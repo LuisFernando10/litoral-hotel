@@ -1,0 +1,25 @@
+
+	#***************************************************************************
+	#@Description: Documento que permite generar URL's amigables a la plataforma
+	#***************************************************************************
+
+	#Validamos que el módulo de re-escritura del Apache esté habilitado
+	<IfModule mod_rewrite.c>
+
+	#Activamos la re-escritura de la URL
+	RewriteEngine On
+
+	#    Restringimos la re-escritura sólo a rutas que no existan previamente en la plataforma
+	#    RewriteCond %{REQUEST_FILENAME} !-d # (!-d), previene los 'directorios' que ya existan
+	#    RewriteCond %{REQUEST_FILENAME} !-f # (!-f), ignora los 'ficheros' que ya existan
+
+	#Establecemos las reglas de re-escritura para gestionar las páginas
+	RewriteRule ^(\w+)/?$ index.php?class=$1 [QSA]
+	RewriteRule ^(\w+)/(\w+)/?$ index.php?class=$1&action=$2 [QSA]
+	RewriteRule ^(\w+)/(\w+)/(\w+)/?$ index.php?class=$1&action=$2&id=$3 [QSA]
+
+	#Retornamos al cliente los documentos de error
+	#ErrorDocument 403 /views/errors/403.php
+	#ErrorDocument 404 /views/errors/404.php
+
+	</IfModule>
