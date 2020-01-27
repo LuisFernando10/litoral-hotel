@@ -1,0 +1,13 @@
+{
+    "name": "luis_fernando/litoral-hotel",
+    "description": "Projeto para Site Web do Hotel Litoral",
+    "authors": [
+        {
+            "name": "Luis Chamorro",
+            "email": "ing.lfchamorro@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}

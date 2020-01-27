@@ -20,11 +20,16 @@
 	    define('SITE_PROTOCOL', $protocol);
 	    define('DEBUG', true);
 
-	    //Ruta general del proyecto
+	    //Definimos las 'RUTAS' generales del proyecto
 	    define('FULL_WEB_URL', constant('SITE_PROTOCOL').'://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/');
-
-	    //Ruta directorio 'assets'
 	    define('ASSETS_WEB_URL', constant('FULL_WEB_URL').'assets/');
-
-	    //Ruta imágenes de la página
 	    define('IMAGES_WEB_URL', constant('ASSETS_WEB_URL').'img/');
+
+        //Pagination
+        define("PAGINATION", 10);
+
+        //Datos de conexión a la BD
+        define('DB_SERVER','localhost');
+        define('DB_USER','phpmyadmin');
+        define('DB_PASSWORD','');
+        define('DB_DATABASE','litoral_hotel');

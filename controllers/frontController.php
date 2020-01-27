@@ -6,8 +6,6 @@
 	$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "Index")));
 	$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
 
-	//echo $class.'<br>'.$action.'<br>'.$id.'<br>';
-
 	//A classe é avaliada para abordar as respectivas visualizações
 	switch ($class) {
 		case 'home':
@@ -16,8 +14,6 @@
 		case 'contact':
 		case 'location':
 		case 'accommodation':
-			# code...
-			break;
 			//Importamos la clase del controlador
             require_once (dirname(__FILE__).'/'.$class.'.php');
             
