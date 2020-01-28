@@ -1,0 +1,60 @@
+
+    <!DOCTYPE html>
+    <html>
+        {% block head %}
+            <head>
+                {# Title #}
+                 <title>Hotel Litoral</title>
+
+                {# Icon #}
+                {#<link rel="icon" href="{{ general.full_assets_url }}img/Logo.ico">#}
+
+                {# Metadata #}
+                <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="description" content="Hotel Litoral (Aracaju-Sergipe)">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                {# Bootstrap V-4.1.2 (CSS) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}framework/bootstrap-4.1.2/bootstrap.min.css">
+
+                {# Font-awesome #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+
+                {# CSS Main (Template) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}css/main.css">
+
+                {# CSS responsive #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}css/responsive.css">
+
+                {# Owl.carousel #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}plugins/OwlCarousel2-2.3.4/owl.carousel.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}plugins/OwlCarousel2-2.3.4/animate.css">
+
+                {# JQuery-datepicker #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}plugins/jquery-datepicker/jquery-ui.css">
+
+                {# Colorcox #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}plugins/colorbox/colorbox.css">
+
+                {# Main (CSS) #}
+                {#<link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}css/operador/main.css">#}
+            </head>
+        {% endblock %}
+
+        <body>
+
+            {% block content %}
+                {#Código HTML para cada vista#}
+            {% endblock %}
+
+        </body>
+
+        {# Scripts generales #}
+        {{ include('footer-scripts.twig') }}
+
+        {% block footer_scripts %}
+            {# Scripts propios de cada documento #}
+        {% endblock %}
+    </html>
