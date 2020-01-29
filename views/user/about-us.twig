@@ -1,0 +1,244 @@
+
+
+    {% extends "base-document.twig" %}
+
+    {% block content %}
+
+        <div class="super_container">
+            {# Header - Nav (Menú) #}
+            {% include 'nav-menu.twig' %}
+
+            {# Home #}
+            <div class="home">
+                <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/reception.jpg)"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Sobre nós</div>
+                                    <div class="booking_form_container">
+                                        <form action="#" class="booking_form" id="booking_form">
+                                            <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
+                                                <div class="booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                    <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
+                                                    <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
+                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Children" required="required"></div>
+                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Room" required="required"></div>
+                                                </div>
+                                                <div><button class="booking_button trans_200">Reserve agora</button></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# About #}
+
+            <div class="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="about_title"><h2>Hotel Litoral / 14 anos de excelencia</h2></div>
+                        </div>
+                    </div>
+                    <div class="row about_row">
+
+                        {# About Content #}
+                        <div class="col-lg-6">
+                            <div class="about_content">
+                                <div class="about_text">
+                                    <p>A 100 m da ORLA, em sua parte central, próximo da Passarela do Caranguejo e das Feiras de Artesanatos; o Hotel Litoral oferece aos seus hóspedes o conforto e tranquilidade para passar as ferias do seus sonhos.</p>
+                                </div>
+                                {#<div class="about_sig"><img src="{{ general.full_images_url }}sig.png" alt=""></div>#}
+                            </div>
+                        </div>
+
+                        {# About Images #}
+                        <div class="col-lg-6">
+                            <div class="about_images d-flex flex-row align-items-start justify-content-between flex-wrap">
+                                <img src="{{ general.full_images_url }}HotelLitoral/mainFacade.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Split Section Right #}
+
+            <div class="split_section_right container_custom">
+                <div class="container">
+                    <div class="row row-xl-eq-height">
+
+                        <div class="col-xl-6 order-xl-1 order-2">
+                            <div class="split_section_image">
+                                <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/landscapes_1.jpg)"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 order-xl-2 order-1">
+                            <div class="split_section_right_content">
+                                <div class="split_section_title"><h1>Acomodacion</h1></div>
+                                <div class="split_section_text">
+                                    <p>Ofrecemos habitaciones totalmente comomodas, puede usted tener la plena tranquilidad de hospedarse en un hotel ubicado en una excelente posicion y muy cerca de la playa, ademas de contar con la ventaja de estar en la cercania a la Osrla, pues sus planes de fin de semana seran realmente variados.</p>
+                                </div>
+
+                                {# Milestones #}
+                                <div class="milestones_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+
+                                    {# Milestone #}
+                                    <div class="milestone d-flex flex-row align-items-start justify-content-start">
+                                        <div class="milestone_content">
+                                            <div class="milestone_counter" data-end-value="45">0</div>
+                                            <div class="milestone_title">Cuarto disponibles</div>
+                                        </div>
+                                    </div>
+
+                                    {# Milestone #}
+                                    <div class="milestone d-flex flex-row align-items-start justify-content-start">
+                                        <div class="milestone_content">
+                                            <div class="milestone_counter" data-end-value="21" data-sign-after="K">0</div>
+                                            <div class="milestone_title">Turistas este año</div>
+                                        </div>
+                                    </div>
+
+                                    {# Milestone #}
+                                    <div class="milestone d-flex flex-row align-items-start justify-content-start">
+                                        <div class="milestone_content">
+                                            <div class="milestone_counter" data-end-value="2">0</div>
+                                            <div class="milestone_title">Estacionamientos</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {# Split Section Left #}
+
+            <div class="split_section_left container_custom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="split_section_left_content">
+                                <div class="split_section_title"><h1>Lugar ideal</h1></div>
+                                <div class="split_section_text">
+                                    <p>Disfruta de la comodida de un hotel acogedor y a la mano de cualquier actividad nocturna o matutina, lo que prefieras, pues estamos ubicados en el centro de la Orla de Atalaya, lugar privilegiado para relajarte en la playa a tan solo 5 minutos y, rodeate de los mejores bares de la ciudad para disfrutar de una noche de musica en vivo y excelente ambiente.</p>
+                                </div>
+
+                                {# Loaders #}
+                                <div class="loaders_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+
+                                    {# Loader #}
+                                    <div class="loader_container text-center">
+                                        <div class="loader text-center" data-perc="0.9">
+                                            <div class="loader_content">
+                                                <div class="loader_title">Buen servicio</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {# Loader #}
+                                    <div class="loader_container text-center">
+                                        <div class="loader text-center" data-perc="0.8">
+                                            <div class="loader_content">
+                                                <div class="loader_title">Turistas</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {# Loader #}
+                                    <div class="loader_container text-center">
+                                        <div class="loader text-center" data-perc="1.0">
+                                            <div class="loader_content">
+                                                <div class="loader_title">Satisfaccion</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Loaders Image #}
+                        <div class="col-xl-6">
+                            <div class="split_section_image split_section_left_image">
+                                <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/landscapes_2.jpg)"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {# Testimonials #}
+
+            <div class="testimonials">
+                <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ general.full_images_url }}HotelLitoral/landscapes_3.jpg" data-speed="0.8"></div>
+                <div class="testimonials_overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="testimonials_slider_container">
+
+                                {# Testimonials Slider #}
+                                <div class="owl-carousel owl-theme test_slider">
+
+                                    {# Slide #}
+                                    <div  class="test_slider_item text-center">
+                                        <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                        <div class="testimonial_title"><a href="#">Estadia perfecta</a></div>
+                                        <div class="testimonial_text">
+                                            <p>Nos sentimos como en casa, aparte de que la atencion es estupenda y su ubicacion es escepcional, la verdad esperamos volver pronto y disfrutar de su amabilidad.</p>
+                                        </div>
+                                        <div class="testimonial_image"><img src="{{ general.full_images_url }}user_1.jpg" alt=""></div>
+                                        <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
+                                    </div>
+
+                                    {# Slide #}
+                                    <div  class="test_slider_item text-center">
+                                        <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                        <div class="testimonial_title"><a href="#">Lugar agradable</a></div>
+                                        <div class="testimonial_text">
+                                            <p>Un comodo y eficiente lugar para pasar las vacaciones y disfrutar de esta excelente ciudad, la verdad un hotel muy grato para hospedarse. Totalmente recomendado.</p>
+                                        </div>
+                                        <div class="testimonial_image"><img src="{{ general.full_images_url }}user_2.jpg" alt=""></div>
+                                        <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
+                                    </div>
+
+                                    {# Slide #}
+                                    <div  class="test_slider_item text-center">
+                                        <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                        <div class="testimonial_title"><a href="#">Enamorados del Hotel Litoral</a></div>
+                                        <div class="testimonial_text">
+                                            <p>Este Hotel tiene todo lo basico y escencial para disfrutar de la playa, pues no esta muy lejos de ella y la atencion es realmente fabulosa.</p>
+                                        </div>
+                                        <div class="testimonial_image"><img src="{{ general.full_images_url }}user_3.jpg" alt=""></div>
+                                        <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Footer #}
+            {% include 'footer.twig' %}
+        </div>
+
+    {% endblock %}
+
+    {% block footer_scripts %}
+        {# Aquí van los scripts Js #}
+        {#<script type="text/javascript" src="{{ general.full_assets_url }}js/user/home.js"></script>#}
+    {% endblock %}

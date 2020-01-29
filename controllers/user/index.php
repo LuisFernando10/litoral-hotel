@@ -40,4 +40,20 @@
                     'general' => $generalParam
                 ));
                 break;
+
+            case 'about':
+
+                //Renderizamos la vista
+                $twig->display('about-us.twig', array(
+                    'general' => $generalParam
+                ));
+                break;
+
+            case 'home':
+
+                //Renderizamos la vista
+                $twig->display('home.twig', array(
+                    'general' => $generalParam
+                ));
+                break;
         }
