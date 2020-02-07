@@ -31,5 +31,5 @@
         //Datos de conexión a la BD
         define('DB_SERVER','localhost');
         define('DB_USER','phpmyadmin');
-        define('DB_PASSWORD','');
+        define('DB_PASSWORD','lfchamorro10f');
         define('DB_DATABASE','litoral_hotel');
