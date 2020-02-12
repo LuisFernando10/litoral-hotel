@@ -35,9 +35,13 @@
         switch ($class){
             case 'home':
 
+                //Obtenemos los diferentes datos de la BD
+                $data_opinions = Opinions::getAll(null, null, null, null, null, null, null, null);
+
                 //Renderizamos la vista
                 $twig->display('home.twig', array(
-                    'general' => $generalParam
+                    'general' => $generalParam,
+                    'data_opinions' => $data_opinions
                 ));
                 break;
 
@@ -49,7 +53,7 @@
                 ));
                 break;
 
-            case 'home':
+            default:
 
                 //Renderizamos la vista
                 $twig->display('home.twig', array(

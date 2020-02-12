@@ -258,39 +258,42 @@
                                     {# Testimonials Slider #}
                                     <div class="owl-carousel owl-theme test_slider">
 
-                                        {# Slide #}
-                                        <div  class="test_slider_item text-center">
-                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="testimonial_title"><a href="#">Estadia perfecta</a></div>
-                                            <div class="testimonial_text">
-                                                <p>Nos sentimos como en casa, aparte de que la atencion es estupenda y su ubicacion es escepcional, la verdad esperamos volver pronto y disfrutar de su amabilidad.</p>
-                                            </div>
-                                            <div class="testimonial_image"><img src="{{ general.full_images_url }}user_1.jpg" alt=""></div>
-                                            <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
-                                        </div>
+                                        {% for opinions in data_opinions %}
 
-                                        {# Slide #}
-                                        <div  class="test_slider_item text-center">
-                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="testimonial_title"><a href="#">Lugar agradable</a></div>
-                                            <div class="testimonial_text">
-                                                <p>Un comodo y eficiente lugar para pasar las vacaciones y disfrutar de esta excelente ciudad, la verdad un hotel muy grato para hospedarse. Totalmente recomendado.</p>
-                                            </div>
-                                            <div class="testimonial_image"><img src="{{ general.full_images_url }}user_2.jpg" alt=""></div>
-                                            <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
-                                        </div>
+                                            {# Slide #}
+                                            <div  class="test_slider_item text-center">
 
-                                        {# Slide #}
-                                        <div  class="test_slider_item text-center">
-                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="testimonial_title"><a href="#">Enamorados del Hotel Litoral</a></div>
-                                            <div class="testimonial_text">
-                                                <p>Este Hotel tiene todo lo basico y escencial para disfrutar de la playa, pues no esta muy lejos de ella y la atencion es realmente fabulosa.</p>
-                                            </div>
-                                            <div class="testimonial_image"><img src="{{ general.full_images_url }}user_3.jpg" alt=""></div>
-                                            <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
-                                        </div>
+                                                {# Calificaciones #}
+                                                <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center">
+                                                    <i></i>
+                                                    <i></i>
+                                                    <i></i>
+                                                    <i></i>
+                                                    <i></i>
+                                                </div>
 
+                                                {# Título Opinião #}
+                                                <div class="testimonial_title">
+                                                    <a href="#">Estadia perfecta</a>
+                                                </div>
+
+                                                {# Texto opinião #}
+                                                <div class="testimonial_text">
+                                                    <p>{{ opinions.op_texto }}</p>
+                                                </div>
+
+                                                {# Imagen #}
+                                                <div class="testimonial_image">
+                                                    <img src="{{ general.full_images_url }}user_1.jpg" alt="">
+                                                </div>
+
+                                                {# Nome Cliente #}
+                                                <div class="testimonial_author">
+                                                    <a href="#">{{ opinions.op_nome }}</a>, Greece
+                                                </div>
+                                            </div>
+
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

@@ -103,11 +103,13 @@
                 //Ejecutamos la consulta
                 $result = DataBase::query($sql);
 
-                var_dump($result);
-                exit();
+                //var_dump($result);
+                //exit();
 
                 if (isset($result[0]) && $result != NULL) {
+
                     if ($type == 'count') {
+
                         //Se calcula el total de paginas con esta configuracion
                         $total_pages = ceil(($result[0]['count']) / $pagination);
 

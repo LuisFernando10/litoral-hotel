@@ -26,10 +26,10 @@
 	    define('IMAGES_WEB_URL', constant('ASSETS_WEB_URL').'img/');
 
         //Pagination
-        define("PAGINATION", 10);
+        define("PAGINATION", 15);
 
         //Datos de conexión a la BD
         define('DB_SERVER','localhost');
-        define('DB_USER','phpmyadmin');
-        define('DB_PASSWORD','lfchamorro10f');
+        define('DB_USER','root');//'phpmyadmin'
+        define('DB_PASSWORD','root');//'lfchamorro10f'
         define('DB_DATABASE','litoral_hotel');
