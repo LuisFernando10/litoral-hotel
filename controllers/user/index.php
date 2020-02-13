@@ -53,6 +53,14 @@
                 ));
                 break;
 
+            case 'contact':
+
+                //Renderizamos la vista
+                $twig->display('contact.twig', array(
+                    'general' => $generalParam
+                ));
+                break;
+
             default:
 
                 //Renderizamos la vista

@@ -1,0 +1,14 @@
+
+    /* Estilos para seccion 'Testimoials' */
+
+    .css-opinions-slider-parent-div{
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    /*.css-opinions-text-div{*/
+    /*    display: -webkit-flex;*/
+    /*    display: flex;*/
+    /*}*/
