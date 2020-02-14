@@ -7,7 +7,7 @@
                         <div class="footer_logo_container text-center">
                             <div class="footer_logo">
                                 <a href="#"></a>
-                                <div>Hotel <span>Litoral</span></div>
+                                <div class="css-footer-logo">Hotel <span>Litoral</span></div>
                                 <div>desde 2005</div>
                             </div>
                         </div>
@@ -16,53 +16,67 @@
                 <div class="row footer_row">
 
                     {# Address #}
-                    <div class="col-lg-3">
-                        <div class="footer_title">Our Address</div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="footer_title">Nosso endereço</div>
                         <div class="footer_list">
                             <ul>
-                                <li>Beach Str. 345</li>
-                                <li>67559 Miami</li>
-                                <li>USA</li>
+                                <li>Av.Oceânica, 819</li>
+                                <li>Atalaia - Aracaju/SE</li>
+                                <li>Brasil</li>
+                            </ul>
+                        </div>
+
+                        <div class="footer_title mt-3">Nós não possuímos / aceitamos</div>
+                        <div class="footer_list">
+                            <ul>
+                                <li><img src="{{ general.full_images_url }}Icons/swimmer-solid.svg" class="css-img-icon-svg"> Piscina</li>
+                                <li><i class="fa fa-building"></i> Elevador</li>
+                                <li><i class="fa fa-paw"></i> Animais</li>
                             </ul>
                         </div>
                     </div>
 
                     {# Reservations #}
-                    <div class="col-lg-3">
-                        <div class="footer_title">Reservations</div>
+                    <div class="col-md-6 col-lg-5">
+                        <div class="footer_title">Nós oferecemos</div>
                         <div class="footer_list">
                             <ul>
-                                <li>Tel: 345 5667 889</li>
-                                <li>Fax; 6783 4567 889</li>
-                                <li>reservations@hotelriver.com</li>
+                                <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg"> Ar condicionado split</li>
+                                <li><img src="{{ general.full_images_url }}Icons/warehouse-solid.svg" class="css-img-icon-svg"> Garagem fechada - GRATUITA</li>
+                                <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg"> Secador de cabelo em todos os aptos</li>
+                                <li><i class="fa fa-coffee"></i> Ótimo café da manhã</li>
+                                <li><i class="fa fa-tv"></i> TV de LED com canais por assinatura</li>
+                                <li><i class="fa fa-wifi"></i> WI-FI</li>
+                                <li><img src="{{ general.full_images_url }}Icons/cuna-para-siesta.svg" class="css-img-icon-svg"> Berço (apenas 1)</li>
+                                <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg"> Frigobar com preços acessíveis</li>
                             </ul>
                         </div>
                     </div>
 
                     {# Newsletter #}
-                    <div class="col-lg-3">
-                        <div class="footer_title">Newsletter</div>
+                    <div class="offset-2 col-md-6 col-lg-3">
+                        <div class="footer_title">Boletim de Notícias</div>
                         <div class="newsletter_container">
                             <form action="#" class="newsletter_form" id="newsletter_form">
-                                <input type="email" class="newsletter_input" placeholder="Your email address" required="required">
-                                <button class="newsletter_button">Subscribe</button>
+                                <input type="email" class="newsletter_input" placeholder="Seu Email" required="required">
+                                <button class="newsletter_button">Se inscrever</button>
                             </form>
                         </div>
                     </div>
 
-                    {# Footer images #}
+                    {# Footer images
                     <div class="col-lg-3">
                         <div class="certificates d-flex flex-row align-items-start justify-content-lg-between justify-content-start flex-lg-nowrap flex-wrap">
                             <div class="cert"><img src="{{ general.full_images_url }}cert_1.png" alt=""></div>
                             <div class="cert"><img src="{{ general.full_images_url }}cert_2.png" alt=""></div>
                         </div>
-                    </div>
+                    </div>#}
                 </div>
             </div>
         </div>
         <div class="copyright">
             {# Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. #}
-            Copyright &copy;2020 Todos los derechos reservados | Plantila hecha por: <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            Direitos Reservados © {{ "now"|date("Y") }} <a href="{{ general.full_web_url }}">Hotel Litoral</a> | Plantila hecha por: <a href="https://colorlib.com" target="_blank">Colorlib</a>
             {# Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. #}
         </div>
     </footer>

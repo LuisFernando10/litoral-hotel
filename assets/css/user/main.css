@@ -1,4 +1,10 @@
 
+    /**** Estilos GENERALES ****/
+    .css-img-icon-svg{
+        width: 13px;
+    }
+
+
     /* Estilos para seccion 'Testimoials' */
 
     .css-opinions-slider-parent-div{
@@ -21,4 +27,10 @@
     .css--menu-logo-slogan{
         font-size: 9px !important;
         font-weight: 600 !important;
+    }
+
+    /* Estilos para el 'Footer' */
+    .css-footer-logo{
+        width: 275px!important;
+        height: 75px!important;
     }
