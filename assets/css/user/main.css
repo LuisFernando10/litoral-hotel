@@ -8,10 +8,10 @@
     /* Estilos para seccion 'Testimoials' */
 
     .css-opinions-slider-parent-div{
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-        flex-wrap: wrap;
+        /*display: -webkit-flex !important;*/
+        display: flex !important;
+        /*-webkit-flex-wrap: wrap;*/
+        /*flex-wrap: wrap;*/
     }
 
     /*.css-opinions-text-div{*/
