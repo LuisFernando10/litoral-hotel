@@ -28,7 +28,8 @@
         $generalParam = array(
             "full_web_url" => constant('FULL_WEB_URL'),
             "full_assets_url" => constant('ASSETS_WEB_URL'),
-            "full_images_url" => constant('IMAGES_WEB_URL')
+            "full_images_url" => constant('IMAGES_WEB_URL'),
+            "class_param" => $class
         );
 
         //Evaluamos cada uno de los controladores para permitir el acceso a las respectivas vistas
@@ -57,6 +58,14 @@
 
                 //Renderizamos la vista
                 $twig->display('contact.twig', array(
+                    'general' => $generalParam
+                ));
+                break;
+
+            case 'rooms':
+
+                //Renderizamos la vista
+                $twig->display('rooms.twig', array(
                     'general' => $generalParam
                 ));
                 break;
