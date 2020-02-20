@@ -8,13 +8,14 @@
                 </a>
             </div>
             <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-start">
-                        <li class="active"><a href="{{ general.full_web_url }}home/">Inicio</a></li>
-                        <li><a href="{{ general.full_web_url }}about/">Sobre nós</a></li>
-                        <li><a href="{{ general.full_web_url }}rooms/">Quartos</a></li>
-                        {# <li><a href="{{ general.full_web_url }}views/blog.php">Blog</a></li> #}
-                        <li><a href="{{ general.full_web_url }}contact/">Contato</a></li>
+                        <li class="{{ (general.class_param == 'home') ? 'active' : '' }}"><a href="{{ general.full_web_url }}home/">Inicio</a></li>
+                        <li class="{{ (general.class_param == 'about') ? 'active' : '' }}"><a href="{{ general.full_web_url }}about/">Sobre nós</a></li>
+                        <li class="{{ (general.class_param == 'rooms') ? 'active' : '' }}"><a href="{{ general.full_web_url }}rooms/">Quartos</a></li>
+                        {# <li class="{{ (general.class_param == 'home') ? 'active' : '' }}"><a href="{{ general.full_web_url }}views/blog.php">Blog</a></li> #}
+                        <li class="{{ (general.class_param == 'contact') ? 'active' : '' }}"><a href="{{ general.full_web_url }}contact/">Contato</a></li>
                     </ul>
                 </nav>
                 <div class="book_button"><a href="{{ general.full_web_url }}views/booking.php">Reserva Online</a></div>
