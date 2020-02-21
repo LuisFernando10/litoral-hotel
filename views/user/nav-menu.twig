@@ -18,7 +18,7 @@
                         <li class="{{ (general.class_param == 'contact') ? 'active' : '' }}"><a href="{{ general.full_web_url }}contact/">Contato</a></li>
                     </ul>
                 </nav>
-                <div class="book_button"><a href="{{ general.full_web_url }}views/booking.php">Reserva Online</a></div>
+                <div class="book_button"><a href="{{ general.full_web_url }}bookings/">Reserva Online</a></div>
                 <div class="header_phone d-flex flex-row align-items-center justify-content-center">
                     <img src="{{ general.full_images_url }}phone.png" alt="">
                     <span>+55 79 9988-2442</span>
@@ -36,16 +36,16 @@
         <div class="menu_content">
             <nav class="menu_nav text-right">
                 <ul>
-                    <li class="active"><a href="{{ general.full_web_url }}home/">Inicio</a></li>
-                    <li><a href="{{ general.full_web_url }}about/">Sobre nós</a></li>
-                    <li><a href="{{ general.full_web_url }}rooms/">Quartos</a></li>
-                    {# <li><a href="{{ general.full_web_url }}views/blog.php">Blog</a></li> #}
-                    <li><a href="{{ general.full_web_url }}contact/">Contato</a></li>
+                    <li class="{{ (general.class_param == 'home') ? 'active' : '' }}"><a href="{{ general.full_web_url }}home/">Inicio</a></li>
+                    <li class="{{ (general.class_param == 'about') ? 'active' : '' }}"><a href="{{ general.full_web_url }}about/">Sobre nós</a></li>
+                    <li class="{{ (general.class_param == 'rooms') ? 'active' : '' }}"><a href="{{ general.full_web_url }}rooms/">Quartos</a></li>
+                    {# <li class="{{ (general.class_param == 'home') ? 'active' : '' }}"><a href="{{ general.full_web_url }}views/blog.php">Blog</a></li> #}
+                    <li class="{{ (general.class_param == 'contact') ? 'active' : '' }}"><a href="{{ general.full_web_url }}contact/">Contato</a></li>
                 </ul>
             </nav>
         </div>
         <div class="menu_extra">
-            <div class="menu_book text-right"><a href="{{ general.full_web_url }}views/#">Reserva online</a></div>
+            <div class="menu_book text-right"><a href="{{ general.full_web_url }}bookings/">Reserva online</a></div>
             <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
                 <img src="{{ general.full_images_url }}phone-2.png" alt="">
                 <span>+55 79 9988-2442</span>

@@ -19,6 +19,10 @@
     /*    display: flex;*/
     /*}*/
 
+    /* Estilos para seccion 'Rooms' */
+    .css-icon-service-rooms{
+        color: black;
+    }
 
     /* Estilos para 'Menu' */
     .css-menu-logo{

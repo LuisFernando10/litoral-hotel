@@ -70,6 +70,14 @@
                 ));
                 break;
 
+            case 'bookings':
+
+                //Renderizamos la vista
+                $twig->display('bookings.twig', array(
+                    'general' => $generalParam
+                ));
+                break;
+
             default:
 
                 //Renderizamos la vista
