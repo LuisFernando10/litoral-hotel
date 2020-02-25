@@ -64,6 +64,8 @@
 
             case 'rooms':
 
+
+
                 //Renderizamos la vista
                 $twig->display('rooms.twig', array(
                     'general' => $generalParam

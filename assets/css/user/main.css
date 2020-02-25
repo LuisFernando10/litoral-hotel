@@ -38,3 +38,24 @@
         width: 275px!important;
         height: 75px!important;
     }
+
+    /* Estilos para seccion de 'CONTACTO' */
+    p.clasificacion {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+    p.clasificacion input {
+        position: absolute;
+        top: -100px;
+    }
+    p.clasificacion label {
+        float: right;
+        color: #333;
+        font-size: 25px;
+    }
+    p.clasificacion label:hover,
+    p.clasificacion label:hover ~ label,
+    p.clasificacion input:checked ~ label {
+        color: #dd4;
+    }
