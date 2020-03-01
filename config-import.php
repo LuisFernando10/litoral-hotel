@@ -3,7 +3,7 @@
         /**
          * @Description: Documento que carga la 'configuraciòn global' y autocarga las 'clases' del proyecto
          * @User: luis.chamorro
-         * @Date: 26-ene-2020
+         * @Date: 29-feb-2020
          */
 
         //Importamos el archivo 'config.php' para reutilizar la configuraciòn del mismo
