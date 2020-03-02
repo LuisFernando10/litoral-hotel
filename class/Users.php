@@ -1,9 +1,12 @@
 
     <?php
 
+        //Importamos la configuración global
+        require_once (dirname(__FILE__).'/../config-import.php');
+
         class Users
         {
-            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_usuario = NULL, $usu_login = NULL, $usu_senha = NULL, $usu_status = NULL) {
+            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_usuario = NULL, $nome = NULL, $user = NULL, $senha = NULL, $rol = NULL, $estado = NULL) {
 
                 //Valor por defecto para 'page'
                 if (isset($page) && $page != NULL && is_numeric($page)){
@@ -35,38 +38,58 @@
                 //Filtro por '$id_usuario'
                 if ($id_usuario !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND usuarios.id_usuario="%s"';
+                    $this_condition = 'AND id_usuario = "%s"';
                     $this_condition = sprintf($this_condition, $id_usuario);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
 
-                //Filtro por '$usu_login'
-                if ($usu_login !== NULL) {
+                //Filtro por '$nome'
+                if ($nome !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND usuarios.usu_login="%s"';
-                    $this_condition = sprintf($this_condition, $usu_login);
+                    $this_condition = 'AND nome = "%s"';
+                    $this_condition = sprintf($this_condition, $nome);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
 
-                //Filtro por '$usu_senha'
-                if ($usu_senha !== NULL) {
+                //Filtro por '$user'
+                if ($user !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND usuarios.usu_senha="%s"';
-                    $this_condition = sprintf($this_condition, $usu_senha);
+                    $this_condition = 'AND user = "%s"';
+                    $this_condition = sprintf($this_condition, $user);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
 
-                //Filtro por '$usu_status'
-                if ($usu_status !== NULL) {
+                //Filtro por '$senha'
+                if ($senha !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND usuarios.usu_status="%s"';
-                    $this_condition = sprintf($this_condition, $usu_status);
+                    $this_condition = 'AND senha = "%s"';
+                    $this_condition = sprintf($this_condition, $senha);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+
+                //Filtro por '$rol'
+                if ($rol !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND rol = "%s"';
+                    $this_condition = sprintf($this_condition, $rol);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+
+                //Filtro por '$estado'
+                if ($estado !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND estado = "%s"';
+                    $this_condition = sprintf($this_condition, $estado);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
@@ -78,10 +101,12 @@
                 }
                 else {
                     $sql_select = "
-                        usuarios.id_usuario,
-                        usuarios.usu_login,
-                        usuarios.usu_senha,
-                        usuarios.usu_status
+                        id_usuario,
+                        nome,
+                        user,
+                        senha,
+                        rol,
+                        estado
                     ";
 
                     $sql_limit = "LIMIT $limit_start, $pagination";
@@ -96,23 +121,23 @@
                         1+1=2
                         $conditions
                     ORDER BY 
-                        usuarios.usu_login
+                        usuarios.user
                     $sql_limit
                 ";
 
                 //Ejecutamos la consulta
                 $result = DataBase::query($sql);
 
-                //var_dump($result);
-                //exit();
-
+                //Validamos si la consulta retornó datos o no
                 if (isset($result[0]) && $result != NULL) {
 
+                    //Validamos si fue tipo 'count' o normal
                     if ($type == 'count') {
 
                         //Se calcula el total de paginas con esta configuracion
                         $total_pages = ceil(($result[0]['count']) / $pagination);
 
+                        //Retornamos array que se usará para las paginaciones
                         return array(
                             "count" => $result[0]['count'],
                             "pagination" => "" . $pagination,
@@ -121,9 +146,72 @@
                         );
                     }
                     else
+                        //Retornamos array con los datos retornados por la consulta
                         return $result;
                 }
                 else
+                    //Retornamos NULL en caso de no haber encontrado nungún dato
                     return NULL;
+            }
+
+            /**
+             * @Description: Método para validar que el usuario y la contraseña sean las correctas
+             */
+            static function validateUserAccessData($user = NULL, $senha = NULL){
+
+                //Creamos variable de control
+                $valid = true;
+
+                //Se valida que se envía un 'usuario'
+                if(isset($user) && $user != NULL && $user != ''){
+                    //Pasa la validación
+                }
+                else
+                    $valid = false;
+
+                //Se valida que se envía una 'contraseña'
+                if(isset($senha) && $senha != NULL && $senha != ''){
+                    /* Se deja igual */
+                }
+                else
+                    $valid = false;
+
+                //Si 'valid' es true
+                if($valid){
+
+                    //Se encripta la contraseña
+                    $senha_secure = Security::passwordConstructor($senha);
+
+                    //Se consulta por el usuario y el password
+                    $sql = "
+                        SELECT
+                            id_usuario,
+                            rol
+                        FROM
+                            usuarios
+                        WHERE
+                            user = '%s'
+                        AND   
+                            senha = '%s'
+                        AND 
+                            estado = 'ativo'
+                        LIMIT 0,1
+                    ";
+
+                    $sql = sprintf($sql,
+                        $user,
+                        $senha_secure
+                    );
+
+                    //Ejecutamos el query
+                    $result = DataBase::query($sql);
+
+                    if(isset($result[0]['id_usuario']) && is_numeric($result[0]['id_usuario']))
+                        return $result;
+                    else
+                        return false;
+                }
+                else
+                    return false;
             }
         }

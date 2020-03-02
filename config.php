@@ -18,6 +18,8 @@
 
 	    //Definimos constante para el protocolo de la plataforma, puede ser (https-http)
 	    define('SITE_PROTOCOL', $protocol);
+
+    //Definimos constante para el Debug (errores)
 	    define('DEBUG', true);
 
 	    //Definimos las 'RUTAS' generales del proyecto

@@ -14,8 +14,36 @@
 //            exit;
 //        }
 
-		//Importamos el archivo de configuración global
-		require_once (dirname(__FILE__).'/config-import.php');
+        //Importamos el archivo que contiene la configuración global
+        require_once(dirname(__FILE__).'/config-import.php');
 
-		//Incluimos los controladores (Futuramente direccionará al controlador dependiendo el rol)
-		include_once (dirname(__FILE__).'/controllers/user/index.php');
+        //Se incluye el archivo de seguridad que no permite hacer nada si no estan las sesiones habilitadas y correctamente iniciadas
+        require_once(dirname(__FILE__).'/security/secure-session.php');
+
+        //Inicializamos las sesiones
+        if(session_status() == PHP_SESSION_NONE)
+            @session_start();
+
+
+        //Definimos el 'rol' del usuario
+        if(isset($_SESSION['session_role']) && $_SESSION['session_role'] != null && $_SESSION['session_role'] != '')
+            $user_role = $_SESSION['session_role'];
+        else
+            $user_role = "N/A";
+
+
+        //Validamos los roles establecidos por la sesión, y direccionamos al respectivo controlador
+        switch ($user_role){
+
+            case 'admin':
+                include_once (dirname(__FILE__).'/controllers/admin/index.php');
+                break;
+
+            case 'user':
+                include_once (dirname(__FILE__).'/controllers/user/index.php');
+                break;
+
+            default:
+                include_once (dirname(__FILE__).'/controllers/user/index.php');
+                break;
+        }

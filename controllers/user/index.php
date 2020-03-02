@@ -34,6 +34,7 @@
 
         //Evaluamos cada uno de los controladores para permitir el acceso a las respectivas vistas
         switch ($class){
+
             case 'home':
 
                 //Obtenemos los diferentes datos de la BD
@@ -64,8 +65,6 @@
 
             case 'rooms':
 
-
-
                 //Renderizamos la vista
                 $twig->display('rooms.twig', array(
                     'general' => $generalParam
@@ -76,6 +75,14 @@
 
                 //Renderizamos la vista
                 $twig->display('bookings.twig', array(
+                    'general' => $generalParam
+                ));
+                break;
+
+            case 'admin':
+
+                //Renderizamos la vista
+                $twig->display('log-in.twig',array(
                     'general' => $generalParam
                 ));
                 break;
