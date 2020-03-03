@@ -52,9 +52,16 @@
         switch ($class){
 
             //Cargamos y renderizamos las plantillas (Vistas), junto con los parámetros (Variables) a utilizar
-            case 'usuarios':
+            case 'dashboard':
 
                 echo $twig->render('dashboard.twig',array(
+                    'general' => $general_param
+                ));
+                break;
+
+            case 'quartos':
+
+                echo $twig->render('rooms.twig',array(
                     'general' => $general_param
                 ));
                 break;

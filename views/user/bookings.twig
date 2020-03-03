@@ -7,7 +7,7 @@
                 {# Header - Nav (Menú) #}
                 {% include 'nav-menu.twig' %}
 
-                <!-- Home -->
+                {# Home #}
                 <div class="home">
                     <div class="background_image" style="background-image:url({{general.full_images_url}}HotelLitoral/galery/foto_1.jpg)"></div>
                     <div class="home_container">
@@ -36,12 +36,12 @@
                     </div>
                 </div>
 
-                <!-- Booking -->
+                {# Booking #}
                 <div class="booking">
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <!-- Booking Slider -->
+                                {# Booking Slider #}
                                 <div class="booking_slider_container">
                                     <div class="owl-carousel owl-theme booking_slider">
 
@@ -151,18 +151,18 @@
                     </div>
                 </div>
 
-                <!-- Details Right -->
+                {# Details Right
                 <div class="details">
                     <div class="container">
                         <div class="row">
-                            <!-- Details Image -->
+                            # Details Image
                             <div class="col-xl-7 col-lg-6">
                                 <div class="details_image">
                                     <div class="background_image" style="background-image:url(<?php echo constant('ASSETS_WEB_URL') ?>img/details_1.jpg)"></div>
                                 </div>
                             </div>
 
-                            <!-- Details Content -->
+                            # Details Content
                             <div class="col-xl-5 col-lg-6">
                                 <div class="details_content">
                                     <div class="details_title">Family Room</div>
@@ -213,18 +213,17 @@
                                     <div class="book_now_button"><a href="#">Book Now</a></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
+                </div>#}
 
-                <!-- Details Left -->
 
+                {# Details Left
                 <div class="details">
                     <div class="container">
                         <div class="row">
 
-                            <!-- Details Content -->
+                            # Details Content
                             <div class="col-xl-5 col-lg-6 order-lg-1 order-2">
                                 <div class="details_content">
                                     <div class="details_title">Double Room</div>
@@ -276,19 +275,17 @@
                                 </div>
                             </div>
 
-                            <!-- Details Image -->
+                            # Details Image
                             <div class="col-xl-7 col-lg-6 order-lg-2 order-1">
                                 <div class="details_image">
                                     <div class="background_image" style="background-image:url(<?php echo constant('ASSETS_WEB_URL') ?>img/details_2.jpg)"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
+                </div>#}
 
-                <!-- Special -->
-
+                {# Special
                 <div class="special">
                     <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="<?php echo constant('ASSETS_WEB_URL') ?>img/special.jpg" data-speed="0.8"></div>
                     <div class="container">
@@ -345,7 +342,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>#}
 
                 {# Footer #}
                 {% include 'footer.twig' %}
