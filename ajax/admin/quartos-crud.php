@@ -19,29 +19,27 @@
         //Validamos el tipo de 'acción'
         if ($action == 'INSERT'){
 
-            var_dump($quarto_name);
-            var_dump($quarto_description);
-            var_dump($quarto_adultos);
-            var_dump($quarto_price);
-            var_dump($quarto_file);
-            var_dump($action);
-            exit();
-
             //Realizamos la inserción de los campos de la plantilla en la BD
-            $id_template = Template::insertTemplate($id_company, $template_name, $array_data);
+            $id_room = Rooms::insertRoom($quarto_name, $quarto_description, $quarto_file['name'],$quarto_price,$quarto_adultos,'disponivel');
 
             //Validamos si la inserción tuvo éxito o no
-            if ($id_template != null)
+            if ($id_room != null && is_numeric($id_room))
                 $response = array(
                     'status' => '200',
                     'message' => 'Quarto Registrado',
-                    'id_template' => $id_template
+                    'id_room' => $id_room
+                );
+            elseif ($id_room == 'existing_quarto')
+                $response = array(
+                    'status' => '500',
+                    'message' => 'O nome do quarto já existe',
+                    'id_room' => $id_room
                 );
             else
                 $response = array(
                     'status' => '500',
                     'message' => 'Error ao registrar',
-                    'id_template' => null
+                    'id_room' => null
                 );
         }
         elseif ($action == 'UPDATE'){

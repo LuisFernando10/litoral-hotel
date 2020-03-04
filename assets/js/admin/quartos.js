@@ -37,7 +37,12 @@
             data: form_data,
             success: function (response) {
 
-                console.log(response);
+                //Nos validamos o estado da petiçao
+                if (response.status === '200'){
+                    notify_success_notification(response.message);
+                }
+                else
+                    notify_error_notification(response.message);
             }
         });
     });

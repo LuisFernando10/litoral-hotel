@@ -5,7 +5,7 @@
     function notify_success_notification(message){
 
         $.notify({
-            icon: "nc-icon nc-check-2",
+            icon: "fa fa-user",
             message: message
         },{
             type: 'success',
@@ -23,7 +23,7 @@
     function notify_error_notification(message){
 
         $.notify({
-            icon: "nc-icon nc-simple-remove",
+            icon: "fa fa-user",
             message: message
         },{
             type: 'danger',
