@@ -61,9 +61,36 @@
 
             case 'quartos':
 
-                echo $twig->render('rooms.twig',array(
-                    'general' => $general_param
-                ));
+                //Nos obtemos os dados que precisaremos renderizar nas vistas
+                $data_room = Rooms::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
+                $data_room_edit = Rooms::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
+
+                //Nos validamos cada uma das clases
+                if ($action == 'create')
+                    echo $twig->render('rooms-create.twig',array(
+                        'general' => $general_param
+                    ));
+                elseif ($action == 'edit'){
+
+                    //Nos validamos se ha um $id
+                    if (is_numeric($id) && $id != ''){
+                        echo $twig->render('rooms-edit.twig',array(
+                            'general' => $general_param,
+                            'data_room_edit' => $data_room_edit[0]
+                        ));
+                    }
+                    else
+                        echo $twig->render('rooms-list.twig',array(
+                            'general' => $general_param,
+                            'data_room' => $data_room
+                        ));
+                }
+                else
+                    echo $twig->render('rooms-list.twig',array(
+                        'general' => $general_param,
+                        'data_room' => $data_room
+                    ));
+
                 break;
 
             case 'salir':

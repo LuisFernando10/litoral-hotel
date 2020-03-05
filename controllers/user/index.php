@@ -66,7 +66,7 @@
             case 'rooms':
 
                 //Renderizamos la vista
-                $twig->display('rooms.twig', array(
+                $twig->display('rooms-create.twig', array(
                     'general' => $generalParam
                 ));
                 break;

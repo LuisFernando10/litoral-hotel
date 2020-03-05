@@ -1,0 +1,85 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="card-title ">Lista de quartos</h4>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}quartos/create/"><button type="button" class="btn btn-info">Criar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th>Quarto</th>
+                                                <th>Nome</th>
+                                                <th>Descrição</th>
+                                                <th>Preço</th>
+                                                <th>Adultos</th>
+                                                <th>Estado</th>
+                                                <th>Acções</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {# Variaveis pro o estado do quarto #}
+                                            {% set disponivel %}
+                                                <span class="badge badge-success">Disponível</span>
+                                            {% endset %}
+                                            {% set ocupado %}
+                                                <span class="badge badge-danger">Ocupado</span>
+                                            {% endset %}
+
+                                            {# Percorremos os dados dos quartos pra renderizar as linhas #}
+                                            {% for rooms in data_room %}
+                                                <tr>
+                                                    <td>
+                                                        <div class="img-container">
+                                                            <img src="{{ rooms.image }}" rel="nofollow" alt="Quarto">
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ rooms.nome }}</td>
+                                                    <td>{{ rooms.descricao }}</td>
+                                                    <td class="text-left td-number"><small>R$</small> {{ rooms.preco }}</td>
+                                                    <td class="text-right td-number">{{ rooms.adultos }}</td>
+                                                    <td>{{ (rooms.estado == 'disponivel') ? disponivel : ocupado }}</td>
+                                                    <td class="td-actions text-right">
+                                                        <a href="{{ general.full_web_url }}quartos/edit/{{ rooms.id_quarto }}/">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Editar">
+                                                                <i class="material-icons">edit</i>
+                                                            </button>
+                                                        </a>
+
+                                                        <a href="#">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" data-original-title="Remover">
+                                                                <i class="material-icons" data-id="{{ rooms.id_quarto }}">delete</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/quartos.js"></script>
+    {% endblock %}
