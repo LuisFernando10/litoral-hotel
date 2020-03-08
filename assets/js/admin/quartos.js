@@ -40,9 +40,26 @@
                 //Nos validamos o estado da petiçao
                 if (response.status === '200'){
                     notify_success_notification(response.message);
+
+                    //Direitonamos pra a pagina do list
+                    $(location).attr('href', FULL_WEB_URL + 'quartos/')
+
                 }
                 else
                     notify_error_notification(response.message);
             }
         });
+    });
+
+    // ** Codigo para permitir funcionalidade ao <file-input> do modelo **
+
+    //Pra detectar o clique e acionar o 'input-file'
+    $('.form-file-simple .inputFileVisible, .js-icon-open-input-file').click(function() {
+        $(this).siblings('.inputFileHidden').trigger('click');
+    });
+
+    //Para exibir o nome do arquivo selecionado no 'input'
+    $('.form-file-simple .inputFileHidden').change(function() {
+        var filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+        $(this).siblings('.inputFileVisible').val(filename);
     });

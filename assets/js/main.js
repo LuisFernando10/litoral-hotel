@@ -5,11 +5,11 @@
     function notify_success_notification(message){
 
         $.notify({
-            icon: "fa fa-user",
+            icon: '<i class="material-icons text-white">check_circle</i>',
             message: message
         },{
             type: 'success',
-            timer: 8000,
+            timer: 4000,
             placement: {
                 from: 'top',
                 align: 'right'
@@ -23,11 +23,11 @@
     function notify_error_notification(message){
 
         $.notify({
-            icon: "fa fa-user",
+            icon: '<i class="material-icons text-white">error</i>',
             message: message
         },{
             type: 'danger',
-            timer: 8000,
+            timer: 4000,
             placement: {
                 from: 'top',
                 align: 'right'
