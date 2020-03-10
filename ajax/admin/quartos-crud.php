@@ -19,6 +19,32 @@
         //Validamos el tipo de 'acción'
         if ($action == 'INSERT'){
 
+            //Validamos si existen archivos para insertar
+            if (!empty($quarto_file)){
+
+                //Creamos variable para guardar el array con información del archivo ó la vaciamos
+                $file_document = empty($quarto_file) ? '' : $quarto_file;
+
+                $file_proccess = Files::uploadFile($file_document);
+
+                //Procesamos el nombre del archivo para guardar la ruta
+                //$url_file = constant('FULL_WEB_URL').'scripts/files/'.$company_id.'/pdf/'.$file_proccess['file_name_hash'];
+                //$url_file = str_replace('ajax/admin/','', $url_file);
+
+                //Realizamos la inserción del archivo a en la BD
+                //$insert_file_on_bd = Files::insertFile($url_file,$file_proccess['file_alias'],$file_proccess['file_type'],$company_id,$result);
+
+//                if ($insert_file_on_bd !== ''){
+//
+//                    //Array de respuesta
+//                    $response = array(
+//                        'status' => '200',
+//                        'message' => 'Plantilla guardada con éxito',
+//                        'text_message' => $file_proccess['file_name_hash']
+//                    );
+//                }
+            }
+
             //Realizamos la inserción de los campos de la plantilla en la BD
             $id_room = Rooms::insertRoom($quarto_name, $quarto_description, $quarto_file['name'],$quarto_price,$quarto_adultos,'disponivel');
 

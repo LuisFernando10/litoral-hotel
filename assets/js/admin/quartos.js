@@ -1,4 +1,9 @@
 
+    $(document).ready(function () {
+
+
+    });
+
     $('.btn-quartos-save').on('click', function () {
 
         //Obtenemos los elementos
