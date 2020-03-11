@@ -6,6 +6,9 @@
 
         class Files
         {
+            /**
+             * @Description: Metodo que processa o arquivo escolhido pra mover no caminho fisico do servidor y faz processo de encriptaçao
+             */
             static function uploadFile($file_document = NULL){
 
                 //Nos obtemos a extensao do arquivo
@@ -19,50 +22,45 @@
                 $fileName = hash("sha256", $varFileName);
 
                 //Obtemos o caminho onde o arquivo será salvo
-                $galery_folder = constant('GALERY_WEB_URL');
+                $galery_folder = __DIR__.'/../assets/img/galery/';
 
                 //Nos validamos se o diretorio ja existe
                 Files::verifyDirectoryExisting($galery_folder);
 
-                //Nos movemos o arquivo ao diretorio fisico
-                $file_upload = Files::moveUploadFile($file_document, $galery_folder);
+                //Obtemos o nome final do arquivo
+                $fileName = $fileName.'.'.$get_extention;
 
-                var_dump($file_upload);
-                var_dump($file_document);
-                exit();
+                //Obtemos o caminho aonde vamos mover o arquivo escolhido pelo usuario
+                $directory_to_move = __DIR__.'/../assets/img/galery/'. $fileName;
+
+                //Nos movemos o arquivo ao diretorio fisico
+                $file_upload = Files::moveUploadFile($file_document, $directory_to_move);
 
                 //Nos validamos se realmente o arquivo foi criado e movido
                 if ($file_upload == false)
-                    return Array('return' => 'arquivo_nao_movido');
-
-                //Obtemos o nome final do arquivo
-                $fileName = $fileName.$get_extention;
-
-                return Array(
-                    'file_name_hash' => $fileName,
-                    'file_alias' => $file_document['name'],
-                    'file_type' => substr($getExtention,1)
-                );
+                    return false;
+                else
+                    //Nos definimos array com os dados do arquivo
+                    return $fileName;
             }
 
-            static function verifyDirectoryExisting($direcotiro_verify = FULL_PROJECT_WEB_URL)
+            /**
+             * @Description: Metodo que valida a existencia de um diretorio pra cria-lo ou nao
+             */
+            static function verifyDirectoryExisting($direcotiro_verify = null)
             {
                 $directory = $direcotiro_verify;
 
-                if (!file_exists($directory)) {
+                if (!file_exists($directory))
                     mkdir($directory, 0755, true);
-                }
             }
 
+            /**
+             * @Description: Método que move um arquivo para o caminho indicado
+             */
             static function moveUploadFile($file_document = NULL, $target_path = NULL)
             {
-                //Modificamos la URL para obtener la raíz del host
-                $path_server = $_SERVER["DOCUMENT_ROOT"];
-                //$application_url = constant('FILES_WEB_URL');
-                //$application_url = str_replace($application_url, '', $nombre_fichero);
-                //$application_url = $path_server.'scripts/files/'.$application_url;
-
-                if (move_uploaded_file($file_document['tmp_name'], $target_path.$file_document['name']))
+                if (move_uploaded_file($file_document['tmp_name'], $target_path))
                     return true;
                 else
                     return false;
@@ -304,10 +302,18 @@
                 return $result;
             }
 
-            static function deleteFileServer($url_file = NULL){
+            static function deleteFileServer($file_current_name = NULL){
 
-                $delete_file = ValidateData::deleteFile($url_file);
+                //Obtemos o caminho aonde vamos mover o arquivo escolhido pelo usuario
+                $file_to_delete = __DIR__.'/../assets/img/galery/'. $file_current_name;
 
-                return $delete_file;
+                if (file_exists($file_to_delete)) {
+
+                    $return = unlink($file_to_delete);
+
+                    return $return;
+                }
+                else
+                    return false;
             }
         }

@@ -26,7 +26,6 @@
 	    define('FULL_WEB_URL', constant('SITE_PROTOCOL').'://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/');
 	    define('ASSETS_WEB_URL', constant('FULL_WEB_URL').'assets/');
 	    define('IMAGES_WEB_URL', constant('ASSETS_WEB_URL').'img/');
-	    define('GALERY_WEB_URL', constant('SITE_PROTOCOL').'://'.$_SERVER['HTTP_HOST'].'/assets/img/galery/');
 
         //Pagination
         define("PAGINATION", 15);

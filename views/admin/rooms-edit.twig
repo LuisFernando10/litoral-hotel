@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body js-quarto-frm-edit">
 
                                 {# Nome #}
                                 <div class="form-row mt-3">
@@ -32,12 +32,12 @@
                                 <div class="form-row mt-4">
                                     <div class="form-group col-md-6">
                                         <label for="select-adults">Adultos</label>
-                                        <select class="form-control js-quartos-adultos" id="select-adults">
-                                            <option {{ (data_room_edit.adultos == 1) ? 'selected disabled' : '' }} class="1">1</option>
-                                            <option {{ (data_room_edit.adultos == 2) ? 'selected disabled' : '' }} class="2">2</option>
-                                            <option {{ (data_room_edit.adultos == 3) ? 'selected disabled' : '' }} class="3">3</option>
-                                            <option {{ (data_room_edit.adultos == 4) ? 'selected disabled' : '' }} class="4">4</option>
-                                            <option {{ (data_room_edit.adultos == 5) ? 'selected disabled' : '' }} class="5">5</option>
+                                        <select class="form-control js-quarto-adultos" id="select-adults">
+                                            <option {{ (data_room_edit.adultos == 1) ? 'selected disabled' : '' }} value="1">1</option>
+                                            <option {{ (data_room_edit.adultos == 2) ? 'selected disabled' : '' }} value="2">2</option>
+                                            <option {{ (data_room_edit.adultos == 3) ? 'selected disabled' : '' }} value="3">3</option>
+                                            <option {{ (data_room_edit.adultos == 4) ? 'selected disabled' : '' }} value="4">4</option>
+                                            <option {{ (data_room_edit.adultos == 5) ? 'selected disabled' : '' }} value="5">5</option>
                                         </select>
                                     </div>
 
@@ -57,15 +57,38 @@
 
                                 {# Imagem #}
                                 <div class="form-group form-file-upload form-file-simple mt-4">
-                                    <label>Imagem</label>
+                                    <label>Imagem</label><br>
                                     <div class="input-group">
                                         <input type="file" class="inputFileHidden js-quarto-image">
                                         <input type="text" class="form-control inputFileVisible" value="{{ data_room_edit.image }}" readonly>
+
+                                        {# '<input-hidden>' para guardar temporalmente el nombre del archivo anteior y asi tenerlo de referencia para eliminar el mismo en caso de que se actualice #}
+                                        <input type="hidden" class="js-input-file-edit" value="{{ data_room_edit.image }}">
+
                                         <span class="input-group-btn js-icon-open-input-file">
                                             <button type="button" class="btn btn-fab btn-round btn-primary">
                                                 <i class="material-icons">attach_file</i>
                                             </button>
                                         </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+
+                                    {# Imagem #}
+                                    <div class="form-group col-md-4">
+                                        <div class="img-container">
+                                            <img class="img-thumbnail" src="{{ general.full_images_url }}/galery/{{ data_room_edit.image }}" rel="nofollow" alt="Quarto">
+                                        </div>
+                                    </div>
+
+                                    {# Estado #}
+                                    <div class="form-group col-md-6 ml-5 mt-5">
+                                        <label for="select-estado">Estado</label>
+                                        <select class="form-control js-quarto-estado" id="select-estado">
+                                            <option {{ (data_room_edit.estado == 'disponivel') ? 'selected' : '' }} value="disponivel">Disponível</option>
+                                            <option {{ (data_room_edit.estado == 'ocupado') ? 'selected' : '' }} value="ocupado">Ocupado</option>
+                                        </select>
                                     </div>
                                 </div>
 
