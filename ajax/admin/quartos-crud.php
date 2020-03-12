@@ -74,7 +74,8 @@
                 $file_document = empty($quarto_file) ? '' : $quarto_file;
 
                 //Deletamos o arquivo no servidor antes de atualizar pelo novo arquivo
-                $delete_file = Files::deleteFileServer($quarto_file_current_name);
+                //$delete_file = Files::deleteFileServer($quarto_file_current_name);
+                $delete_file = true;
 
                 //Nos validamos se realmente se deleteu o arquivo
                 if ($delete_file == true){

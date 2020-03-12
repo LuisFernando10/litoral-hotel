@@ -158,9 +158,6 @@
                 //Ejecutamos la consulta
                 $result = DataBase::query($sql);
 
-                //var_dump($result);
-                //exit();
-
                 if (isset($result[0]) && $result != NULL) {
 
                     if ($type == 'count') {
@@ -232,7 +229,7 @@
                     if ($result != NULL)
                         return $result;
                     else
-                        false;
+                        return false;
                 }
             }
 
@@ -244,9 +241,29 @@
                 // ** Proceso para validar si existe un cuarto con el mismo nombre **
                 $existing_quarto = Rooms::getAll(NULL,NULL,NULL,NULL, $nome);
 
-                if ($existing_quarto != NULL)
-                    return 'existing_quarto';
+                //Variavel de control pra controlar a existencia do mesmo nome em outra tabela
+                $existing_control = true;
+
+                //Percorremos os dados pra validar se o nome que vai-se salvar já existe com o meu Id
+                foreach ($existing_quarto as $value){
+
+                    //Validamos se o nome existe no mesmo Id que o atual da edição
+                    if ($value['id_quarto'] !== $id_quarto)
+                        $existing_control = false;
+                }
+
+                //Validamos se o nome existe em outra tabela ou não
+                if ($existing_control == false){
+                    //return 'existing_quarto';
+                    var_dump('Se repite!!!');
+                    exit();
+                }
+
                 else{
+
+                    var_dump('Llega a este punto!!!');
+                    exit();
+
                     //Preparamos el Query
                     $sql = "
                         UPDATE quartos
@@ -271,6 +288,9 @@
                         $estado,
                         $id_quarto
                     );
+
+                    //var_dump($sql);
+                    //exit();
 
                     //Ejecutamos el Query
                     $result = DataBase::query($sql);
