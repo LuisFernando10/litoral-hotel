@@ -253,16 +253,9 @@
                 }
 
                 //Validamos se o nome existe em outra tabela ou não
-                if ($existing_control == false){
-                    //return 'existing_quarto';
-                    var_dump('Se repite!!!');
-                    exit();
-                }
-
+                if ($existing_control == false)
+                    return 'existing_quarto';
                 else{
-
-                    var_dump('Llega a este punto!!!');
-                    exit();
 
                     //Preparamos el Query
                     $sql = "
@@ -288,9 +281,6 @@
                         $estado,
                         $id_quarto
                     );
-
-                    //var_dump($sql);
-                    //exit();
 
                     //Ejecutamos el Query
                     $result = DataBase::query($sql);
