@@ -11,7 +11,7 @@
     class Opinions
     {
 
-        static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_opiniao = NULL, $op_nome = NULL, $op_texto = NULL, $op_data = NULL, $op_status = NULL) {
+        static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_opiniao = NULL, $nome = NULL, $sujeito = NULL, $texto = NULL, $data = NULL, $puntuacao = NULL, $origem = NULL, $status = NULL) {
 
             //Valor por defecto para 'page'
             if (isset($page) && $page != NULL && is_numeric($page)){
@@ -50,41 +50,71 @@
                 unset($this_condition);
             }
 
-            //Filtro por '$op_nome'
-            if ($op_nome !== NULL) {
+            //Filtro por '$nome'
+            if ($nome !== NULL) {
                 unset($this_condition);
-                $this_condition = 'AND opiniao.op_nome = "%s"';
-                $this_condition = sprintf($this_condition, $op_nome);
+                $this_condition = 'AND opiniao.nome = "%s"';
+                $this_condition = sprintf($this_condition, $nome);
 
                 $conditions .= $this_condition;
                 unset($this_condition);
             }
 
-            //Filtro por '$op_texto'
-            if ($op_texto !== NULL) {
+            //Filtro por '$sujeito'
+            if ($sujeito !== NULL) {
                 unset($this_condition);
-                $this_condition = 'AND opiniao.op_texto = "%s"';
-                $this_condition = sprintf($this_condition, $op_texto);
+                $this_condition = 'AND opiniao.sujeito = "%s"';
+                $this_condition = sprintf($this_condition, $sujeito);
 
                 $conditions .= $this_condition;
                 unset($this_condition);
             }
 
-            //Filtro por '$op_data'
-            if ($op_data !== NULL) {
+            //Filtro por '$texto'
+            if ($texto !== NULL) {
                 unset($this_condition);
-                $this_condition = 'AND opiniao.op_data = "%s"';
-                $this_condition = sprintf($this_condition, $op_data);
+                $this_condition = 'AND opiniao.texto = "%s"';
+                $this_condition = sprintf($this_condition, $texto);
 
                 $conditions .= $this_condition;
                 unset($this_condition);
             }
 
-            //Filtro por '$op_status'
-            if ($op_status !== NULL) {
+            //Filtro por '$data'
+            if ($data !== NULL) {
                 unset($this_condition);
-                $this_condition = 'AND opiniao.op_status = "%s"';
-                $this_condition = sprintf($this_condition, $op_status);
+                $this_condition = 'AND opiniao.data = "%s"';
+                $this_condition = sprintf($this_condition, $data);
+
+                $conditions .= $this_condition;
+                unset($this_condition);
+            }
+
+            //Filtro por '$puntuacao'
+            if ($puntuacao !== NULL) {
+                unset($this_condition);
+                $this_condition = 'AND opiniao.puntuacao = "%s"';
+                $this_condition = sprintf($this_condition, $puntuacao);
+
+                $conditions .= $this_condition;
+                unset($this_condition);
+            }
+
+            //Filtro por '$origem'
+            if ($origem !== NULL) {
+                unset($this_condition);
+                $this_condition = 'AND opiniao.origem = "%s"';
+                $this_condition = sprintf($this_condition, $origem);
+
+                $conditions .= $this_condition;
+                unset($this_condition);
+            }
+
+            //Filtro por '$status'
+            if ($status !== NULL) {
+                unset($this_condition);
+                $this_condition = 'AND opiniao.status = "%s"';
+                $this_condition = sprintf($this_condition, $status);
 
                 $conditions .= $this_condition;
                 unset($this_condition);
@@ -97,10 +127,13 @@
             else {
                 $sql_select = "
                     opiniao.id_opiniao,
-                    opiniao.op_nome,
-                    opiniao.op_texto,
-                    opiniao.op_data,
-                    opiniao.op_status
+                    opiniao.nome,
+                    opiniao.sujeito,
+                    opiniao.texto,
+                    opiniao.data,
+                    opiniao.puntuacao,
+                    opiniao.origem,
+                    opiniao.status
                 ";
 
                 $sql_limit = "LIMIT $limit_start, $pagination";
@@ -115,7 +148,7 @@
                         1+1=2
                         $conditions
                     ORDER BY 
-                        opiniao.op_data
+                        opiniao.data
                     $sql_limit
                 ";
 

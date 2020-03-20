@@ -32,5 +32,5 @@
             Security::sessionClose();
 
             //Se carga la vista de login
-            include_once (dirname(__FILE__).'/../controllers/log-in.php');
+            include_once (dirname(__FILE__).'/../controllers/user/index.php');
         }
