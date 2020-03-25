@@ -256,7 +256,6 @@
                 if ($existing_control == false)
                     return 'existing_quarto';
                 else{
-
                     //Preparamos el Query
                     $sql = "
                         UPDATE quartos
@@ -309,7 +308,7 @@
                 );
 
                 //A gente executa o query
-                $result = Db::query($sql);
+                $result = DataBase::query($sql);
 
                 //A gente retorna o resultado da consulta (true-false)
                 return $result;

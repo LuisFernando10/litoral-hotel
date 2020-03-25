@@ -115,6 +115,11 @@
         });
     });
 
+    $('.js-quarto-btn-delete').on('click', function () {
+
+
+    });
+
     // ** Codigo para permitir funcionalidade ao <file-input> do modelo **
 
     //Pra detectar o clique e acionar o 'input-file'
