@@ -14,13 +14,15 @@
         $quarto_description = filter_input(INPUT_POST, 'quarto_description', FILTER_SANITIZE_STRING);
         $quarto_adultos = filter_input(INPUT_POST, "quarto_adultos", FILTER_SANITIZE_STRING);
         $quarto_price = filter_input(INPUT_POST, "quarto_price", FILTER_SANITIZE_STRING);
-        $quarto_file = $_FILES['quarto_file'];
         $quarto_file_current_name = filter_input(INPUT_POST, "quarto_file_current_name", FILTER_SANITIZE_STRING);
         $quarto_estado = filter_input(INPUT_POST, "quarto_estado", FILTER_SANITIZE_STRING);
         $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 
         //Validamos el tipo de 'acción'
         if ($action == 'INSERT'){
+
+            //Nós obtemos as propiedades do file
+            $quarto_file = $_FILES['quarto_file'];
 
             //Validamos si existen archivos para insertar
             if (!empty($quarto_file)){
@@ -67,15 +69,21 @@
         }
         elseif ($action == 'UPDATE'){
 
+            //Nós validamos se o array ($_FILES) está vacío para nao ter problemas con o (Notice do PHP)
+            if (empty($_FILES))
+                $quarto_file = NULL;
+            else
+                //Nós obtemos as propiedades do file
+                $quarto_file = $_FILES['quarto_file'];
+
             //Validamos si existen archivos para insertar
-            if (!empty($quarto_file) || $quarto_file != NULL){
+            if (isset($quarto_file) && (!empty($quarto_file) || $quarto_file != NULL)){
 
                 //Creamos variable para guardar el array con información del archivo ó la vaciamos
                 $file_document = empty($quarto_file) ? '' : $quarto_file;
 
                 //Deletamos o arquivo no servidor antes de atualizar pelo novo arquivo
                 $delete_file = Files::deleteFileServer($quarto_file_current_name);
-                //$delete_file = true;
 
                 //Nos validamos se realmente se deleteu o arquivo
                 if ($delete_file == true){
@@ -105,7 +113,7 @@
                         else
                             $response = array(
                                 'status' => '500',
-                                'message' => 'Error ao Atualizarx',
+                                'message' => 'Error ao Atualizar',
                                 'id_room' => null
                             );
                     }
@@ -119,30 +127,27 @@
                 else
                     $response = array(
                         'status' => '500',
-                        'message' => 'Error ao Atualizarz',
+                        'message' => 'Error ao Atualizar',
                         'id_room' => null
                     );
             }
             else{
 
-                var_dump('Dato SIn archivo');
-                exit();
-
                 //Realizamos la inserción de los campos de la plantilla en la BD
-                $id_room = Rooms::insertRoom($quarto_name, $quarto_description, NULL,$quarto_price,$quarto_adultos,'disponivel');
+                $update_room = Rooms::updateRoom($quarto_id,$quarto_name, $quarto_description, NULL,$quarto_price,$quarto_adultos,$quarto_estado);
 
                 //Validamos si la inserción tuvo éxito o no
-                if ($id_room != null && is_numeric($id_room))
+                if ($update_room != false)
                     $response = array(
                         'status' => '200',
                         'message' => 'Quarto Atualizado',
-                        'id_room' => $id_room
+                        'id_room' => $update_room
                     );
-                elseif ($id_room == 'existing_quarto')
+                elseif ($update_room == 'existing_quarto')
                     $response = array(
                         'status' => '500',
                         'message' => 'O nome do quarto já existe',
-                        'id_room' => $id_room
+                        'id_room' => $update_room
                     );
                 else
                     $response = array(
@@ -154,20 +159,31 @@
         }
         elseif ($action == 'DELETE'){
 
-            //Eliminamos la plantilla junto a sus respectivos 'plantilla_detalle'
-            //$delete_template = Template::deleteTemplate($template_id,$id_company);
+            //Obtemos os dados do quarto
+            $data_room = Rooms::getAll(NULL,NULL,NULL,$quarto_id,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
-            //Validamos éxito de la operación
-            //if ($delete_template)
-//                $response = array(
-//                    'status' => '200',
-//                    'message' => 'Quarto Deletado'
-//                );
-            //else
-//                $response = array(
-//                    'status' => '500',
-//                    'message' => 'Error ao Deletar'
-//                );
+            //Obtemos o nome do arquivo
+            $image_name = $data_room[0]['image'];
+
+            //Nos executamos o método que deleta o quarto e o arquivo do servidor
+            $delete_quarto = Rooms::deleteRoom($quarto_id);
+
+            //Nón validamos o sucesso da operacao
+            if ($delete_quarto){
+
+                //Deletamos o arquivo no servidor antes de atualizar pelo novo arquivo
+                $delete_file = Files::deleteFileServer($image_name);
+
+                $response = array(
+                    'status' => '200',
+                    'message' => 'Quarto Deletado'
+                );
+            }
+            else
+                $response = array(
+                    'status' => '500',
+                    'message' => 'Error ao Deletar'
+                );
         }
 
         //Retornamos la respuesta en formato Json

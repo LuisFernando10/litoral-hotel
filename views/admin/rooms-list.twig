@@ -42,7 +42,7 @@
 
                                             {# Percorremos os dados dos quartos pra renderizar as linhas #}
                                             {% for rooms in data_room %}
-                                                <tr>
+                                                <tr class="js-quartos-tr">
                                                     <td>
                                                         <div class="img-container">
                                                             <img src="{{ general.full_images_url }}/galery/{{ rooms.image }}" class="img-thumbnail" rel="nofollow" alt="Quarto">
@@ -54,15 +54,18 @@
                                                     <td class="text-center td-number">{{ rooms.adultos }}</td>
                                                     <td>{{ (rooms.estado == 'disponivel') ? disponivel : ocupado }}</td>
                                                     <td class="td-actions text-right">
+
+                                                        {# Editar #}
                                                         <a href="{{ general.full_web_url }}quartos/edit/{{ rooms.id_quarto }}/">
                                                             <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Editar">
                                                                 <i class="material-icons">edit</i>
                                                             </button>
                                                         </a>
 
+                                                        {# Deletar #}
                                                         <a href="#">
-                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm js-quarto-btn-delete" data-original-title="Remover">
-                                                                <i class="material-icons" data-id="{{ rooms.id_quarto }}">delete</i>
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm js-quarto-btn-delete" data-original-title="Remover" data-id="{{ rooms.id_quarto }}">
+                                                                <i class="material-icons">delete</i>
                                                                 <div class="ripple-container"></div>
                                                             </button>
                                                         </a>

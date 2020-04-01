@@ -190,6 +190,8 @@
                 if ($existing_quarto != NULL)
                     return 'existing_quarto';
                 else{
+                    //
+
                     //Preparamos Query
                     $sql = "
                         INSERT INTO quartos (
@@ -244,25 +246,33 @@
                 //Variavel de control pra controlar a existencia do mesmo nome em outra tabela
                 $existing_control = true;
 
-                //Percorremos os dados pra validar se o nome que vai-se salvar já existe com o meu Id
-                foreach ($existing_quarto as $value){
+                //Validamos se a variável é uma matriz (array) pra não possuir erros com o PHP ao momento de percorrer o 'foreach'
+                if (is_array($existing_quarto) || is_object($existing_quarto))
+                    //Percorremos os dados pra validar se o nome que vai-se salvar já existe com o meu Id
+                    foreach ($existing_quarto as $value){
 
-                    //Validamos se o nome existe no mesmo Id que o atual da edição
-                    if ($value['id_quarto'] !== $id_quarto)
-                        $existing_control = false;
-                }
+                        //Validamos se o nome existe no mesmo Id que o atual da edição
+                        if ($value['id_quarto'] !== $id_quarto)
+                            $existing_control = false;
+                    }
 
                 //Validamos se o nome existe em outra tabela ou não
                 if ($existing_control == false)
                     return 'existing_quarto';
                 else{
+                    //Validamos se existe ou nao uma imagem pra atualizar
+                    if ($image != NULL)
+                        $update_image = "image = '$image',";
+                    else
+                        $update_image = "";
+
                     //Preparamos el Query
                     $sql = "
                         UPDATE quartos
                         SET
                             nome = '%s',
                             descricao = '%s',
-                            image = '%s',
+                            $update_image
                             preco = '%s',
                             adultos = '%s',
                             estado = '%s'
@@ -274,7 +284,6 @@
                     $sql = sprintf($sql,
                         $nome,
                         $descricao,
-                        $image,
                         $preco,
                         $adultos,
                         $estado,
@@ -296,7 +305,7 @@
 
                 //A gente prepara o query
                 $sql = "
-                    DELETE FROM 
+                    DELETE FROM
                         quartos 
                     WHERE 
                         id_quarto = '%s'

@@ -309,6 +309,7 @@
 
                 if (file_exists($file_to_delete)) {
 
+                    //Deletamos o arquivo
                     $return = unlink($file_to_delete);
 
                     return $return;
