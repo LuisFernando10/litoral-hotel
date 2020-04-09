@@ -53,142 +53,43 @@
                                 {# Rooms Types #}
                                 <div class="booking_slider_container">
 
+                                    {# Quartos #}
                                     <div class="css-div-rooms row">
 
-                                        {# Apto Single #}
-                                        <div class="col col-md-4 mb-3">
-                                            <div class="card">
-                                                <img class="card-img-top" src="{{ general.full_images_url }}HotelLitoral/apto-single.jpg" alt="triple-room">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Apto. Single</h5>
-                                                    <div class="footer_list">
-                                                        <ul>
-                                                            <li><i class="fa fa-bed"></i> Camas box de casal</li>
-                                                            <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg">&nbsp; Ar condicionado SPLIT</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg">&nbsp; Secador de cabelo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg">&nbsp; Frigobar</li>
-                                                            <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted"><a href="{{ general.full_web_url }}bookings/"><button type="button" class="btn btn-outline-warning">Solicite Reserva!</button></a></span>
-                                                    <span style="float: right">
-                                                        <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
-                                                        <img src="{{ general.full_images_url }}Icons/utensils-solid.svg" class="css-img-icon-svg">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% for rooms in data_rooms %}
 
-                                        {# Apto Duplo / Casal #}
-                                        <div class="col col-md-4 mb-3">
-                                            <div class="card">
-                                                <img class="card-img-top" src="{{ general.full_images_url }}HotelLitoral/apto-duplo-casal.jpg" alt="married-room">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Apto. Duplo / Casal</h5>
-                                                    <div class="footer_list">
-                                                        <ul>
-                                                            <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                            <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg">&nbsp; Ar condicionado SPLIT</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg">&nbsp; Secador de cabelo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg">&nbsp; Frigobar</li>
-                                                            <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                        </ul>
+                                            <div class="col col-md-4 mb-3">
+                                                <div class="card">
+                                                    <img class="card-img-top" src="{{ general.full_images_url }}galery/{{rooms.image}}" alt="triple-room">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{rooms.nome}}</h5>
+                                                        <div class="footer_list">
+                                                            <ul>
+                                                                <li><i class="fa fa-bed"></i> Camas box de casal</li>
+                                                                <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
+                                                                <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg">&nbsp; Ar condicionado SPLIT</li>
+                                                                <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg">&nbsp; Secador de cabelo</li>
+                                                                <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg">&nbsp; Frigobar</li>
+                                                                <li><i class="fa fa-wifi"></i> Wi-Fi</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <span class="text-muted">
+                                                            <a href="{{ general.full_web_url }}bookings/">
+                                                                <button type="button" class="btn btn-outline-warning" data-id="{{ rooms.id_quarto }}">
+                                                                    Solicite Reserva!
+                                                                </button>
+                                                            </a>
+                                                        </span>
+                                                        <span style="float: right">
+                                                            <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
+                                                            <i class="mr-2 fa fa-coffee css-icon-service-rooms"></i>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted"><a href="{{ general.full_web_url }}bookings/"><button type="button" class="btn btn-outline-warning">Solicite Reserva!</button></a></span>
-                                                    <span style="float: right">
-                                                        <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
-                                                        <img src="{{ general.full_images_url }}Icons/utensils-solid.svg" class="css-img-icon-svg">
-                                                    </span>
-                                                </div>
                                             </div>
-                                        </div>
-
-                                        {# Apto Triplo #}
-                                        <div class="col col-md-4 mb-3">
-                                            <div class="card">
-                                                <img class="card-img-top" src="{{ general.full_images_url }}HotelLitoral/apto-triplo.jpg" alt="single-room">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Apto. Triplo</h5>
-                                                    <div class="footer_list">
-                                                        <ul>
-                                                            <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                            <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg">&nbsp; Ar condicionado SPLIT</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg">&nbsp; Secador de cabelo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg">&nbsp; Frigobar</li>
-                                                            <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted"><a href="{{ general.full_web_url }}bookings/"><button type="button" class="btn btn-outline-warning">Solicite Reserva!</button></a></span>
-                                                    <span style="float: right">
-                                                        <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
-                                                        <img src="{{ general.full_images_url }}Icons/utensils-solid.svg" class="css-img-icon-svg">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {# Apto Quádruplo #}
-                                        <div class="col col-md-4 mb-3">
-                                            <div class="card">
-                                                <img class="card-img-top" src="{{ general.full_images_url }}HotelLitoral/apto-quadruplo.jpg" alt="single-room">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Apto. Quádruplo</h5>
-                                                    <div class="footer_list">
-                                                        <ul>
-                                                            <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                            <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg">&nbsp; Ar condicionado SPLIT</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg">&nbsp; Secador de cabelo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg">&nbsp; Frigobar</li>
-                                                            <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted"><a href="{{ general.full_web_url }}bookings/"><button type="button" class="btn btn-outline-warning">Solicite Reserva!</button></a></span>
-                                                    <span style="float: right">
-                                                        <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
-                                                        <img src="{{ general.full_images_url }}Icons/utensils-solid.svg" class="css-img-icon-svg">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {# Apto Quíntuplo #}
-                                        <div class="col col-md-4 mb-3">
-                                            <div class="card">
-                                                <img class="card-img-top" src="{{ general.full_images_url }}HotelLitoral/apto-quintuplo.jpg" alt="triple-room">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Apto. Quíntuplo</h5>
-                                                    <div class="footer_list">
-                                                        <ul>
-                                                            <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                            <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg">&nbsp; Ar condicionado SPLIT</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg">&nbsp; Secador de cabelo</li>
-                                                            <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg">&nbsp; Frigobar</li>
-                                                            <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-muted"><a href="{{ general.full_web_url }}bookings/"><button type="button" class="btn btn-outline-warning">Solicite Reserva!</button></a></span>
-                                                    <span style="float: right">
-                                                        <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
-                                                        <img src="{{ general.full_images_url }}Icons/utensils-solid.svg" class="css-img-icon-svg">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

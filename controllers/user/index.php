@@ -65,9 +65,13 @@
 
             case 'rooms':
 
+                //Nós obtemos os dados relacionados aos quartos
+                $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+
                 //Renderizamos la vista
-                $twig->display('rooms-create.twig', array(
-                    'general' => $generalParam
+                $twig->display('rooms.twig', array(
+                    'general' => $generalParam,
+                    'data_rooms' => $data_rooms
                 ));
                 break;
 

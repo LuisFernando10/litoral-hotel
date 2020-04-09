@@ -7,10 +7,8 @@
          * @Date: 14/feb/2020
          */
 
-        //Se incluye el archivo de seguridad que no permite hacer nada si no estan las sesiones habilitadas y correctamente iniciadas
+        //Importamos os arquivos que sao indispensaveis pra funcionaiodade do sistema
         require_once(dirname(__FILE__).'/../../security/secure-session.php');
-
-        //Registramos el cargador automático de Twig
         require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
         //Indicamos en qué parte del proyecto se encontrarán las plantillas a reenderizar
@@ -22,8 +20,12 @@
         //Twig load enviroment
         $twig = new \Twig\Environment($loader, array(
         //            'cache' =>  $path_cache_twig,
-            'auto_reload' => true
+            'auto_reload' => true,
+            'debug' => true
         ));
+
+        //Adicionamos as extensões necessárias
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
 
         //Obtenemos el Id del 'usuario' y el Id de la 'empresa'
         $user_id = $_SESSION['user_id'];
@@ -90,6 +92,18 @@
                         'general' => $general_param,
                         'data_room' => $data_room
                     ));
+
+                break;
+
+            case 'oferecimentos':
+
+                //Obtemos os dados relacionados às ofertas
+                $data_offering = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+                $twig->display('offerings.twig',array(
+                    'general' => $general_param,
+                    'data_offering' => $data_offering
+                ));
 
                 break;
 

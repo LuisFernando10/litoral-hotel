@@ -3,3 +3,9 @@
     .css-element-hide{
         display: none;
     }
+
+    /*Clase para alinhar o '<input>' con o '<select>'*/
+    .css-input-aligned-with-select{
+        padding-top: 36px;
+        padding-bottom: 19px;
+    }
