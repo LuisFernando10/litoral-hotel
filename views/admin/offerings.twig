@@ -15,7 +15,7 @@
                                         <h5 class="card-title">Oferecimentos</h5>
 
                                         {# --- Input-hidden para cargar el Id de la plantilla registrada --- #}
-                                        <input type="hidden" class="js-hide-template-id" data-id-template="">
+                                        <input type="hidden" class="js-hide-offering-id" data-id-offering="">
                                     </div>
                                     <div class="col-4 text-right">
                                         <a href="{{general.full_web_url}}oferecimentos/"><button type="button" class="btn btn-info">Voltar</button></a>
@@ -32,22 +32,23 @@
                                         <div class="form-group mt-3">
 
                                             {# Subir #}
-                                            <button class="btn btn-primary btn-fab btn-fab-mini btn-round js-btn-template-priority-up">
+                                            <button class="btn btn-primary btn-fab btn-fab-mini btn-round js-btn-offering-priority-up">
                                                 <i class="material-icons">keyboard_arrow_up</i>
                                             </button>
 
                                             {# Baixar #}
-                                            <button class="btn btn-primary btn-fab btn-fab-mini btn-round js-btn-template-priority-down">
+                                            <button class="btn btn-primary btn-fab btn-fab-mini btn-round js-btn-offering-priority-down">
                                                 <i class="material-icons">keyboard_arrow_down</i>
                                             </button>
 
                                             {# Deletar #}
-                                            <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-template-priority-delete">
+                                            <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-offering-priority-delete">
                                                 <i class="material-icons">delete</i>
                                             </button>
                                         </div>
                                     </div>
                                 {% endset %}
+
                                 <div class="js-container-to-add-elements">
 
                                     {# Validamos se existem items pra iterar sobre eles #}
@@ -55,7 +56,7 @@
 
                                         <div class="row js-div-new-row" data-id-priority="">
 
-                                            {# Botões Prioridad #}
+                                            {# Botões Prioridades #}
                                             <div class="col-md-1 pr-1">
                                                 <div class="form-group mt-4">
                                                     <input type="hidden" class="form-control js-offering-priority">
@@ -66,7 +67,7 @@
                                             <div class="col-md-4 pl-1 mt-3">
                                                 <div class="form-group css-hide-element js-div-form-name-field">
                                                     <label>Nome</label>
-                                                    <input type="text" class="form-control css-input-aligned-with-select js-template-field-name">
+                                                    <input type="text" class="form-control css-input-aligned-with-select js-offering-field-name">
                                                 </div>
                                             </div>
 
@@ -74,7 +75,7 @@
                                             <div class="col-md-3 pl-1">
                                                 <div class="form-group">
                                                     <label for="select-type">Tipo</label>
-                                                    <select class="form-control js-template-field-type" id="select-type">
+                                                    <select class="form-control js-offering-field-type" id="select-type">
                                                         <option selected disabled class="">Selecionar</option>
                                                         <option class="possui">Possui</option>
                                                         <option class="nao_possui">Não possui</option>
@@ -103,7 +104,7 @@
                                                 <div class="col-md-4 pl-1 mt-3">
                                                     <div class="form-group css-hide-element js-div-form-name-field">
                                                         <label>Nome</label>
-                                                        <input type="text" class="form-control css-input-aligned-with-select js-template-field-name" value="{{ offering.nome }}">
+                                                        <input type="text" class="form-control css-input-aligned-with-select js-offering-field-name" value="{{ offering.nome }}">
                                                     </div>
                                                 </div>
 
@@ -111,7 +112,7 @@
                                                 <div class="col-md-3 pl-1">
                                                     <div class="form-group">
                                                         <label for="select-type">Tipo</label>
-                                                        <select class="form-control js-template-field-type" id="select-type">
+                                                        <select class="form-control js-offering-field-type" id="select-type">
                                                             <option selected disabled class="">Selecionar</option>
                                                             <option {{ (offering.tipo == 'possui') ? 'selected' : '' }} class="possui">Possui</option>
                                                             <option {{ (offering.tipo == 'nao_possui') ? 'selected' : '' }} class="nao_possui">Não possui</option>
@@ -124,20 +125,20 @@
                                             </div>
                                         {% endfor %}
                                     {% endif %}
+                                </div>
 
-                                    {# Botón Add(+) #}
-                                    <div class="row">
-                                        <div class="update ml-auto mr-auto">
-                                            <button class="btn btn-success btn-fab btn-fab-mini js-btn-template-add-fields">
-                                                <i class="material-icons">add</i>
-                                            </button>
-                                        </div>
+                                {# Botón Add(+) #}
+                                <div class="row">
+                                    <div class="update ml-auto mr-auto">
+                                        <button class="btn btn-success btn-fab btn-fab-mini js-btn-offering-add-fields">
+                                            <i class="material-icons">add</i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
 
                             {# ** HTML oculto para controlar la adición de elementos de forma dinámica ** #}
-                            <div class="css-element-hide js-parent-div-add-elements">
+                            <div class="css-element-hide js-hide-parent-div-add-elements">
 
                                 <div class="row js-div-new-row" data-id-priority="">
 
@@ -152,7 +153,7 @@
                                     <div class="col-md-4 pl-1 mt-3">
                                         <div class="form-group css-hide-element js-div-form-name-field">
                                             <label>Nome</label>
-                                            <input type="text" class="form-control css-input-aligned-with-select js-template-field-name">
+                                            <input type="text" class="form-control css-input-aligned-with-select js-offering-field-name">
                                         </div>
                                     </div>
 
@@ -160,7 +161,7 @@
                                     <div class="col-md-3 pl-1">
                                         <div class="form-group">
                                             <label for="select-type">Tipo</label>
-                                            <select class="form-control js-template-field-type" id="select-type">
+                                            <select class="form-control js-offering-field-type" id="select-type">
                                                 <option selected disabled class="">Selecionar</option>
                                                 <option class="possui">Possui</option>
                                                 <option class="nao_possui">Não possui</option>
@@ -184,6 +185,6 @@
         <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/offerings.js"></script>
 
         <script>
-            $('.js-template-name').blur(insert_template);
+            $('.js-offering-name').blur(insert_offering);
         </script>
     {% endblock %}
