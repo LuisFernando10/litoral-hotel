@@ -31,12 +31,14 @@
         let element_btn_up = $('.js-container-to-add-elements .js-btn-offering-priority-up');
         let element_btn_down = $('.js-container-to-add-elements .js-btn-offering-priority-down');
         let element_offering_name = $('.js-container-to-add-elements .js-offering-field-name');
+        let element_offering_type = $('.js-container-to-add-elements .js-offering-field-type');
 
         //Refrescamos os evntos dos elementos
         element_btn_delete.off('click');
         element_btn_up.off('click');
         element_btn_down.off('click');
         element_offering_name.off('blur');
+        element_offering_type.off('change');
 
         //DELETAR um oferecimento
         element_btn_delete.on('click', function () {
@@ -55,6 +57,11 @@
 
         //SALVAR o nome
         element_offering_name.on('blur', function () {
+            insert_offering($(this));
+        });
+
+        //SALVAR o tipo
+        element_offering_type.on('change', function () {
             insert_offering($(this));
         });
     }
@@ -131,61 +138,74 @@
      */
     function insert_offering() {
 
-        //Este metodo reordena las prioridades
+        //Reordenamos las prioridades
         offering_priorities();
 
-        //Esta es la variable que guardara los campos agregados
+        //Variavel 'array' que guardará cada oferecimento
         var general_array = [];
 
-        //Aqui se recorre los elemtentos que estan agregados dinamicamente
+        //Nós iteramos sobre os elementos (oferecimentos)
         $('.js-container-to-add-elements .js-div-new-row').each(function () {
 
+            //Criamos objeto que guardará a informacao própira de cada oferecimento
             let general_object = {};
+
+            //Obtemos os valores
             let name_field = $(this).find('.js-offering-field-name').val();
-            let number_priority =$(this).find('.js-offering-priority').val();
+            let type_field = $(this).find('.js-offering-field-type').val();
+            let number_priority = $(this).find('.js-offering-priority').val();
 
-            //Aqui le asignamos los valores a los objetos
-            general_object['nombre'] = name_field;
-            general_object['prioridad'] = number_priority;
+            //Nós atribuímos os valores ao objeto
+            general_object['nome'] = name_field;
+            general_object['tipo'] = type_field;
+            general_object['prioridade'] = number_priority;
 
-            //Se agrefa cada objeto al array general
+            //Adicionamos o objeto à matriz geral
             general_array.push(general_object);
         });
 
-        //Se define la variable que guardara array con los nombres de las plantillas
+        //Nós inicializamos variável que armazenará os nomes de cada 'oferecimento'
         var array_name_field = [];
+
+        //Variavél de control pra parar/continuar com o processo
         var control_validation = true;
 
-        //Aqui recorremos el array para sacar los nombres de los campos
+        //Passamos pela matriz para obter os nomes dos campos (oferecimentos)
         general_array.forEach(function (value, index) {
 
-            if (array_name_field.indexOf(value.nombre) === -1){
-                array_name_field.push(value.nombre);
-                $('.js-btn-add').prop('disabled', false);
+            //Validamos se o 'nome' do ofererecimento não existe
+            if (array_name_field.indexOf(value.nome) === -1){
+                //Adcionamos o nome ao array final e habilitamos o botão
+                array_name_field.push(value.nome);
+                $('.js-btn-offering-add-fields').prop('disabled', false);
             }
             else {
+                //Mudamos o valor da variavél de control pra parar o processo e desabilitamos o botão
                 control_validation = false;
-                $('.js-btn-add').prop('disabled', true);
+                $('.js-btn-offering-add-fields').prop('disabled', true);
             }
         });
 
-        //Se valida si hay algun campo repetido
+        //Validamos se existe um campo repetido
         if (control_validation === true)
-            //Ejecutamos el ajax que guarda los datos en la bd
+            //Executamos o ajax que salva os dados no BD
             $.ajax({
                 type: 'POST',
-                url: FULL_WEB_URL + 'ajax/usuario_sistema/offering-template.php',
+                url: FULL_WEB_URL + 'ajax/admin/offerings-crud.php',
                 data:{
                     array_data: general_array,
                     action: 'INSERT'
-                }, success: function (response) {
+                },
+                success: function (response) {
 
-                    //Parseamos las respuesta a Json
+                    //Passamos a resposta para JSON
                     let json_obj = $.parseJSON(response);
+
+                    console.log(json_obj);
                 }
             });
         else{
-            notify_error_notification('La <b>Etiqueta</b> No puede repetirse.');
+            notify_error_notification('O <b>oferecimento</b> não pode ser repetido.');
             return false;
         }
     }

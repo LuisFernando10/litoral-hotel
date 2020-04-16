@@ -10,7 +10,7 @@
         class Offerings
         {
             /**
-             * @Description: Metodo que obtem os dados correspondentes aos 'Quartos'
+             * @Description: Metodo que obtem os dados correspondentes aos 'Oferecimentos'
              */
             static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_oferecimento = NULL, $nome = NULL, $tipo = NULL, $prioridade = NULL) {
 
@@ -88,28 +88,28 @@
                 }
                 else {
                     $sql_select = "
-                                            oferecimentos.id_oferecimento,
-                                            oferecimentos.nome,
-                                            oferecimentos.tipo,
-                                            oferecimentos.prioridade
-                                        ";
+                        oferecimentos.id_oferecimento,
+                        oferecimentos.nome,
+                        oferecimentos.tipo,
+                        oferecimentos.prioridade
+                    ";
 
                     $sql_limit = "LIMIT $limit_start, $pagination";
                 }
 
                 //Preparamos el query
                 $sql = "
-                                    SELECT 
-                                        $sql_select
-                                    FROM 
-                                        oferecimentos
-                                    WHERE
-                                        1+1=2
-                                        $conditions
-                                    ORDER BY 
-                                        oferecimentos.prioridade
-                                    $sql_limit
-                                ";
+                    SELECT 
+                        $sql_select
+                    FROM 
+                        oferecimentos
+                    WHERE
+                        1+1=2
+                        $conditions
+                    ORDER BY 
+                        oferecimentos.prioridade
+                    $sql_limit
+                ";
 
                 //Ejecutamos la consulta
                 $result = DataBase::query($sql);
@@ -133,5 +133,97 @@
                 }
                 else
                     return NULL;
+            }
+
+            /**
+             * @Description: Método que insere um orferecimento no BD
+             */
+            static function insertOffering($id_plantilla = NULL, $array_data_tags = NULL){
+
+                //Validamos
+                if (ValidateData::validateInt($id_plantilla) == false)
+                    return false;
+
+                //Definimos variables de control para insertar los registros en la BD
+                $counter = 0;
+                $new_insert_row = '';
+
+                //Recorremos el array general ($data_array) para obtener cada uno de los datos recibidos como objeto
+                foreach ($array_data_tags as $object) {
+
+                    //Guardamos la coma(,) separadora que diferenciará un 'VALUE-Insert' del anterior
+                    $coma = ',';
+
+                    //Si contador es 0, no va la coma(,) para no generar error de sintaxis en el insert (Será el primer insert)
+                    if ($counter == 0)
+                        $coma = '';
+
+                    //Validamos que el 'Id_etiqueta' exista y no esté vacío para hacer la 'Edición'
+                    if ($object['id_tag'] != '')
+                        //Obtenemos cada una de las plantillas correspondientes a su 'prioridad'
+                        $data_item = Tag::getAllTag(NULL, NULL, NULL, $object['id_tag'], $id_plantilla, NULL);
+                    else
+                        $data_item = NULL;
+
+                    //Si hay información, 'actualizamos' las que ya hay, si no, 'insertamos' nuevas etiquetas
+                    if ($data_item != NULL)
+                        //Actualizamos la plantilla correspondiente a la prioridad en curso
+                        Tag::updateTag($data_item[0]['id_etiqueta'], $id_plantilla, html_entity_decode($object['nombre'], ENT_QUOTES | ENT_HTML401, "UTF-8"));
+                    else {
+                        //Variable que contiene la cadena de inserción a la Bd "Ej: VALUE ',(valor, valor, valor')"
+                        $new_insert_row .= "$coma(".$id_plantilla.",'".html_entity_decode($object['nombre'], ENT_QUOTES | ENT_HTML401, "UTF-8")."')";
+
+                        //Incrementamos contador para referirnos a más de una inserción
+                        $counter++;
+                    }
+                }
+
+                //Validamos si contador sigue en 0 para asumir que no se hizo ninguna actualización
+                if ($counter == 0)
+                    return true;
+
+                //Preparamos el Query
+                $sql = "
+                    INSERT INTO etiqueta
+                    (
+                        id_plantilla,
+                        nombre
+                    )
+                    VALUES 
+                ".$new_insert_row;
+
+                //Ejecutamos el Query
+                $result = DataBase::query($sql);
+
+                //Retornamos el Id de la plantilla recién ingresada
+                return $result;
+            }
+
+            /**
+             * @Description: Método que reordena consecutivamente las prioridades de 'Ofrecimientos'
+             */
+            static function updatePriorityOffering($id_plantilla = NULL, $id_plantilla_detalle = NULL,$prioridad = NULL){
+
+                //Preparamos el Query
+                $sql = "
+                    UPDATE
+                        plantilla_detalle
+                    SET
+                        prioridad = '%s'
+                    WHERE
+                        id_plantilla_detalle = '%s'
+                ";
+
+                //Reemplazamos valores
+                $sql = sprintf($sql,
+                    $prioridad,
+                    $id_plantilla_detalle
+                );
+
+                //Ejecutamos el Query
+                $result = DataBase::query($sql);
+
+                //Retornamos la operación true-false
+                return $result;
             }
         }

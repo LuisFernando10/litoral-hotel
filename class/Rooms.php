@@ -190,8 +190,6 @@
                 if ($existing_quarto != NULL)
                     return 'existing_quarto';
                 else{
-                    //
-
                     //Preparamos Query
                     $sql = "
                         INSERT INTO quartos (

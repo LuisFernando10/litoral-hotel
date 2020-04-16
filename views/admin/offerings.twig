@@ -77,8 +77,8 @@
                                                     <label for="select-type">Tipo</label>
                                                     <select class="form-control js-offering-field-type" id="select-type">
                                                         <option selected disabled class="">Selecionar</option>
-                                                        <option class="possui">Possui</option>
-                                                        <option class="nao_possui">Não possui</option>
+                                                        <option value="possui">Possui</option>
+                                                        <option value="nao_possui">Não possui</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -114,8 +114,8 @@
                                                         <label for="select-type">Tipo</label>
                                                         <select class="form-control js-offering-field-type" id="select-type">
                                                             <option selected disabled class="">Selecionar</option>
-                                                            <option {{ (offering.tipo == 'possui') ? 'selected' : '' }} class="possui">Possui</option>
-                                                            <option {{ (offering.tipo == 'nao_possui') ? 'selected' : '' }} class="nao_possui">Não possui</option>
+                                                            <option {{ (offering.tipo == 'possui') ? 'selected' : '' }} value="possui">Possui</option>
+                                                            <option {{ (offering.tipo == 'nao_possui') ? 'selected' : '' }} value="nao_possui">Não possui</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -163,8 +163,8 @@
                                             <label for="select-type">Tipo</label>
                                             <select class="form-control js-offering-field-type" id="select-type">
                                                 <option selected disabled class="">Selecionar</option>
-                                                <option class="possui">Possui</option>
-                                                <option class="nao_possui">Não possui</option>
+                                                <option value="possui">Possui</option>
+                                                <option value="nao_possui">Não possui</option>
                                             </select>
                                         </div>
                                     </div>
