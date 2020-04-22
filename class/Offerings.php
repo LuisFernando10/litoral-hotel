@@ -138,11 +138,7 @@
             /**
              * @Description: Método que insere um orferecimento no BD
              */
-            static function insertOffering($id_plantilla = NULL, $array_data_tags = NULL){
-
-                //Validamos
-                if (ValidateData::validateInt($id_plantilla) == false)
-                    return false;
+            static function insertOffering($array_data_tags = NULL){
 
                 //Definimos variables de control para insertar los registros en la BD
                 $counter = 0;
@@ -159,19 +155,19 @@
                         $coma = '';
 
                     //Validamos que el 'Id_etiqueta' exista y no esté vacío para hacer la 'Edición'
-                    if ($object['id_tag'] != '')
+                    if ($object['prioridade'] != '')
                         //Obtenemos cada una de las plantillas correspondientes a su 'prioridad'
-                        $data_item = Tag::getAllTag(NULL, NULL, NULL, $object['id_tag'], $id_plantilla, NULL);
+                        $data_item = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, NULL, $object['prioridade']);
                     else
                         $data_item = NULL;
 
-                    //Si hay información, 'actualizamos' las que ya hay, si no, 'insertamos' nuevas etiquetas
+                    //Si hay información, 'actualizamos' las que ya hay, si no, 'insertamos' nuevos ofrecimientos
                     if ($data_item != NULL)
                         //Actualizamos la plantilla correspondiente a la prioridad en curso
-                        Tag::updateTag($data_item[0]['id_etiqueta'], $id_plantilla, html_entity_decode($object['nombre'], ENT_QUOTES | ENT_HTML401, "UTF-8"));
+                        Offerings::updateOffering($data_item[0]['id_oferecimento'], html_entity_decode($object['nome'], ENT_QUOTES | ENT_HTML401, "UTF-8"), html_entity_decode($object['tipo'], ENT_QUOTES | ENT_HTML401, "UTF-8"));
                     else {
                         //Variable que contiene la cadena de inserción a la Bd "Ej: VALUE ',(valor, valor, valor')"
-                        $new_insert_row .= "$coma(".$id_plantilla.",'".html_entity_decode($object['nombre'], ENT_QUOTES | ENT_HTML401, "UTF-8")."')";
+                        $new_insert_row .= "$coma('".html_entity_decode($object['nome'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['tipo'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['prioridade'], ENT_QUOTES | ENT_HTML401, "UTF-8")."')";
 
                         //Incrementamos contador para referirnos a más de una inserción
                         $counter++;
@@ -184,10 +180,11 @@
 
                 //Preparamos el Query
                 $sql = "
-                    INSERT INTO etiqueta
+                    INSERT INTO oferecimentos
                     (
-                        id_plantilla,
-                        nombre
+                        nome,
+                        tipo,
+                        prioridade
                     )
                     VALUES 
                 ".$new_insert_row;
@@ -200,30 +197,101 @@
             }
 
             /**
-             * @Description: Método que reordena consecutivamente las prioridades de 'Ofrecimientos'
+             * @Description: Método que 'atualiza' um orferecimento no BD
              */
-            static function updatePriorityOffering($id_plantilla = NULL, $id_plantilla_detalle = NULL,$prioridad = NULL){
+            static function updateOffering($id_oferecimento = NULL, $nome = NULL, $tipo = NULL){
 
-                //Preparamos el Query
+                //Preparamos el SQL
                 $sql = "
                     UPDATE
-                        plantilla_detalle
+                        oferecimentos
                     SET
-                        prioridad = '%s'
+                        nome = '%s',
+                        tipo = '%s'
                     WHERE
-                        id_plantilla_detalle = '%s'
+                        id_oferecimento = '%s'
                 ";
 
                 //Reemplazamos valores
                 $sql = sprintf($sql,
-                    $prioridad,
-                    $id_plantilla_detalle
+                    $nome,
+                    $tipo,
+                    $id_oferecimento
+                );
+
+                //Ejecutamos el Query (true-false)
+                $result = DataBase::query($sql);
+
+                //Retornamos a resposta
+                return $result;
+            }
+
+            /**
+             * @Description: Método que reordena consecutivamente las prioridades de 'Ofrecimientos'
+             */
+            static function updatePriorityOffering($id_oferecimento = NULL, $prioridade = NULL){
+
+                //Preparamos el Query
+                $sql = "
+                    UPDATE
+                        oferecimentos
+                    SET
+                        prioridade = '%s'
+                    WHERE
+                        id_oferecimento = '%s'
+                ";
+
+                //Reemplazamos valores
+                $sql = sprintf($sql,
+                    $prioridade,
+                    $id_oferecimento
                 );
 
                 //Ejecutamos el Query
                 $result = DataBase::query($sql);
 
                 //Retornamos la operación true-false
+                return $result;
+            }
+
+            /**
+             * @Description: Método que elimina un 'Ofrecimiento'
+             */
+            static function deleteOffering($prioridade = NULL){
+
+                //Preparamos el Query
+                $sql = "
+                    DELETE FROM oferecimentos
+                    WHERE prioridade = '%s'
+                ";
+
+                //Reemplazamos los valores
+                $sql = sprintf($sql,
+                    $prioridade
+                );
+
+                //Ejecutamos el Query
+                $result = DataBase::query($sql);
+
+                // *** Proceso para actualizar las 'prioridades' antes de relaizar cualquier edición ***
+
+                //Obtenemos los datos correspondiente a la tabla 'plantilla_detalle'
+                $data_offering = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+                //Creamos variable de control para actualizar las prioridades en caso que existan
+                $priority_indicator = 0;
+
+                //Recorremos las plantillas creadas
+                foreach ($data_offering as $item){
+
+                    //Incrementamos la variable de control por cada iteración
+                    $priority_indicator++;
+
+                    //Actualizamos las prioridades de los 'ofrecimientos' para no alterar el consecutivo de las mismas
+                    Offerings::updatePriorityOffering($item['id_oferecimento'],$priority_indicator);
+                }
+
+                //Retornamos el resultado de la operación true-false
                 return $result;
             }
         }

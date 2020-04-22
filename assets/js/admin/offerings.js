@@ -217,17 +217,10 @@
 
         let priority_value = element.parents('.js-container-to-add-elements .js-div-new-row').find('.js-offering-priority').val();
 
-        //Eliminamos el html correspondiente a la fila
-        element
-            .parents('.js-div-new-row')
-            .hide('slow')
-            .remove()
-            .removeClass('js-div-new-row')
-            .removeAttr('data-id-priority');
-
+        //Executamos a peticao que deleta o oferecimento
         $.ajax({
             type: 'POST',
-            url: FULL_WEB_URL + 'ajax/usuario_sistema/offering-template.php',
+            url: FULL_WEB_URL + 'ajax/admin/offerings-crud.php',
             data: {
                 priority_value: priority_value,
                 action: 'DELETE'
@@ -239,6 +232,14 @@
 
                 //validamos el estado de la operacion
                 if (json_obj.status === '200'){
+
+                    //Eliminamos el html correspondiente a la fila
+                    element
+                        .parents('.js-div-new-row')
+                        .hide('slow')
+                        .remove()
+                        .removeClass('js-div-new-row')
+                        .removeAttr('data-id-priority');
 
                     //Mensaje de exito
                     notify_success_notification(json_obj.message);
