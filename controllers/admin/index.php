@@ -54,13 +54,16 @@
         switch ($class){
 
             //Cargamos y renderizamos las plantillas (Vistas), junto con los parámetros (Variables) a utilizar
+
+            #DASHBOARD
             case 'dashboard':
 
-                echo $twig->render('dashboard.twig',array(
+                $twig->display('dashboard.twig',array(
                     'general' => $general_param
                 ));
                 break;
 
+            #QUARTOS
             case 'quartos':
 
                 //Nos obtemos os dados que precisaremos renderizar nas vistas
@@ -69,37 +72,39 @@
 
                 //Nos validamos cada uma das clases
                 if ($action == 'create')
-                    echo $twig->render('rooms-create.twig',array(
+                    $twig->display('rooms-create.twig',array(
                         'general' => $general_param
                     ));
                 elseif ($action == 'edit'){
 
                     //Nos validamos se ha um $id
                     if (is_numeric($id) && $id != ''){
-                        echo $twig->render('rooms-edit.twig',array(
+                        $twig->display('rooms-edit.twig',array(
                             'general' => $general_param,
                             'data_room_edit' => $data_room_edit[0]
                         ));
                     }
                     else
-                        echo $twig->render('rooms-list.twig',array(
+                        $twig->display('rooms-list.twig',array(
                             'general' => $general_param,
                             'data_room' => $data_room
                         ));
                 }
                 else
-                    echo $twig->render('rooms-list.twig',array(
+                    $twig->display('rooms-list.twig',array(
                         'general' => $general_param,
                         'data_room' => $data_room
                     ));
 
                 break;
 
+            #OFERECIMENTOS
             case 'oferecimentos':
 
                 //Obtemos os dados relacionados às ofertas
                 $data_offering = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
+                //Renderizamos la vista
                 $twig->display('offerings.twig',array(
                     'general' => $general_param,
                     'data_offering' => $data_offering
@@ -107,6 +112,15 @@
 
                 break;
 
+            #CONFIGURAÇÕES
+            case 'configuracoes':
+
+                $twig->display('configurations.twig',array(
+                    'general' => $general_param
+                ));
+                break;
+
+            #SAIR
             case 'salir':
 
                 //Importamos el controlador del LogIn
@@ -120,10 +134,11 @@
 
                 break;
 
+            #DEFAULT
             default:
 
                 //Cargamos y renderizamos la plantilla (Vista), junto con los parámetros (Variables) a utilizar
-                echo $twig->render('dashboard.twig',array(
+                $twig->display('dashboard.twig',array(
                     'general' => $general_param
                 ));
                 break;

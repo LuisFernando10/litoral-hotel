@@ -1,0 +1,85 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h5 class="card-title">Configurações</h5>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}configuracoes/"><button type="button" class="btn btn-info">Voltar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                {# Adress #}
+                                <div class="form-row mt-3">
+                                    <div class="offset-md-1 col-md-5">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Endereço</label>
+                                            <input type="text" class="form-control js-configuracao-endereço">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Adultos-Preço #}
+                                <div class="form-row mt-4">
+                                    <div class="form-group col-md-6">
+                                        <label for="select-adults">Adultos</label>
+                                        <select class="form-control js-quartos-adultos" id="select-adults">
+                                            <option selected disabled class="">Selecionar</option>
+                                            <option class="1">1</option>
+                                            <option class="2">2</option>
+                                            <option class="3">3</option>
+                                            <option class="4">4</option>
+                                            <option class="5">5</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label style="top: 5px">Preço</label><br style="margin-bottom: 3px">
+                                        <input type="text" class="form-control mt-2 js-quarto-preco">
+                                    </div>
+                                </div>
+
+                                {# Descrição #}
+                                <div class="form-row mt-4">
+                                    <div class="form-group col-md-12">
+                                        <label>Descrição</label>
+                                        <textarea type="text" class="form-control js-quarto-descricao"></textarea>
+                                    </div>
+                                </div>
+
+                                {# Imagem #}
+                                <div class="form-group form-file-upload form-file-simple mt-4">
+                                    <label>Imagem</label>
+                                    <div class="input-group">
+                                        <input type="file" class="inputFileHidden js-quarto-image">
+                                        <input type="text" class="form-control inputFileVisible" placeholder="Selecione um arquivo" readonly>
+                                        <span class="input-group-btn js-icon-open-input-file">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">attach_file</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {# Botao de salvar #}
+                                <button type="submit" class="btn btn-primary pull-right btn-quartos-save">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/quartos.js"></script>
+    {% endblock %}
