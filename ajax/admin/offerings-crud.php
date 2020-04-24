@@ -40,13 +40,13 @@
         if ($id_oferecimento != null)
             $response = array(
                 'status' => '200',
-                'message' => 'Plantilla Registrada',
+                'message' => 'Oferecimento Salvado',
                 'id_template' => $id_oferecimento
             );
         else
             $response = array(
                 'status' => '500',
-                'message' => 'Error al registrar',
+                'message' => 'Falha al registrar',
                 'id_template' => null
             );
     }
