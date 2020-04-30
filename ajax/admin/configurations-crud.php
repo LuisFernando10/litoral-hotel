@@ -15,29 +15,20 @@
         //Validamos el tipo de 'acción'
         if ($action == 'INSERT'){
 
-            var_dump($array_data);
-            var_dump($neighborhood);
-            var_dump($state);
-            var_dump($country);
-
-exit();
-
             //Realizamos la inserción de los campos de la plantilla en la BD
-            $id_oferecimento = Offerings::insertOffering($array_data);
-
-            // *** Fin proceso **
+            $id_configuracao = Configurations::insertConfiguration($neighborhood, $state, $country, $array_data);
 
             //Validamos si la inserción tuvo éxito o no
-            if ($id_oferecimento != null)
+            if ($id_configuracao != null)
                 $response = array(
                     'status' => '200',
                     'message' => 'Configuração Salva',
-                    'id_template' => $id_oferecimento
+                    'id_configuracao' => $id_configuracao
                 );
             else
                 $response = array(
                     'status' => '500',
                     'message' => 'Falha ao Registrar',
-                    'id_template' => null
+                    'id_configuracao' => null
                 );
         }

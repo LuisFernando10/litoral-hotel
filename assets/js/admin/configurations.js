@@ -52,7 +52,7 @@
             let value_phone_type = element_phone_type.val();
 
             //Alimentamos o objeto com os valores
-            object_data_phone['telefones'] = value_phone_number;
+            object_data_phone['telefone'] = value_phone_number;
             object_data_phone['tipo'] = value_phone_type;
 
             //Alimentamos o array geral
