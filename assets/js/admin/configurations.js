@@ -1,4 +1,7 @@
 
+    //Variáveis globales
+    var status_ok = false; //Controla quando um processo foi com sucesso ou nao
+
     $(document).ready(function () {
         //Métodos executados por defeito no carregamento do documento
         configurations_function();
@@ -18,7 +21,22 @@
     });
 
     //Evento 'click' pra processar os dados e guardar no BD
-    $('.js-btn-configuracao-salvar').on('click', function () {
+    $('.js-btn-configuracao-salvar, .js-btn-configuracao-alterar').on('click', function () {
+
+        //Obtemos os elementos do DOM
+        let element_btn = $(this);
+
+        //Evaluamos que tipo de botao é pra executar a respetiva peticao ajax
+        if (element_btn.attr('data-btn-type') === 'salvar')
+            ajax_petition('INSERT', element_btn);
+        else
+            ajax_petition('UPDATE', element_btn);
+    });
+
+    /**
+     * @Description: Método que procesa as peticoes Ajax
+     */
+    function ajax_petition(action, element_btn) {
 
         //Obtemos os elementos do DOM
         let element_general_container = $('.js-form-data-real-container');
@@ -26,6 +44,7 @@
         let element_state = element_general_container.find('.js-configuracao-estado');
         let element_country = element_general_container.find('.js-configuracao-pais');
         let element_phones = element_general_container.find('.js-real-container-to-add-phones');
+        let element_id_configuration = $('.js-input-hidden-control-id');
 
         //Obtemos os valores
         let value_neighborhood = element_neighborhood.val();
@@ -68,18 +87,49 @@
                 neighborhood: value_neighborhood,
                 state: value_state,
                 country: value_country,
-                action: 'INSERT'
+                id_configuration: element_id_configuration.attr('data-id'),
+                action: action
+            },
+            beforeSend: function(){
+                enable_disable_elements(element_btn, 'disabled');
             },
             success: function (response) {
 
                 //Passamos a resposta para JSON
                 let json_obj = $.parseJSON(response);
 
-                console.log(json_obj);
-            }
-        });
+                //Validamos se a operacao tuvo sucesso
+                if (json_obj.status === '200'){
 
-    });
+                    //Validamos se é de tipo 'INSERT' pra carregar o Id da edicao
+                    if (action === 'INSERT')
+                        element_id_configuration.attr('data-id', json_obj.id_configuracao);
+
+                    //Notificacao de sucesso
+                    notify_success_notification(json_obj.message);
+
+                    //Atualizamos o valor da variavel global
+                    status_ok = true;
+                }
+                else{
+                    notify_error_notification(json_obj.message);
+                    enable_disable_elements(element_btn, 'enabled');
+                    return false;
+                }
+            },
+            complete: function(){
+
+                //Validamos o estado da variavel global
+                if (status_ok === true){
+                    setTimeout(function () {
+                        location.reload();
+                        enable_disable_elements(element_btn, 'enabled');
+                        status_ok = false;
+                    }, 4500);
+                }
+            },
+        });
+    }
 
     /**
      * @Description: Método que executa sub-métodos pra funcionalidade dependentes de outros procesos
@@ -109,4 +159,21 @@
             .hide('slow')
             .remove()
             .removeClass('js-div-new-row');
+    }
+    
+    /**
+     *@Description: Método que ativa/desativa um elemento HTML do DOM
+     */
+    function enable_disable_elements(element, type) {
+
+        //Validamos o tipo de acao
+        if (type === 'enabled'){
+            element
+                .prop('disabled', false)
+                .removeClass('css-cursor-not-allowed');
+        }
+        else
+            element
+                .prop('disabled', true)
+                .addClass('css-cursor-not-allowed');
     }

@@ -6,6 +6,11 @@
 
     /*Clase para alinhar o '<input>' con o '<select>'*/
     .css-input-aligned-with-select{
-        padding-top: 36px;
-        padding-bottom: 19px;
+        padding-top: 32px;
+        padding-bottom: 21px;
+    }
+
+    /* Classes para os cursores */
+    .css-cursor-not-allowed{
+        cursor: not-allowed!important;
     }

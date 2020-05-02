@@ -181,12 +181,9 @@
                 //Iteramos sobre o '$array_data'
                 foreach ($array_data as $key => $value){
                     //Alimentamos os arrays generales correspondente ao dado certo
-                    $phones[][$value['telefone']];
-                   $type[][$value['tipo']];
+                    $phones[] = $value['telefone'];
+                   $type[] = $value['tipo'];
                 }
-
-                var_dump($phones);
-                exit();
 
                 //Preparamos el Query
                 $sql = "
@@ -212,8 +209,8 @@
                     $barrio,
                     $estado,
                     $pais,
-                    $phones,
-                    $type
+                    json_encode($phones),
+                    json_encode($type)
                 );
 
                 //Executamos o Query
@@ -229,99 +226,49 @@
             /**
              * @Description: Método que 'atualiza' um orferecimento no BD
              */
-            static function updateOffering($id_oferecimento = NULL, $nome = NULL, $tipo = NULL){
+            static function updateConfiguration($id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL){
+
+                // *** Procesamos os dados do '$array_data' pra obter os 'telefones' e os 'tipos' ***
+
+                //Criamos as variáveis que guardarao os telefones e os tipos
+                $phones = [];
+                $type = [];
+
+                //Iteramos sobre o '$array_data'
+                foreach ($array_data as $key => $value){
+                    //Alimentamos os arrays generales correspondente ao dado certo
+                    $phones[] = $value['telefone'];
+                    $type[] = $value['tipo'];
+                }
 
                 //Preparamos el SQL
                 $sql = "
-                            UPDATE
-                                oferecimentos
-                            SET
-                                nome = '%s',
-                                tipo = '%s'
-                            WHERE
-                                id_oferecimento = '%s'
-                        ";
+                    UPDATE
+                        configuracoes
+                    SET
+                        barrio = '%s',
+                        estado = '%s',
+                        pais = '%s',
+                        telefones = '%s',
+                        tipo = '%s'
+                    WHERE
+                        id_configuracao = '%s'
+                ";
 
                 //Reemplazamos valores
                 $sql = sprintf($sql,
-                    $nome,
-                    $tipo,
-                    $id_oferecimento
+                    $barrio,
+                    $estado,
+                    $pais,
+                    json_encode($phones),
+                    json_encode($type),
+                    $id_configuracao
                 );
 
                 //Ejecutamos el Query (true-false)
                 $result = DataBase::query($sql);
 
                 //Retornamos a resposta
-                return $result;
-            }
-
-            /**
-             * @Description: Método que reordena consecutivamente las prioridades de 'Ofrecimientos'
-             */
-            static function updatePriorityOffering($id_oferecimento = NULL, $prioridade = NULL){
-
-                //Preparamos el Query
-                $sql = "
-                            UPDATE
-                                oferecimentos
-                            SET
-                                prioridade = '%s'
-                            WHERE
-                                id_oferecimento = '%s'
-                        ";
-
-                //Reemplazamos valores
-                $sql = sprintf($sql,
-                    $prioridade,
-                    $id_oferecimento
-                );
-
-                //Ejecutamos el Query
-                $result = DataBase::query($sql);
-
-                //Retornamos la operación true-false
-                return $result;
-            }
-
-            /**
-             * @Description: Método que elimina un 'Ofrecimiento'
-             */
-            static function deleteOffering($prioridade = NULL){
-
-                //Preparamos el Query
-                $sql = "
-                            DELETE FROM oferecimentos
-                            WHERE prioridade = '%s'
-                        ";
-
-                //Reemplazamos los valores
-                $sql = sprintf($sql,
-                    $prioridade
-                );
-
-                //Ejecutamos el Query
-                $result = DataBase::query($sql);
-
-                // *** Proceso para actualizar las 'prioridades' antes de relaizar cualquier edición ***
-
-                //Obtenemos los datos correspondiente a la tabla 'plantilla_detalle'
-                $data_offering = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-                //Creamos variable de control para actualizar las prioridades en caso que existan
-                $priority_indicator = 0;
-
-                //Recorremos las plantillas creadas
-                foreach ($data_offering as $item){
-
-                    //Incrementamos la variable de control por cada iteración
-                    $priority_indicator++;
-
-                    //Actualizamos las prioridades de los 'ofrecimientos' para no alterar el consecutivo de las mismas
-                    Offerings::updatePriorityOffering($item['id_oferecimento'],$priority_indicator);
-                }
-
-                //Retornamos el resultado de la operación true-false
                 return $result;
             }
         }

@@ -15,11 +15,11 @@
         $loader = new \Twig\Loader\FilesystemLoader(dirname(__FILE__).'/../../views/admin/');
 
         //Indicamos las carpetas que almacenarán el caché de Twig
-        //        $path_cache_twig = dirname(__FILE__).'/../../temp/cache/';
+        //$path_cache_twig = dirname(__FILE__).'/../../temp/cache/';
 
         //Twig load enviroment
         $twig = new \Twig\Environment($loader, array(
-        //            'cache' =>  $path_cache_twig,
+            //'cache' =>  $path_cache_twig,
             'auto_reload' => true,
             'debug' => true
         ));
@@ -115,8 +115,25 @@
             #CONFIGURAÇÕES
             case 'configuracoes':
 
+                //Obtemos os dados das configuracoes que precisemos
+                $data_configurations = Configurations::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+                //Validamos se realmente tem dados pra evitar o error de 'NOTICE do PHP'
+                if ($data_configurations != NULL){
+                    $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
+                    $data_types = json_decode($data_configurations[0]['tipo'], TRUE);
+                }
+                else{
+                    $data_phones = NULL;
+                    $data_types = NULL;
+                }
+
+
                 $twig->display('configurations.twig',array(
-                    'general' => $general_param
+                    'general' => $general_param,
+                    'data_configuration' => $data_configurations,
+                    'data_phones' => $data_phones,
+                    'data_types' => $data_types
                 ));
                 break;
 

@@ -2,14 +2,14 @@
     /**
      * @Description: Método para notificación de 'Exito'
      */
-    function notify_success_notification(message){
+    function notify_success_notification(message, time = 4000){
 
         $.notify({
             icon: '<i class="material-icons text-white">check_circle</i>',
             message: message
         },{
             type: 'success',
-            timer: 4000,
+            timer: time,
             placement: {
                 from: 'top',
                 align: 'right'

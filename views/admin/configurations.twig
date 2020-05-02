@@ -16,90 +16,187 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {# '<input-hidden>' en el que guardaremos el Id que identificará la 'actualización' #}
+                            <input type="hidden" class="js-input-hidden-control-id" data-id="{{ (data_configuration is null) ? '' : data_configuration[0].id_configuracao }}">
+
                             <div class="card-body js-form-data-real-container">
 
-                                {# Endereços #}
-                                <h3>Endereços</h3>
-                                <hr>
+                                {# Processo pra renderizar o conteúdo previamente inserido no BD (É pra saber se é um processo de 'insercao' ou 'edicao') #}
 
-                                <div class="form-row mt-3">
+                                {# Validamos se já existem configuracoes ou nao no BD#}
+                                {% if (data_configuration is null) %}
 
-                                    {# Bairro #}
-                                    <div class="col-md-4">
-                                        <div class="form-group bmd-form-group">
-                                            <label>Barrio</label>
-                                            <input type="text" class="form-control js-configuracao-barrio">
+                                    {# Endereços #}
+                                    <h3>Endereços</h3>
+                                    <hr>
+                                    <div class="form-row mt-3">
+
+                                        {# Bairro #}
+                                        <div class="col-md-4">
+                                            <div class="form-group bmd-form-group">
+                                                <label>Barrio</label>
+                                                <input type="text" class="form-control js-configuracao-barrio">
+                                            </div>
+                                        </div>
+
+                                        {# Estado Descrição #}
+                                        <div class="col-md-4">
+                                            <div class="form-group bmd-form-group">
+                                                <label>Estado Descrição</label>
+                                                <input type="text" class="form-control js-configuracao-estado">
+                                            </div>
+                                        </div>
+
+                                        {# País #}
+                                        <div class="col-md-4">
+                                            <div class="form-group bmd-form-group">
+                                                <label>País</label>
+                                                <input type="text" class="form-control js-configuracao-pais" value="Brasil" readonly>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {# Estado Descrição #}
-                                    <div class="col-md-4">
-                                        <div class="form-group bmd-form-group">
-                                            <label>Estado Descrição</label>
-                                            <input type="text" class="form-control js-configuracao-estado">
-                                        </div>
-                                    </div>
+                                    {# Telefones #}
+                                    <h3>Telefones</h3>
+                                    <hr>
+                                    <div class="form-row mt-3">
+                                        <div class="col-md-12 js-real-container-to-add-phones">
 
-                                    {# País #}
-                                    <div class="col-md-4">
-                                        <div class="form-group bmd-form-group">
-                                            <label>País</label>
-                                            <input type="text" class="form-control js-configuracao-pais" value="Brasil" readonly>
-                                        </div>
-                                    </div>
-                                </div>
+                                            {# Recipiente real #}
+                                            <div class="row js-div-new-row">
 
-                                {# Telefones #}
-                                <h3>Telefones</h3>
-                                <hr>
+                                                {# Telefone #}
+                                                <div class="offset-md-1 col-md-4 mt-3">
+                                                    <div class="form-group bmd-form-group">
+                                                        <label>Telefone</label>
+                                                        <input type="text" class="form-control css-input-aligned-with-select js-configuracao-telefone">
+                                                    </div>
+                                                </div>
 
-                                <div class="form-row mt-3">
-                                    <div class="col-md-12 js-real-container-to-add-phones">
+                                                {# Tipo #}
+                                                <div class="col-md-4">
+                                                    <div class="form-group bmd-form-group">
+                                                        <label for="select-type">Tipo</label>
+                                                        <select class="form-control js-configuracao-tipo" id="select-type">
+                                                            <option value="fixo">Fixo</option>
+                                                            <option value="whatsapp">WhatsApp</option>
+                                                            <option value="tim">Tim</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
-                                        {# Recipiente real #}
-                                        <div class="row js-div-new-row">
-
-                                            {# Telefone #}
-                                            <div class="offset-md-1 col-md-4 mt-3">
-                                                <div class="form-group bmd-form-group">
-                                                    <label>Telefone</label>
-                                                    <input type="text" class="form-control css-input-aligned-with-select js-configuracao-telefone">
+                                                {# Deletar Telefone #}
+                                                <div class="col-md-2 mt-4">
+                                                    <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-phone-delete">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            {# Tipo #}
-                                            <div class="col-md-4">
-                                                <div class="form-group bmd-form-group">
-                                                    <label for="select-type">Tipo</label>
-                                                    <select class="form-control js-configuracao-tipo" id="select-type">
-                                                        <option value="fixo">Fixo</option>
-                                                        <option value="whatsapp">WhatsApp</option>
-                                                        <option value="tim">Tim</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            {# Deletar Telefone #}
-                                            <div class="col-md-2">
-                                                <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-phone-delete">
-                                                    <i class="material-icons">delete</i>
+                                        {# Botão adicionar telefones #}
+                                        <div class="col-md-12 text-center">
+                                            <div class="update ml-auto mr-auto">
+                                                <button class="btn btn-success btn-fab btn-fab-mini js-btn-configuracao-add-telefones">
+                                                    <i class="material-icons">add</i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {# Botão adicionar telefones #}
-                                    <div class="col-md-12 text-center">
-                                        <div class="update ml-auto mr-auto">
-                                            <button class="btn btn-success btn-fab btn-fab-mini js-btn-configuracao-add-telefones">
-                                                <i class="material-icons">add</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    {# Botao de salvar #}
+                                    <button type="submit" class="btn btn-primary pull-right js-btn-configuracao-salvar" data-btn-type="salvar">Salvar</button>
 
-                                {# Botao de salvar #}
-                                <button type="submit" class="btn btn-primary pull-right js-btn-configuracao-salvar">Salvar</button>
+                                {% else %}
+                                    {% for configurations in data_configuration %}
+                                        {# Endereços #}
+                                        <h3>Endereços</h3>
+                                        <hr>
+                                        <div class="form-row mt-3">
+
+                                            {# Bairro #}
+                                            <div class="col-md-4">
+                                                <div class="form-group bmd-form-group">
+                                                    <label>Barrio</label>
+                                                    <input type="text" class="form-control js-configuracao-barrio" value="{{ configurations.barrio }}">
+                                                </div>
+                                            </div>
+
+                                            {# Estado Descrição #}
+                                            <div class="col-md-4">
+                                                <div class="form-group bmd-form-group">
+                                                    <label>Estado Descrição</label>
+                                                    <input type="text" class="form-control js-configuracao-estado" value="{{ configurations.estado }}">
+                                                </div>
+                                            </div>
+
+                                            {# País #}
+                                            <div class="col-md-4">
+                                                <div class="form-group bmd-form-group">
+                                                    <label>País</label>
+                                                    <input type="text" class="form-control js-configuracao-pais" value="Brasil" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {# Telefones #}
+                                        <h3>Telefones</h3>
+                                        <hr>
+                                        <div class="form-row mt-3">
+                                            <div class="col-md-12 js-real-container-to-add-phones">
+
+                                                {# Iteramos sob os 'telefones' e o respetivo 'tipo' #}
+                                                {% for key, phones in data_phones %}
+
+                                                    {# Recipiente real #}
+                                                    <div class="row js-div-new-row">
+
+                                                        {# Telefone #}
+                                                        <div class="offset-md-1 col-md-4 mt-3">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label>Telefone</label>
+                                                                <input type="text" class="form-control css-input-aligned-with-select js-configuracao-telefone" value="{{ phones }}">
+                                                            </div>
+                                                        </div>
+
+                                                        {# Tipo #}
+                                                        <div class="col-md-4">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label for="select-type">Tipo</label>
+                                                                <select class="form-control js-configuracao-tipo" id="select-type">
+                                                                    <option {{ data_types[key] == 'fixo' ? 'selected' : '' }} value="fixo">Fixo</option>
+                                                                    <option {{ data_types[key] == 'whatsapp' ? 'selected' : '' }} value="whatsapp">WhatsApp</option>
+                                                                    <option {{ data_types[key] == 'fixo' ? 'selected' : '' }} value="tim">Tim</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        {# Deletar Telefone #}
+                                                        <div class="col-md-2 mt-4">
+                                                            <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-phone-delete">
+                                                                <i class="material-icons">delete</i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                {% endfor %}
+                                            </div>
+
+                                            {# Botão adicionar telefones #}
+                                            <div class="col-md-12 text-center">
+                                                <div class="update ml-auto mr-auto">
+                                                    <button class="btn btn-success btn-fab btn-fab-mini js-btn-configuracao-add-telefones">
+                                                        <i class="material-icons">add</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {# Botao de Alterar #}
+                                        <button type="submit" class="btn btn-primary pull-right js-btn-configuracao-alterar" data-btn-type="alterar">Alterar</button>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
 
                             {# ** Recipiente Oculto (HTML) ** #}
@@ -127,7 +224,7 @@
                                     </div>
 
                                     {# Deletar Telefone #}
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 mt-4">
                                         <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-phone-delete">
                                             <i class="material-icons">delete</i>
                                         </button>
