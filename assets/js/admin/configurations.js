@@ -51,13 +51,25 @@
         let value_state = element_state.val();
         let value_country = element_country.val();
 
-        // ** Processo pra obter os telefones
+        // ** Processo pra validacao dos campos **
+
+        //Definimos variável de control para as validacoes
+        var control_validity = true;
+
+        if (validateFullString(element_neighborhood) === false
+            || validateFullString(element_state) === false
+            || validateFullString(element_country) === false){
+            control_validity = false;
+            return false;
+        }
+
+        // ** Processo pra obter os telefones **
 
         //Criamos variavél pra guardar os telefones adicionados dinámicacmente
         var array_phone = [];
 
         //Iteramos sob os telefones adicionados
-        element_phones.find('.js-div-new-row').each(function () {
+        element_phones.find('.js-div-new-row').each(function (index, value) {
 
             //Criamos objeto pra guardar o 'telefone' e o 'tipo'
             let object_data_phone = {};
@@ -70,65 +82,88 @@
             let value_phone_number = element_phone_number.val();
             let value_phone_type = element_phone_type.val();
 
-            //Alimentamos o objeto com os valores
-            object_data_phone['telefone'] = value_phone_number;
-            object_data_phone['tipo'] = value_phone_type;
+            // ** Validamos se o número de telefone já existe **
+            let phone_validation = array_phone.find( phone => phone.telefone === value_phone_number );
+
+            if (value_phone_number === '' || value_phone_number.length === 0){
+
+                //Disparamos aviso de erro
+                //markErrorBorder(element_phone_number, `O número ${value_phone_number} já existe.`);
+                markErrorBorder(element_phone_number, 'Você não pode ter telefones vazios.');
+                control_validity = false;
+                return false;
+            }
+            else if (phone_validation !== undefined){
+                //Disparamos aviso de erro
+                markErrorBorder(element_phone_number, `O número ${value_phone_number} já existe.`);
+                control_validity = false;
+                return false;
+            }
+            else{
+                //Alimentamos o objeto com os valores
+                object_data_phone['telefone'] = value_phone_number;
+                object_data_phone['tipo'] = value_phone_type;
+            }
 
             //Alimentamos o array geral
             array_phone.push(object_data_phone);
         });
 
-        //Processamos a peticao Ajax pra mandar os dados ao BD
-        $.ajax({
-            type: 'POST',
-            url: FULL_WEB_URL + 'ajax/admin/configurations-crud.php',
-            data:{
-                array_data: array_phone,
-                neighborhood: value_neighborhood,
-                state: value_state,
-                country: value_country,
-                id_configuration: element_id_configuration.attr('data-id'),
-                action: action
-            },
-            beforeSend: function(){
-                enable_disable_elements(element_btn, 'disabled');
-            },
-            success: function (response) {
+        //Validamos se as validacoes foram 'Ok'
+        if (control_validity === true)
+            //Processamos a peticao Ajax pra mandar os dados ao BD
+            $.ajax({
+                type: 'POST',
+                url: FULL_WEB_URL + 'ajax/admin/configurations-crud.php',
+                data:{
+                    array_data: array_phone,
+                    neighborhood: value_neighborhood,
+                    state: value_state,
+                    country: value_country,
+                    id_configuration: element_id_configuration.attr('data-id'),
+                    action: action
+                },
+                beforeSend: function(){
+                    enable_disable_elements(element_btn, 'disabled');
+                },
+                success: function (response) {
 
-                //Passamos a resposta para JSON
-                let json_obj = $.parseJSON(response);
+                    //Passamos a resposta para JSON
+                    let json_obj = $.parseJSON(response);
 
-                //Validamos se a operacao tuvo sucesso
-                if (json_obj.status === '200'){
+                    //Validamos se a operacao tuvo sucesso
+                    if (json_obj.status === '200'){
 
-                    //Validamos se é de tipo 'INSERT' pra carregar o Id da edicao
-                    if (action === 'INSERT')
-                        element_id_configuration.attr('data-id', json_obj.id_configuracao);
+                        //Validamos se é de tipo 'INSERT' pra carregar o Id da edicao
+                        if (action === 'INSERT')
+                            element_id_configuration.attr('data-id', json_obj.id_configuracao);
 
-                    //Notificacao de sucesso
-                    notify_success_notification(json_obj.message);
+                        //Notificacao de sucesso
+                        notify_success_notification(json_obj.message, 2500);
 
-                    //Atualizamos o valor da variavel global
-                    status_ok = true;
-                }
-                else{
-                    notify_error_notification(json_obj.message);
-                    enable_disable_elements(element_btn, 'enabled');
-                    return false;
-                }
-            },
-            complete: function(){
-
-                //Validamos o estado da variavel global
-                if (status_ok === true){
-                    setTimeout(function () {
-                        location.reload();
+                        //Atualizamos o valor da variavel global
+                        status_ok = true;
+                    }
+                    else{
+                        notify_error_notification(json_obj.message);
                         enable_disable_elements(element_btn, 'enabled');
-                        status_ok = false;
-                    }, 4500);
-                }
-            },
-        });
+                        return false;
+                    }
+                },
+                complete: function(){
+
+                    //Validamos o estado da variavel global
+                    if (status_ok === true){
+                        setTimeout(function () {
+                            location.reload();
+                            enable_disable_elements(element_btn, 'enabled');
+                            status_ok = false;
+                        }, 3000);
+                    }
+                },
+            });
+        else
+            return false;
     }
 
     /**
