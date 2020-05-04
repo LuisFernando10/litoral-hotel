@@ -1,14 +1,19 @@
 
+{# (DESK) Menu #}
     <header class="header">
         <div class="header_content d-flex flex-row align-items-center justify-content-start">
+
+            {# Logo text #}
             <div class="logo css-menu-logo">
                 <a href="{{ general.full_web_url }}">
                     Hotel <span>Litoral</span>
                     <p class="css--menu-logo-slogan">Espaço, Conforto e Tranquilidade</p>
                 </a>
             </div>
+
             <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
 
+                {# Menu Items #}
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-start">
                         <li class="{{ (general.class_param == 'home') ? 'active' : '' }}"><a href="{{ general.full_web_url }}home/">Inicio</a></li>
@@ -18,21 +23,33 @@
                         <li class="{{ (general.class_param == 'contact') ? 'active' : '' }}"><a href="{{ general.full_web_url }}contact/">Contato</a></li>
                     </ul>
                 </nav>
-                <div class="book_button"><a href="{{ general.full_web_url }}bookings/">Reserva Online</a></div>
-                <div class="header_phone d-flex flex-row align-items-center justify-content-center">
-                    <img src="{{ general.full_images_url }}phone.png" alt="">
-                    <span>+55 79 99988-2442</span>
+
+                {# Text link #}
+                <div class="book_button">
+                    <a href="{{ general.full_web_url }}bookings/">Reservas</a>
                 </div>
 
-                {# Hamburger Menu #}
+                {# Number Phone #}
+                <div class="header_phone d-flex flex-row align-items-center justify-content-center">
+                    <img src="{{ general.full_images_url }}phone.png" alt="">
+                    <span>{{ general.data_phones[0] }}</span>
+                </div>
+
+                {# (Icon) Hamburger Menu #}
                 <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
             </div>
         </div>
     </header>
 
-    {# Menu #}
+    {# (RESPONSIVE) Menu #}
     <div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
-        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+        {# Icon close #}
+        <div class="menu_close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+
+        {# Menu Items #}
         <div class="menu_content">
             <nav class="menu_nav text-right">
                 <ul>
@@ -44,11 +61,19 @@
                 </ul>
             </nav>
         </div>
+
+        {# 'Text' and 'Number Phone' for reservation #}
         <div class="menu_extra">
-            <div class="menu_book text-right"><a href="{{ general.full_web_url }}bookings/">Reserva online</a></div>
+
+            {# Text link #}
+            <div class="menu_book text-right">
+                <a href="{{ general.full_web_url }}bookings/">Solicite sua Reserva</a>
+            </div>
+
+            {# Number Phone #}
             <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
                 <img src="{{ general.full_images_url }}phone-2.png" alt="">
-                <span>+55 79 99988-2442</span>
+                <span>{{ general.data_phones[0] }}</span>
             </div>
         </div>
     </div>
