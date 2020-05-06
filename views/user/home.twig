@@ -1,49 +1,33 @@
 
     {% extends "base-document.twig" %}
-
         {% block content %}
 
             <div class="super_container">
+
                 {# Header - Nav (Menú) #}
                 {% include 'nav-menu.twig' %}
 
-                {# Home #}
+                {# Sliders (Start) #}
                 <div class="home">
                     <div class="home_slider_container">
+
+                        {# Sliders Photos #}
                         <div class="owl-carousel owl-theme home_slider">
 
-                            {# Slide #}
+                            {# Slide-1 #}
                             <div class="slide">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/kitchen.jpg)"></div>
+
+                                {# Image #}
+                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/main_facade.jpeg)">
+                                </div>
+
+                                {# Content #}
                                 <div class="home_container">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="home_content text-center">
-                                                    <div class="home_title">Café da manhã</div>
-                                                    <div class="booking_form_container">
-                                                        <form action="#" class="booking_form">
-                                                            <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                                                <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                                    <div>
-                                                                        <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check-in" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check-out" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <button class="booking_button trans_200 js-btn-reservation">Solicite sua reserva</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                    <div class="home_title">Tranquilidade</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,38 +35,20 @@
                                 </div>
                             </div>
 
-                            {# Slide #}
+                            {# Slide-2 #}
                             <div class="slide">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/room.jpg)"></div>
+
+                                {# Image #}
+                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_2.jpeg)">
+                                </div>
+
+                                {# Content #}
                                 <div class="home_container">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="home_content text-center">
                                                     <div class="home_title">Estadia confortável</div>
-                                                    <div class="booking_form_container">
-                                                        <form action="#" class="booking_form">
-                                                            <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                                                <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                                    <div>
-                                                                        <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check-in" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check-out" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <button class="booking_button trans_200 js-btn-reservation">Solicite sua reserva</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,38 +56,20 @@
                                 </div>
                             </div>
 
-                            {# Slide #}
+                            {# Slide-3 #}
                             <div class="slide">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/reception.jpg)"></div>
+
+                                {# Image #}
+                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/reception.jpeg)">
+                                </div>
+
+                                {# Content #}
                                 <div class="home_container">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="home_content text-center">
                                                     <div class="home_title">Ótimo serviço</div>
-                                                    <div class="booking_form_container">
-                                                        <form action="#" class="booking_form">
-                                                            <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                                                <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                                    <div>
-                                                                        <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check-in" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check-out" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <button class="booking_button trans_200 js-btn-reservation">Solicite sua reserva</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -131,6 +79,39 @@
                         </div>
 
                         {# Home Slider Dots #}
+                        <div class="col-12 css-slider-home">{# home_slider_dots_container #}
+
+                            {#Imputs fields #}
+                            <div class="row booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start text-center">
+
+                                {# Check-in #}
+                                <div class="col-lg-3">
+                                    <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check-in" required="required">
+                                </div>
+
+                                {# Checl-out #}
+                                <div class="col-lg-3">
+                                    <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check-out" required="required">
+                                </div>
+
+                                {# Childrens #}
+                                <div class="col-lg-2">
+                                    <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
+                                </div>
+
+                                {# Rooms #}
+                                <div class="col-lg-2">
+                                    <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
+                                </div>
+
+                                {# Button (Reservation) #}
+                                <div class="col-lg-2">
+                                    <button class="booking_button trans_200 js-btn-reservation">Solicite sua reserva</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Number pagination #}
                         <div class="home_slider_dots_container">
                             <div class="home_slider_dots">
                                 <ul id="home_slider_custom_dots" class="home_slider_custom_dots d-flex flex-row align-items-start justify-content-start">
@@ -148,7 +129,7 @@
                     <div class="container">
                         <div class="row">
 
-                            {# Icon Box #}
+                            {# Espaço, conforto e tranquilidade #}
                             <div class="col-lg-4 icon_box_col">
                                 <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
                                     <div class="icon_box_icon"><img src="{{ general.full_images_url }}Icons/icon_1.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
@@ -159,7 +140,7 @@
                                 </div>
                             </div>
 
-                            {# Icon Box #}
+                            {# Acomodação #}
                             <div class="col-lg-4 icon_box_col">
                                 <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
                                     <div class="icon_box_icon"><img src="{{ general.full_images_url }}Icons/icon_4.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
@@ -170,7 +151,7 @@
                                 </div>
                             </div>
 
-                            {# Icon Box #}
+                            {# Localização #}
                             <div class="col-lg-4 icon_box_col">
                                 <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
                                     <div class="icon_box_icon"><img src="{{ general.full_images_url }}Icons/icon_3.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>

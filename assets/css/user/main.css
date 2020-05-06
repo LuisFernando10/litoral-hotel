@@ -4,6 +4,14 @@
         width: 13px;
     }
 
+    /*Estilos pra secao de 'Sliders' no 'HOME'*/
+    .css-slider-home{
+        position: absolute;
+        top: 400px;
+        /*left: 280px;*/
+        /*bottom: 50px;*/
+        z-index: 1;
+    }
 
     /* Estilos para seccion 'Testimoials' */
 
