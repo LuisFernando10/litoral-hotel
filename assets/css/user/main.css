@@ -36,7 +36,7 @@
     .css-menu-logo{
         width: 155px !important;
     }
-    .css--menu-logo-slogan{
+    .css-menu-logo-slogan{
         font-size: 9px !important;
         font-weight: 600 !important;
     }
@@ -66,4 +66,35 @@
     p.clasificacion label:hover ~ label,
     p.clasificacion input:checked ~ label {
         color: #dd4;
+    }
+
+    /***** Código pras (MEDIA QUERIES) *****/
+
+    /*Tamanhos (X-SMALL)*/
+    @media (min-width: 320px) and (max-width: 575px) {
+
+        .css-logo-header{
+            font-size: 23px!important;
+            line-height: 25px!important;
+        }
+        .css-menu-logo{
+            height: 35px;
+        }
+
+        .css-home-slide-container{
+            top: -85px;
+        }
+        .css-slider-home{
+            top: 250px;
+        }
+    }
+
+    /*Tamanhos (SMALL)*/
+    @media (min-width: 576px) and (max-width: 767px) {
+        .css-home-slide-container{
+            top: -85px;
+        }
+        .css-slider-home{
+            top: 330px;
+        }
     }
