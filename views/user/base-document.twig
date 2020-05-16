@@ -4,49 +4,38 @@
         {% block head %}
             <head>
                 {# Title #}
-                 <title>Hotel Litoral</title>
+                 <title>Ecofynity</title>
 
                 {# Icon #}
-                {#<link rel="icon" href="{{ general.full_assets_url }}img/Logo.ico">#}
+                <link rel="icon" href="{{ general.full_images_url }}logo/logo.ico">
 
                 {# Metadata #}
                 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="description" content="Hotel Litoral (Aracaju-Sergipe)">
+                <meta name="description" content="Ecofynity">
+                <link rel="manifest" href="site.webmanifest">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
 
                 {# Bootstrap V-4.1.2 (CSS) #}
                 <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}framework/bootstrap-4.1.2/bootstrap.min.css">
 
                 {# Font-awesome #}
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-
-                {# CSS Main (Template) #}
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/main.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/fontawesome-all.min.css">
 
                 {# CSS Main Views (Template) #}
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/about.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/about_responsive.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/blog.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/blog_responsive.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/booking.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/booking_responsive.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/contact.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/contact_responsive.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/elements.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/elements_responsive.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/responsive.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/flaticon.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/slicknav.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/animate.min.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/magnific-popup.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/themify-icons.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/slick.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/nice-select.css">
+
+                {# CSS Main (Template) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/style.css">
 
                 {# Owl.carousel #}
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/OwlCarousel2-2.3.4/owl.carousel.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/OwlCarousel2-2.3.4/animate.css">
-
-                {# JQuery-datepicker #}
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/jquery-datepicker/jquery-ui.css">
-
-                {# Colorcox #}
-                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/colorbox/colorbox.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/owl.carousel.min.css">
 
                 {# Main (CSS) #}
                 <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}css/main.css">
@@ -56,9 +45,31 @@
 
         <body>
 
+            {# Icono de 'Pre-carga del Contenido' #}
+            <div id="preloader-active">
+                <div class="preloader d-flex align-items-center justify-content-center">
+                    <div class="preloader-inner position-relative">
+                        <div class="preloader-circle"></div>
+                        <div class="preloader-img pere-text">
+                            <img src="{{ general.full_images_url }}logo/logo_alone.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {% block content %}
                 {#Código HTML para cada vista#}
             {% endblock %}
+
+            {# Caja de búsqueda #}
+            <div class="search-model-box">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <div class="search-close-btn">+</div>
+                    <form class="search-model-form">
+                        <input type="text" id="search-input" placeholder="Searching key.....">
+                    </form>
+                </div>
+            </div>
 
         </body>
 
