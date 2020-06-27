@@ -1,0 +1,75 @@
+
+{% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="card-title ">Listado de Galeria</h4>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}galeria/create/"><button type="button" class="btn btn-info">Criar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-shopping table-hover">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>Imagem</th>
+                                                <th>Nome</th>
+                                                <th>Descrição</th>
+                                                <th>Tipo</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for galery in data_galery %}
+                                                <tr class="js-galerias-tr">
+                                                    <td>
+                                                        <div class="img-container">
+                                                            <img src="{{ general.full_images_url }}galery/{{ galery.imagem }}" class="img-thumbnail" rel="nofollow" alt="Foto">
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ galery.nome }}</td>
+                                                    <td>{{ galery.descricao }}</td>
+                                                    <td>{{ galery.tipo }}</td>
+                                                    <td class="td-actions text-left">
+
+                                                        {# Editar #}
+                                                        <a href="{{ general.full_web_url }}galeria/edit/{{ galery.id_galeria }}/">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Editar">
+                                                                <i class="material-icons">edit</i>
+                                                            </button>
+                                                        </a>
+
+                                                        {# Deletar #}
+                                                        <a href="#">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm js-galery-btn-delete" data-original-title="Remover" data-id="{{ galery.id_galeria }}">
+                                                                <i class="material-icons">delete</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/galery.js"></script>
+    {% endblock %}

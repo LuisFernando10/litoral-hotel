@@ -31,7 +31,7 @@
         define("PAGINATION", 15);
 
         //Datos de conexión a la BD
-        define('DB_SERVER','localhost');
-        define('DB_USER','root');//phpmyadmin - root - hlitorallira
-        define('DB_PASSWORD','');//lfchamorro10f - root - HlLitoHote10f*
-        define('DB_DATABASE','litoral_hotel');
+        define('DB_SERVER','litora-hotel.mysql.uhserver.com'); //litora-hotel.mysql.uhserver.com - localhost
+        define('DB_USER','hlitorallira');//phpmyadmin - root - hlitorallira
+        define('DB_PASSWORD','HlLitoHote10f*');//lfchamorro10f - root - HlLitoHote10f*
+        define('DB_DATABASE','litora_hotel');//litoral_hotel - litora_hotel

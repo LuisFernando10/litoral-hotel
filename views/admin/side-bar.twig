@@ -40,6 +40,15 @@
                         </a>
                     </li>
 
+
+                    {# Galery #}
+                    <li class="nav-item {{ (general.class_url == 'galeria') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{general.full_web_url}}galeria/">
+                            <i class="material-icons">collections</i>
+                            <p>Galeria</p>
+                        </a>
+                    </li>
+
                     {# Configurations #}
                     <li class="nav-item {{ (general.class_url == 'configuracoes') ? 'active' : '' }}">
                         <a class="nav-link" href="{{general.full_web_url}}configuracoes/">

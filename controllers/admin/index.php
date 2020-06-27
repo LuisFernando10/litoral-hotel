@@ -112,6 +112,40 @@
 
                 break;
 
+            #GALERIA
+            case 'galeria':
+
+                //Nos obtemos os dados que precisaremos renderizar nas vistas
+                $data_galery = Galery::getAll(NULL, NULL, NULL, NULL, NULL, NULL);
+                $data_galery_edit = Galery::getAll(NULL, NULL, NULL, $id, NULL, NULL);
+
+                //Nos validamos cada uma das clases
+                if ($action == 'create')
+                    $twig->display('galery-create.twig',array(
+                        'general' => $general_param
+                    ));
+                elseif ($action == 'edit'){
+                    //Nos validamos se tem um $id
+                    if (is_numeric($id) && $id != ''){
+                        $twig->display('galery-edit.twig',array(
+                            'general' => $general_param,
+                            'data_galery_edit' => $data_galery_edit[0]
+                        ));
+                    }
+                    else
+                        $twig->display('galery-list.twig',array(
+                            'general' => $general_param,
+                            'data_galery' => $data_galery
+                        ));
+                }
+                else
+                    $twig->display('galery-list.twig',array(
+                        'general' => $general_param,
+                        'data_galery' => $data_galery
+                    ));
+
+                break;
+
             #CONFIGURAÇÕES
             case 'configuracoes':
 
