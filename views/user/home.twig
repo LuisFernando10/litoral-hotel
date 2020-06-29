@@ -7,79 +7,39 @@
                 {# Header - Nav (Menú) #}
                 {% include 'nav-menu.twig' %}
 
-                {# Sliders (Start) #}
+                {# HOME #}
                 <div class="home">
                     <div class="home_slider_container">
 
-                        {# Sliders Photos #}
+                        {# Home Photos #}
                         <div class="owl-carousel owl-theme home_slider">
 
-                            {# Slide-1 #}
-                            <div class="slide">
+                            {# Ciclo para obter as imagens do Home #}
+                            {% for home_galery in data_home_galery %}
+                                <div class="slide">
 
-                                {# Image #}
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/main_facade.jpeg)">
-                                </div>
+                                    {# Image #}
+                                    <div class="background_image" style="background-image:url({{ general.full_images_url }}galery/{{ home_galery.imagem }})">
+                                    </div>
 
-                                {# Content #}
-                                <div class="home_container">
-                                    <div class="container css-home-slide-container">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="home_content text-center">
-                                                    <div class="home_title">Tranquilidade</div>
+                                    {# Content #}
+                                    <div class="home_container">
+                                        <div class="container css-home-slide-container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="home_content text-center">
+                                                        <div class="home_title">{{ home_galery.descricao }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            {# Slide-2 #}
-                            <div class="slide">
-
-                                {# Image #}
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_2.jpeg)">
-                                </div>
-
-                                {# Content #}
-                                <div class="home_container">
-                                    <div class="container css-home-slide-container">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="home_content text-center">
-                                                    <div class="home_title">Estadia confortável</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {# Slide-3 #}
-                            <div class="slide">
-
-                                {# Image #}
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/reception.jpeg)">
-                                </div>
-
-                                {# Content #}
-                                <div class="home_container">
-                                    <div class="container css-home-slide-container">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="home_content text-center">
-                                                    <div class="home_title">Ótimo serviço</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
 
-                        {# Home Slider Dots #}
-                        <div class="col-12 css-slider-home">{# home_slider_dots_container #}
+                        {# Home Form #}
+                        <div class="col-12 css-slider-home">
 
                             {#Imputs fields #}
                             <div class="row">
@@ -90,12 +50,16 @@
 
                                         {# Check-in #}
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                                            <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check-in" required="required">
+                                            <label>
+                                                <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check-in" required="required">
+                                            </label>
                                         </div>
 
                                         {# Check-out #}
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                                            <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check-out" required="required">
+                                            <label>
+                                                <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check-out" required="required">
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -106,12 +70,16 @@
 
                                         {# Childrens #}
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                                            <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
+                                            <label>
+                                                <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
+                                            </label>
                                         </div>
 
                                         {# Rooms #}
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                                            <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
+                                            <label>
+                                                <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
+                                            </label>
                                         </div>
 
                                         {# Button (Reservation) #}
@@ -138,16 +106,21 @@
                         <div class="home_slider_dots_container">
                             <div class="home_slider_dots">
                                 <ul id="home_slider_custom_dots" class="home_slider_custom_dots d-flex flex-row align-items-start justify-content-start">
-                                    <li class="home_slider_custom_dot active">1 -</li>
-                                    <li class="home_slider_custom_dot">2 -</li>
-                                    <li class="home_slider_custom_dot">3</li>
+
+                                    {% set numeration_slide = 0 %}
+
+                                    {# Ciclo para obter a numeracao das imagens do Home #}
+                                    {% for home_galery in data_home_galery %}
+                                        {% set numeration_slide = numeration_slide + 1 %}
+                                        <li class="home_slider_custom_dot active">{{ numeration_slide }}&nbsp;&nbsp;</li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {# Features #}
+                {# FEATURES #}
                 <div class="features">
                     <div class="container">
                         <div class="row">
@@ -188,94 +161,20 @@
                     </div>
                 </div>
 
-                {# Gallery #}
+                {# GALLERY #}
                 <div class="gallery">
                     <div class="gallery_slider_container">
                         <div class="owl-carousel owl-theme gallery_slider">
 
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/aisle.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/aisle.jpeg"></a>
-                            </div>
+                            {# Ciclo para obter as imagens do Home #}
+                            {% for site_galery in data_site_galery %}
 
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/balcony.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/balcony.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/bathroom.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/bathroom.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/garage.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/garage.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/garden.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/garden.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/main_facade.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/main_facade.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/reception.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/reception.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/reception_2.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/reception_2.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/reception_3.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/reception_3.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_1.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/room_1.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_2.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/room_2.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_3.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/room_3.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_4.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/room_4.jpeg"></a>
-                            </div>
-
-                            {# Foto #}
-                            <div class="gallery_item">
-                                <div class="background_image" style="background-image:url({{ general.full_images_url }}LH_Fotos/room_5.jpeg)"></div>
-                                <a class="colorbox" href="{{ general.full_images_url }}LH_Fotos/room_5.jpeg"></a>
-                            </div>
+                                {# Foto #}
+                                <div class="gallery_item">
+                                    <div class="background_image" style="background-image:url({{ general.full_images_url }}galery/{{site_galery.imagem}})"></div>
+                                    <a class="colorbox" href="{{ general.full_images_url }}galery/{{site_galery.imagem}}"></a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

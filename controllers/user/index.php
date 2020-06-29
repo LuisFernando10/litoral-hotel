@@ -49,11 +49,15 @@
 
                 //Obtenemos los diferentes datos de la BD
                 $data_opinions = Opinions::getAll(null, null, null, null, null, null, null, null);
+                $data_site_galery = Galery::getAll(null, null, null, null, null, 'galery');
+                $data_home_galery = Galery::getAll(null, null, null, null, null, 'home');
 
                 //Renderizamos la vista
                 $twig->display('home.twig', array(
                     'general' => $generalParam,
-                    'data_opinions' => $data_opinions
+                    'data_opinions' => $data_opinions,
+                    'data_site_galery' => $data_site_galery,
+                    'data_home_galery' => $data_home_galery
                 ));
                 break;
 
