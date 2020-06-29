@@ -1,0 +1,88 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h5 class="card-title">Editar Imagem</h5>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}galeria/"><button type="button" class="btn btn-info">Voltar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body js-galery-frm-edit">
+
+                                {# Nome #}
+                                <div class="form-row mt-3">
+
+                                    {# Nome #}
+                                    <div class="form-group col-md-6">
+                                        <label style="top: 5px">Nome</label><br style="margin-bottom: 3px">
+                                        <input type="text" class="form-control mt-2 js-galery-nome" value="{{ data_galery_edit.nome }}">
+                                    </div>
+
+                                    {# Tipo #}
+                                    <div class="form-group col-md-6">
+                                        <label for="select-galery-tipo">Tipo</label>
+                                        <select class="form-control js-galery-tipo" id="select-galery-tipo">
+                                            <option {{ (data_galery_edit.tipo == 'galery') ? 'selected' : '' }} value="galery">Galeria</option>
+                                            <option {{ (data_galery_edit.tipo == 'home') ? 'selected' : '' }} value="home">Inicio</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {# Descrição #}
+                                <div class="form-row mt-4">
+                                    <div class="form-group col-md-12">
+                                        <label>Descrição</label>
+                                        <textarea type="text" class="form-control js-galery-descricao">{{ data_galery_edit.descricao }}</textarea>
+                                    </div>
+                                </div>
+
+                                {# Imagem #}
+                                <div class="form-group form-file-upload form-file-simple mt-4">
+                                    <label>Imagem</label><br>
+                                    <div class="input-group">
+                                        <input type="file" class="inputFileHidden js-galery-image">
+                                        <input type="text" class="form-control inputFileVisible" value="{{ data_galery_edit.imagem }}" readonly>
+
+                                        {# '<input-hidden>' para guardar temporalmente el nombre del archivo anteior y asi tenerlo de referencia para eliminar el mismo en caso de que se actualice #}
+                                        <input type="hidden" class="js-input-file-edit" value="{{ data_galery_edit.imagem }}">
+
+                                        <span class="input-group-btn js-icon-open-input-file">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">attach_file</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+
+                                    {# Imagem #}
+                                    <div class="form-group col-md-4">
+                                        <div class="img-container">
+                                            <img class="img-thumbnail" src="{{ general.full_images_url }}/galery/{{ data_galery_edit.imagem }}" rel="nofollow" alt="Imagem">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Botao de salvar #}
+                                <button type="submit" class="btn btn-primary pull-right btn-galery-save-edit" data-id="{{ data_galery_edit.id_galeria }}">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/galery.js"></script>
+    {% endblock %}

@@ -133,7 +133,7 @@
              */
             static function insertGalery($nome = NULL, $imagem = NULL, $descricao = NULL, $tipo = NULL){
 
-                // ** Proceso para validar si existe una imagen con el mismo nombre **
+                // ** Proceso para validar si existe una imagen con el mismo nome **
                 $existing_galery = Galery::getAll(NULL,NULL,NULL,NULL, $nome);
 
                 if ($existing_galery != NULL) return 'existing_galery';
@@ -141,7 +141,7 @@
                     //Preparamos Query
                     $sql = "
                         INSERT INTO galeria (
-                            nombre,
+                            nome,
                             imagem,
                             descricao,
                             tipo
@@ -178,15 +178,15 @@
              */
             static function updateGalery($id_galeria = NULL, $nome = NULL, $imagem = NULL, $descricao = NULL, $tipo = NULL){
 
-                // ** Proceso para validar si existe una imagen con el mismo nombre **
+                // ** Proceso para validar si existe una imagen con el mismo nome **
                 $existing_galery = Galery::getAll(NULL,NULL,NULL,NULL, $nome);
 
-                //Variavel de control pra controlar a existencia do mesmo nombre em outra tabela
+                //Variavel de control pra controlar a existencia do mesmo nome em outra tabela
                 $existing_control = true;
 
                 //Validamos se a variável é uma matriz (array) pra não possuir erros com o PHP ao momento de percorrer o 'foreach'
                 if (is_array($existing_galery) || is_object($existing_galery))
-                    //Percorremos os dados pra validar se o nombre que vai-se salvar já existe com o meu Id
+                    //Percorremos os dados pra validar se o nome que vai-se salvar já existe com o meu Id
                     foreach ($existing_galery as $value){
 
                         //Validamos se o Id existe no mesmo Id que o atual da edição
@@ -201,7 +201,7 @@
 
                     //Validamos se existe ou nao uma imagenm pra atualizar
                     if ($imagem != NULL)
-                        $update_image = ", imagen = '$imagem'";
+                        $update_image = ", imagem = '$imagem'";
                     else
                         $update_image = "";
 

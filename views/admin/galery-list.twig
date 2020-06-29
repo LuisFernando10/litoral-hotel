@@ -31,7 +31,7 @@
                                         <tbody>
 
                                             {% for galery in data_galery %}
-                                                <tr class="js-galerias-tr">
+                                                <tr class="js-galery-tr">
                                                     <td>
                                                         <div class="img-container">
                                                             <img src="{{ general.full_images_url }}galery/{{ galery.imagem }}" class="img-thumbnail" rel="nofollow" alt="Foto">
@@ -39,7 +39,11 @@
                                                     </td>
                                                     <td>{{ galery.nome }}</td>
                                                     <td>{{ galery.descricao }}</td>
-                                                    <td>{{ galery.tipo }}</td>
+                                                    <td>
+                                                        <span class="badge badge-pill {{ (galery.tipo == 'home') ? 'badge-success' : 'badge-info' }}">
+                                                            {{ (galery.tipo == 'home') ? 'Inicio' : 'Galería' }}
+                                                        </span>
+                                                    </td>
                                                     <td class="td-actions text-left">
 
                                                         {# Editar #}
