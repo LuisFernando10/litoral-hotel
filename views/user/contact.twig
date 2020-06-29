@@ -48,13 +48,19 @@
                                     <div class="contact_title"><h2>Entrar em contato</h2></div>
                                     <div class="contact_list">
                                         <ul>
-                                            <li><b>Endereço: </b>Av.Oceânica, 819, Atalaia - Aracaju/SE</li>
-                                            <li><b>Tel: </b>(79)3025-2483</li>
-                                            <li><b>Tel: </b>(79)3025-2441</li>
-                                            <li><b>Tel: </b>(79)3243-2442</li>
-                                            <li><b>Tim: </b>(79)9145-4410</li>
-                                            <li><b>Vivo: </b>(79)9601-0210</li>
-                                            <li><b>Email: </b>reservas@hotellitoral.com.br</li>
+                                            <li><b>Endereço: </b>{{data_configuration.barrio}} {{ data_configuration.estado }}</li>
+
+                                            {# Phones #}
+                                            {% for key, phones in data_phones %}
+                                                <li><b>{{data_types[key]}}: </b>{{phones}}</li>
+                                            {% endfor %}
+
+                                            {# Email #}
+                                            <li><b>Email:</b>
+                                                {% for email in data_emails %}
+                                                     &nbsp;- {{email}}
+                                                {% endfor %}
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="contact_form_container">
