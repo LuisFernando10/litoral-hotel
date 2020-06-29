@@ -7,6 +7,7 @@
 
         //Obtenemos los datos enviados por el Ajax
         $array_data = filter_input(INPUT_POST, "array_data", FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);
+        $array_email = filter_input(INPUT_POST, "array_email", FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);
         $neighborhood = filter_input(INPUT_POST, 'neighborhood', FILTER_SANITIZE_STRING, array("options" => array("default" => NULL)));
         $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING, array("options" => array("default" => NULL)));
         $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_STRING, array("options" => array("default" => NULL)));
@@ -21,7 +22,8 @@
                 $neighborhood,
                 $state,
                 $country,
-                $array_data
+                $array_data,
+                $array_email
             );
 
             //Validamos si la inserción tuvo éxito o no
@@ -46,7 +48,8 @@
                 $neighborhood,
                 $state,
                 $country,
-                $array_data
+                $array_data,
+                $array_email
             );
 
             //Validamos si la inserción tuvo éxito o no

@@ -20,6 +20,19 @@
         configurations_function();
     });
 
+    //Evento 'click' pra adicionar uma nova configuracao ao container
+    $('.js-btn-configuracao-add-email').on('click', function () {
+
+        //Obtemos o HTML oculto
+        let element_hide_parent_container = $('.js-hide-container-to-add-emails');
+
+        //Adicionamos o HTML ao elemento principal
+        $('.js-real-container-to-add-email').append(element_hide_parent_container.html());
+
+        //Método que procesa sub-procesos
+        configurations_function();
+    });
+
     //Evento 'click' pra processar os dados e guardar no BD
     $('.js-btn-configuracao-salvar, .js-btn-configuracao-alterar').on('click', function () {
 
@@ -44,6 +57,7 @@
         let element_state = element_general_container.find('.js-configuracao-estado');
         let element_country = element_general_container.find('.js-configuracao-pais');
         let element_phones = element_general_container.find('.js-real-container-to-add-phones');
+        let element_emails = element_general_container.find('.js-real-container-to-add-email');
         let element_id_configuration = $('.js-input-hidden-control-id');
 
         //Obtemos os valores
@@ -109,6 +123,48 @@
             array_phone.push(object_data_phone);
         });
 
+        // ** Processo pra obter os emails **
+
+        //Criamos variavél pra guardar os emails adicionados dinámicacmente
+        var array_email = [];
+
+        //Iteramos sob os emails adicionados
+        element_emails.find('.js-div-new-row-email').each(function (index, value) {
+
+            //Criamos objeto pra guardar o 'email'
+            let object_data_email = {};
+
+            //Obtemos os elementos do DOM
+            let element_email_text = $(this).find('.js-configuracao-email');
+
+            //Obtemos os valores
+            let value_email_text = element_email_text.val();
+
+            // ** Validamos se o email já existe **
+            let email_validation = array_email.find( email => email.email === value_email_text );
+
+            if (value_email_text === '' || value_email_text.length === 0){
+
+                //Disparamos aviso de erro
+                markErrorBorder(element_email_text, 'Você não pode ter emails vazios.');
+                control_validity = false;
+                return false;
+            }
+            else if (email_validation !== undefined){
+                //Disparamos aviso de erro
+                markErrorBorder(element_email_text, `O email ${value_email_text} já existe.`);
+                control_validity = false;
+                return false;
+            }
+            else{
+                //Alimentamos o objeto com os valores
+                object_data_email['email'] = value_email_text;
+            }
+
+            //Alimentamos o array geral
+            array_email.push(object_data_email);
+        });
+
         //Validamos se as validacoes foram 'Ok'
         if (control_validity === true)
             //Processamos a peticao Ajax pra mandar os dados ao BD
@@ -117,6 +173,7 @@
                 url: FULL_WEB_URL + 'ajax/admin/configurations-crud.php',
                 data:{
                     array_data: array_phone,
+                    array_email: array_email,
                     neighborhood: value_neighborhood,
                     state: value_state,
                     country: value_country,
@@ -172,28 +229,44 @@
     function configurations_function() {
 
         //Obtemos os elementos do DOM
-        let element_btn_delete = $('.js-real-container-to-add-phones .js-btn-configuration-phone-delete');
+        let element_btn_delete_phone = $('.js-real-container-to-add-phones .js-btn-configuration-phone-delete');
+        let element_btn_delete_email = $('.js-real-container-to-add-email .js-btn-configuration-email-delete');
 
         //Refrescamos os evntos dos elementos
-        element_btn_delete.off('click');
+        element_btn_delete_phone.off('click');
+        element_btn_delete_email.off('click');
 
-        //DELETAR um oferecimento
-        element_btn_delete.on('click', function () {
-            delete_phone($(this));
+        //DELETAR um telefone
+        element_btn_delete_phone.on('click', function () {
+            delete_data($(this), 'phone');
+        });
+
+        //DELETAR um email
+        element_btn_delete_email.on('click', function () {
+            delete_data($(this), 'email');
         });
     }
 
     /**
-     * @Description: Método que deleta o 'oferecimento' do HTML
+     * @Description: Método que deleta o 'telefone/email' do HTML
      */
-    function delete_phone(element) {
+    function delete_data(element, type) {
 
-        //Deletamos o HTML do telepone
-        element
-            .parents('.js-div-new-row')
-            .hide('slow')
-            .remove()
-            .removeClass('js-div-new-row');
+        //Validamos o tipo de elininacao
+        if (type === 'phone')
+            //Deletamos o HTML do telepone
+            element
+                .parents('.js-div-new-row')
+                .hide('slow')
+                .remove()
+                .removeClass('js-div-new-row');
+        else
+            //Deletamos o HTML do email
+            element
+                .parents('.js-div-new-row-email')
+                .hide('slow')
+                .remove()
+                .removeClass('js-div-new-row-email');
     }
     
     /**

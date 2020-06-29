@@ -154,12 +154,18 @@
 
                 //Validamos se realmente tem dados pra evitar o error de 'NOTICE do PHP'
                 if ($data_configurations != NULL){
+
+                    //Obtemos os telefones
                     $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
                     $data_types = json_decode($data_configurations[0]['tipo'], TRUE);
+
+                    //Obtemos os emails
+                    $data_emails = json_decode($data_configurations[0]['email'], TRUE);
                 }
                 else{
                     $data_phones = NULL;
                     $data_types = NULL;
+                    $data_emails = NULL;
                 }
 
 
@@ -167,7 +173,8 @@
                     'general' => $general_param,
                     'data_configuration' => $data_configurations,
                     'data_phones' => $data_phones,
-                    'data_types' => $data_types
+                    'data_types' => $data_types,
+                    'data_emails' => $data_emails
                 ));
                 break;
 

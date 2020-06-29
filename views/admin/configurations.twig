@@ -193,13 +193,54 @@
                                             </div>
                                         </div>
 
+                                        {# E-mails #}
+                                        <h3>E-mails</h3>
+                                        <hr>
+                                        <div class="form-row mt-3">
+                                            <div class="col-md-12 js-real-container-to-add-email">
+
+                                                {# Iteramos sob os 'telefones' e o respetivo 'tipo' #}
+                                                {% for key, email in data_emails %}
+
+                                                    {# Recipiente real #}
+                                                    <div class="row js-div-new-row-email">
+
+                                                        {# Email #}
+                                                        <div class="offset-md-3 col-md-4 mt-3">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label>Telefone</label>
+                                                                <input type="text" class="form-control css-input-aligned-with-select border-danger js-input-email js-configuracao-email" value="{{ email }}">
+                                                            </div>
+                                                        </div>
+
+                                                        {# Deletar Email #}
+                                                        <div class="col-md-2 mt-4">
+                                                            <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-email-delete">
+                                                                <i class="material-icons">delete</i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                {% endfor %}
+                                            </div>
+
+                                            {# Botão adicionar email #}
+                                            <div class="col-md-12 text-center">
+                                                <div class="update ml-auto mr-auto">
+                                                    <button class="btn btn-success btn-fab btn-fab-mini js-btn-configuracao-add-email">
+                                                        <i class="material-icons">add</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         {# Botao de Alterar #}
                                         <button type="submit" class="btn btn-primary pull-right js-btn-configuracao-alterar" data-btn-type="alterar">Alterar</button>
                                     {% endfor %}
                                 {% endif %}
                             </div>
 
-                            {# ** Recipiente Oculto (HTML) ** #}
+                            {# ** Recipiente Oculto Telefones (HTML) ** #}
                             <div class="css-element-hide js-hide-container-to-add-phones">
                                 <div class="row js-div-new-row">
 
@@ -226,6 +267,27 @@
                                     {# Deletar Telefone #}
                                     <div class="col-md-2 mt-4">
                                         <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-phone-delete">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# ** Recipiente Oculto Emails (HTML) ** #}
+                            <div class="css-element-hide js-hide-container-to-add-emails">
+                                <div class="row js-div-new-row-email">
+
+                                    {# Email #}
+                                    <div class="offset-md-3 col-md-4 mt-3">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control css-input-aligned-with-select border-danger js-input-email js-configuracao-email">
+                                        </div>
+                                    </div>
+
+                                    {# Deletar Email #}
+                                    <div class="col-md-2 mt-4">
+                                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round js-btn-configuration-email-delete">
                                             <i class="material-icons">delete</i>
                                         </button>
                                     </div>

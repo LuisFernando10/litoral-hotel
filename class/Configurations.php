@@ -12,7 +12,7 @@
             /**
              * @Description: Metodo que obtem os dados correspondentes aos 'Configuracoes'
              */
-            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $telefones = NULL, $tipo = NULL) {
+            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $telefones = NULL, $tipo = NULL, $emails = NULL) {
 
                 //Valor por defeito para '$page'
                 if (isset($page) && $page != NULL && is_numeric($page)){
@@ -111,6 +111,16 @@
                     unset($this_condition);
                 }
 
+                //Filtro por '$emails'
+                if ($emails !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND configuracoes.email = "%s"';
+                    $this_condition = sprintf($this_condition, $emails);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+
                 //Evaluamos el tipo de consulta
                 if ($type == 'count') {
                     $sql_select = "count(*) as count";
@@ -123,7 +133,8 @@
                         configuracoes.estado,
                         configuracoes.pais,
                         configuracoes.telefones,
-                        configuracoes.tipo
+                        configuracoes.tipo,
+                        configuracoes.email
                     ";
 
                     $sql_limit = "LIMIT $limit_start, $pagination";
@@ -170,19 +181,26 @@
             /**
              * @Description: Método que insere um orferecimento no BD
              */
-            static function insertConfiguration($barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL){
+            static function insertConfiguration($barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL, $array_email = NULL){
 
-                // *** Procesamos os dados do '$array_data' pra obter os 'telefones' e os 'tipos' ***
+                // *** Procesamos os dados dos '$array' pra obter os 'telefones', os 'tipos' e os 'email' ***
 
-                //Criamos as variáveis que guardarao os telefones e os tipos
+                //Criamos as variáveis que guardarao os telefones, os tipos e os emails
                 $phones = [];
                 $type = [];
+                $emails = [];
 
                 //Iteramos sobre o '$array_data'
                 foreach ($array_data as $key => $value){
                     //Alimentamos os arrays generales correspondente ao dado certo
                     $phones[] = $value['telefone'];
                    $type[] = $value['tipo'];
+                }
+
+                //Iteramos sobre o '$array_email'
+                foreach ($array_email as $key => $value){
+                    //Alimentamos os arrays generales correspondente ao dado certo
+                    $emails[] = $value['email'];
                 }
 
                 //Preparamos el Query
@@ -193,9 +211,11 @@
                         estado,
                         pais,
                         telefones,
-                        tipo
+                        tipo,
+                        email
                     )
                     VALUES (
+                        '%s',
                         '%s',
                         '%s',
                         '%s',
@@ -210,7 +230,8 @@
                     $estado,
                     $pais,
                     json_encode($phones),
-                    json_encode($type)
+                    json_encode($type),
+                    json_encode($emails)
                 );
 
                 //Executamos o Query
@@ -226,19 +247,26 @@
             /**
              * @Description: Método que 'atualiza' um orferecimento no BD
              */
-            static function updateConfiguration($id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL){
+            static function updateConfiguration($id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL, $array_email = NULL){
 
-                // *** Procesamos os dados do '$array_data' pra obter os 'telefones' e os 'tipos' ***
+                // *** Procesamos os dados dos '$array' pra obter os 'telefones', os 'tipos' e os 'email' ***
 
-                //Criamos as variáveis que guardarao os telefones e os tipos
+                //Criamos as variáveis que guardarao os telefones, os tipos e os emails
                 $phones = [];
                 $type = [];
+                $emails = [];
 
                 //Iteramos sobre o '$array_data'
                 foreach ($array_data as $key => $value){
                     //Alimentamos os arrays generales correspondente ao dado certo
                     $phones[] = $value['telefone'];
                     $type[] = $value['tipo'];
+                }
+
+                //Iteramos sobre o '$array_email'
+                foreach ($array_email as $key => $value){
+                    //Alimentamos os arrays generales correspondente ao dado certo
+                    $emails[] = $value['email'];
                 }
 
                 //Preparamos el SQL
@@ -250,7 +278,8 @@
                         estado = '%s',
                         pais = '%s',
                         telefones = '%s',
-                        tipo = '%s'
+                        tipo = '%s',
+                        email = '%s'
                     WHERE
                         id_configuracao = '%s'
                 ";
@@ -262,6 +291,7 @@
                     $pais,
                     json_encode($phones),
                     json_encode($type),
+                    json_encode($emails),
                     $id_configuracao
                 );
 
