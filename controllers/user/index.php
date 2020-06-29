@@ -51,13 +51,15 @@
                 $data_opinions = Opinions::getAll(null, null, null, null, null, null, null, null);
                 $data_site_galery = Galery::getAll(null, null, null, null, null, 'galery');
                 $data_home_galery = Galery::getAll(null, null, null, null, null, 'home');
+                $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
 
                 //Renderizamos la vista
                 $twig->display('home.twig', array(
                     'general' => $generalParam,
                     'data_opinions' => $data_opinions,
                     'data_site_galery' => $data_site_galery,
-                    'data_home_galery' => $data_home_galery
+                    'data_home_galery' => $data_home_galery,
+                    'data_rooms' => $data_rooms
                 ));
                 break;
 

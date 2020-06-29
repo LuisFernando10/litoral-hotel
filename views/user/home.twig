@@ -179,7 +179,7 @@
                     </div>
                 </div>
 
-                {# About #}
+                {# ABOUT #}
                 <div class="about">
                     <div class="container">
                         <div class="row">
@@ -190,7 +190,9 @@
                                         <h2>Hotel Litoral / 14 anos de excelencia</h2>
                                     </div>
                                     <div class="about_text">
-                                        <p>Llevamos 14 años ofreciendo el mejor servicio posible a turistas tanto brasileros como extranjeros, ubicado a tan solo 100mts de la playa, con una excelente calidad humana y unas instalaciones sencillas, pero realmente cómodas; nos preocupamos porque usted se sienta a gusto en nuestro hotel, ofrecemos un excelente desayuno en donde puede usted comer a gusto y empezar su día con la mejor actitud.</p>
+                                        <p>
+                                            Há 14 anos, oferecemos o melhor serviço possível a turistas brasileiros e estrangeiros, localizado a apenas 100 metros da praia, com excelente qualidade humana e instalações simples, mas muito confortáveis ​​e atenciosas; cuidamos para que você se sinta confortável em nosso hotel, oferecemos um excelente café da manhã, onde você pode comer confortavelmente e começar o dia com a melhor atitude.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +207,7 @@
                     </div>
                 </div>
 
-                {# Testimonials #}
+                {# TESTIMONIALS #}
                 <div class="testimonials">
                     <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ general.full_images_url }}HotelLitoral/mainFacade.jpg" data-speed="0.8"></div>
                     <div class="testimonials_overlay"></div>
@@ -260,44 +262,32 @@
                     </div>
                 </div>
 
-                {# Booking #}
+                {# BOOKING (ROOMS) #}
                 <div class="booking">
                     <div class="container">
                         <div class="row">
                             <div class="col">
                                 <div class="booking_title text-center"><h2>Reserve um quarto</h2></div>
                                 <div class="booking_text text-center">
-                                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit.</p>
+                                    <p>
+                                        No nosso Hotel Litoral, você encontrará alguns tipos de quartos que se ajustam às suas necessidades, são quartos confortáveis ​​e totalmente adequados para fazer você se sentir em casa.
+                                    </p>
                                 </div>
 
                                 {# Booking Slider #}
                                 <div class="booking_slider_container">
                                     <div class="owl-carousel owl-theme booking_slider">
 
-                                        {# Slide #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/triple-room.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_price">R$ 185,00/Noite</div>
-                                            <div class="booking_link"><a href="{{ general.full_web_url }}bookings/">Apto. Triplo</a></div>
-                                        </div>
+                                        {# Ciclo para obter os quartos do Home #}
+                                        {% for rooms in data_rooms %}
 
-                                        {# Slide #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/married-room.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_price">R$ 145,00/Noite</div>
-                                            <div class="booking_link"><a href="{{ general.full_web_url }}bookings/">Apto. Duplo/Casal</a></div>
-                                        </div>
-
-                                        {# Slide #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/single-room.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_price">R$ 115,00/Noite</div>
-                                            <div class="booking_link"><a href="{{ general.full_web_url }}bookings/">Apto. Single</a></div>
-                                        </div>
-
+                                            <div class="booking_item">
+                                                <div class="background_image" style="background-image:url({{ general.full_images_url }}galery/{{ rooms.image }})"></div>
+                                                <div class="booking_overlay trans_200"></div>
+                                                <div class="booking_price">R$ {{rooms.preco}},00/Noite</div>
+                                                <div class="booking_link"><a href="{{ general.full_web_url }}bookings/">{{rooms.nome}}</a></div>
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +295,7 @@
                     </div>
                 </div>
 
-                {# Blog #}
+                {# BLOG #}
                 <div class="blog">
 
                     {# Blog Slider #}
