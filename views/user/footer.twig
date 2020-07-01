@@ -20,18 +20,28 @@
                         <div class="footer_title">Nosso endereço</div>
                         <div class="footer_list">
                             <ul>
-                                <li>Av.Oceânica, 819</li>
-                                <li>Atalaia - Aracaju/SE</li>
-                                <li><img src="{{ general.full_images_url }}Icons/brazil.png" class="css-img-icon-svg"> Brasil</li>
+                                <li>{{general.data_configuration['barrio']}}</li>
+                                <li>{{general.data_configuration['estado']}}</li>
+                                <li><img src="{{ general.full_images_url }}Icons/brazil.png" class="css-img-icon-svg" alt="pais"> {{general.data_configuration['pais']}}</li>
                             </ul>
                         </div>
 
                         <div class="footer_title mt-3">Nós não possuímos / aceitamos</div>
                         <div class="footer_list">
                             <ul>
-                                <li><img src="{{ general.full_images_url }}Icons/swimmer-solid.svg" class="css-img-icon-svg"> Piscina</li>
-                                <li><i class="fa fa-building"></i> Elevador</li>
-                                <li><i class="fa fa-paw"></i> Animais</li>
+                                {# Fazemos iteracao sob os oferecimentos (Nao Possuimos) #}
+                                {% for dont_have_offerings in general.data_offerings.dont_have %}
+
+                                    {% set nome = dont_have_offerings['nome'] %}
+                                    {% set icon = dont_have_offerings['icone'] %}
+
+                                    {# Validamos se é um icone o uma imagem #}
+                                    {% if (icon|slice(-4)) == '.svg' %}
+                                        <li><img src="{{ general.full_images_url }}Icons/{{icon}}" class="css-img-icon-svg" alt=""> {{nome}}</li>
+                                    {% else %}
+                                        <li><i class="fa {{icon}}"></i> {{nome}}</li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -41,14 +51,19 @@
                         <div class="footer_title">Nós oferecemos</div>
                         <div class="footer_list">
                             <ul>
-                                <li><img src="{{ general.full_images_url }}Icons/wind-solid.svg" class="css-img-icon-svg"> Ar condicionado split</li>
-                                <li><img src="{{ general.full_images_url }}Icons/warehouse-solid.svg" class="css-img-icon-svg"> Garagem fechada - GRATUITA</li>
-                                <li><img src="{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg" class="css-img-icon-svg"> Secador de cabelo em todos os aptos</li>
-                                <li><i class="fa fa-coffee"></i> Ótimo café da manhã</li>
-                                <li><i class="fa fa-tv"></i> TV de LED com canais por assinatura</li>
-                                <li><i class="fa fa-wifi"></i> WI-FI</li>
-                                <li><img src="{{ general.full_images_url }}Icons/cuna-para-siesta.svg" class="css-img-icon-svg"> Berço (apenas 1)</li>
-                                <li><img src="{{ general.full_images_url }}Icons/minibar.svg" class="css-img-icon-svg"> Frigobar com preços acessíveis</li>
+                                {# Fazemos iteracao sob os oferecimentos (Possuimos) #}
+                                {% for have_offerings in general.data_offerings.have %}
+
+                                    {% set nome = have_offerings['nome'] %}
+                                    {% set icon = have_offerings['icone'] %}
+
+                                    {# Validamos se é um icone o uma imagem #}
+                                    {% if (icon|slice(-4)) == '.svg' %}
+                                        <li><img src="{{ general.full_images_url }}Icons/{{icon}}" class="css-img-icon-svg" alt=""> {{nome}}</li>
+                                    {% else %}
+                                        <li><i class="fa {{icon}}"></i> {{nome}}</li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>

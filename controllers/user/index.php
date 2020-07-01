@@ -29,6 +29,8 @@
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
 
         //Obtemos os dados do BD necessários nas visualizações gerais pra tratamento
+        $data_offerings_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'possui', NULL);
+        $data_offerings_dont_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'nao_possui', NULL);
         $data_configurations = Configurations::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
 
@@ -38,6 +40,7 @@
             "full_assets_url" => constant('ASSETS_WEB_URL'),
             "full_images_url" => constant('IMAGES_WEB_URL'),
             "class_param" => $class,
+            "data_offerings" => ['have' => $data_offerings_have, 'dont_have' => $data_offerings_dont_have],
             "data_configuration" => $data_configurations[0],
             "data_phones" => $data_phones
         );
