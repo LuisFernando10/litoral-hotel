@@ -64,7 +64,7 @@
                                             </div>
 
                                             {# Nome #}
-                                            <div class="col-md-4 pl-1 mt-3">
+                                            <div class="col-md-3 pl-1 mt-3">
                                                 <div class="form-group css-hide-element js-div-form-name-field">
                                                     <label>Nome</label>
                                                     <input type="text" class="form-control css-input-aligned-with-select js-offering-field-name">
@@ -72,12 +72,24 @@
                                             </div>
 
                                             {# Tipo #}
-                                            <div class="col-md-3 pl-1">
+                                            <div class="col-md-2 pl-1">
                                                 <div class="form-group">
                                                     <label for="select-type">Tipo</label>
                                                     <select class="form-control js-offering-field-type" id="select-type">
                                                         <option selected disabled class="">Selecionar</option>
                                                         <option value="possui">Possui</option>
+                                                        <option value="nao_possui">Não possui</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            {# Icone #}
+                                            <div class="col-md-2 pl-1">
+                                                <div class="form-group">
+                                                    <label for="select-icon">Icone</label>
+                                                    <select class="form-control js-offering-icon" data-show-content="true" id="select-icon">
+                                                        <option selected disabled class="">Selecionar</option>
+                                                        <option data-content="Eye <i class='fa fa-eye'></i>" value="possui">Possui</option>
                                                         <option value="nao_possui">Não possui</option>
                                                     </select>
                                                 </div>
@@ -101,7 +113,7 @@
                                                 </div>
 
                                                 {# Nome #}
-                                                <div class="col-md-4 pl-1 mt-3">
+                                                <div class="col-md-3 pl-1 mt-3">
                                                     <div class="form-group css-hide-element js-div-form-name-field">
                                                         <label>Nome</label>
                                                         <input type="text" class="form-control css-input-aligned-with-select js-offering-field-name" value="{{ offering.nome }}">
@@ -109,13 +121,26 @@
                                                 </div>
 
                                                 {# Tipo #}
-                                                <div class="col-md-3 pl-1">
+                                                <div class="col-md-2 pl-1">
                                                     <div class="form-group">
                                                         <label for="select-type">Tipo</label>
                                                         <select class="form-control js-offering-field-type" id="select-type">
                                                             <option selected disabled class="">Selecionar</option>
                                                             <option {{ (offering.tipo == 'possui') ? 'selected' : '' }} value="possui">Possui</option>
                                                             <option {{ (offering.tipo == 'nao_possui') ? 'selected' : '' }} value="nao_possui">Não possui</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                {# Icone #}
+                                                <div class="col-md-2 pl-1">
+                                                    <div class="form-group css-form-group-bootstrap-select">
+                                                        <label for="select-icon">Icone</label>
+                                                        <select class="form-control js-select-icon-graphic js-offering-icon" data-show-content="true" id="select-icon">
+                                                            <option selected disabled class="">Selecionar</option>
+                                                            <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
+                                                            <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-bed"></option>
+                                                            <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
                                                         </select>
                                                     </div>
                                                 </div>

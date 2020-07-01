@@ -91,6 +91,7 @@
                         oferecimentos.id_oferecimento,
                         oferecimentos.nome,
                         oferecimentos.tipo,
+                        oferecimentos.icone,
                         oferecimentos.prioridade
                     ";
 

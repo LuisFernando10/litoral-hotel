@@ -1,4 +1,9 @@
 
+    $(document).ready(function () {
+        //Inicializamos o 'selectpicker'
+        $('.js-select-icon-graphic').selectpicker();
+    });
+
     $('.js-input-number').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g,'');
     });
