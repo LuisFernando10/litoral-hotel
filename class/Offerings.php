@@ -165,10 +165,10 @@
                     //Si hay información, 'actualizamos' las que ya hay, si no, 'insertamos' nuevos ofrecimientos
                     if ($data_item != NULL)
                         //Actualizamos la plantilla correspondiente a la prioridad en curso
-                        Offerings::updateOffering($data_item[0]['id_oferecimento'], html_entity_decode($object['nome'], ENT_QUOTES | ENT_HTML401, "UTF-8"), html_entity_decode($object['tipo'], ENT_QUOTES | ENT_HTML401, "UTF-8"));
+                        Offerings::updateOffering($data_item[0]['id_oferecimento'], html_entity_decode($object['nome'], ENT_QUOTES | ENT_HTML401, "UTF-8"), html_entity_decode($object['tipo'], ENT_QUOTES | ENT_HTML401, "UTF-8"), html_entity_decode($object['icone'], ENT_QUOTES | ENT_HTML401, "UTF-8"));
                     else {
                         //Variable que contiene la cadena de inserción a la Bd "Ej: VALUE ',(valor, valor, valor')"
-                        $new_insert_row .= "$coma('".html_entity_decode($object['nome'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['tipo'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['prioridade'], ENT_QUOTES | ENT_HTML401, "UTF-8")."')";
+                        $new_insert_row .= "$coma('".html_entity_decode($object['nome'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['tipo'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['icone'], ENT_QUOTES | ENT_HTML401, "UTF-8")."','".html_entity_decode($object['prioridade'], ENT_QUOTES | ENT_HTML401, "UTF-8")."')";
 
                         //Incrementamos contador para referirnos a más de una inserción
                         $counter++;
@@ -185,6 +185,7 @@
                     (
                         nome,
                         tipo,
+                        icone,
                         prioridade
                     )
                     VALUES 
@@ -200,7 +201,7 @@
             /**
              * @Description: Método que 'atualiza' um orferecimento no BD
              */
-            static function updateOffering($id_oferecimento = NULL, $nome = NULL, $tipo = NULL){
+            static function updateOffering($id_oferecimento = NULL, $nome = NULL, $tipo = NULL, $icone = NULL){
 
                 //Preparamos el SQL
                 $sql = "
@@ -208,7 +209,8 @@
                         oferecimentos
                     SET
                         nome = '%s',
-                        tipo = '%s'
+                        tipo = '%s',
+                        icone = '%s'
                     WHERE
                         id_oferecimento = '%s'
                 ";
@@ -217,6 +219,7 @@
                 $sql = sprintf($sql,
                     $nome,
                     $tipo,
+                    $icone,
                     $id_oferecimento
                 );
 

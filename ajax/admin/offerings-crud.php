@@ -46,7 +46,7 @@
         else
             $response = array(
                 'status' => '500',
-                'message' => 'Falha al registrar',
+                'message' => 'Falha ao registrar',
                 'id_template' => null
             );
     }

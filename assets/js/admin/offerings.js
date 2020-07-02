@@ -27,11 +27,13 @@
     function offering_function() {
 
         //Obtemos os elementos do DOM
-        let element_btn_delete = $('.js-container-to-add-elements .js-btn-offering-priority-delete');
-        let element_btn_up = $('.js-container-to-add-elements .js-btn-offering-priority-up');
-        let element_btn_down = $('.js-container-to-add-elements .js-btn-offering-priority-down');
-        let element_offering_name = $('.js-container-to-add-elements .js-offering-field-name');
-        let element_offering_type = $('.js-container-to-add-elements .js-offering-field-type');
+        let element_real_container = $('.js-container-to-add-elements');
+        let element_btn_delete = element_real_container.find('.js-btn-offering-priority-delete');
+        let element_btn_up = element_real_container.find('.js-btn-offering-priority-up');
+        let element_btn_down = element_real_container.find('.js-btn-offering-priority-down');
+        let element_offering_name = element_real_container.find('.js-offering-field-name');
+        let element_offering_type = element_real_container.find('.js-offering-field-type');
+        let element_offering_icon = element_real_container.find('select.js-offering-field-icon');
 
         //Refrescamos os evntos dos elementos
         element_btn_delete.off('click');
@@ -39,6 +41,7 @@
         element_btn_down.off('click');
         element_offering_name.off('blur');
         element_offering_type.off('change');
+        element_offering_icon.off('change');
 
         //DELETAR um oferecimento
         element_btn_delete.on('click', function () {
@@ -63,6 +66,12 @@
         //SALVAR o tipo
         element_offering_type.on('change', function () {
             insert_offering($(this));
+        });
+
+        //SALVAR o icone
+        element_offering_icon.on('change', function () {
+            insert_offering($(this));
+
         });
     }
 
@@ -153,11 +162,13 @@
             //Obtemos os valores
             let name_field = $(this).find('.js-offering-field-name').val();
             let type_field = $(this).find('.js-offering-field-type').val();
+            let icon_field = $(this).find('select.js-offering-field-icon').val();
             let number_priority = $(this).find('.js-offering-priority').val();
 
             //Nós atribuímos os valores ao objeto
             general_object['nome'] = name_field;
             general_object['tipo'] = type_field;
+            general_object['icone'] = icon_field;
             general_object['prioridade'] = number_priority;
 
             //Adicionamos o objeto à matriz geral

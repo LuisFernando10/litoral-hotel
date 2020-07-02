@@ -26,7 +26,7 @@
                             {# ** Cóntenedor REAL (Conteudo) ** #}
                             <div class="card-body">
 
-                                {# Guardamos o HTML dos Botões pra nao duplicar código #}
+                                {# Guardamos o HTML nescesario pra nao duplicar código #}
                                 {% set html_botoens %}
                                     <div class="col-md-4 pl-1 mt-4">
                                         <div class="form-group mt-3">
@@ -85,12 +85,22 @@
 
                                             {# Icone #}
                                             <div class="col-md-2 pl-1">
-                                                <div class="form-group">
-                                                    <label for="select-icon">Icone</label>
-                                                    <select class="form-control js-offering-icon" data-show-content="true" id="select-icon">
+                                                <div class="form-group css-form-group-bootstrap-select">
+                                                    <label for="select-icon-real">Icone</label>
+                                                    <select class="form-control js-select-icon-graphic js-offering-field-icon" data-show-content="true" id="select-icon-real">
                                                         <option selected disabled class="">Selecionar</option>
-                                                        <option data-content="Eye <i class='fa fa-eye'></i>" value="possui">Possui</option>
-                                                        <option value="nao_possui">Não possui</option>
+                                                        <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
+                                                        <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-tv"></option>
+                                                        <option data-content="<i class='fa fa-wifi'></i> WIFI" value="fa-wifi"></option>
+                                                        <option data-content="<i class='fa fa-building'></i> Elevador" value="fa-building"></option>
+                                                        <option data-content="<i class='fa fa-paw'></i> Animais" value="fa-paw"></option>
+                                                        <option data-content="<i class='fa fa-coffee'></i> Café da manhã" value="fa-coffee"></option>
+                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Ar condicionado" value="wind-solid.svg"></option>
+                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
+                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/minibar.svg' class='css-img-icon-svg'> Frigobar" value="minibar.svg"></option>
+                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/swimmer-solid.svg' class='css-img-icon-svg'> Piscina" value="swimmer-solid.svg"></option>
+                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/warehouse-solid.svg' class='css-img-icon-svg'> Garagem" value="warehouse-solid.svg"></option>
+                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/cuna-para-siesta.svg' class='css-img-icon-svg'> Berço" value="cuna-para-siesta.svg"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -125,7 +135,7 @@
                                                     <div class="form-group">
                                                         <label for="select-type">Tipo</label>
                                                         <select class="form-control js-offering-field-type" id="select-type">
-                                                            <option selected disabled class="">Selecionar</option>
+                                                            <option disabled class="">Selecionar</option>
                                                             <option {{ (offering.tipo == 'possui') ? 'selected' : '' }} value="possui">Possui</option>
                                                             <option {{ (offering.tipo == 'nao_possui') ? 'selected' : '' }} value="nao_possui">Não possui</option>
                                                         </select>
@@ -136,11 +146,20 @@
                                                 <div class="col-md-2 pl-1">
                                                     <div class="form-group css-form-group-bootstrap-select">
                                                         <label for="select-icon">Icone</label>
-                                                        <select class="form-control js-select-icon-graphic js-offering-icon" data-show-content="true" id="select-icon">
-                                                            <option selected disabled class="">Selecionar</option>
-                                                            <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
-                                                            <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-bed"></option>
-                                                            <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
+                                                        <select class="form-control js-select-icon-graphic js-offering-field-icon" data-show-content="true" id="select-icon">
+                                                            <option disabled class="">Selecionar</option>
+                                                            <option {{ (offering.icone == 'fa-bed') ? 'selected' : '' }} data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
+                                                            <option {{ (offering.icone == 'fa-tv') ? 'selected' : '' }} data-content="<i class='fa fa-tv'></i> TV LED" value="fa-tv"></option>
+                                                            <option {{ (offering.icone == 'fa-wifi') ? 'selected' : '' }} data-content="<i class='fa fa-wifi'></i> WIFI" value="fa-wifi"></option>
+                                                            <option {{ (offering.icone == 'fa-building') ? 'selected' : '' }} data-content="<i class='fa fa-building'></i> Elevador" value="fa-building"></option>
+                                                            <option {{ (offering.icone == 'fa-paw') ? 'selected' : '' }} data-content="<i class='fa fa-paw'></i> Animais" value="fa-paw"></option>
+                                                            <option {{ (offering.icone == 'fa-coffee') ? 'selected' : '' }} data-content="<i class='fa fa-coffee'></i> Café da manhã" value="fa-coffee"></option>
+                                                            <option {{ (offering.icone == 'wind-solid.svg') ? 'selected' : '' }} data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Ar condicionado" value="wind-solid.svg"></option>
+                                                            <option {{ (offering.icone == 'secador-de-pelo-encendido.svg') ? 'selected' : '' }} data-content="<img src='{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg' class='css-img-icon-svg'> Secador" value="secador-de-pelo-encendido.svg"></option>
+                                                            <option {{ (offering.icone == 'minibar.svg') ? 'selected' : '' }} data-content="<img src='{{ general.full_images_url }}Icons/minibar.svg' class='css-img-icon-svg'> Frigobar" value="minibar.svg"></option>
+                                                            <option {{ (offering.icone == 'swimmer-solid.svg') ? 'selected' : '' }} data-content="<img src='{{ general.full_images_url }}Icons/swimmer-solid.svg' class='css-img-icon-svg'> Piscina" value="swimmer-solid.svg"></option>
+                                                            <option {{ (offering.icone == 'warehouse-solid.svg') ? 'selected' : '' }} data-content="<img src='{{ general.full_images_url }}Icons/warehouse-solid.svg' class='css-img-icon-svg'> Garagem" value="warehouse-solid.svg"></option>
+                                                            <option {{ (offering.icone == 'cuna-para-siesta.svg') ? 'selected' : '' }} data-content="<img src='{{ general.full_images_url }}Icons/cuna-para-siesta.svg' class='css-img-icon-svg'> Berço" value="cuna-para-siesta.svg"></option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -175,7 +194,7 @@
                                     </div>
 
                                     {# Nome #}
-                                    <div class="col-md-4 pl-1 mt-3">
+                                    <div class="col-md-3 pl-1 mt-3">
                                         <div class="form-group css-hide-element js-div-form-name-field">
                                             <label>Nome</label>
                                             <input type="text" class="form-control css-input-aligned-with-select js-offering-field-name">
@@ -183,13 +202,35 @@
                                     </div>
 
                                     {# Tipo #}
-                                    <div class="col-md-3 pl-1">
+                                    <div class="col-md-2 pl-1">
                                         <div class="form-group">
                                             <label for="select-type">Tipo</label>
                                             <select class="form-control js-offering-field-type" id="select-type">
                                                 <option selected disabled class="">Selecionar</option>
                                                 <option value="possui">Possui</option>
                                                 <option value="nao_possui">Não possui</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {# Icone #}
+                                    <div class="col-md-2 pl-1">
+                                        <div class="form-group css-form-group-bootstrap-select">
+                                            <label for="select-icon-hide">Icone</label>
+                                            <select class="form-control js-select-icon-graphic js-offering-field-icon" data-show-content="true" id="select-icon-hide">
+                                                <option selected disabled class="">Selecionar</option>
+                                                <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
+                                                <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-tv"></option>
+                                                <option data-content="<i class='fa fa-wifi'></i> WIFI" value="fa-wifi"></option>
+                                                <option data-content="<i class='fa fa-building'></i> Elevador" value="fa-building"></option>
+                                                <option data-content="<i class='fa fa-paw'></i> Animais" value="fa-paw"></option>
+                                                <option data-content="<i class='fa fa-coffee'></i> Café da manhã" value="fa-coffee"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Ar condicionado" value="wind-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/minibar.svg' class='css-img-icon-svg'> Frigobar" value="minibar.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/swimmer-solid.svg' class='css-img-icon-svg'> Piscina" value="swimmer-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/warehouse-solid.svg' class='css-img-icon-svg'> Garagem" value="warehouse-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/cuna-para-siesta.svg' class='css-img-icon-svg'> Berço" value="cuna-para-siesta.svg"></option>
                                             </select>
                                         </div>
                                     </div>
