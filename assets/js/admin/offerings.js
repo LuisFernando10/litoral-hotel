@@ -3,6 +3,9 @@
         //Métodos executados por defeito no carregamento do documento
         offering_function();
         offering_priorities();
+
+        //Inicializamos o 'selectpicker'
+        $('.js-select-icon-graphic').selectpicker();
     });
 
     //Evento 'click' pra adicionar um novo oferecimento ao container
@@ -71,7 +74,6 @@
         //SALVAR o icone
         element_offering_icon.on('change', function () {
             insert_offering($(this));
-
         });
     }
 

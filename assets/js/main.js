@@ -1,7 +1,7 @@
 
     $(document).ready(function () {
         //Inicializamos o 'selectpicker'
-        $('.js-select-icon-graphic').selectpicker();
+        //$('.js-select-icon-graphic').selectpicker();
     });
 
     $('.js-input-number').on('input', function () {

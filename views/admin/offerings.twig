@@ -48,6 +48,28 @@
                                         </div>
                                     </div>
                                 {% endset %}
+                                {% set html_icon_select %}
+                                    <div class="col-md-2 pl-1">
+                                        <div class="form-group css-form-group-bootstrap-select">
+                                            <label for="select-icon-real">Icone</label>
+                                            <select class="form-control js-select-icon-graphic js-offering-field-icon" data-show-content="true" id="select-icon-real">
+                                                <option selected disabled class="">Selecionar</option>
+                                                <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
+                                                <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-tv"></option>
+                                                <option data-content="<i class='fa fa-wifi'></i> WIFI" value="fa-wifi"></option>
+                                                <option data-content="<i class='fa fa-building'></i> Elevador" value="fa-building"></option>
+                                                <option data-content="<i class='fa fa-paw'></i> Animais" value="fa-paw"></option>
+                                                <option data-content="<i class='fa fa-coffee'></i> Café da manhã" value="fa-coffee"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Ar condicionado" value="wind-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/minibar.svg' class='css-img-icon-svg'> Frigobar" value="minibar.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/swimmer-solid.svg' class='css-img-icon-svg'> Piscina" value="swimmer-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/warehouse-solid.svg' class='css-img-icon-svg'> Garagem" value="warehouse-solid.svg"></option>
+                                                <option data-content="<img src='{{ general.full_images_url }}Icons/cuna-para-siesta.svg' class='css-img-icon-svg'> Berço" value="cuna-para-siesta.svg"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                {% endset %}
 
                                 <div class="js-container-to-add-elements">
 
@@ -84,26 +106,7 @@
                                             </div>
 
                                             {# Icone #}
-                                            <div class="col-md-2 pl-1">
-                                                <div class="form-group css-form-group-bootstrap-select">
-                                                    <label for="select-icon-real">Icone</label>
-                                                    <select class="form-control js-select-icon-graphic js-offering-field-icon" data-show-content="true" id="select-icon-real">
-                                                        <option selected disabled class="">Selecionar</option>
-                                                        <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
-                                                        <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-tv"></option>
-                                                        <option data-content="<i class='fa fa-wifi'></i> WIFI" value="fa-wifi"></option>
-                                                        <option data-content="<i class='fa fa-building'></i> Elevador" value="fa-building"></option>
-                                                        <option data-content="<i class='fa fa-paw'></i> Animais" value="fa-paw"></option>
-                                                        <option data-content="<i class='fa fa-coffee'></i> Café da manhã" value="fa-coffee"></option>
-                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Ar condicionado" value="wind-solid.svg"></option>
-                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
-                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/minibar.svg' class='css-img-icon-svg'> Frigobar" value="minibar.svg"></option>
-                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/swimmer-solid.svg' class='css-img-icon-svg'> Piscina" value="swimmer-solid.svg"></option>
-                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/warehouse-solid.svg' class='css-img-icon-svg'> Garagem" value="warehouse-solid.svg"></option>
-                                                        <option data-content="<img src='{{ general.full_images_url }}Icons/cuna-para-siesta.svg' class='css-img-icon-svg'> Berço" value="cuna-para-siesta.svg"></option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            {{ html_icon_select }}
 
                                             {# Botões Subir-Baixar #}
                                             {{ html_botoens }}
@@ -214,26 +217,7 @@
                                     </div>
 
                                     {# Icone #}
-                                    <div class="col-md-2 pl-1">
-                                        <div class="form-group css-form-group-bootstrap-select">
-                                            <label for="select-icon-hide">Icone</label>
-                                            <select class="form-control js-select-icon-graphic js-offering-field-icon" data-show-content="true" id="select-icon-hide">
-                                                <option selected disabled class="">Selecionar</option>
-                                                <option data-content="<i class='fa fa-bed'></i> Camas box" value="fa-bed"></option>
-                                                <option data-content="<i class='fa fa-tv'></i> TV LED" value="fa-tv"></option>
-                                                <option data-content="<i class='fa fa-wifi'></i> WIFI" value="fa-wifi"></option>
-                                                <option data-content="<i class='fa fa-building'></i> Elevador" value="fa-building"></option>
-                                                <option data-content="<i class='fa fa-paw'></i> Animais" value="fa-paw"></option>
-                                                <option data-content="<i class='fa fa-coffee'></i> Café da manhã" value="fa-coffee"></option>
-                                                <option data-content="<img src='{{ general.full_images_url }}Icons/wind-solid.svg' class='css-img-icon-svg'> Ar condicionado" value="wind-solid.svg"></option>
-                                                <option data-content="<img src='{{ general.full_images_url }}Icons/secador-de-pelo-encendido.svg' class='css-img-icon-svg'> Secador" value="wind-solid.svg"></option>
-                                                <option data-content="<img src='{{ general.full_images_url }}Icons/minibar.svg' class='css-img-icon-svg'> Frigobar" value="minibar.svg"></option>
-                                                <option data-content="<img src='{{ general.full_images_url }}Icons/swimmer-solid.svg' class='css-img-icon-svg'> Piscina" value="swimmer-solid.svg"></option>
-                                                <option data-content="<img src='{{ general.full_images_url }}Icons/warehouse-solid.svg' class='css-img-icon-svg'> Garagem" value="warehouse-solid.svg"></option>
-                                                <option data-content="<img src='{{ general.full_images_url }}Icons/cuna-para-siesta.svg' class='css-img-icon-svg'> Berço" value="cuna-para-siesta.svg"></option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    {{ html_icon_select }}
 
                                     {# Botões Subir-Baixar #}
                                     {{ html_botoens }}
