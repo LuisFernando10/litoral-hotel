@@ -30,6 +30,9 @@
         //Pagination
         define("PAGINATION", 15);
 
+        //Email
+        define('EMAIL', 'reservas@hotellitoral.com.br');
+
         //Datos de conexión a la BD
         define('DB_SERVER','localhost'); //litora-hotel.mysql.uhserver.com - localhost
         define('DB_USER','root');//phpmyadmin - root - hlitorallira

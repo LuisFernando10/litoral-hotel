@@ -95,3 +95,19 @@
         notify_warning_notification(message);
         return false;
     }
+
+    /**
+     * @Description: Método pra validar um email
+     */
+    function validateEmail(email) {
+        let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+
+    /**
+     * @Description: Método pra validar um número
+     */
+    function validateNumber(number) {
+        let regExp = /^([0-9])*$/;
+        return regExp.test(number);
+    }

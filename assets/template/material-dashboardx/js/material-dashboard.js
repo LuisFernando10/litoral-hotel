@@ -368,7 +368,7 @@ md = {
       md.startAnimationForLineChart(completedTasksChart);
 
 
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+      /* ----------==========     HotelContact Subscription Chart initialization    ==========---------- */
 
       var dataWebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
@@ -402,7 +402,7 @@ md = {
       ];
       var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
 
-      //start animation for the Emails Subscription Chart
+      //start animation for the HotelContact Subscription Chart
       md.startAnimationForBarChart(websiteViewsChart);
     }
   },

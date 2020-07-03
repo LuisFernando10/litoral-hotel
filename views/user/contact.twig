@@ -52,7 +52,7 @@
 
                                             {# Phones #}
                                             {% for key, phones in data_phones %}
-                                                <li><b>{{data_types[key]}}: </b>{{phones}}</li>
+                                                <li><b>{{data_types[key]|capitalize}}: </b>{{phones}}</li>
                                             {% endfor %}
 
                                             {# Email #}
@@ -64,7 +64,7 @@
                                         </ul>
                                     </div>
                                     <div class="contact_form_container">
-                                        <form action="#" class="contact_form" id="contact_form">
+                                        <form action="##" class="contact_form js-contact-form">
 {#                                            <div class="row">#}
 {#                                                #}{# Calificacion #}
 {#                                                <div class="col-md-12 input_container">#}
@@ -88,34 +88,29 @@
                                             <div class="row">
                                                 {# Nombre #}
                                                 <div class="col-md-12 input_container">
-                                                    <input type="text" class="contact_input" placeholder="Seu nome" required="required">
+                                                    <input type="text" class="contact_input js-contact-name" placeholder="Seu nome*" required="required">
                                                 </div>
 
                                                 {# Email #}
                                                 <div class="col-md-6 input_container">
-                                                    <input type="tel" class="contact_input" placeholder="Seu email" required="required">
+                                                    <input type="text" class="contact_input js-contact-email" placeholder="Seu email*" required="required">
                                                 </div>
 
                                                 {# Telefone #}
                                                 <div class="col-md-6 input_container">
-                                                    <input type="email" class="contact_input" placeholder="Seu telefone" required="required">
+                                                    <input type="text" class="contact_input js-input-number js-contact-phone" placeholder="Seu telefone">
                                                 </div>
                                             </div>
 
                                             <div class="row">
-                                                {# Asunto #}
-                                                <div class="col-md-12 input_container">
-                                                    <input type="text" class="contact_input" placeholder="Sujeito">
-                                                </div>
-
                                                 {# Texto #}
                                                 <div class="col-md-12 input_container">
-                                                    <textarea class="contact_input contact_textarea" placeholder="Mensagem" required="required"></textarea>
+                                                    <textarea class="contact_input contact_textarea js-contact-text" placeholder="Mensagem*" required="required"></textarea>
                                                 </div>
                                             </div>
 
                                             {# Boton Enviar #}
-                                            <button class="contact_button">Enviar</button>
+                                            <button class="contact_button js-contact-btn-send-email">Enviar</button>
                                         </form>
                                     </div>
                                 </div>
