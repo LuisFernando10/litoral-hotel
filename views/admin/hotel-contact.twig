@@ -1,0 +1,68 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="card-title ">Contato do Hotel</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-shopping table-hover">
+                                        <thead class="text-primary">
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Email</th>
+                                            <th>Telefone</th>
+                                            <th>Mensagem</th>
+                                            <th>Data</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {# Percorremos os dados dos producto pra renderizar as linhas #}
+                                        {% for contact in data_hotel_contact %}
+
+                                            {% if contact.estado == 'lido' %}
+                                                {% set tag ='badge-success' %}
+                                            {% elseif contact.estado == 'sem_ler' %}
+                                                {% set tag ='badge-warning' %}
+                                            {% elseif contact.estado == 'arquivado' %}
+                                                {% set tag ='badge-default' %}
+                                            {% else %}
+                                                {% set tag ='badge-danger' %}
+                                            {% endif %}
+
+                                            <tr class="js-producto-tr">
+                                                <td>{{ contact.nome }}</td>
+                                                <td>{{ contact.email }}</td>
+                                                <td>{{ contact.telefone }}</td>
+                                                <td>{{ contact.mensagem }}</td>
+                                                <td>{{ contact.data }}</td>
+                                                <td>
+                                                    <span class="badge {{ tag }}">{{ contact.estado }}</span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/products.js"></script>
+    {% endblock %}

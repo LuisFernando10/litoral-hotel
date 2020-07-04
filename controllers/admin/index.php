@@ -146,6 +146,19 @@
 
                 break;
 
+            #CORREO
+            case 'contato':
+
+                //Obtenemos los datos que se procesarán en las vistas
+                $data_hotel_contact = HotelContact::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
+
+                //Renderizamos la vista
+                $twig->display('hotel-contact.twig',array(
+                    'general' => $general_param,
+                    'data_hotel_contact' => $data_hotel_contact
+                ));
+                break;
+
             #CONFIGURAÇÕES
             case 'configuracoes':
 
