@@ -4,9 +4,14 @@
         //$('.js-select-icon-graphic').selectpicker();
     });
 
-    $('.js-input-number').on('input', function () {
-        this.value = this.value.replace(/[^0-9]/g,'');
-    });
+    /**
+     * @Description: Método que valida um telefone válido
+     */
+    function phone_validatios(){
+        $('.js-input-number').on('input', function () {
+            this.value = this.value.replace(/[^0-9()-. ]/g,'');
+        });
+    }
 
     /**
      * @Description: Método para notificación de 'Exito'

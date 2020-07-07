@@ -1,4 +1,9 @@
 
+    $(document).ready(function () {
+        //Chamamos método que valida um telefone válido (inicializacao)
+        phone_validatios();
+    });
+
     $('.js-contact-btn-send-email').on('click', function () {
 
         //Obtenemos los elementos del DOM

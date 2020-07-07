@@ -5,6 +5,9 @@
     $(document).ready(function () {
         //Métodos executados por defeito no carregamento do documento
         configurations_function();
+
+        //Chamamos método que valida um telefone válido (inicializacao)
+        phone_validatios();
     });
 
     //Evento 'click' pra adicionar uma nova configuracao ao container
@@ -18,6 +21,9 @@
 
         //Método que procesa sub-procesos
         configurations_function();
+
+        //Chamamos método que valida um telefone válido (inicializacao)
+        phone_validatios();
     });
 
     //Evento 'click' pra adicionar uma nova configuracao ao container
