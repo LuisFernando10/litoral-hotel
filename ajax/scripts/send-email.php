@@ -7,6 +7,9 @@
          * @Date: 31-may-2020
          */
 
+        //Importamos los archivos necesarios para el tratamiento de los datos
+        require_once(dirname(__FILE__).'/../../config-import.php');
+
         //Obtenemos los datos del Ajax
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING, array('options'=>array('default'=>NULL)));
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL, array('options'=>array('default'=>NULL)));
@@ -24,13 +27,10 @@
             //    $text);
 
             //Enviamos el 'email'
-            $send_email = GeneralMethods::sendPphMailerEmail(
+            $send_email = GeneralMethods::sendPhpMailerEmail(
                 'lfchamorror@ut.edu.co',
                 'Contato (Hotel Litoral)lixx',
                 $text);
-
-            var_dump($send_email);
-            exit();
 
             //Insertamos los datos en la BD
             $insert_email = HotelContact::insertEmail(
