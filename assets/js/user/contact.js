@@ -69,9 +69,9 @@
                     action: 'CONTACT'
                 },
                 beforeSend: function(){
-                    element_btn
-                        .prop('disabled', true)
-                        .addClass('css-cursor-not-allowed');
+                    //element_btn
+                    //    .prop('disabled', true)
+                    //    .addClass('css-cursor-not-allowed');
                 },
                 success : function (response) {
 
@@ -88,9 +88,9 @@
                     }
                 },
                 complete: function () {
-                    element_btn
-                        .prop('disabled', false)
-                        .removeClass('css-cursor-not-allowed');
+                    //element_btn
+                    //    .prop('disabled', false)
+                    //    .removeClass('css-cursor-not-allowed');
 
                     //Limpiamos los valores
                     element_name.val('');
