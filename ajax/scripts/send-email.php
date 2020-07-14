@@ -21,16 +21,11 @@
         if ($action === 'CONTACT'){
 
             //Enviamos el 'email'
-            //$send_email = GeneralMethods::sendEmail(
-            //    constant('EMAIL'),
-            //    'Contato (Hotel Litoral)',
-            //    $text);
-
-            //Enviamos el 'email'
             $send_email = GeneralMethods::sendPhpMailerEmail(
-                'lfchamorror@ut.edu.co',
-                'Contato (Hotel Litoral)lixx',
-                $text);
+                constant('EMAIL'),
+                'Contato (Hotel Litoral)',
+                $text
+            );
 
             //Insertamos los datos en la BD
             $insert_email = HotelContact::insertEmail(
