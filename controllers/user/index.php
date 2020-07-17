@@ -35,11 +35,13 @@
         $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
 
         //Definimos las variables generales a utilizar en las vistas 'Twig'
-        $generalParam = array(
+        $general_param = array(
             "full_web_url" => constant('FULL_WEB_URL'),
             "full_assets_url" => constant('ASSETS_WEB_URL'),
             "full_images_url" => constant('IMAGES_WEB_URL'),
             "class_param" => $class,
+            "action_param" => $action,
+            "id_param" => $id,
             "data_offerings" => ['have' => $data_offerings_have, 'dont_have' => $data_offerings_dont_have],
             "data_configuration" => $data_configurations[0],
             "data_phones" => $data_phones
@@ -58,7 +60,7 @@
 
                 //Renderizamos la vista
                 $twig->display('home.twig', array(
-                    'general' => $generalParam,
+                    'general' => $general_param,
                     'data_opinions' => $data_opinions,
                     'data_site_galery' => $data_site_galery,
                     'data_home_galery' => $data_home_galery,
@@ -70,7 +72,7 @@
 
                 //Renderizamos la vista
                 $twig->display('about-us.twig', array(
-                    'general' => $generalParam
+                    'general' => $general_param
                 ));
                 break;
 
@@ -97,7 +99,7 @@
 
                 //Renderizamos la vista
                 $twig->display('contact.twig', array(
-                    'general' => $generalParam,
+                    'general' => $general_param,
                     'data_configuration' => $data_configurations[0],
                     'data_phones' => $data_phones,
                     'data_types' => $data_types,
@@ -112,24 +114,48 @@
 
                 //Renderizamos la vista
                 $twig->display('rooms.twig', array(
-                    'general' => $generalParam,
+                    'general' => $general_param,
                     'data_rooms' => $data_rooms
                 ));
                 break;
 
             case 'bookings':
 
-                //Renderizamos la vista
-                $twig->display('bookings.twig', array(
-                    'general' => $generalParam
-                ));
+                //Nós obtemos os dados relacionados aos quartos
+                $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+
+                //Nos validamos cada uma das clases
+                if ($action == 'reserve'){
+
+                    if (is_numeric($id) && $id != ''){
+
+                        //Nós obtemos os dados relacionados aos quartos
+                        $data_reserve_room = Rooms::getAll(NULL,NULL,NULL,$id,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+
+                        $twig->display('bookings-make.twig',array(
+                            'general' => $general_param,
+                            'data_reserve_room' => $data_reserve_room[0]
+                        ));
+                    }
+                    else
+                        $twig->display('bookings.twig', array(
+                            'general' => $general_param,
+                            'data_rooms' => $data_rooms
+                        ));
+                }
+                else
+                    $twig->display('bookings.twig', array(
+                        'general' => $general_param,
+                        'data_rooms' => $data_rooms
+                    ));
+
                 break;
 
             case 'admin':
 
                 //Renderizamos la vista
                 $twig->display('log-in.twig',array(
-                    'general' => $generalParam
+                    'general' => $general_param
                 ));
                 break;
 
@@ -137,7 +163,7 @@
 
                 //Renderizamos la vista
                 $twig->display('home.twig', array(
-                    'general' => $generalParam
+                    'general' => $general_param
                 ));
                 break;
         }

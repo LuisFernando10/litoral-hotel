@@ -1,9 +1,10 @@
 
-{% extends "base-document.twig" %}
+    {% extends "base-document.twig" %}
 
         {% block content %}
 
             <div class="super_container">
+
                 {# Header - Nav (Menú) #}
                 {% include 'nav-menu.twig' %}
 
@@ -41,308 +42,37 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
+
                                 {# Booking Slider #}
                                 <div class="booking_slider_container">
                                     <div class="owl-carousel owl-theme booking_slider">
 
-                                        {# Apto Single #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{general.full_images_url}}HotelLitoral/apto-single.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_item_content">
-                                                <div class="booking_item_list">
-                                                    <ul>
-                                                        <li><i class="fa fa-bed"></i> Camas box de casal</li>
-                                                        <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/ar_condicionado_2.svg" style="width: 15px; display: inline">&nbsp; Ar condicionado SPLIT</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/secador_cabelo_2.svg" style="width: 15px; display: inline"> Secador de cabelo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/minibar_2.svg" style="width: 15px; display: inline">&nbsp; Frigobar</li>
-                                                        <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                    </ul>
+                                        {% for rooms in data_rooms %}
+                                            <div class="booking_item">
+                                                <div class="background_image" style="background-image:url({{general.full_images_url}}galery/{{rooms.image}}"></div>
+                                                <div class="booking_overlay trans_200"></div>
+                                                <div class="booking_item_content">
+                                                    <div class="booking_item_list">
+                                                        <ul>
+                                                            <li><i class="fa fa-bed"></i> Camas box de casal</li>
+                                                            <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
+                                                            <li><img src="{{ general.full_images_url }}Icons/ar_condicionado_2.svg" style="width: 15px; display: inline">&nbsp; Ar condicionado SPLIT</li>
+                                                            <li><img src="{{ general.full_images_url }}Icons/secador_cabelo_2.svg" style="width: 15px; display: inline"> Secador de cabelo</li>
+                                                            <li><img src="{{ general.full_images_url }}Icons/minibar_2.svg" style="width: 15px; display: inline">&nbsp; Frigobar</li>
+                                                            <li><i class="fa fa-wifi"></i> Wi-Fi</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
+                                                <div class="booking_price">$R {{ rooms.preco }}/Noite</div>
+                                                <div class="booking_link"><a href="{{ general.full_web_url }}bookings/reserve/{{ rooms.id_quarto }}/">{{rooms.nome}}</a></div>
                                             </div>
-                                            <div class="booking_price">$120/Night</div>
-                                            <div class="booking_link"><a href="booking.html">Apto Single</a></div>
-                                        </div>
-
-                                        {# Apto Duplo / Casal #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/apto-duplo-casal.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_item_content">
-                                                <div class="booking_item_list">
-                                                    <ul>
-                                                        <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                        <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/ar_condicionado_2.svg" style="width: 15px; display: inline">&nbsp; Ar condicionado SPLIT</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/secador_cabelo_2.svg" style="width: 15px; display: inline"> Secador de cabelo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/minibar_2.svg" style="width: 15px; display: inline">&nbsp; Frigobar</li>
-                                                        <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="booking_price">$120/Night</div>
-                                            <div class="booking_link"><a href="booking.html">Apto Duplo / Casal</a></div>
-                                        </div>
-
-                                        {# Apto Triplo #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{general.full_images_url}}HotelLitoral/apto-triplo.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_item_content">
-                                                <div class="booking_item_list">
-                                                    <ul>
-                                                        <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                        <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/ar_condicionado_2.svg" style="width: 15px; display: inline">&nbsp; Ar condicionado SPLIT</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/secador_cabelo_2.svg" style="width: 15px; display: inline"> Secador de cabelo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/minibar_2.svg" style="width: 15px; display: inline">&nbsp; Frigobar</li>
-                                                        <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="booking_price">$120/Night</div>
-                                            <div class="booking_link"><a href="booking.html">Apto Triplo</a></div>
-                                        </div>
-
-                                        {# Apto Quádruplo #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{ general.full_images_url }}HotelLitoral/apto-quadruplo.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_item_content">
-                                                <div class="booking_item_list">
-                                                    <ul>
-                                                        <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                        <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/ar_condicionado_2.svg" style="width: 15px; display: inline">&nbsp; Ar condicionado SPLIT</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/secador_cabelo_2.svg" style="width: 15px; display: inline"> Secador de cabelo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/minibar_2.svg" style="width: 15px; display: inline">&nbsp; Frigobar</li>
-                                                        <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="booking_price">$120/Night</div>
-                                            <div class="booking_link"><a href="booking.html">Apto Quádruplo</a></div>
-                                        </div>
-
-                                        {# Apto. Quíntuplo #}
-                                        <div class="booking_item">
-                                            <div class="background_image" style="background-image:url({{general.full_images_url}}HotelLitoral/apto-quintuplo.jpg)"></div>
-                                            <div class="booking_overlay trans_200"></div>
-                                            <div class="booking_item_content">
-                                                <div class="booking_item_list">
-                                                    <ul>
-                                                        <li><i class="fa fa-bed"></i> Camas box de casal e solteiro</li>
-                                                        <li><i class="fa fa-tv"></i> TV LED com canais a cabo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/ar_condicionado_2.svg" style="width: 15px; display: inline">&nbsp; Ar condicionado SPLIT</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/secador_cabelo_2.svg" style="width: 15px; display: inline"> Secador de cabelo</li>
-                                                        <li><img src="{{ general.full_images_url }}Icons/minibar_2.svg" style="width: 15px; display: inline">&nbsp; Frigobar</li>
-                                                        <li><i class="fa fa-wifi"></i> Wi-Fi</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="booking_price">$120/Night</div>
-                                            <div class="booking_link"><a href="booking.html">Apto. Quíntuplo</a></div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {# Details Right
-                <div class="details">
-                    <div class="container">
-                        <div class="row">
-                            # Details Image
-                            <div class="col-xl-7 col-lg-6">
-                                <div class="details_image">
-                                    <div class="background_image" style="background-image:url(<?php echo constant('ASSETS_WEB_URL') ?>img/details_1.jpg)"></div>
-                                </div>
-                            </div>
-
-                            # Details Content
-                            <div class="col-xl-5 col-lg-6">
-                                <div class="details_content">
-                                    <div class="details_title">Family Room</div>
-                                    <div class="details_list">
-                                        <ul>
-                                            <li>27 m² Patio</li>
-                                            <li>Balcony with view</li>
-                                            <li>Garden / Mountain view</li>
-                                            <li>Flat-screen TV</li>
-                                            <li>Air conditioning</li>
-                                            <li>Soundproofing</li>
-                                            <li>Private bathroom</li>
-                                            <li>Free WiFi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="details_long_list">
-                                        <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                            <li>Balcony</li>
-                                            <li>Mountain view</li>
-                                            <li>Terrace</li>
-                                            <li>TV</li>
-                                            <li>Satellite Channels</li>
-                                            <li>Safety Deposit Box</li>
-                                            <li>Heating</li>
-                                            <li>Sofa</li>
-                                            <li>Tile/Marble floor</li>
-                                            <li>Mosquito net</li>
-                                            <li>Wardrobe/Closet</li>
-                                            <li>Sofa bed</li>
-                                            <li>Shower</li>
-                                            <li>Hairdryer</li>
-                                            <li>Free toiletries</li>
-                                            <li>Toilet</li>
-                                            <li>Bath or Shower</li>
-                                            <li>Toilet paper</li>
-                                            <li>Tea/Coffee Maker</li>
-                                            <li>Minibar</li>
-                                            <li>Dining area</li>
-                                            <li>Electric kettle</li>
-                                            <li>Dining table</li>
-                                            <li>Outdoor furniture</li>
-                                            <li>Outdoor dining area</li>
-                                            <li>Towels</li>
-                                            <li>Linen</li>
-                                            <li>Upper floors accessible by lift</li>
-                                        </ul>
-                                    </div>
-                                    <div class="book_now_button"><a href="#">Book Now</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>#}
-
-
-                {# Details Left
-                <div class="details">
-                    <div class="container">
-                        <div class="row">
-
-                            # Details Content
-                            <div class="col-xl-5 col-lg-6 order-lg-1 order-2">
-                                <div class="details_content">
-                                    <div class="details_title">Double Room</div>
-                                    <div class="details_list">
-                                        <ul>
-                                            <li>27 m² Patio</li>
-                                            <li>Balcony with view</li>
-                                            <li>Garden / Mountain view</li>
-                                            <li>Flat-screen TV</li>
-                                            <li>Air conditioning</li>
-                                            <li>Soundproofing</li>
-                                            <li>Private bathroom</li>
-                                            <li>Free WiFi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="details_long_list">
-                                        <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                            <li>Balcony</li>
-                                            <li>Mountain view</li>
-                                            <li>Terrace</li>
-                                            <li>TV</li>
-                                            <li>Satellite Channels</li>
-                                            <li>Safety Deposit Box</li>
-                                            <li>Heating</li>
-                                            <li>Sofa</li>
-                                            <li>Tile/Marble floor</li>
-                                            <li>Mosquito net</li>
-                                            <li>Wardrobe/Closet</li>
-                                            <li>Sofa bed</li>
-                                            <li>Shower</li>
-                                            <li>Hairdryer</li>
-                                            <li>Free toiletries</li>
-                                            <li>Toilet</li>
-                                            <li>Bath or Shower</li>
-                                            <li>Toilet paper</li>
-                                            <li>Tea/Coffee Maker</li>
-                                            <li>Minibar</li>
-                                            <li>Dining area</li>
-                                            <li>Electric kettle</li>
-                                            <li>Dining table</li>
-                                            <li>Outdoor furniture</li>
-                                            <li>Outdoor dining area</li>
-                                            <li>Towels</li>
-                                            <li>Linen</li>
-                                            <li>Upper floors accessible by lift</li>
-                                        </ul>
-                                    </div>
-                                    <div class="book_now_button"><a href="#">Book Now</a></div>
-                                </div>
-                            </div>
-
-                            # Details Image
-                            <div class="col-xl-7 col-lg-6 order-lg-2 order-1">
-                                <div class="details_image">
-                                    <div class="background_image" style="background-image:url(<?php echo constant('ASSETS_WEB_URL') ?>img/details_2.jpg)"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>#}
-
-                {# Special
-                <div class="special">
-                    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="<?php echo constant('ASSETS_WEB_URL') ?>img/special.jpg" data-speed="0.8"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-6 offset-xl-6 col-lg-8 offset-lg-2">
-                                <div class="special_content">
-                                    <div class="details_title">Special Offer - Family Room</div>
-                                    <div class="details_list">
-                                        <ul>
-                                            <li>27 m² Patio</li>
-                                            <li>Balcony with view</li>
-                                            <li>Garden / Mountain view</li>
-                                            <li>Flat-screen TV</li>
-                                            <li>Air conditioning</li>
-                                            <li>Soundproofing</li>
-                                            <li>Private bathroom</li>
-                                            <li>Free WiFi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="details_long_list">
-                                        <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                            <li>Balcony</li>
-                                            <li>Mountain view</li>
-                                            <li>Terrace</li>
-                                            <li>TV</li>
-                                            <li>Satellite Channels</li>
-                                            <li>Safety Deposit Box</li>
-                                            <li>Heating</li>
-                                            <li>Sofa</li>
-                                            <li>Tile/Marble floor</li>
-                                            <li>Mosquito net</li>
-                                            <li>Wardrobe/Closet</li>
-                                            <li>Sofa bed</li>
-                                            <li>Shower</li>
-                                            <li>Hairdryer</li>
-                                            <li>Free toiletries</li>
-                                            <li>Toilet</li>
-                                            <li>Bath or Shower</li>
-                                            <li>Toilet paper</li>
-                                            <li>Tea/Coffee Maker</li>
-                                            <li>Minibar</li>
-                                            <li>Dining area</li>
-                                            <li>Electric kettle</li>
-                                            <li>Dining table</li>
-                                            <li>Outdoor furniture</li>
-                                            <li>Outdoor dining area</li>
-                                            <li>Towels</li>
-                                            <li>Linen</li>
-                                            <li>Upper floors accessible by lift</li>
-                                        </ul>
-                                    </div>
-                                    <div class="book_now_button"><a href="#">Book Now</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>#}
 
                 {# Footer #}
                 {% include 'footer.twig' %}

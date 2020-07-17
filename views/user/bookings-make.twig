@@ -1,0 +1,79 @@
+
+    {% extends "base-document.twig" %}
+
+        {% block content %}
+
+            <div class="super_container">
+                {# Header - Nav (Menú) #}
+                {% include 'nav-menu.twig' %}
+
+                {# Booking #}
+                <div class="booking">
+                    <div class="container">
+                        <div class="row">
+
+                            {# Formulario #}
+                            <div class="col col-md-6 mt-3">
+                                <div>
+                                    <h2>Informações da Reserva</h2>
+                                    <h5>Preencha para solicitar sua reserva.</h5>
+                                </div>
+                                <div class="contact_form_container">
+                                    <form action="##" class="contact_form js-contact-form">
+                                        <div class="row">
+                                            {# Nombre #}
+                                            <div class="col-md-12 input_container">
+                                                <input type="text" class="contact_input js-contact-name" placeholder="Seu nome*" required="required">
+                                            </div>
+
+                                            {# Email #}
+                                            <div class="col-md-6 input_container">
+                                                <input type="text" class="contact_input js-contact-email" placeholder="Seu email*" required="required">
+                                            </div>
+
+                                            {# Telefone #}
+                                            <div class="col-md-6 input_container">
+                                                <input type="text" class="contact_input js-input-number js-contact-phone" placeholder="Seu telefone">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            {# Texto #}
+                                            <div class="col-md-12 input_container">
+                                                <textarea class="contact_input contact_textarea js-contact-text" placeholder="Mensagem*" required="required"></textarea>
+                                            </div>
+                                        </div>
+
+                                        {# Boton Enviar #}
+                                        <button class="contact_button js-contact-btn-send-email">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            {# Resumem Reserva #}
+                            <div class="col col-md-6 mt-3">
+                                <h2>Sua Reserva</h2>
+
+                                <label>Dato:</label>
+                                <span>Algo</span>
+
+                                <label>Dato:</label>
+                                <span>Algo</span>
+
+                                <label>Dato:</label>
+                                <span>Algo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Footer #}
+                {% include 'footer.twig' %}
+            </div>
+
+        {% endblock %}
+
+        {% block footer_scripts %}
+            {# Aquí van los scripts Js #}
+            <script type="text/javascript" src="{{ general.full_assets_url }}js/user/booking.js"></script>
+        {% endblock %}

@@ -13,8 +13,13 @@
         z-index: 1;
     }
 
-    /* Estilos para seccion 'Testimoials' */
+    /* Estilos para seccion 'BOOKINGS' */
+    .css-header-active-reserve-page{
+        background: rgba(0,0,0,0.7);
+        opacity: 0.8;
+    }
 
+    /* Estilos para seccion 'TESTIMONIALS' */
     .css-opinions-slider-parent-div{
         /*display: -webkit-flex !important;*/
         display: flex !important;
@@ -27,12 +32,12 @@
     /*    display: flex;*/
     /*}*/
 
-    /* Estilos para seccion 'Rooms' */
+    /* Estilos para seccion 'ROOMS' */
     .css-icon-service-rooms{
         color: black;
     }
 
-    /* Estilos para 'Menu' */
+    /* Estilos para 'MENU' */
     .css-menu-logo{
         width: 155px !important;
     }
@@ -41,13 +46,13 @@
         font-weight: 600 !important;
     }
 
-    /* Estilos para el 'Footer' */
+    /* Estilos para el 'FOOTER' */
     .css-footer-logo{
         width: 275px!important;
         height: 75px!important;
     }
 
-    /* Estilos para seccion de 'CONTACTO' */
+    /* Estilos para seccion de 'CONTACT' */
     p.clasificacion {
         position: relative;
         overflow: hidden;
