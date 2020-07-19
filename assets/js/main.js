@@ -2,7 +2,35 @@
     $(document).ready(function () {
         //Inicializamos o 'selectpicker'
         //$('.js-select-icon-graphic').selectpicker();
+
+        //Inicializacao das datas
+        setting_datepicker();
     });
+
+    /**
+     * @Description: Método que tem as configuracoes das 'datas' pra reservas
+     */
+    function setting_datepicker() {
+
+            var current_date = new Date();
+
+            //Data de entrada
+            $(".js-reserve-check-in").datepicker({
+                defaultDate: "+1w",
+                minDate: new Date(),
+                onClose: function (selectedDate) {
+                    $(".js-reserve-check-out").datepicker("option", "minDate", selectedDate);
+                }
+            });
+
+            //Data de saída
+            $(".js-reserve-check-out").datepicker({
+                maxDate: new Date(current_date.getFullYear(), current_date.getMonth()+3, current_date.getDate()),
+                onClose: function (selectedDate) {
+                    $(".js-reserve-check-in").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+        }
 
     /**
      * @Description: Método que valida um telefone válido

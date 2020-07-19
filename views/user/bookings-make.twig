@@ -19,49 +19,61 @@
                                     <h5>Preencha para solicitar sua reserva.</h5>
                                 </div>
                                 <div class="contact_form_container">
-                                    <form action="##" class="contact_form js-contact-form">
+                                    <form action="##" class="contact_form js-reserve-form">
                                         <div class="row">
                                             {# Nombre #}
                                             <div class="col-md-12 input_container">
-                                                <input type="text" class="contact_input js-contact-name" placeholder="Seu nome*" required="required">
+                                                <input type="text" class="contact_input js-reserve-name" placeholder="Seu nome*" required="required">
                                             </div>
 
                                             {# Email #}
                                             <div class="col-md-6 input_container">
-                                                <input type="text" class="contact_input js-contact-email" placeholder="Seu email*" required="required">
+                                                <input type="text" class="contact_input js-reserve-email" placeholder="Seu email*" required="required">
                                             </div>
 
                                             {# Telefone #}
                                             <div class="col-md-6 input_container">
-                                                <input type="text" class="contact_input js-input-number js-contact-phone" placeholder="Seu telefone">
+                                                <input type="text" class="contact_input js-input-number js-reserve-phone" placeholder="Seu telefone">
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             {# Texto #}
                                             <div class="col-md-12 input_container">
-                                                <textarea class="contact_input contact_textarea js-contact-text" placeholder="Mensagem*" required="required"></textarea>
+                                                <textarea class="contact_input contact_textarea js-reserve-text" placeholder="Sua mensagem*" required="required"></textarea>
                                             </div>
                                         </div>
 
                                         {# Boton Enviar #}
-                                        <button class="contact_button js-contact-btn-send-email">Enviar</button>
+                                        <button class="contact_button js-reserve-btn-send-email">SOLICITAR RESERVA</button>
                                     </form>
                                 </div>
                             </div>
 
                             {# Resumem Reserva #}
                             <div class="col col-md-6 mt-3">
-                                <h2>Sua Reserva</h2>
+                                <div>
+                                    <h2>Sua Reserva</h2>
+                                    <h5>Detalhes da sua reserva.</h5>
+                                </div>
 
-                                <label>Dato:</label>
-                                <span>Algo</span>
+                                <div class="mt-5">
+                                    <h4>Datas escolhidas:</h4>
+                                    <span class="css-reserve-span-data-summary mt-2">Chegada: <p class="css-reserve-p-data-summary">2020-04-12</p></span>
+                                    <span class="css-reserve-span-data-summary mt-2">Saída: <p class="css-reserve-p-data-summary">2020-04-12</p></span>
+                                </div>
 
-                                <label>Dato:</label>
-                                <span>Algo</span>
+                                <div class="mt-5">
+                                    <h4>Detalhes do quarto:</h4>
+                                    <span class="css-reserve-span-data-summary">Tipo de quarto: <p class="css-reserve-p-data-summary">Apto. Duplo</p></span>
+                                    <span class="css-reserve-span-data-summary">Quartos: <p class="css-reserve-p-data-summary">2</p></span>
+                                    <span class="css-reserve-span-data-summary">Adultos: <p class="css-reserve-p-data-summary">2</p></span>
+                                    <span class="css-reserve-span-data-summary">Crianças: <p class="css-reserve-p-data-summary">1</p></span>
+                                </div>
 
-                                <label>Dato:</label>
-                                <span>Algo</span>
+                                <div class="mt-5">
+                                    <h3>Total: <span>$R 50,00</span></h3>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,14 @@
         background: rgba(0,0,0,0.7);
         opacity: 0.8;
     }
+    .css-reserve-span-data-summary{
+        font-weight: bold;
+        display: block;
+    }
+    .css-reserve-p-data-summary{
+        font-weight: bold;
+        display: inline;
+    }
 
     /* Estilos para seccion 'TESTIMONIALS' */
     .css-opinions-slider-parent-div{
