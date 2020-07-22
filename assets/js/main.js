@@ -1,11 +1,6 @@
 
-    $(document).ready(function () {
-        //Inicializamos o 'selectpicker'
-        //$('.js-select-icon-graphic').selectpicker();
-
-        //Inicializacao das datas
-        setting_datepicker();
-    });
+    //Inicializacao do método pras datas
+    setting_datepicker();
 
     /**
      * @Description: Método que tem as configuracoes das 'datas' pra reservas
@@ -30,7 +25,7 @@
                     $(".js-reserve-check-in").datepicker("option", "maxDate", selectedDate);
                 }
             });
-        }
+    }
 
     /**
      * @Description: Método que valida um telefone válido

@@ -26,6 +26,13 @@
         font-weight: bold;
         display: inline;
     }
+    .css-btn-booking-request-discount > button:hover{
+        background: #FFFFFF;
+        color: #ffa37b;
+        border: solid #ffa37b 1px;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
 
     /* Estilos para seccion 'TESTIMONIALS' */
     .css-opinions-slider-parent-div{
