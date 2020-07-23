@@ -143,6 +143,24 @@
                             'data_reserve_room' => $data_reserve_room[0]
                         ));
                     }
+                    elseif (isset($id) && empty($id)){
+
+                        //Obtenemos los parámetros GET
+                        $summary_booking_check_in = filter_input(INPUT_GET, 'check_in', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
+                        $summary_booking_check_out = filter_input(INPUT_GET, 'check_out', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
+                        $summary_booking_children = filter_input(INPUT_GET, 'children', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "0")));
+                        $summary_booking_room = filter_input(INPUT_GET, 'room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "1")));
+                        $summary_booking_price = filter_input(INPUT_GET, 'price', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
+
+                        $twig->display('bookings-make.twig',array(
+                            'general' => $general_param,
+                            'summary_booking_check_in' => $summary_booking_check_in,
+                            'summary_booking_check_out' => $summary_booking_check_out,
+                            'summary_booking_children' => $summary_booking_children,
+                            'summary_booking_room' => $summary_booking_room,
+                            'summary_booking_price' => $summary_booking_price
+                        ));
+                    }
                     else
                         $twig->display('bookings.twig', array(
                             'general' => $general_param,

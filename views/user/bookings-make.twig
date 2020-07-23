@@ -18,6 +18,8 @@
                                     <h2>Informações da Reserva</h2>
                                     <h5>Preencha para solicitar sua reserva.</h5>
                                 </div>
+                                <hr>
+
                                 <div class="contact_form_container">
                                     <form action="##" class="contact_form js-reserve-form">
                                         <div class="row">
@@ -56,23 +58,24 @@
                                     <h2>Sua Reserva</h2>
                                     <h5>Detalhes da sua reserva.</h5>
                                 </div>
+                                <hr>
 
                                 <div class="mt-5">
                                     <h4>Datas escolhidas:</h4>
-                                    <span class="css-reserve-span-data-summary mt-2">Chegada: <p class="css-reserve-p-data-summary">2020-04-12</p></span>
-                                    <span class="css-reserve-span-data-summary mt-2">Saída: <p class="css-reserve-p-data-summary">2020-04-12</p></span>
+                                    <span class="css-reserve-span-data-summary mt-2">Chegada: <p class="css-reserve-p-data-summary">{{ summary_booking_check_in }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-2">Saída: <p class="css-reserve-p-data-summary">{{ summary_booking_check_out }}</p></span>
                                 </div>
 
                                 <div class="mt-5">
                                     <h4>Detalhes do quarto:</h4>
                                     <span class="css-reserve-span-data-summary">Tipo de quarto: <p class="css-reserve-p-data-summary">Apto. Duplo</p></span>
-                                    <span class="css-reserve-span-data-summary">Quartos: <p class="css-reserve-p-data-summary">2</p></span>
+                                    <span class="css-reserve-span-data-summary">Quartos: <p class="css-reserve-p-data-summary">{{ summary_booking_room }}</p></span>
                                     <span class="css-reserve-span-data-summary">Adultos: <p class="css-reserve-p-data-summary">2</p></span>
-                                    <span class="css-reserve-span-data-summary">Crianças: <p class="css-reserve-p-data-summary">1</p></span>
+                                    <span class="css-reserve-span-data-summary">Crianças: <p class="css-reserve-p-data-summary">{{ summary_booking_children }}</p></span>
                                 </div>
 
                                 <div class="mt-5">
-                                    <h3>Total: <span>$R 50,00</span></h3>
+                                    <h3>Total: <span>{{ summary_booking_price }}</span></h3>
                                 </div>
                             </div>
                         </div>

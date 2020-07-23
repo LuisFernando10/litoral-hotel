@@ -11,8 +11,8 @@
                                     <div class="booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">
                                         <div><input type="text" name="reserve_check_in" class="datepicker booking_input booking_input_a booking_in js-reserve-check-in" placeholder="Data de entrada" required="required"></div>
                                         <div><input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída" required="required"></div>
-                                        <div><input type="number" name="reserve_children" class="booking_input booking_input_b js-reserve-children" placeholder="Crianças" required="required"></div>
-                                        <div><input type="number" name="reserve_room" class="booking_input booking_input_b js-reserve-room" placeholder="Quartos" required="required"></div>
+                                        <div><input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" placeholder="Crianças" required="required" maxlength="1"></div>
+                                        <div><input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" placeholder="Quartos" required="required" maxlength="1"></div>
                                     </div>
                                     <div>
                                         <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Reserve agora</button>
