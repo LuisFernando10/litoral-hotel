@@ -1,7 +1,7 @@
 
-    $(document).ready(function () {
-
-    });
+    //Variáveis ​​globais
+    let DATE_CHECK_IN = new Date();
+    let DATE_CHECK_OUT = new Date();
 
     //Obtemos os elementos do DOM
     let element_booking_check_in = $('.js-reserve-check-in');
@@ -10,6 +10,22 @@
     let element_booking_room = $('.js-reserve-room');
     let element_booking_price = $('.js-booking-price');
 
+    //Data de entrada
+    $(".js-reserve-check-in").on('change', function() {
+
+        DATE_CHECK_IN = $(this).val();
+
+        calculate_price();
+    });
+
+    //Data de saída
+    $(".js-reserve-check-out").on('change', function() {
+        DATE_CHECK_OUT = $(this).val();
+
+        calculate_price();
+    });
+
+    //Evencto 'click' pro botao da reserva
     $('.js-btn-booking').on('click', function () {
 
         //Obtemos os valores
@@ -42,3 +58,17 @@
         $(location).attr('href', `${FULL_WEB_URL}bookings/reserve/?check_in=${value_booking_check_in}&check_out=${value_booking_check_out}&children=${value_booking_children}&room=${value_booking_room}&price=${value_booking_price}`)
 
     });
+
+    function calculate_price(){
+
+        //Obtemos os elementos do DOM
+        let element_booking_price = $('.js-booking-price').find('span');
+
+        let check_in = new Date(DATE_CHECK_IN).getTime();
+        let check_out = new Date(DATE_CHECK_OUT).getTime();
+        let difference_date = check_out - check_in;
+        let days_difference_millisecond = difference_date / (1000*60*60*24);
+
+        //Mudamos o valor do preco
+        element_booking_price.text(days_difference_millisecond);
+    }

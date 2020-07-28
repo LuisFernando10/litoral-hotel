@@ -11,8 +11,9 @@
 
             //Data de entrada
             $(".js-reserve-check-in").datepicker({
-                defaultDate: "+1w",
-                minDate: new Date(),
+                defaultDate: current_date,
+                dateFormat: 'yy-mm-dd',
+                minDate: current_date,
                 onClose: function (selectedDate) {
                     $(".js-reserve-check-out").datepicker("option", "minDate", selectedDate);
                 }
@@ -20,7 +21,9 @@
 
             //Data de saída
             $(".js-reserve-check-out").datepicker({
-                maxDate: new Date(current_date.getFullYear(), current_date.getMonth()+3, current_date.getDate()),
+                dateFormat: 'yy-mm-dd',
+                minDate: current_date,
+                maxDate: new Date(current_date.getFullYear(), current_date.getMonth()+2, current_date.getDate()),
                 onClose: function (selectedDate) {
                     $(".js-reserve-check-in").datepicker("option", "maxDate", selectedDate);
                 }
