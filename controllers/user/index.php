@@ -31,6 +31,7 @@
         //Obtemos os dados do BD necessários nas visualizações gerais pra tratamento
         $data_offerings_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'possui', NULL);
         $data_offerings_dont_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'nao_possui', NULL);
+        $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
         $data_configurations = Configurations::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
 
@@ -44,6 +45,7 @@
             "id_param" => $id,
             "data_offerings" => ['have' => $data_offerings_have, 'dont_have' => $data_offerings_dont_have],
             "data_configuration" => $data_configurations[0],
+            "data_rooms" => $data_rooms[0],
             "data_phones" => $data_phones
         );
 
