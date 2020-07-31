@@ -68,14 +68,14 @@
 
                                 <div class="mt-5">
                                     <h4>Detalhes do quarto:</h4>
-                                    <span class="css-reserve-span-data-summary">Tipo de quarto: <p class="css-reserve-p-data-summary">Apto. Duplo</p></span>
+                                    <span class="css-reserve-span-data-summary">Tipo de quarto: <p class="css-reserve-p-data-summary">{{ summary_booking_type_room.nome }}</p></span>
                                     <span class="css-reserve-span-data-summary">Quartos: <p class="css-reserve-p-data-summary">{{ summary_booking_room }}</p></span>
-                                    <span class="css-reserve-span-data-summary">Adultos: <p class="css-reserve-p-data-summary">2</p></span>
+                                    <span class="css-reserve-span-data-summary">Adultos: <p class="css-reserve-p-data-summary">{{ summary_booking_type_room.adultos }}</p></span>
                                     <span class="css-reserve-span-data-summary">Crianças: <p class="css-reserve-p-data-summary">{{ summary_booking_children }}</p></span>
                                 </div>
 
                                 <div class="mt-5">
-                                    <h3>Total: <span>{{ summary_booking_price }}</span></h3>
+                                    <h3>Total: $R <span>{{ summary_booking_price }}</span></h3>
                                 </div>
                             </div>
                         </div>

@@ -142,3 +142,14 @@
         let regExp = /^([0-9])*$/;
         return regExp.test(number);
     }
+
+    /**
+     * @Description: Método que valida se uma data é maior que outra
+     */
+    function validateIsGreaterDate(element_initial_date = null, element_final_date = null, initial_date, final_date) {
+
+        if (Date.parse(initial_date) > Date.parse(final_date)){
+            notify_error_notification('A "Data de Chegada" deve ser menor que a "Data de Saída".');
+            return false;
+        }
+    }

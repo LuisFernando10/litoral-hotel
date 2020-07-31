@@ -16,10 +16,10 @@
                                             <input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída" required="required">
                                         </div>
                                         <div class="col-md-2">
-                                            <input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" placeholder="Crianças" maxlength="1">
+                                            <input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" value="" placeholder="Crianças" maxlength="1">
                                         </div>
                                         <div class="col-md-2">
-                                            <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" placeholder="Quartos" required="required" maxlength="1">
+                                            <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" required="required" maxlength="1">
                                         </div>
                                         <div class="col-md-2">
                                             <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" required="required" maxlength="1">
@@ -29,14 +29,6 @@
                                             </select>
                                         </div>
                                     </div>
-{#                                    <div class="booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">#}
-{#                                        <div>#}
-{#                                            <select type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" placeholder="Quartos" required="required" maxlength="1">#}
-{#                                                <option value="f">ffffffffffff</option>#}
-{#                                                <option value="f">yyyyyyyy</option>#}
-{#                                            </select>#}
-{#                                        </div>#}
-{#                                    </div>#}
                                     <div>
                                         <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Reserve agora</button>
                                     </div>
