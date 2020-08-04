@@ -100,3 +100,8 @@
                 }
             });
     });
+
+    $('.js-btn-reserve').on('click', function () {
+
+        validateReserveFields();
+    });

@@ -45,7 +45,7 @@
             "id_param" => $id,
             "data_offerings" => ['have' => $data_offerings_have, 'dont_have' => $data_offerings_dont_have],
             "data_configuration" => $data_configurations[0],
-            "data_rooms" => $data_rooms[0],
+            "data_rooms_general" => $data_rooms,
             "data_phones" => $data_phones
         );
 

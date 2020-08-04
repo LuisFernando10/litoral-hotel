@@ -33,16 +33,16 @@
                                         {# Type Room #}
                                         <div class="col-md-2">
                                             <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" required="required" maxlength="1">
-                                                {% for room in data_rooms %}
+                                                {% for room in general.data_rooms_general %}
                                                     <option value="{{ room.id_quarto }}" data-room-price="{{ room.preco }}">{{ room.nome }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
-                                    </div>
 
-                                    {# Botao #}
-                                    <div>
-                                        <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Reserve agora</button>
+                                        {# Botao #}
+                                        <div class="col-md-12 mt-3">
+                                            <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Reserve agora</button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
