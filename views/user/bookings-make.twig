@@ -62,8 +62,9 @@
 
                                 <div class="mt-5">
                                     <h4>Datas escolhidas:</h4>
-                                    <span class="css-reserve-span-data-summary mt-2">Chegada: <p class="css-reserve-p-data-summary">{{ summary_booking_check_in }}</p></span>
-                                    <span class="css-reserve-span-data-summary mt-2">Saída: <p class="css-reserve-p-data-summary">{{ summary_booking_check_out }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-1">Chegada: <p class="css-reserve-p-data-summary">{{ summary_booking_check_in }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-1">Saída: <p class="css-reserve-p-data-summary">{{ summary_booking_check_out }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-1">Total Días: <p class="css-reserve-p-data-summary">{{ summary_booking_diff_days }}</p></span>
                                 </div>
 
                                 <div class="mt-5">
@@ -75,7 +76,8 @@
                                 </div>
 
                                 <div class="mt-5">
-                                    <h3>Total: $R <span>{{ summary_booking_price }}</span></h3>
+                                    <h2>Total: $R <span>{{ summary_booking_price }}</span></h2>
+                                    <img src="{{ general.full_images_url }}galery/{{ summary_booking_type_room.image }}" class="img-fluid" alt="{{ summary_booking_type_room.nome }}">
                                 </div>
                             </div>
                         </div>

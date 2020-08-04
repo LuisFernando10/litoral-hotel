@@ -158,11 +158,15 @@
                         //Obtemos os dados do quarto
                         $data_rooms = Rooms::getAll(NULL,NULL,NULL,$summary_booking_type_room,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
 
+                        //Obtemos a diferencia de dias dasa datas
+                        $diff_days = GeneralMethods::calculateDaysDiff($summary_booking_check_in, $summary_booking_check_out);
+
                         $twig->display('bookings-make.twig',array(
                             'general' => $general_param,
                             'summary_booking_check_in' => $summary_booking_check_in,
                             'summary_booking_check_out' => $summary_booking_check_out,
                             'summary_booking_children' => $children = empty($summary_booking_children) ? '0' : $summary_booking_children,
+                            'summary_booking_diff_days' => $diff_days,
                             'summary_booking_room' => $summary_booking_room,
                             'summary_booking_price' => $summary_booking_price,
                             'summary_booking_type_room' => $data_rooms[0]

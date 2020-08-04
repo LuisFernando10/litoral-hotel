@@ -3,6 +3,8 @@
     let CURRENT_DATE = new Date();
     let DATE_CHECK_IN = new Date(CURRENT_DATE.getFullYear(), CURRENT_DATE.getMonth(), CURRENT_DATE.getDate());
     let DATE_CHECK_OUT = new Date(CURRENT_DATE.getFullYear(), CURRENT_DATE.getMonth(), CURRENT_DATE.getDate()+1);
+    let ROOMS = 1;
+    let CHILDREN = 0;
     let TOTAL_PRICE = 0;
 
     //Obtemos os elementos do DOM
@@ -20,6 +22,12 @@
 
     //Data de entrada
     global_element_booking_type_room.on('change', function() {
+        calculate_price();
+    });
+
+    //Quarto
+    global_element_booking_room.on('keyup', function () {
+        if ($(this).val() !== '') ROOMS = $(this).val();
         calculate_price();
     });
 
@@ -97,7 +105,7 @@
         }
         else
             //Obtemos o total do preco com as datas escolhidas
-            total_price = (room_price * days_difference_millisecond);
+            total_price = ((room_price * days_difference_millisecond) * ROOMS);
 
         //Mudamos o valor do preco
         element_booking_price.text(total_price);
