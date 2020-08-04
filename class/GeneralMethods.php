@@ -74,4 +74,12 @@
                 if (!$mail->send()) return 'Mailer Error: '. $mail->ErrorInfo;
                 else return '200';
             }
+
+            static function calculateDaysDiff($date_1, $date_2){
+                $days = (strtotime($date_1)-strtotime($date_2))/86400;
+                $days = abs($days);
+                $days = floor($days);
+
+                return $days;
+            }
         }
