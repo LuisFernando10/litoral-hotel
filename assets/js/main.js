@@ -176,6 +176,12 @@
             notify_error_notification('As datas são obrigatórias.', 2000);
             return false;
         }
+        else if (value_booking_check_in === value_booking_check_out){
+            notify_error_notification('As datas não podem ser as mesmas.', 2000);
+            return false;
+        }
+        else if (validateIsGreaterDate(null, null, value_booking_check_in, value_booking_check_out) === false)
+            return false;
 
         if (value_booking_children.length > 1 || validateNumber(value_booking_children) === false || isNaN(value_booking_children) === true){
             notify_error_notification('Somente números são aceitos.', 2000);

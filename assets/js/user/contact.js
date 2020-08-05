@@ -103,5 +103,11 @@
 
     $('.js-btn-reserve').on('click', function () {
 
-        validateReserveFields();
+        //Elementos DOM
+        let element_form = $('.js-frm-reserve-data');
+
+        //Validamos se as validacoes estao certas
+        if (validateReserveFields()) element_form.submit();
+
+        return false;
     });

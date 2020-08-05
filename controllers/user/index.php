@@ -26,7 +26,7 @@
         //Obtenemos los paràmetros URL configurados desde el .htaccess (Clase-Acciòn-Id)
         $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "home")));
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
-        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
 
         //Obtemos os dados do BD necessários nas visualizações gerais pra tratamento
         $data_offerings_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'possui', NULL);
@@ -123,12 +123,6 @@
 
             case 'bookings':
 
-                //Obtenemos los datos de las reservas pasados por POST
-                $check_in = filter_input(INPUT_POST, 'reserve_check_in', FILTER_SANITIZE_STRING);
-                $check_out = filter_input(INPUT_POST, 'reserve_check_out', FILTER_SANITIZE_STRING);
-                $children = filter_input(INPUT_POST, 'reserve_children', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
-                $room = filter_input(INPUT_POST, 'reserve_room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
-
                 //Nós obtemos os dados relacionados aos quartos
                 $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
 
@@ -143,6 +137,35 @@
                         $twig->display('bookings-make.twig',array(
                             'general' => $general_param,
                             'data_reserve_room' => $data_reserve_room[0]
+                        ));
+                    }
+                    elseif (is_string($id) && $id == 'form'){
+
+                        //Obtenemos los datos de las reservas pasados por POST
+                        $check_in = filter_input(INPUT_POST, 'reserve_check_in', FILTER_SANITIZE_STRING);
+                        $check_out = filter_input(INPUT_POST, 'reserve_check_out', FILTER_SANITIZE_STRING);
+                        $children = filter_input(INPUT_POST, 'reserve_children', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
+                        $room = filter_input(INPUT_POST, 'reserve_room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
+                        $type_room = filter_input(INPUT_POST, 'reserve_type_room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
+
+                        //Obtemos os dados do quarto
+                        $data_rooms = Rooms::getAll(NULL,NULL,NULL,$type_room,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+
+                        //Obtemos a diferencia de dias dasa datas
+                        $diff_days = GeneralMethods::calculateDaysDiff($check_in, $check_out);
+
+                        //Obtemos o preco
+                        $price = (($data_rooms[0]['preco'] * $diff_days) * $room);
+
+                        $twig->display('bookings-make.twig',array(
+                            'general' => $general_param,
+                            'summary_booking_check_in' => $check_in,
+                            'summary_booking_check_out' => $check_out,
+                            'summary_booking_children' => $children = empty($children) ? '0' : $children,
+                            'summary_booking_diff_days' => $diff_days,
+                            'summary_booking_room' => $room,
+                            'summary_booking_price' => $price,
+                            'summary_booking_type_room' => $data_rooms[0]
                         ));
                     }
                     elseif (isset($id) && empty($id)){

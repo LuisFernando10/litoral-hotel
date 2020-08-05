@@ -6,18 +6,18 @@
                     <div class="home_content text-center">
                         <div class="home_title">Faça sua reserva</div>
                         <div class="booking_form_container">
-                            <form action="{{general.full_web_url}}bookings/" method="post" class="booking_form" id="booking_form">
+                            <form action="{{general.full_web_url}}bookings/reserve/form/" method="post" class="booking_form js-frm-reserve-data" id="booking_form">
                                 <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                     <div class="row booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">
 
                                         {# Check-In #}
                                         <div class="col-md-3">
-                                            <input type="text" name="reserve_check_in" class="datepicker booking_input booking_input_a booking_in js-reserve-check-in" placeholder="Data de entrada" required="required">
+                                            <input type="text" name="reserve_check_in" class="datepicker booking_input booking_input_a booking_in js-reserve-check-in" placeholder="Data de entrada">
                                         </div>
 
                                         {# Check-Out #}
                                         <div class="col-md-3">
-                                            <input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída" required="required">
+                                            <input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída">
                                         </div>
 
                                         {# Children #}
@@ -27,12 +27,12 @@
 
                                         {# Rooms #}
                                         <div class="col-md-2">
-                                            <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" required="required" maxlength="1">
+                                            <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" maxlength="1">
                                         </div>
 
                                         {# Type Room #}
                                         <div class="col-md-2">
-                                            <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" required="required" maxlength="1">
+                                            <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" maxlength="1">
                                                 {% for room in general.data_rooms_general %}
                                                     <option value="{{ room.id_quarto }}" data-room-price="{{ room.preco }}">{{ room.nome }}</option>
                                                 {% endfor %}
