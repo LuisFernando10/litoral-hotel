@@ -39,68 +39,44 @@
                         </div>
 
                         {# Home Form #}
-                        <div class="col-12 css-slider-home">
+                        <form action="{{general.full_web_url}}bookings/reserve/form/" method="post" class="booking_form js-frm-reserve-data" id="booking_form">
+                            <div class="row booking_form_container css-slider-home text-center">
 
-                            {#Imputs fields #}
-                            <div class="row">
-
-                                {# Dates #}
-                                <div class="col-12 offset-sm-1 col-sm-10 offset-md-2 col-md-4 offset-lg-2 col-lg-4 mb-3 mb-sm-3">
-                                    <div class="row">
-
-                                        {# Check-in #}
-                                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                                            <label>
-                                                <input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Data de entrada" required="required">
-                                            </label>
-                                        </div>
-
-                                        {# Check-out #}
-                                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                                            <label>
-                                                <input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Data de saída" required="required">
-                                            </label>
-                                        </div>
-                                    </div>
+                                {# Check-In #}
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                                    <input type="text" name="reserve_check_in" class="datepicker booking_input booking_input_a booking_in js-reserve-check-in" placeholder="Data de entrada">
                                 </div>
 
-                                {# Childrens, Rooms, Btn-Reservation #}
-                                <div class="col-12 offset-sm-1 col-sm-10 col-md-4 col-lg-4 mb-3 mb-sm-3">
-                                    <div class="row">
-
-                                        {# Childrens #}
-                                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                                            <label>
-                                                <input type="number" class="booking_input booking_input_b" placeholder="Crianças" required="required">
-                                            </label>
-                                        </div>
-
-                                        {# Rooms #}
-                                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                                            <label>
-                                                <input type="number" class="booking_input booking_input_b" placeholder="Quartos" required="required">
-                                            </label>
-                                        </div>
-
-                                        {# Button (Reservation) #}
-                                        <div class="d-none d-sm-none d-md-none d-lg-block col-lg-4">
-                                            <button class="booking_button trans_200 js-btn-reservation">Solicite sua reserva</button>
-                                        </div>
-                                    </div>
+                                {# Check-Out #}
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                                    <input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída">
                                 </div>
 
-                                {# Button Reservation (< lg) #}
-                                <div class="d-block col-12 d-sm-block col-sm-12 d-md-block col-md-12 d-lg-none text-center">
-                                    <div class="row mt-md-3">
+                                {# Children #}
+                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
+                                    <input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" value="" placeholder="Crianças" maxlength="1">
+                                </div>
 
-                                        {# Button (Reservation) #}
-                                        <div class="col-sm-12 col-md-12">
-                                            <button class="booking_button trans_200 js-btn-reservation">Solicite sua reserva</button>
-                                        </div>
-                                    </div>
+                                {# Rooms #}
+                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
+                                    <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" maxlength="1">
+                                </div>
+
+                                {# Type Room #}
+                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
+                                    <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" maxlength="1">
+                                        {% for room in general.data_rooms_general %}
+                                            <option value="{{ room.id_quarto }}" data-room-price="{{ room.preco }}">{{ room.nome }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                {# Botao #}
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+                                    <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Reserve agora</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
 
                         {# Number pagination #}
                         <div class="home_slider_dots_container">
@@ -267,11 +243,11 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <div class="booking_title text-center"><h2>Reserve um quarto</h2></div>
+                                <div class="booking_title text-center">
+                                    <h2>Reserve um quarto</h2>
+                                </div>
                                 <div class="booking_text text-center">
-                                    <p>
-                                        No nosso Hotel Litoral, você encontrará alguns tipos de quartos que se ajustam às suas necessidades, são quartos confortáveis ​​e totalmente adequados para fazer você se sentir em casa.
-                                    </p>
+                                    <p>No nosso Hotel Litoral, você encontrará alguns tipos de quartos que se ajustam às suas necessidades, são quartos confortáveis ​​e totalmente adequados para fazer você se sentir em casa.</p>
                                 </div>
 
                                 {# Booking Slider #}
@@ -284,8 +260,8 @@
                                             <div class="booking_item">
                                                 <div class="background_image" style="background-image:url({{ general.full_images_url }}galery/{{ rooms.image }})"></div>
                                                 <div class="booking_overlay trans_200"></div>
-                                                <div class="booking_price">R$ {{rooms.preco}},00/Noite</div>
-                                                <div class="booking_link"><a href="{{ general.full_web_url }}bookings/">{{rooms.nome}}</a></div>
+                                                <div class="booking_price">R$ {{rooms.preco}}/Noite</div>
+                                                <div class="booking_link"><a href="{{ general.full_web_url }}bookings/reserve/{{ rooms.id_quarto }}/">{{rooms.nome}}</a></div>
                                             </div>
                                         {% endfor %}
                                     </div>
