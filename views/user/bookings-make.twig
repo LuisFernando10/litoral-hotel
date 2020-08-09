@@ -62,21 +62,21 @@
 
                                 <div class="mt-5">
                                     <h4>Datas escolhidas:</h4>
-                                    <span class="css-reserve-span-data-summary mt-1">Chegada: <p class="css-reserve-p-data-summary">{{ summary_booking_check_in }}</p></span>
-                                    <span class="css-reserve-span-data-summary mt-1">Saída: <p class="css-reserve-p-data-summary">{{ summary_booking_check_out }}</p></span>
-                                    <span class="css-reserve-span-data-summary mt-1">Total Días: <p class="css-reserve-p-data-summary">{{ summary_booking_diff_days }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-1">Chegada: <p class="css-reserve-p-data-summary js-reserve-check-in">{{ summary_booking_check_in }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-1">Saída: <p class="css-reserve-p-data-summary js-reserve-check-out">{{ summary_booking_check_out }}</p></span>
+                                    <span class="css-reserve-span-data-summary mt-1">Total Días: <p class="css-reserve-p-data-summary js-reserve-diff-days">{{ summary_booking_diff_days }}</p></span>
                                 </div>
 
                                 <div class="mt-5">
                                     <h4>Detalhes do quarto:</h4>
-                                    <span class="css-reserve-span-data-summary">Tipo de quarto: <p class="css-reserve-p-data-summary">{{ summary_booking_type_room.nome }}</p></span>
-                                    <span class="css-reserve-span-data-summary">Quartos: <p class="css-reserve-p-data-summary">{{ summary_booking_room }}</p></span>
-                                    <span class="css-reserve-span-data-summary">Adultos: <p class="css-reserve-p-data-summary">{{ summary_booking_type_room.adultos }}</p></span>
-                                    <span class="css-reserve-span-data-summary">Crianças: <p class="css-reserve-p-data-summary">{{ summary_booking_children }}</p></span>
+                                    <span class="css-reserve-span-data-summary">Tipo de quarto: <p class="css-reserve-p-data-summary js-reserve-type-room" data-id-room="{{ summary_booking_type_room.id_quarto }}">{{ summary_booking_type_room.nome }}</p></span>
+                                    <span class="css-reserve-span-data-summary">Quartos: <p class="css-reserve-p-data-summary js-reserve-rooms">{{ summary_booking_room }}</p></span>
+                                    <span class="css-reserve-span-data-summary">Adultos: <p class="css-reserve-p-data-summary js-reserve-adults">{{ summary_booking_type_room.adultos }}</p></span>
+                                    <span class="css-reserve-span-data-summary">Crianças: <p class="css-reserve-p-data-summary js-reserve-children">{{ summary_booking_children }}</p></span>
                                 </div>
 
                                 <div class="mt-5">
-                                    <h2>Total: $R <span>{{ summary_booking_price|number_format(2, '.', ',') }}</span></h2>
+                                    <h2>Total: $R <span class="js-reserve-price">{{ summary_booking_price|number_format(2, '.', ',') }}</span></h2>
                                     <div style="background-image:url({{ general.full_images_url }}galery/{{ summary_booking_type_room.image }})" class="img-fluid css-reserve-div-img-room"></div>
                                 </div>
                             </div>
