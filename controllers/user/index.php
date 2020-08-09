@@ -133,10 +133,24 @@
 
                         //Nós obtemos os dados relacionados aos quartos
                         $data_reserve_room = Rooms::getAll(NULL,NULL,NULL,$id,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+                        $check_in = date("Y-m-d");
+                        $check_out = date("Y-m-d", strtotime('+1 day', strtotime($check_in)));
+
+                        //Obtemos a diferencia de dias dasa datas
+                        $diff_days = GeneralMethods::calculateDaysDiff($check_in, $check_out);
+
+                        //Obtemos o preco
+                        $price = (($data_reserve_room[0]['preco'] * $diff_days) * 1);
 
                         $twig->display('bookings-make.twig',array(
                             'general' => $general_param,
-                            'data_reserve_room' => $data_reserve_room[0]
+                            'summary_booking_check_in' => $check_in,
+                            'summary_booking_check_out' => $check_out,
+                            'summary_booking_children' => '0',
+                            'summary_booking_diff_days' => $diff_days,
+                            'summary_booking_room' => '1',
+                            'summary_booking_price' => $price,
+                            'summary_booking_type_room' => $data_reserve_room[0]
                         ));
                     }
                     elseif (is_string($id) && $id == 'form'){
