@@ -34,6 +34,15 @@
         font-weight: bold;
         display: inline;
     }
+    .css-reserve-div-img-room{
+        background-size: cover;
+        background-position: center;
+        padding: 5px;
+        border-radius: 5px;
+        width: 140px;
+        min-height: 140px;
+        height: 140px;
+    }
     .css-btn-booking-request-discount > button:hover{
         background: #FFFFFF;
         color: #ffa37b;
