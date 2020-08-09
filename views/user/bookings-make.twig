@@ -76,8 +76,8 @@
                                 </div>
 
                                 <div class="mt-5">
-                                    <h2>Total: $R <span>{{ summary_booking_price }}</span></h2>
-                                    <img src="{{ general.full_images_url }}galery/{{ summary_booking_type_room.image }}" class="img-fluid" alt="{{ summary_booking_type_room.nome }}">
+                                    <h2>Total: $R <span>{{ summary_booking_price|number_format(2, '.', ',') }}</span></h2>
+                                    <div style="background-image:url({{ general.full_images_url }}galery/{{ summary_booking_type_room.image }})" class="img-fluid css-reserve-div-img-room"></div>
                                 </div>
                             </div>
                         </div>

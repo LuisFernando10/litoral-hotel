@@ -107,7 +107,11 @@
             //Obtemos o total do preco com as datas escolhidas
             total_price = ((room_price * days_difference_millisecond) * ROOMS);
 
+        //A gente formatea o numero
+        //total_price = number_format_js(total_price,2,'.',',');
+
         //Mudamos o valor do preco
+        //element_booking_price.text(addOrRemoveDecimalsToAffiliateValue(total_price));
         element_booking_price.text(total_price);
 
         //Atualizamos a variável

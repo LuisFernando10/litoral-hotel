@@ -122,3 +122,98 @@
             return false;
         }
     }
+
+    /**
+     * @Description: Format a decimal number, add decimals, separate decimals from integers, and separate thousand units
+     * @Param: Number|NumberDecimals|DecimalSeparator|ThousandUnitsSeparator
+     * @return: (string) formatted number
+     */
+    function number_format_js(number, decimals, dec_point, thousands_point) {
+
+        if (number == null || !isFinite(number)) throw new TypeError("number is not valid");
+
+        if (!decimals) {
+            var len = number.toString().split('.').length;
+            decimals = len > 1 ? len : 0;
+        }
+
+        if (!dec_point) dec_point = '.';
+
+        if (!thousands_point) thousands_point = ',';
+
+        number = parseFloat(number).toFixed(decimals);
+
+        number = number.replace(".", dec_point);
+
+        var splitNum = number.split(dec_point);
+        splitNum[0] = splitNum[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands_point);
+        number = splitNum.join(dec_point);
+
+        return number;
+    }
+
+    /**
+     * @Description: Method that returns the value formatted with correct decimals
+     * @Call: When el método 'addOrRemoveDecimalsToAffiliateValue()' es ejecutado
+     * @Param: String (Value or Balance of afiliate)
+     * @return: (sting) Number with decimals without aproximation
+     */
+    function numberFormatNoApproximationJs(value_nunber){
+
+        //We capture the 'value of the affiliate' in a variable to facilitate access to it
+        var valueBalance = value_nunber;
+        //Formatting the value, we show 4 decimals, separate the decimals with (,) and separate with space the units of a thousand
+        valueBalance = number_format_js(valueBalance,2,'.',',');
+        //We obtain and save the last 4 characters of the received value as parameter
+        var correctDecimals = value_nunber.substr(value_nunber.length-2);
+        //We obtain and save the last 5 characters of the formatted value, also obtaining the comma (,) that separates the decimals
+        var decimalsToEliminate = valueBalance.substr(valueBalance.length-3);
+        //We search and delete the last 5 characters obtained to leave only the whole part of the value
+        var valueWithoutDecimals = valueBalance.replace(decimalsToEliminate,'');
+        //The value of integers is concatenated with decimals of the original value
+        var formattedValue = valueWithoutDecimals+'.'+correctDecimals;
+        //We return the formatted value of the member's obligation and with the correct decimals
+        return formattedValue;
+    }
+
+    /**
+     * @Description: Method to validate the addition or not of the decimals of the balance
+     * @Param: String (Value or Balance of afiliate)
+     * @return: (sting) Number with or without decimals
+     */
+    function addOrRemoveDecimalsToAffiliateValue(value_number){
+        //We obtain and save the total balance of the affiliate
+        var valueBalance = value_number;
+        //We obtain the position in which the last point is found (.)
+        var positionCharacterLastPoint = valueBalance.lastIndexOf('.');
+        //We get the last 4 characters of the value, which are the decimals
+        var lastFourChararcters = valueBalance.substr(positionCharacterLastPoint+1,4);
+
+        //Initialize variable that will contain the definitive value
+        var formattedValue ='';
+        //We evaluate if the different decimals of the number end in '0000', '000', '00' or '0'; and hide them respectively
+        if (lastFourChararcters === '0000'){
+            //We format the value and we do not show decimals
+            formattedValue = number_format_js(valueBalance,2,'.',',');
+            //We search and delete the last 3 characters to delete the comma (,) and the zeros (00) that are added by default (, 00)
+            //formattedValue = formattedValue.replace(formattedValue.substr(-3),'');
+        }
+        else if (lastFourChararcters.substr(-3) === '000'){
+            //We format the value and we do show one decimal
+            formattedValue = number_format_js(valueBalance,2,'.',',');
+        }
+        else if (lastFourChararcters.substr(-2) === '00'){
+            //We format the value and we do show two decimals
+            formattedValue = number_format_js(valueBalance,2,'.',',');
+        }
+        else if (lastFourChararcters.substr(-1) === '0'){
+            //We format the value and we do show three decimals
+            formattedValue = number_format_js(valueBalance,2,'.',',');
+        }
+        else{
+            //We save the formatted value that returns the method that takes away the approximation
+            formattedValue = numberFormatNoApproximationJs(valueBalance);
+        }
+        //We return the value with or without decimals
+        return formattedValue;
+    }
