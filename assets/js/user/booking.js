@@ -109,42 +109,45 @@
         let value_email = element_email.val();
         let value_phone = element_phone.val();
         let value_text = element_text.val();
+        let value_check_in = element_check_in.text();
+        let value_check_out = element_check_out.text();
+        let value_diff_days = element_diff_days.text();
+        let value_type_room = element_type_room.attr('data-id-room');
+        let value_room = element_room.text();
+        let value_adult = element_adult.text();
+        let value_children = element_children.text();
+        let value_price = element_price.text();
 
         //** Proceso para validar los datos **
 
         //Variable de control
-        var control_validation = true;
+        var control_validation = false;
 
         if (value_name === '' || value_name.length === 0){
             notify_error_notification('O <b>Nome</b> é obrigatório.', 2000);
-            control_validation = false;
             return false;
         }
         else if (value_email === '' || value_email.length === 0){
             notify_error_notification('O <b>Email</b> é obrigatório.', 2000);
-            control_validation = false;
             return false;
         }
         else if ((value_email !== '' || value_email.length > 0) && validateEmail(value_email) === false){
             notify_error_notification('O <b>Email</b> é inválido.', 2000);
-            control_validation = false;
             return false;
         }
         else if (value_phone.length > 0 && value_phone.length <= 5){
             notify_error_notification('O <b>Telefone</b> deve ter mais de 5 dígitos.', 2000);
-            control_validation = false;
             return false;
         }
         else if ((value_phone.length > 5 && value_phone.length < 32) && validateNumber(value_phone) === false){
             notify_error_notification('O <b>Telefone</b> deve conter apenas números.', 2000);
-            control_validation = false;
             return false;
         }
         else if (value_text === '' || value_text.length === 0){
             notify_error_notification('A <b>Mensagem</b> é obrigatória.', 2000);
-            control_validation = false;
             return false;
         }
+        else control_validation = true;
 
         //Validamos si t0do etá Ok
         if (control_validation === true)
@@ -156,7 +159,15 @@
                     email : value_email,
                     phone : value_phone,
                     text : value_text,
-                    action: 'CONTACT'
+                    check_in : value_check_in,
+                    check_out : value_check_out,
+                    diff_days : value_diff_days,
+                    type_room : value_type_room,
+                    room : value_room,
+                    adult : value_adult,
+                    children : value_children,
+                    price : value_price,
+                    action: 'RESERVE'
                 },
                 beforeSend: function(){
                     //element_btn
