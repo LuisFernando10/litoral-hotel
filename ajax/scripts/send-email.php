@@ -27,11 +27,40 @@
 
         //Evaluamos el tipo de acción
         if ($action === 'CONTACT'){
+            $type = 'contato';
+            $subject = 'Contato (Hotel Litoral)';
+        }
+        else if ($action === 'RESERVE'){
+            $type = 'contato';
+            $subject = 'Reserva (Hotel Litoral)';
+
+            //Inserimos os dados da reserva no BD
+            $insert_reserve = Reserves::insertReserve(
+                $type_room,
+                $name,
+                $phone,
+                $email,
+                $text,
+                $check_in,
+                $check_out,
+                $room,
+                $adult,
+                $children,
+                $price
+            );
+
+            if (!is_numeric($insert_reserve) || $insert_reserve == NULL)
+                $response = [
+                    'status' => '500',
+                    'message' => 'Ocorreu um erro. Por favor, tente novamente !!',
+                    'type' => 'INSERT-RESERVE'
+                ];
+        }
 
             //Enviamos el 'email'
             $send_email = GeneralMethods::sendPhpMailerEmail(
                 constant('EMAIL'),
-                'Contato (Hotel Litoral)',
+                $subject,
                 $text
             );
 
@@ -41,53 +70,21 @@
                 $email,
                 $phone,
                 $text,
-                'contato'
+                $type
             );
 
             //Validamos si se envió el correo
-            if ($send_email === '200' && $insert_email != NULL){
+            if ($send_email === '200' && $insert_email != NULL)
                 $response = [
                     'status' => '200',
                     'message' => 'Email enviado!!'
                 ];
-            }
             else
                 $response = [
                     'status' => '500',
-                    'message' => 'Ocorreu um erro. Por favor, tente novamente !!'
+                    'message' => 'Ocorreu um erro. Por favor, tente novamente !!',
+                    'type' => 'GENERAL-ERROR'
                 ];
-        }
-        elseif ($action === 'RESERVE'){
-
-            //Enviamos el 'email'
-            $send_email = GeneralMethods::sendPhpMailerEmail(
-                constant('EMAIL'),
-                'Reserva (Hotel Litoral)',
-                $text
-            );
-
-            //Insertamos los datos en la BD
-            $insert_email = HotelContact::insertEmail(
-                $name,
-                $email,
-                $phone,
-                $text,
-                'contato'
-            );
-
-            //Validamos si se envió el correo
-            if ($send_email === '200' && $insert_email != NULL){
-                $response = [
-                    'status' => '200',
-                    'message' => 'Email enviado!!'
-                ];
-            }
-            else
-                $response = [
-                    'status' => '500',
-                    'message' => 'Ocorreu um erro. Por favor, tente novamente !!'
-                ];
-        }
 
         //Retornamos la respuesta en formato JSON
         echo json_encode($response);

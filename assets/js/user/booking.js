@@ -170,9 +170,9 @@
                     action: 'RESERVE'
                 },
                 beforeSend: function(){
-                    //element_btn
-                    //    .prop('disabled', true)
-                    //    .addClass('css-cursor-not-allowed');
+                    element_btn
+                        .prop('disabled', true)
+                        .addClass('css-cursor-not-allowed');
                 },
                 success : function (response) {
 
@@ -180,18 +180,30 @@
                     let json_object = $.parseJSON(response);
 
                     //Validamos si hubo o no éxito
-                    if (json_object.status === '200')
+                    if (json_object.status === '200'){
                         notify_success_notification(json_object.message);
+                        setTimeout(function (){
+                            location.attr('href', `${FULL_WEB_URL}`);
+                        }, 3000);
+                    }
                     else{
-
-                        notify_error_notification(json_object.message);
-                        return false;
+                        if(json_object.type === 'INSERT-RESERVE'){
+                            notify_error_notification(json_object.message);
+                            setTimeout(function (){
+                                location.attr('href', `${FULL_WEB_URL}`);
+                            }, 3000);
+                            return false;
+                        }
+                        else{
+                            notify_error_notification(json_object.message);
+                            return false;
+                        }
                     }
                 },
                 complete: function () {
-                    //element_btn
-                    //    .prop('disabled', false)
-                    //    .removeClass('css-cursor-not-allowed');
+                    element_btn
+                        .prop('disabled', false)
+                        .removeClass('css-cursor-not-allowed');
 
                     //Limpiamos los valores
                     element_name.val('');
@@ -200,6 +212,8 @@
                     element_text.val('');
                 }
             });
+
+        return false;
     });
 
     /**

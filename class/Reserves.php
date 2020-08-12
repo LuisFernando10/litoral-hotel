@@ -223,46 +223,62 @@
             /**
              * @Description: Metodo que inserta un email en la BD
              */
-            static function insertEmail($nome = NULL, $email = NULL, $telefone = NULL, $mensagem = NULL, $tipo = NULL){
+            static function insertReserve($id_quarto = NULL, $nome_cliente = NULL, $telefone = NULL, $email = NULL, $mensagem = NULL, $data_entrada = NULL, $data_saida = NULL, $num_quartos = NULL, $num_adultos = NULL, $num_criancas = NULL, $valor_total = NULL){
 
                 //Preparamos Query
                 $sql = "
                     INSERT INTO reservas (
-                        nome,
+                        id_quarto,
+                        nome_cliente,
+                        telefone,
                         email,
                         mensagem,
-                        data,
-                        telefone,
-                        tipo,
+                        data_entrada,
+                        data_saida,
+                        num_quartos,
+                        num_adultos,
+                        num_criancas,
+                        valor_total,
+                        data_reserva,
                         estado
                     )
                     VALUES (
                         '%s',
                         '%s',
                         '%s',
+                        '%s',
+                        '%s',
+                        '%s',
+                        '%s',
+                        '%s',
+                        '%s',
+                        '%s',
+                        '%s',
                         NOW(),
-                        '%s',
-                        '%s',
-                        'sem_ler'
+                        'pendente'
                     )
                 ";
 
                 //Reemplazamos los valores
                 $sql = sprintf($sql,
-                    $nome,
+                    $id_quarto,
+                    $nome_cliente,
+                    $telefone,
                     $email,
                     $mensagem,
-                    $telefone,
-                    $tipo
+                    $data_entrada,
+                    $data_saida,
+                    $num_quartos,
+                    $num_adultos,
+                    $num_criancas,
+                    $valor_total
                 );
 
                 //Ejecutamos el query
                 $result = DataBase::query($sql);
 
                 //Validamos si la consulta se ejecuto correctamente
-                if ($result != NULL)
-                    return $result;
-                else
-                    return false;
+                if ($result != NULL) return $result;
+                else return false;
             }
         }
