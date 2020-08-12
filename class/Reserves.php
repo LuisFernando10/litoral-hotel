@@ -225,6 +225,9 @@
              */
             static function insertReserve($id_quarto = NULL, $nome_cliente = NULL, $telefone = NULL, $email = NULL, $mensagem = NULL, $data_entrada = NULL, $data_saida = NULL, $num_quartos = NULL, $num_adultos = NULL, $num_criancas = NULL, $valor_total = NULL){
 
+                //Nós removemos as vírgulas do valor total
+                $sanitized_total_value = str_replace(",", "", $valor_total);
+
                 //Preparamos Query
                 $sql = "
                     INSERT INTO reservas (
@@ -271,7 +274,7 @@
                     $num_quartos,
                     $num_adultos,
                     $num_criancas,
-                    $valor_total
+                    $sanitized_total_value
                 );
 
                 //Ejecutamos el query
