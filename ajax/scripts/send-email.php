@@ -43,6 +43,7 @@
                 $text,
                 $check_in,
                 $check_out,
+                $diff_days,
                 $room,
                 $adult,
                 $children,
