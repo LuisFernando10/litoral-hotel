@@ -158,6 +158,7 @@
                     $sql_select = "
                         reservas.id_reserva,
                         reservas.id_quarto,
+                        quartos.nome as nome_quarto,
                         reservas.nome_cliente,
                         reservas.telefone,
                         reservas.email,
@@ -181,6 +182,10 @@
                         $sql_select
                     FROM 
                         reservas
+                    INNER JOIN
+                        quartos
+                    ON
+                        reservas.id_quarto = quartos.id_quarto 
                     WHERE
                         1+1=2
                         $conditions
@@ -215,7 +220,7 @@
             /**
              * @Description: Metodo que inserta un email en la BD
              */
-            static function insertReserve($id_quarto = NULL, $nome_cliente = NULL, $telefone = NULL, $email = NULL, $mensagem = NULL, $data_entrada = NULL, $data_saida = NULL, $num_quartos = NULL, $num_adultos = NULL, $num_criancas = NULL, $valor_total = NULL){
+            static function insertReserve($id_quarto = NULL, $nome_cliente = NULL, $telefone = NULL, $email = NULL, $mensagem = NULL, $data_entrada = NULL, $data_saida = NULL, $diff_days = NULL, $num_quartos = NULL, $num_adultos = NULL, $num_criancas = NULL, $valor_total = NULL){
 
                 //Nós removemos as vírgulas do valor total
                 $sanitized_total_value = str_replace(",", "", $valor_total);
@@ -230,6 +235,7 @@
                         mensagem,
                         data_entrada,
                         data_saida,
+                        num_dias,
                         num_quartos,
                         num_adultos,
                         num_criancas,
@@ -238,6 +244,7 @@
                         estado
                     )
                     VALUES (
+                        '%s',
                         '%s',
                         '%s',
                         '%s',
@@ -263,6 +270,7 @@
                     $mensagem,
                     $data_entrada,
                     $data_saida,
+                    $diff_days,
                     $num_quartos,
                     $num_adultos,
                     $num_criancas,

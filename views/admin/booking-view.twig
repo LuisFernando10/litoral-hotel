@@ -1,0 +1,140 @@
+
+{% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h5 class="card-title">Detalhes da Reserva</h5>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}reservas/">
+                                            <button type="button" class="btn btn-info">Voltar</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body js-quarto-frm-edit">
+
+                                {# Seção 1 #}
+                                <div class="form-row mt-3">
+                                    {# Nome #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Nome Cliente</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.nome_cliente }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Telefone #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Telefone</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.telefone }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Email #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Email</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.email }}" disabled readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Seção 2 #}
+                                <div class="form-row mt-3">
+                                    {# Data Chegada #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Data Chegada</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.data_entrada }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Data Chegada #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Data Saída</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.data_saida }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Número de Días #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Número de Días</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.num_dias }}" disabled readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Seção 3 #}
+                                <div class="form-row mt-3">
+                                    {# Quartos #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Quartos</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.num_quartos }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Adultos #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Adultos</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.num_adultos }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Crianças #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Crianças</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.num_criancas }}" disabled readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Seção 4 #}
+                                <div class="form-row mt-3">
+
+                                    {# Valor Total #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Valor Total</label>
+                                            <input type="text" class="form-control" value="$R {{ data_booking_view.valor_total|number_format(2, '.', ',') }}" disabled readonly>
+                                        </div>
+                                    </div>
+
+                                    {# Estado #}
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" value="{{ data_booking_view.estado }}" disabled readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Seção 5 #}
+                                <div class="form-row mt-3">
+                                    {# Mensagem #}
+                                    <div class="col-md-12">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Mensagem</label>
+                                            <textarea class="form-control" rows="4" disabled readonly>{{ data_booking_view.mensagem }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
