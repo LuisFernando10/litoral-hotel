@@ -26,6 +26,7 @@
                                                 <th>N. Días</th>
                                                 <th>Preço</th>
                                                 <th>Estado</th>
+                                                <th>Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,6 +54,17 @@
                                                     <td><span class="text-primary">$R {{ booking.valor_total }}</span></td>
                                                     <td>
                                                         <span class="badge {{ tag }}">{{ booking.estado }}</span>
+                                                    </td>
+                                                    <td>
+                                                        {# Detalhes #}
+                                                        <a href="{{ general.full_web_url }}reservas/view/{{ booking.id_reserva }}/" title="Detalhes da Reserva">
+                                                            <i class="material-icons text-info">visibility</i>
+                                                        </a>
+
+                                                        {# Responder Email #}
+                                                        <a href="{{ general.full_web_url }}reservas/reply/{{ booking.id_reserva }}/" title="Escrever Email">
+                                                            <i class="material-icons text-warning">email</i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}
