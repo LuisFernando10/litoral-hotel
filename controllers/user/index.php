@@ -210,13 +210,13 @@
                         ));
                     }
                     else
-                        $twig->display('bookings.twig', array(
+                        $twig->display('booking-list.twig', array(
                             'general' => $general_param,
                             'data_rooms' => $data_rooms
                         ));
                 }
                 else
-                    $twig->display('bookings.twig', array(
+                    $twig->display('booking-list.twig', array(
                         'general' => $general_param,
                         'data_rooms' => $data_rooms
                     ));

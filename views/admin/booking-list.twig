@@ -1,0 +1,72 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="card-title">Reservas</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-shopping table-hover">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Telefone</th>
+                                                <th>Email</th>
+                                                <th>Mensagem</th>
+                                                <th>Data Chegada</th>
+                                                <th>N. Días</th>
+                                                <th>Preço</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {# Percorremos os dados dos producto pra renderizar as linhas #}
+                                            {% for booking in data_booking %}
+
+                                                {% if booking.estado == 'confirmada' %}
+                                                    {% set tag ='badge-success' %}
+                                                {% elseif booking.estado == 'pendente' %}
+                                                    {% set tag ='badge-warning' %}
+                                                {% elseif booking.estado == 'finalizada' %}
+                                                    {% set tag ='badge-info' %}
+                                                {% elseif booking.estado == 'cancelada' %}
+                                                    {% set tag ='badge-danger' %}
+                                                {% endif %}
+
+                                                <tr class="js-reserve-tr">
+                                                    <td>{{ booking.nome_cliente }}</td>
+                                                    <td>{{ booking.telefone }}</td>
+                                                    <td>{{ booking.email }}</td>
+                                                    <td>{{ booking.mensagem }}</td>
+                                                    <td>{{ booking.data_entrada }}</td>
+                                                    <td>{{ booking.num_dias }}</td>
+                                                    <td><span class="text-primary">$R {{ booking.valor_total }}</span></td>
+                                                    <td>
+                                                        <span class="badge {{ tag }}">{{ booking.estado }}</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/products.js"></script>
+    {% endblock %}

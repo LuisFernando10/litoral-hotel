@@ -112,6 +112,38 @@
 
                 break;
 
+            #RESERVAS
+            case 'reservas':
+
+                //Nos obtemos os dados que precisaremos renderizar nas vistas
+                $data_booking = Reserves::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+                $data_booking_view = Reserves::getAll(NULL, NULL, NULL, $id, NULL, NULL, NULL, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+                //Nos validamos cada uma das clases
+                if ($action == 'reply')
+                    $twig->display('booking-reply.twig',array(
+                        'general' => $general_param
+                    ));
+                elseif ($action == 'view'){
+                    if (is_numeric($id) && $id != '')
+                        $twig->display('booking-view.twig',array(
+                            'general' => $general_param,
+                            'data_booking_view' => $data_booking_view[0]
+                        ));
+                    else
+                        $twig->display('booking-list.twig',array(
+                            'general' => $general_param,
+                            'data_booking' => $data_booking
+                        ));
+                }
+                else
+                    $twig->display('booking-list.twig',array(
+                        'general' => $general_param,
+                        'data_booking' => $data_booking
+                    ));
+
+                break;
+
             #GALERIA
             case 'galeria':
 

@@ -40,6 +40,14 @@
                         </a>
                     </li>
 
+                    {# Bookings #}
+                    <li class="nav-item {{ (general.class_url == 'reservas') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{general.full_web_url}}reservas/">
+                            <i class="material-icons">king_bed</i>
+                            <p>Reservas</p>
+                        </a>
+                    </li>
+
                     {# Galery #}
                     <li class="nav-item {{ (general.class_url == 'galeria') ? 'active' : '' }}">
                         <a class="nav-link" href="{{general.full_web_url}}galeria/">

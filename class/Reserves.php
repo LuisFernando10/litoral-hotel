@@ -12,25 +12,16 @@
             static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_reserva = NULL, $nome_cliente = NULL, $telefone = NULL, $email = NULL, $data_entrada = NULL, $data_saida = NULL, $num_quartos = NULL, $num_adultos = NULL, $num_criancas = NULL, $valor_total = NULL, $data_reserva = NULL, $estado = NULL) {
 
                 //Valor por defecto para 'page'
-                if (isset($page) && $page != NULL && is_numeric($page)){
-                    /* Se deja igual */
-                }
-                else
-                    $page = 1;
+                if (isset($page) && $page != NULL && is_numeric($page)){/* Se deja igual */}
+                else $page = 1;
 
                 //Valor por defecto para 'pagination'
-                if (isset($pagination) && $pagination != NULL && is_numeric($pagination)) {
-                    /* Se deja igual */
-                }
-                else
-                    $pagination = constant("PAGINATION");
+                if (isset($pagination) && $pagination != NULL && is_numeric($pagination)) {/* Se deja igual */}
+                else $pagination = constant("PAGINATION");
 
                 //Valor por defecto para tipo (normal - count)
-                if (isset($type) && $type != NULL) {
-                    /* Se deja igual */
-                }
-                else
-                    $type = "normal";
+                if (isset($type) && $type != NULL) {/* Se deja igual */}
+                else $type = "normal";
 
                 //Se calcula desde que registro se va a listar segun la paginacion
                 $limit_start = ($page * $pagination) - $pagination;
@@ -173,6 +164,7 @@
                         reservas.mensagem,
                         reservas.data_entrada,
                         reservas.data_saida,
+                        reservas.num_dias,
                         reservas.num_quartos,
                         reservas.num_adultos,
                         reservas.num_criancas,
