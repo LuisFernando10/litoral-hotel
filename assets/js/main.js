@@ -113,6 +113,14 @@
     }
 
     /**
+     * @Description: Método pra validar um número de telefone
+     */
+    function validatePhoneNumber(number) {
+        let regExp = /^([0-9()+])*$/;
+        return regExp.test(number);
+    }
+
+    /**
      * @Description: Método que valida se uma data é maior que outra
      */
     function validateIsGreaterDate(element_initial_date = null, element_final_date = null, initial_date, final_date) {

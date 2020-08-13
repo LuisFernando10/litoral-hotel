@@ -139,8 +139,8 @@
             notify_error_notification('O <b>Telefone</b> deve ter mais de 5 dígitos.', 2000);
             return false;
         }
-        else if ((value_phone.length > 5 && value_phone.length < 32) && validateNumber(value_phone) === false){
-            notify_error_notification('O <b>Telefone</b> deve conter apenas números.', 2000);
+        else if ((value_phone.length > 5 && value_phone.length < 32) && validatePhoneNumber(value_phone) === false){
+            notify_error_notification('Por favor insira um <b>Telefone</b> válido. Ex: (+55)7999882442', 2000);
             return false;
         }
         else if (value_text === '' || value_text.length === 0){
