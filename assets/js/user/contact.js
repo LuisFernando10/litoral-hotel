@@ -23,38 +23,33 @@
         //** Proceso para validar los datos **
 
         //Variable de control
-        var control_validation = true;
+        var control_validation = false;
 
         if (value_name === '' || value_name.length === 0){
             notify_error_notification('O <b>Nome</b> é obrigatório.', 2000);
-            control_validation = false;
             return false;
         }
         else if (value_email === '' || value_email.length === 0){
             notify_error_notification('O <b>Email</b> é obrigatório.', 2000);
-            control_validation = false;
             return false;
         }
         else if ((value_email !== '' || value_email.length > 0) && validateEmail(value_email) === false){
             notify_error_notification('O <b>Email</b> é inválido.', 2000);
-            control_validation = false;
             return false;
         }
         else if (value_phone.length > 0 && value_phone.length <= 5){
             notify_error_notification('O <b>Telefone</b> deve ter mais de 5 dígitos.', 2000);
-            control_validation = false;
             return false;
         }
-        else if ((value_phone.length > 5 && value_phone.length < 32) && validateNumber(value_phone) === false){
-            notify_error_notification('O <b>Telefone</b> deve conter apenas números.', 2000);
-            control_validation = false;
+        else if ((value_phone.length > 5 && value_phone.length < 32) && validatePhoneNumber(value_phone) === false){
+            notify_error_notification('Por favor insira um <b>Telefone</b> válido. Ex: (+55)7999882442', 2000);
             return false;
         }
         else if (value_text === '' || value_text.length === 0){
             notify_error_notification('A <b>Mensagem</b> é obrigatória.', 2000);
-            control_validation = false;
             return false;
         }
+        else control_validation = true;
 
         //Validamos si t0do etá Ok
         if (control_validation === true)
@@ -82,7 +77,6 @@
                     if (json_object.status === '200')
                         notify_success_notification(json_object.message);
                     else{
-
                         notify_error_notification(json_object.message);
                         return false;
                     }
@@ -93,10 +87,11 @@
                     //    .removeClass('css-cursor-not-allowed');
 
                     //Limpiamos los valores
-                    element_name.val('');
-                    element_email.val('');
-                    element_phone.val('');
-                    element_text.val('');
+                    //element_name.val('');
+                    //element_email.val('');
+                    //element_phone.val('');
+                    //element_text.val('');
                 }
             });
+        return false;
     });

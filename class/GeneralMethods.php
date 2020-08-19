@@ -5,7 +5,7 @@
         // These must be at the top of your script, not inside a function
         use PHPMailer\PHPMailer\PHPMailer;
         //use PHPMailer\PHPMailer\SMTP;
-        //use PHPMailer\PHPMailer\Exception;
+        use PHPMailer\PHPMailer\Exception;
 
         //Cargamos la configuracion global
         require_once dirname(__FILE__).'/../config-import.php';
@@ -41,21 +41,23 @@
             static function sendPhpMailerEmail($to = NULL, $subject = 'Contato (Hotel Litoral)', $message = NULL){
 
                 // Instantiation and passing `true` enables exceptions
-                $mail = new PHPMailer();
+                $mail = new PHPMailer;
 
                 //Server settings
                 $mail->isSMTP();                                              // Send using SMTP
-                $mail->SMTPAuth   = true;                                     // Enable SMTP authentication
+                $mail->SMTPAuth   = false;                                     // Enable SMTP authentication
                 //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
                 //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
                 $mail->Host       = 'smtp.hotellitoral.com.br';               // Set the SMTP server to send through
-                $mail->Port       = '587';                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+                $mail->Port       = 25;                                  // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+                //$mail->SMTPSecure = 'tls';                                    // Enable TLS encryption, ssl also accepted
                 $mail->Username   = 'luis_teste@hotellitoral.com.br';         // SMTP username
                 $mail->Password   = 'lfchamorro10f';                          // SMTP password
 
                 //Recipients
                 $mail->setFrom('luis_teste@hotellitoral.com.br');
-                $mail->addAddress($to);  // Add a recipient
+                $mail->addAddress('ing.lfchamorro@gmail.com');  // Add a recipient
+                //$mail->addAddress('ing.lfchamorro@gmail.com');  // Add a recipient
                 //$mail->addReplyTo('info@example.com', 'Information');
                 //$mail->addCC('ing.lfchamorro@gmail.com');
                 //$mail->addBCC('bcc@example.com');

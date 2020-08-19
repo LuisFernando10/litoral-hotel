@@ -31,7 +31,7 @@
             $subject = 'Contato (Hotel Litoral)';
         }
         else if ($action === 'RESERVE'){
-            $type = 'contato';
+            $type = 'reserva';
             $subject = 'Reserva (Hotel Litoral)';
 
             //Inserimos os dados da reserva no BD

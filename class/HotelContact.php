@@ -207,7 +207,6 @@
                 //Validamos si la consulta se ejecuto correctamente
                 if ($result != NULL)
                     return $result;
-                else
-                    return false;
+                else return false;
             }
         }
