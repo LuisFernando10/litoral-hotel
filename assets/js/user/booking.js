@@ -16,8 +16,12 @@
     let global_element_booking_price = $('.js-booking-price');
 
     $(document).ready(function () {
-        let property_price_option_selected = global_element_booking_type_room.find('option:selected').attr('data-room-price');
-        global_element_booking_price.find('span').text(property_price_option_selected.replace('.', ','));
+
+        //Se valida que o elemento exista, do contrario pode generar erro nas validacoes de abaixo
+        if (global_element_booking_type_room.length > 0){
+            let property_price_option_selected = global_element_booking_type_room.find('option:selected').attr('data-room-price');
+            global_element_booking_price.find('span').text(property_price_option_selected.replace('.', ','));
+        }
 
         //Chamamos método que valida um telefone válido (inicializacao)
         phone_validatios();
