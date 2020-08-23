@@ -10,14 +10,14 @@
     //Obtemos os elementos do DOM
     let global_element_booking_check_in = $('.js-reserve-check-in');
     let global_element_booking_check_out = $('.js-reserve-check-out');
-    let global_element_booking_children = $('.js-reserve-children');
+    //let global_element_booking_children = $('.js-reserve-children');
     let global_element_booking_room = $('.js-reserve-room');
     let global_element_booking_type_room = $('.js-reserve-type_room');
     let global_element_booking_price = $('.js-booking-price');
 
     $(document).ready(function () {
         let property_price_option_selected = global_element_booking_type_room.find('option:selected').attr('data-room-price');
-        global_element_booking_price.find('span').text(property_price_option_selected);
+        global_element_booking_price.find('span').text(property_price_option_selected.replace('.', ','));
 
         //Chamamos método que valida um telefone válido (inicializacao)
         phone_validatios();
@@ -58,7 +58,7 @@
         //Obtemos os valores
         let value_booking_check_in = global_element_booking_check_in.val();
         let value_booking_check_out = global_element_booking_check_out.val();
-        let value_booking_children = global_element_booking_children.val();
+        //let value_booking_children = global_element_booking_children.val();
         let value_booking_room = global_element_booking_room.val();
         let value_booking_type_room = global_element_booking_type_room.val();
 
@@ -69,10 +69,10 @@
         }
         else if (calculate_price() === false) return false;
 
-        if (value_booking_children.length > 1 || validateNumber(value_booking_children) === false || isNaN(value_booking_children) === true){
-            notify_error_notification('Somente números são aceitos.', 2000);
-            return false;
-        }
+        //if (value_booking_children.length > 1 || validateNumber(value_booking_children) === false || isNaN(value_booking_children) === true){
+        //    notify_error_notification('Somente números são aceitos.', 2000);
+        //    return false;
+        //}
 
         if (value_booking_room === '' || value_booking_room.length === 0){
             notify_error_notification('O número de quartos é obrigatório.', 2000);
@@ -83,7 +83,7 @@
             return false;
         }
 
-        $(location).attr('href', `${FULL_WEB_URL}bookings/reserve/?check_in=${value_booking_check_in}&check_out=${value_booking_check_out}&children=${value_booking_children}&rooms=${value_booking_room}&price=${TOTAL_PRICE}&type_room=${value_booking_type_room}`)
+        $(location).attr('href', `${FULL_WEB_URL}bookings/reserve/?check_in=${value_booking_check_in}&check_out=${value_booking_check_out}&children=0&rooms=${value_booking_room}&price=${TOTAL_PRICE}&type_room=${value_booking_type_room}`)
     });
 
     $('.js-reserve-btn-send-email').on('click', function () {
@@ -101,7 +101,7 @@
         let element_type_room = $('.js-reserve-type-room');
         let element_room = $('.js-reserve-rooms');
         let element_adult = $('.js-reserve-adults');
-        let element_children = $('.js-reserve-children');
+        //let element_children = $('.js-reserve-children');
         let element_price = $('.js-reserve-price');
 
         //Obtenemos los valores
@@ -115,7 +115,7 @@
         let value_type_room = element_type_room.attr('data-id-room');
         let value_room = element_room.text();
         let value_adult = element_adult.text();
-        let value_children = element_children.text();
+        //let value_children = element_children.text();
         let value_price = element_price.text();
 
         //** Proceso para validar los datos **
@@ -165,7 +165,7 @@
                     type_room : value_type_room,
                     room : value_room,
                     adult : value_adult,
-                    children : value_children,
+                    children : 0,
                     price : value_price,
                     action: 'RESERVE'
                 },
@@ -238,14 +238,14 @@
         }
         else
             //Obtemos o total do preco com as datas escolhidas
-            total_price = ((room_price * days_difference_millisecond) * ROOMS);
+            total_price = ((room_price * days_difference_millisecond) * ROOMS) + ',00';
 
         //A gente formatea o numero
         //total_price = number_format_js(total_price,2,'.',',');
 
         //Mudamos o valor do preco
-        //element_booking_price.text(addOrRemoveDecimalsToAffiliateValue(total_price));
-        element_booking_price.text(total_price);
+        element_booking_price.text(addOrRemoveDecimalsToAffiliateValue(total_price));
+        //element_booking_price.text(total_price);
 
         //Atualizamos a variável
         TOTAL_PRICE = total_price;
