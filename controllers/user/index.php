@@ -159,7 +159,7 @@
                         $check_in = filter_input(INPUT_POST, 'reserve_check_in', FILTER_SANITIZE_STRING);
                         $check_out = filter_input(INPUT_POST, 'reserve_check_out', FILTER_SANITIZE_STRING);
                         $children = filter_input(INPUT_POST, 'reserve_children', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
-                        $room = filter_input(INPUT_POST, 'reserve_room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
+                        $room = filter_input(INPUT_POST, 'reserve_room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "1")));
                         $type_room = filter_input(INPUT_POST, 'reserve_type_room', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
 
                         //Obtemos os dados do quarto
