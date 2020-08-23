@@ -13,7 +13,7 @@
         //Obtenemos los datos del Ajax
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING, array('options'=>array('default'=>NULL)));
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL, array('options'=>array('default'=>NULL)));
-        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT, array('options'=>array('default'=>NULL)));
+        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING, array('options'=>array('default'=>NULL)));
         $text = filter_input(INPUT_POST, 'text', FILTER_SANITIZE_STRING, array('options'=>array('default'=>NULL)));
         $check_in = filter_input(INPUT_POST, 'check_in', FILTER_SANITIZE_STRING, array('options'=>array('default'=>NULL)));
         $check_out = filter_input(INPUT_POST, 'check_out', FILTER_SANITIZE_STRING, array('options'=>array('default'=>NULL)));

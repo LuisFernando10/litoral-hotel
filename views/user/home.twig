@@ -40,7 +40,7 @@
 
                         {# Home Form #}
                         <form action="{{general.full_web_url}}bookings/reserve/form/" method="post" class="booking_form js-frm-reserve-data" id="booking_form">
-                            <div class="row booking_form_container css-slider-home text-center">
+                            <div class="row booking_form_container css-slider-home justify-content-center text-center">
 
                                 {# Check-In #}
                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
@@ -53,14 +53,9 @@
                                 </div>
 
                                 {# Children #}
-                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
+                                {# <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
                                     <input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" value="" placeholder="Crianças" maxlength="1">
-                                </div>
-
-                                {# Rooms #}
-                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
-                                    <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" maxlength="1">
-                                </div>
+                                </div> #}
 
                                 {# Type Room #}
                                 <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
@@ -71,9 +66,14 @@
                                     </select>
                                 </div>
 
+                                {# Rooms #}
+                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
+                                    <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" maxlength="1">
+                                </div>
+
                                 {# Botao #}
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
-                                    <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Reserve agora</button>
+                                    <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Solicite sua Reserva</button>
                                 </div>
                             </div>
                         </form>
@@ -163,11 +163,11 @@
                             <div class="col-lg-6">
                                 <div class="about_content">
                                     <div class="about_title">
-                                        <h2>Hotel Litoral / 14 anos de excelencia</h2>
+                                        <h2>Hotel Litoral / Desde o 2002</h2>
                                     </div>
                                     <div class="about_text">
                                         <p>
-                                            Há 14 anos, oferecemos o melhor serviço possível a turistas brasileiros e estrangeiros, localizado a apenas 100 metros da praia, com excelente qualidade humana e instalações simples, mas muito confortáveis ​​e atenciosas; cuidamos para que você se sinta confortável em nosso hotel, oferecemos um excelente café da manhã, onde você pode comer confortavelmente e começar o dia com a melhor atitude.
+                                            Desde o 2002, oferecemos o melhor serviço possível a turistas brasileiros e estrangeiros, localizado a apenas 100 metros da praia, com excelente qualidade humana e instalações simples, mas muito confortáveis ​​e atenciosas; cuidamos para que você se sinta confortável em nosso hotel, oferecemos um excelente café da manhã, onde você pode comer confortavelmente e começar o dia com a melhor atitude.
                                         </p>
                                     </div>
                                 </div>
@@ -229,7 +229,6 @@
                                                     <a href="#">{{ opinions.op_nome }}</a>, Greece
                                                 </div>
                                             </div>
-
                                         {% endfor %}
                                     </div>
                                 </div>
