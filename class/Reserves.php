@@ -225,6 +225,9 @@
                 //Nós removemos as vírgulas do valor total
                 $sanitized_total_value = str_replace(['.', ','], ['', '.'], $valor_total);
 
+                $data_entrada = GeneralMethods::changeDateFormat($data_entrada);
+                $data_saida = GeneralMethods::changeDateFormat($data_saida);
+
                 //Preparamos Query
                 $sql = "
                     INSERT INTO reservas (

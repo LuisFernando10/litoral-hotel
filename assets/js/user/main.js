@@ -23,7 +23,7 @@
         //Data de entrada
         $(".js-reserve-check-in").datepicker({
             defaultDate: current_date,
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'dd/mm/yy',
             minDate: current_date,
             onClose: function (selectedDate) {
                 $(".js-reserve-check-out").datepicker("option", "minDate", selectedDate);
@@ -32,7 +32,7 @@
 
         //Data de saída
         $(".js-reserve-check-out").datepicker({
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'dd/mm/yy',
             minDate: current_date,
             maxDate: new Date(current_date.getFullYear(), current_date.getMonth()+2, current_date.getDate()),
             onClose: function (selectedDate) {

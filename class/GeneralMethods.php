@@ -84,4 +84,9 @@
 
                 return $days;
             }
+
+            static function changeDateFormat($date){
+                $formatted_date = str_replace('/', '-', $date);
+                return date('Y-m-d', strtotime($formatted_date));
+            }
         }
