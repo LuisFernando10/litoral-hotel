@@ -7,7 +7,7 @@
     let CHILDREN = 0;
     let TOTAL_PRICE = 0;
 
-    //Obtemos os elementos do DOM
+    //DOM
     let global_element_booking_check_in = $('.js-reserve-check-in');
     let global_element_booking_check_out = $('.js-reserve-check-out');
     //let global_element_booking_children = $('.js-reserve-children');
@@ -27,18 +27,15 @@
         phone_validatios();
     })
 
-    //Data de entrada
     global_element_booking_type_room.on('change', function() {
         calculate_price();
     });
 
-    //Quarto
     global_element_booking_room.on('keyup', function () {
         if ($(this).val() !== '') ROOMS = $(this).val();
         calculate_price();
     });
 
-    //Data de entrada
     global_element_booking_check_in.on('change', function() {
 
         DATE_CHECK_IN = $(this).val();
@@ -47,7 +44,6 @@
             calculate_price();
     });
 
-    //Data de saída
     global_element_booking_check_out.on('change', function() {
 
         DATE_CHECK_OUT = $(this).val();
@@ -56,7 +52,6 @@
             calculate_price();
     });
 
-    //Evencto 'click' pro botao da reserva
     $('.js-btn-booking').on('click', function () {
 
         //Obtemos os valores
@@ -220,9 +215,6 @@
         return false;
     });
 
-    /**
-     * @Description: Método que faz o cálculo dos dados para obter o preco final
-     */
     function calculate_price(){
 
         //Obtemos os elementos do DOM
