@@ -106,7 +106,7 @@
         </div>
         <div class="css-btn-whatsapp">
             {% set wp_number = general.data_phones[0] %}{# 5579999882442 #}
-            {% set wp_message = "Olá!! Eu gostaria de fazer uma reserva: "|url_encode %}
+            {% set wp_message = "Olá!! Eu gostaria de solicitar uma reserva."|url_encode %}
             <a href="https://api.whatsapp.com/send?phone={{ wp_number }}&text={{ wp_message }}" target="_blank">
                 <img src="{{ general.full_images_url }}Icons/btn_whatsapp.png" alt="">
             </a>
