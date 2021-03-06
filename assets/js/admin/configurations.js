@@ -1,75 +1,58 @@
 
     //Variáveis globales
-    var status_ok = false; //Controla quando um processo foi com sucesso ou nao
+    var status_ok = false;
 
     $(document).ready(function () {
-        //Métodos executados por defeito no carregamento do documento
         configurations_function();
-
-        //Chamamos método que valida um telefone válido (inicializacao)
         phone_validatios();
     });
 
-    //Evento 'click' pra adicionar uma nova configuracao ao container
     $('.js-btn-configuracao-add-telefones').on('click', function () {
 
-        //Obtemos o HTML oculto
         let element_hide_parent_container = $('.js-hide-container-to-add-phones');
 
-        //Adicionamos o HTML ao elemento principal
         $('.js-real-container-to-add-phones').append(element_hide_parent_container.html());
 
-        //Método que procesa sub-procesos
         configurations_function();
-
-        //Chamamos método que valida um telefone válido (inicializacao)
         phone_validatios();
     });
 
-    //Evento 'click' pra adicionar uma nova configuracao ao container
     $('.js-btn-configuracao-add-email').on('click', function () {
 
-        //Obtemos o HTML oculto
         let element_hide_parent_container = $('.js-hide-container-to-add-emails');
 
-        //Adicionamos o HTML ao elemento principal
         $('.js-real-container-to-add-email').append(element_hide_parent_container.html());
 
-        //Método que procesa sub-procesos
         configurations_function();
     });
 
-    //Evento 'click' pra processar os dados e guardar no BD
     $('.js-btn-configuracao-salvar, .js-btn-configuracao-alterar').on('click', function () {
 
-        //Obtemos os elementos do DOM
         let element_btn = $(this);
 
-        //Evaluamos que tipo de botao é pra executar a respetiva peticao ajax
         if (element_btn.attr('data-btn-type') === 'salvar')
             ajax_petition('INSERT', element_btn);
         else
             ajax_petition('UPDATE', element_btn);
     });
 
-    /**
-     * @Description: Método que procesa as peticoes Ajax
-     */
     function ajax_petition(action, element_btn) {
 
-        //Obtemos os elementos do DOM
+        //DOM
         let element_general_container = $('.js-form-data-real-container');
         let element_neighborhood = element_general_container.find('.js-configuracao-barrio');
         let element_state = element_general_container.find('.js-configuracao-estado');
         let element_country = element_general_container.find('.js-configuracao-pais');
         let element_phones = element_general_container.find('.js-real-container-to-add-phones');
         let element_emails = element_general_container.find('.js-real-container-to-add-email');
+        let element_whatsapp_number = element_general_container.find('.js-configuracao-whatsapp');
         let element_id_configuration = $('.js-input-hidden-control-id');
 
-        //Obtemos os valores
+        //Valores
         let value_neighborhood = element_neighborhood.val();
         let value_state = element_state.val();
         let value_country = element_country.val();
+        let value_whatsapp_number = element_whatsapp_number.val();
 
         // ** Processo pra validacao dos campos **
 
@@ -183,6 +166,7 @@
                     neighborhood: value_neighborhood,
                     state: value_state,
                     country: value_country,
+                    whatsapp_number: value_whatsapp_number,
                     id_configuration: element_id_configuration.attr('data-id'),
                     action: action
                 },
@@ -229,9 +213,6 @@
             return false;
     }
 
-    /**
-     * @Description: Método que executa sub-métodos pra funcionalidade dependentes de outros procesos
-     */
     function configurations_function() {
 
         //Obtemos os elementos do DOM
@@ -253,12 +234,7 @@
         });
     }
 
-    /**
-     * @Description: Método que deleta o 'telefone/email' do HTML
-     */
     function delete_data(element, type) {
-
-        //Validamos o tipo de elininacao
         if (type === 'phone')
             //Deletamos o HTML do telepone
             element
@@ -274,10 +250,7 @@
                 .remove()
                 .removeClass('js-div-new-row-email');
     }
-    
-    /**
-     *@Description: Método que ativa/desativa um elemento HTML do DOM
-     */
+
     function enable_disable_elements(element, type) {
 
         //Validamos o tipo de acao

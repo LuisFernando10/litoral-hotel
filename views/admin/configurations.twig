@@ -271,13 +271,25 @@
                                             </div>
                                         </div>
 
+                                        {# General #}
+                                        <h3>General</h3>
+                                        <hr>
+                                        <div class="form-row mt-3">
+                                            <div class="offset-4 col-md-4">
+                                                <div class="form-group bmd-form-group">
+                                                    <label>Número WhatsApp</label>
+                                                    <input type="text" class="form-control js-input-number js-configuracao-whatsapp" value="{{ configurations.numero_wp }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         {# Botao de Alterar #}
                                         <button type="submit" class="btn btn-primary pull-right js-btn-configuracao-alterar" data-btn-type="alterar">Alterar</button>
                                     {% endfor %}
                                 {% endif %}
                             </div>
 
-                            {# ** Recipiente Oculto Telefones (HTML) ** #}
+                            {# ** HTML Oculto (Telefones) ** #}
                             <div class="css-element-hide js-hide-container-to-add-phones">
                                 <div class="row js-div-new-row">
 
@@ -313,7 +325,7 @@
                                 </div>
                             </div>
 
-                            {# ** Recipiente Oculto Emails (HTML) ** #}
+                            {# ** HTML Oculto (Emails) ** #}
                             <div class="css-element-hide js-hide-container-to-add-emails">
                                 <div class="row js-div-new-row-email">
 

@@ -9,39 +9,19 @@
 
         class Configurations
         {
-            /**
-             * @Description: Metodo que obtem os dados correspondentes aos 'Configuracoes'
-             */
+            # SELECT
             static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $telefones = NULL, $tipo = NULL, $emails = NULL) {
 
-                //Valor por defeito para '$page'
-                if (isset($page) && $page != NULL && is_numeric($page)){
-                    /* Se deixa igual */
-                }
-                else
-                    $page = 1;
+                #General
+                $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
+                $pagination = isset($pagination) && $pagination != NULL && is_numeric($pagination) ? $pagination : constant("PAGINATION");;
+                $type = isset($type) && $type != NULL && is_numeric($type) ? $type : 'normal';
 
-                //Valor por defeito para '$pagination'
-                if (isset($pagination) && $pagination != NULL && is_numeric($pagination)) {
-                    /* Se deixa igual */
-                }
-                else
-                    $pagination = constant("PAGINATION");
-
-                //Valor por defeito para '$type' (normal - count)
-                if (isset($type) && $type != NULL) {
-                    /* Se deixa igual */
-                }
-                else
-                    $type = "normal";
-
-                //Se calcula desde que registro se va a listar según la paginacion
+                #Condiciones
                 $limit_start = ($page * $pagination) - $pagination;
-
-                //Construimos las condiciones de la consulta
                 $conditions = "";
 
-                //Filtro por '$id_configuracao'
+                #Filtros
                 if ($id_configuracao !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.id_configuracao = "%s"';
@@ -50,8 +30,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$barrio'
                 if ($barrio !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.barrio = "%s"';
@@ -60,8 +38,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$estado'
                 if ($estado !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.estado = "%s"';
@@ -70,8 +46,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$pais'
                 if ($pais !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.pais = "%s"';
@@ -80,8 +54,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$telefones'
                 if ($telefones !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.telefones = "%s"';
@@ -90,8 +62,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$barrio'
                 if ($barrio !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.barrio = "%s"';
@@ -100,8 +70,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$tipo'
                 if ($tipo !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.tipo = "%s"';
@@ -110,8 +78,6 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-
-                //Filtro por '$emails'
                 if ($emails !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND configuracoes.email = "%s"';
@@ -121,7 +87,7 @@
                     unset($this_condition);
                 }
 
-                //Evaluamos el tipo de consulta
+                #Campos
                 if ($type == 'count') {
                     $sql_select = "count(*) as count";
                     $sql_limit = '';
@@ -134,13 +100,13 @@
                         configuracoes.pais,
                         configuracoes.telefones,
                         configuracoes.tipo,
-                        configuracoes.email
+                        configuracoes.email,
+                        configuracoes.numero_wp
                     ";
-
                     $sql_limit = "LIMIT $limit_start, $pagination";
                 }
 
-                //Preparamos el query
+                #Query
                 $sql = "
                     SELECT 
                         $sql_select
@@ -154,56 +120,45 @@
                     $sql_limit
                 ";
 
-                //Ejecutamos la consulta
+                #Executar
                 $result = DataBase::query($sql);
 
+                #Resposta
                 if (isset($result[0]) && $result != NULL) {
-
                     if ($type == 'count') {
-
-                        //Se calcula el total de paginas con esta configuracion
                         $total_pages = ceil(($result[0]['count']) / $pagination);
-
-                        return array(
+                        return [
                             "count" => $result[0]['count'],
                             "pagination" => "" . $pagination,
                             "page" => "" . $page,
                             "total_pages" => "" . $total_pages,
-                        );
+                        ];
                     }
-                    else
-                        return $result;
+                    else return $result;
                 }
-                else
-                    return NULL;
+                else return NULL;
             }
 
-            /**
-             * @Description: Método que insere um orferecimento no BD
-             */
-            static function insertConfiguration($barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL, $array_email = NULL){
+            # INSERT
+            static function insertConfiguration($barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL, $array_email = NULL, $numero_wp  = NULL){
 
-                // *** Procesamos os dados dos '$array' pra obter os 'telefones', os 'tipos' e os 'email' ***
-
-                //Criamos as variáveis que guardarao os telefones, os tipos e os emails
+                # Procesamos os dados dos '$array' pra obter os 'telefones', os 'tipos' e os 'email'
                 $phones = [];
                 $type = [];
                 $emails = [];
 
-                //Iteramos sobre o '$array_data'
+                #Telefones
                 foreach ($array_data as $key => $value){
-                    //Alimentamos os arrays generales correspondente ao dado certo
                     $phones[] = $value['telefone'];
                    $type[] = $value['tipo'];
                 }
 
-                //Iteramos sobre o '$array_email'
+                #Email
                 foreach ($array_email as $key => $value){
-                    //Alimentamos os arrays generales correspondente ao dado certo
                     $emails[] = $value['email'];
                 }
 
-                //Preparamos el Query
+                #Query
                 $sql = "
                     INSERT INTO configuracoes
                     (
@@ -212,9 +167,11 @@
                         pais,
                         telefones,
                         tipo,
-                        email
+                        email,
+                        numero_wp
                     )
                     VALUES (
+                        '%s',
                         '%s',
                         '%s',
                         '%s',
@@ -223,53 +180,45 @@
                         '%s'
                     )
                 ";
-
-                //Nos substitui os valores
                 $sql = sprintf($sql,
                     $barrio,
                     $estado,
                     $pais,
                     json_encode($phones),
                     json_encode($type),
-                    json_encode($emails)
+                    json_encode($emails),
+                    $numero_wp
                 );
 
-                //Executamos o Query
+                #Executar
                 $result = DataBase::query($sql);
 
-                //Validamos se a operacao foi com sucesso
-                if ($result != NULL)
-                    return $result;
-                else
-                    return false;
+                #Resposta
+                if ($result != NULL) return $result;
+                else return false;
             }
 
-            /**
-             * @Description: Método que 'atualiza' um orferecimento no BD
-             */
-            static function updateConfiguration($id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL, $array_email = NULL){
+            # UPDATE
+            static function updateConfiguration($id_configuracao = NULL, $barrio = NULL, $estado = NULL, $pais = NULL, $array_data = NULL, $array_email = NULL, $numero_wp  = NULL){
 
                 // *** Procesamos os dados dos '$array' pra obter os 'telefones', os 'tipos' e os 'email' ***
 
-                //Criamos as variáveis que guardarao os telefones, os tipos e os emails
                 $phones = [];
                 $type = [];
                 $emails = [];
 
-                //Iteramos sobre o '$array_data'
+                # Telefones
                 foreach ($array_data as $key => $value){
-                    //Alimentamos os arrays generales correspondente ao dado certo
                     $phones[] = $value['telefone'];
                     $type[] = $value['tipo'];
                 }
 
-                //Iteramos sobre o '$array_email'
+                #Email
                 foreach ($array_email as $key => $value){
-                    //Alimentamos os arrays generales correspondente ao dado certo
                     $emails[] = $value['email'];
                 }
 
-                //Preparamos el SQL
+                #Query
                 $sql = "
                     UPDATE
                         configuracoes
@@ -279,12 +228,11 @@
                         pais = '%s',
                         telefones = '%s',
                         tipo = '%s',
-                        email = '%s'
+                        email = '%s',
+                        numero_wp = '%s'
                     WHERE
                         id_configuracao = '%s'
                 ";
-
-                //Reemplazamos valores
                 $sql = sprintf($sql,
                     $barrio,
                     $estado,
@@ -292,13 +240,11 @@
                     json_encode($phones),
                     json_encode($type),
                     json_encode($emails),
+                    $numero_wp,
                     $id_configuracao
                 );
 
-                //Ejecutamos el Query (true-false)
-                $result = DataBase::query($sql);
-
-                //Retornamos a resposta
-                return $result;
+                #Resposta
+                return DataBase::query($sql);
             }
         }
