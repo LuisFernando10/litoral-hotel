@@ -82,7 +82,13 @@
                             <div class="footer_list">
                                 <ul>
                                     <li>
-                                        <span><p>Crianças até 7 anos não pagam.</p></span>
+                                        <span><p>- Parcelamos em até 3 vezes sem juros.</p></span>
+                                    </li>
+                                    <li>
+                                        <span><p>- Crianças até 7 anos não pagam.</p></span>
+                                    </li>
+                                    <li>
+                                        <span><p>- Os preços podem mudar em feriados e dias com eventos .</p></span>
                                     </li>
                                 </ul>
                             </div>
@@ -105,12 +111,10 @@
             {# Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. #}
         </div>
         <div class="css-btn-whatsapp">
-            {% set wp_number = '5579999882442' %}{# 5579999882442 #}
+            {% set wp_number = '' %}
             {% set wp_message = "Olá!! Eu gostaria de solicitar uma reserva."|url_encode %}
             <a href="https://api.whatsapp.com/send?phone={{ wp_number }}&text={{ wp_message }}" target="_blank">
                 <img src="{{ general.full_images_url }}Icons/btn_whatsapp.png" alt="">
             </a>
         </div>
-    {# {{ dump(wp_number) }}
-        {{ dump(wp_message) }} #}
     </footer>
