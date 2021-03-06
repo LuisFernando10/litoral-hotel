@@ -111,7 +111,7 @@
             {# Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. #}
         </div>
         <div class="css-btn-whatsapp">
-            {% set wp_number = '' %}
+            {% set wp_number = general.data_configuration['numero_wp'] %}
             {% set wp_message = "Olá!! Eu gostaria de solicitar uma reserva."|url_encode %}
             <a href="https://api.whatsapp.com/send?phone={{ wp_number }}&text={{ wp_message }}" target="_blank">
                 <img src="{{ general.full_images_url }}Icons/btn_whatsapp.png" alt="">
