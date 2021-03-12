@@ -111,16 +111,16 @@
             {# Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. #}
         </div>
 
-        {# <div class="css-btn-whatsapp">
+        <div class="css-btn-whatsapp">
             {% set wp_number = general.data_configuration['numero_wp'] %}
             {% set wp_message = "Olá!! Eu gostaria de solicitar uma reserva."|url_encode %}
             <a href="https://api.whatsapp.com/send?phone={{ wp_number }}&text={{ wp_message }}" target="_blank">
                 <img src="{{ general.full_images_url }}Icons/btn_whatsapp.png" alt="">
             </a>
-        </div> #}
+        </div>
 
 
-        <script type='text/javascript' charset='utf-8'>
+        {# <script type='text/javascript' charset='utf-8'>
             let iframe = document.createElement('iframe');
             let html_content = `
                 <div style="display:block; width:70px; height:70px; color:#fff; position:fixed; right:20px; bottom:20px; border-radius:50%; line-height:80px; text-align:center; z-index:999;">
@@ -135,5 +135,5 @@
             iframe.contentWindow.document.write(html_content);
             iframe.classList.add('css-btn-whatsapp');
             //iframe.style = "display:block; width:70px; height:70px; color:#fff; position:fixed; right:20px; bottom:20px; border-radius:50%; line-height:80px; text-align:center; z-index:999;";
-        </script>
+        </script> #}
     </footer>
