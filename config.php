@@ -1,40 +1,25 @@
 
 	<?php
 
-		/**
-		* @Description: Documento que almacena las constantes de configuración del sitio
-		* @User: luis.chamorro
-		* @Date: 06-10-2019
-		*/
+        #Headers
+        header('Content-Type: text/html; charset=utf-8');
 
-	    //Definimos zona horaria de la página
+	    #Zona horaria
 		date_default_timezone_set('America/Bogota');
 
-		//Evaluamos si el protocolo es 'https' o 'http'
-	    if (isset($_SERVER['HTTPS']) === true) 
-	    	$protocol = 'https';
-	    else 
-	    	$protocol = 'http';
+        #Generales
+        define('SITE_PROTOCOL', isset($_SERVER['HTTPS']) === true ? 'https' : 'https');
+        define("PAGINATION", 15);
+        define('DEBUG', true);
+        define('EMAIL', 'reservas@hotellitoral.com.br');
 
-	    //Definimos constante para el protocolo de la plataforma, puede ser (https-http)
-	    define('SITE_PROTOCOL', $protocol);
-
-        //Definimos constante para el Debug (errores)
-	    define('DEBUG', true);
-
-	    //Definimos las 'RUTAS' generales del proyecto
+	    #Rutas
 	    define('FULL_WEB_URL', constant('SITE_PROTOCOL').'://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/');
 	    define('ASSETS_WEB_URL', constant('FULL_WEB_URL').'assets/');
 	    define('IMAGES_WEB_URL', constant('ASSETS_WEB_URL').'img/');
 
-        //Pagination
-        define("PAGINATION", 15);
-
-        //Email
-        define('EMAIL', 'reservas@hotellitoral.com.br');
-
-        //Datos de conexión a la BD
+        #BD
         define('DB_SERVER','localhost'); //litora-hotel.mysql.uhserver.com - localhost
         define('DB_USER','root');//phpmyadmin - root - hlitorallira
-        define('DB_PASSWORD','');//lfchamorro10f - root - HlLitoHote10f*
+        define('DB_PASSWORD','phpmyadmin');//lfchamorro10f - root - HlLitoHote10f*
         define('DB_DATABASE','litoral_hotel');//litoral_hotel - litora_hotel
