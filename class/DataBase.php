@@ -37,6 +37,7 @@
                         $dbConnection = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 
                         //Declaramos la codificación de la Bd
+                        $dbConnection->set_charset("utf8mb4");
                         $dbConnection->query("SET NAMES 'utf8mb4'");
 
                         if ($dbConnection->connect_error) {
