@@ -34,7 +34,7 @@
         $data_user = Users::getAll(NULL, NULL, NULL, $user_id, NULL, NULL, NULL, '1','ativo');
 
         //Obtenemos los datos GET que corresponden a la estructura general de la plataforma (Class-Method-Id) y paginaciones
-        $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "usuarios")));
+        $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "configuracoes")));
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING, array("options" => array("default" => 1)));
@@ -241,7 +241,7 @@
             default:
 
                 //Cargamos y renderizamos la plantilla (Vista), junto con los parámetros (Variables) a utilizar
-                $twig->display('dashboard.twig',array(
+                $twig->display('configurations.twig',array(
                     'general' => $general_param
                 ));
                 break;
