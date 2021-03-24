@@ -50,10 +50,8 @@
             'class_url' => $class
         );
 
-        //Evaluamos cada uno de los controladores para permitir el acceso a las respectivas vistas
+        #Vistas
         switch ($class){
-
-            //Cargamos y renderizamos las plantillas (Vistas), junto con los parámetros (Variables) a utilizar
 
             #DASHBOARD
             case 'dashboard':
@@ -95,6 +93,38 @@
                         'general' => $general_param,
                         'data_room' => $data_room
                     ));
+
+                break;
+
+            #PROMOÇÕES
+            case 'promocoes':
+
+                #DB Data
+                $data_promotion = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
+                $data_promotion_edit = Promotions::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
+
+                #Actions
+                if ($action == 'create')
+                    $twig->display('promotions-create.twig', [
+                        'general' => $general_param
+                    ]);
+                elseif ($action == 'edit'){
+                    if (is_numeric($id) && $id != '')
+                        $twig->display('promotions-edit.twig', [
+                            'general' => $general_param,
+                            'data_promotion_edit' => $data_promotion_edit[0]
+                        ]);
+                    else
+                        $twig->display('promotions-list.twig', [
+                            'general' => $general_param,
+                            'data_promotion' => $data_promotion
+                        ]);
+                }
+                else
+                    $twig->display('promotions-list.twig', [
+                        'general' => $general_param,
+                        'data_promotion' => $data_promotion
+                    ]);
 
                 break;
 
