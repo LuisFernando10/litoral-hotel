@@ -14,7 +14,7 @@
 
                 #General
                 $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
-                $pagination = isset($pagination) && $pagination != NULL && is_numeric($pagination) ? $pagination : constant("PAGINATION");;
+                $pagination = isset($pagination) && $pagination != NULL && is_numeric($pagination) ? $pagination : constant("PAGINATION");
                 $type = isset($type) && $type != NULL && is_numeric($type) ? $type : 'normal';
 
                 #Condiciones
