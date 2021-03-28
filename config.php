@@ -8,7 +8,7 @@
 		date_default_timezone_set('America/Bogota');
 
         #Generales
-        define('SITE_PROTOCOL', isset($_SERVER['HTTPS']) === true ? 'https' : 'https');
+        define('SITE_PROTOCOL', isset($_SERVER['HTTPS']) === true ? 'https' : 'http');
         define("PAGINATION", 15);
         define('DEBUG', true);
         define('EMAIL', 'reservas@hotellitoral.com.br');
@@ -21,5 +21,5 @@
         #BD
         define('DB_SERVER','localhost'); //litora-hotel.mysql.uhserver.com - localhost
         define('DB_USER','root');//phpmyadmin - root - hlitorallira
-        define('DB_PASSWORD','phpmyadmin');//lfchamorro10f - root - HlLitoHote10f*
+        define('DB_PASSWORD','');//lfchamorro10f - root - HlLitoHote10f*
         define('DB_DATABASE','litoral_hotel');//litoral_hotel - litora_hotel
