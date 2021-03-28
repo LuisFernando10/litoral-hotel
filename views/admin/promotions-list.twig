@@ -40,11 +40,17 @@
                                                     <td class="text-left td-number"><small>R$</small> {{ promotion.preco }}</td>
                                                     <td>
                                                         {% if (promotion.estado == 'ativo') %}
-                                                            {% set estado = '<span class="badge badge-success">Ativo</span>' %}
+                                                            {% set estado %}
+                                                                <span class="badge badge-success">Ativo</span>
+                                                            {% endset %}
                                                         {% elseif (promotion.estado == 'finalizado') %}
-                                                            {% set estado = '<span class="badge badge-black">Finalizado</span>' %}
+                                                            {% set estado %}
+                                                                <span class="badge badge-black">Finalizado</span>
+                                                            {% endset %}
                                                         {% else %}
-                                                            {% set estado = '<span class="badge badge-warning">Próximo</span>' %}
+                                                            {% set estado %}
+                                                                <span class="badge badge-warning">Próximo</span>
+                                                            {% endset %}
                                                         {% endif %}
 
                                                         {# Render #}

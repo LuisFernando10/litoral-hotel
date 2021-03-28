@@ -1,13 +1,7 @@
 
     <?php
 
-        /**
-         * @Description: Documento que procesa los controladores y las acciones para renderizar las vistas con 'Twig' para el rol 'administrador'
-         * @User: luis.chamorro
-         * @Date: 14/feb/2020
-         */
-
-        //Importamos os arquivos que sao indispensaveis pra funcionaiodade do sistema
+        #Importaciones
         require_once(dirname(__FILE__).'/../../security/secure-session.php');
         require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
@@ -27,20 +21,20 @@
         //Adicionamos as extensões necessárias
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-        //Obtenemos el Id del 'usuario' y el Id de la 'empresa'
+        #Datos Generales
         $user_id = $_SESSION['user_id'];
 
-        //Obtenemos los datos desde la BD correspondiente al rol 'administrador'
+        #Datos BD
         $data_user = Users::getAll(NULL, NULL, NULL, $user_id, NULL, NULL, NULL, '1','ativo');
 
-        //Obtenemos los datos GET que corresponden a la estructura general de la plataforma (Class-Method-Id) y paginaciones
+        #URL
         $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "configuracoes")));
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING, array("options" => array("default" => 1)));
         $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING, array("options" => array("default" => NULL)));
 
-        //Definimos los parámetros generales a utilizar en las plantillas 'twig'
+        #Parámetros Generales
         $general_param = array(
             'full_web_url' => constant('FULL_WEB_URL'),
             'full_assets_url' => constant('ASSETS_WEB_URL'),
@@ -100,13 +94,15 @@
             case 'promocoes':
 
                 #DB Data
-                $data_promotion = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
-                $data_promotion_edit = Promotions::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL, NULL, NULL, NULL, NULL);
+                $data_promotion = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL);
+                $data_room = Rooms::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL,NULL,NULL);
+                $data_promotion_edit = Promotions::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL, NULL, NULL);
 
                 #Actions
                 if ($action == 'create')
                     $twig->display('promotions-create.twig', [
-                        'general' => $general_param
+                        'general' => $general_param,
+                        'data_room' => $data_room
                     ]);
                 elseif ($action == 'edit'){
                     if (is_numeric($id) && $id != '')

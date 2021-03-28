@@ -74,7 +74,7 @@
                     $sql_select = "
                         promocao.id_promocao,
                         promocao.id_quarto,
-                        quartos.nome,
+                        quartos.nome as nome_quarto,
                         promocao.nome,
                         promocao.data_inicial,
                         promocao.data_final,
@@ -121,40 +121,46 @@
             # INSERT
             static function insertPromotion($id_quarto = NULL, $nome = NULL, $data_inicial = NULL, $data_final = NULL, $preco = NULL){
 
-                #Query
-                $sql = "
-                    INSERT INTO promocao
-                    (
-                        id_quarto,
-                        nome,
-                        data_inicial,
-                        data_final,
-                        preco,
-                        estado
-                    )
-                    VALUES (
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        '%s',
-                        'proximo'
-                    )
-                ";
-                $sql = sprintf($sql,
-                    $id_quarto,
-                    $nome,
-                    $data_inicial,
-                    $data_final,
-                    $preco
-                );
+                $existing_promotion = Promotions::getAll(NULL,NULL,NULL,NULL, NULL, $nome);
 
-                #Executar
-                $result = DataBase::query($sql);
+                if ($existing_promotion != NULL)
+                    return 'existing-promotion';
+                else{
+                    #Query
+                    $sql = "
+                        INSERT INTO promocao
+                        (
+                            id_quarto,
+                            nome,
+                            data_inicial,
+                            data_final,
+                            preco,
+                            estado
+                        )
+                        VALUES (
+                            '%s',
+                            '%s',
+                            '%s',
+                            '%s',
+                            '%s',
+                            'proximo'
+                        )
+                    ";
+                    $sql = sprintf($sql,
+                        $id_quarto,
+                        $nome,
+                        $data_inicial,
+                        $data_final,
+                        $preco
+                    );
 
-                #Resposta
-                if ($result != NULL) return $result;
-                else return false;
+                    #Executar
+                    $result = DataBase::query($sql);
+
+                    #Resposta
+                    if ($result != NULL) return $result;
+                    else return false;
+                }
             }
 
             # UPDATE
@@ -183,6 +189,24 @@
                 );
 
                 #Resposta
+                return DataBase::query($sql);
+            }
+
+            # DELETE
+            static function deletePromotion($id_promotion = NULL){
+
+                #Query
+                $sql = "
+                    DELETE FROM
+                        promocao 
+                    WHERE 
+                        id_promocao = '%s'
+                ";
+                $sql = sprintf($sql,
+                    $id_promotion
+                );
+
+                #Respuesta
                 return DataBase::query($sql);
             }
         }

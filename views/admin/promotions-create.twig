@@ -23,55 +23,48 @@
                                     <div class="offset-md-2 col-md-8">
                                         <div class="form-group bmd-form-group">
                                             <label>Nome</label>
-                                            <input type="text" class="form-control js-quarto-nome">
+                                            <input type="text" class="form-control js-promotion-name">
                                         </div>
                                     </div>
                                 </div>
 
-                                {# Adultos-Preço #}
+                                {# Quartos-Preço #}
                                 <div class="form-row mt-4">
                                     <div class="form-group col-md-6">
-                                        <label for="select-adults">Adultos</label>
-                                        <select class="form-control js-quartos-adultos" id="select-adults">
+                                        <label for="select-room">Quartos</label>
+                                        <select class="form-control js-promotion-rooms" id="select-room">
                                             <option selected disabled class="">Selecionar</option>
-                                            <option class="1">1</option>
-                                            <option class="2">2</option>
-                                            <option class="3">3</option>
-                                            <option class="4">4</option>
-                                            <option class="5">5</option>
+                                            {% for room in data_room %}
+                                                <option value="{{ room.id_quarto }}">{{ room.nome }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label style="top: 5px">Preço</label><br style="margin-bottom: 3px">
-                                        <input type="text" class="form-control mt-2 js-quarto-preco">
+                                        <input type="text" class="form-control mt-2 js-promotion-price">
                                     </div>
                                 </div>
 
-                                {# Descrição #}
+                                {# Datas #}
                                 <div class="form-row mt-4">
-                                    <div class="form-group col-md-12">
-                                        <label>Descrição</label>
-                                        <textarea type="text" class="form-control js-quarto-descricao"></textarea>
+                                    <div class="form-group col-md-6">
+                                        <label>Data Inicial</label>
+                                        <input type="date" class="form-control mt-2 js-promotion-initial-date">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Data Final</label>
+                                        <input type="date" class="form-control mt-2 js-promotion-final-date">
                                     </div>
                                 </div>
+                            </div>
 
-                                {# Imagem #}
-                                <div class="form-group form-file-upload form-file-simple mt-4">
-                                    <label>Imagem</label>
-                                    <div class="input-group">
-                                        <input type="file" class="inputFileHidden js-quarto-image">
-                                        <input type="text" class="form-control inputFileVisible" placeholder="Selecione um arquivo" readonly>
-                                        <span class="input-group-btn js-icon-open-input-file">
-                                            <button type="button" class="btn btn-fab btn-round btn-primary">
-                                                <i class="material-icons">attach_file</i>
-                                            </button>
-                                        </span>
-                                    </div>
+                            {# Botao Salvar #}
+                            <div class="card-footer">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary pull-right js-promotion-btn-create">Salvar</button>
                                 </div>
-
-                                {# Botao de salvar #}
-                                <button type="submit" class="btn btn-primary pull-right btn-quartos-save">Salvar</button>
                             </div>
                         </div>
                     </div>
@@ -81,5 +74,5 @@
     {% endblock %}
 
     {% block footer_scripts %}
-        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/quartos.js"></script>
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/promotion.js"></script>
     {% endblock %}
