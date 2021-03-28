@@ -14,31 +14,13 @@
              */
             static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_quarto = NULL, $nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL, $order_control = NULL) {
 
-                //Valor por defecto para 'page'
-                if (isset($page) && $page != NULL && is_numeric($page)){
-                    /* Se deja igual */
-                }
-                else
-                    $page = 1;
+                #General
+                $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
+                $pagination = isset($pagination) && $pagination != NULL && is_numeric($pagination) ? $pagination : constant("PAGINATION");
+                $type = isset($type) && $type != NULL && is_numeric($type) ? $type : 'normal';
 
-                //Valor por defecto para 'pagination'
-                if (isset($pagination) && $pagination != NULL && is_numeric($pagination)) {
-                    /* Se deja igual */
-                }
-                else
-                    $pagination = constant("PAGINATION");
-
-                //Valor por defecto para tipo (normal - count)
-                if (isset($type) && $type != NULL) {
-                    /* Se deja igual */
-                }
-                else
-                    $type = "normal";
-
-                //Se calcula desde que registro se va a listar segun la paginacion
+                #Condiciones
                 $limit_start = ($page * $pagination) - $pagination;
-
-                //Construimos las condiciones de la consulta
                 $conditions = "";
 
                 //Filtro por '$id_quarto'
@@ -151,7 +133,7 @@
                         1+1=2
                         $conditions
                     ORDER BY 
-                        quartos.nome
+                        quartos.adultos, quartos.nome
                     $sql_limit
                 ";
 
