@@ -74,7 +74,7 @@
                     $sql_select = "
                         promocao.id_promocao,
                         promocao.id_quarto,
-                        quartos.nome_quarto,
+                        quartos.nome,
                         promocao.nome,
                         promocao.data_inicial,
                         promocao.data_final,
