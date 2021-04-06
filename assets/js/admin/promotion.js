@@ -54,37 +54,33 @@
         });
     });
 
-    $('.btn-quartos-save-edit').on('click', function () {
+    $('.js-promotion-btn-edit').on('click', function () {
 
-        //Obtenemos los elementos
-        let element_frm_parent = $('.js-quarto-frm-edit');
-        let element_name = element_frm_parent.find('.js-quarto-nome');
-        let element_description = element_frm_parent.find('.js-quarto-descricao');
-        let element_adultos = element_frm_parent.find('.js-quarto-adultos');
-        let element_price = element_frm_parent.find('.js-quarto-preco');
-        let element_image = element_frm_parent.find('.js-quarto-image');
-        let element_estado = element_frm_parent.find('.js-quarto-estado');
+        //DOM
+        let current_element = $(e.target);
+        let element_name = $('.js-promotion-name');
+        let element_room = $('.js-promotion-rooms');
+        let element_price = $('.js-promotion-price');
+        let element_initial_date = $('.js-promotion-initial-date');
+        let element_final_date = $('.js-promotion-final-date');
 
-        //Obtenemos los valores
+        //Valores
+        let value_id = current_element.attr('data-id');
         let value_name = element_name.val();
-        let value_description = element_description.val();
-        let value_adultos = element_adultos.val();
+        let value_room = element_room.val();
         let value_price = element_price.val();
-        let value_image = element_image.prop('files')[0];
-        let value_estado = element_estado.val();
+        let value_initial_date = element_initial_date.val();
+        let value_final_date = element_final_date.val();
 
-        //Creamos objeto para recopilar los datos que enviaremos al Ajax
+        //FormData
         let form_data = new FormData();
 
-        //Adicionamos las llaves y los valores que conformarán el FormData
-        form_data.append('quarto_id', $(this).attr('data-id'));
-        form_data.append('quarto_name', value_name);
-        form_data.append('quarto_description', value_description);
-        form_data.append('quarto_adultos', value_adultos);
-        form_data.append('quarto_price', value_price);
-        form_data.append('quarto_file', value_image);
-        form_data.append('quarto_file_current_name', $('.js-input-file-edit').val());
-        form_data.append('quarto_estado', value_estado);
+        form_data.append('promotion_id_promotion', value_id);
+        form_data.append('promotion_name', value_name);
+        form_data.append('promotion_room', value_room);
+        form_data.append('promotion_price', value_price);
+        form_data.append('promotion_initial_date', value_initial_date);
+        form_data.append('promotion_final_date', value_final_date);
         form_data.append('action', 'UPDATE');
 
         //Ejecutamos Ajax

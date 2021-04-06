@@ -16,84 +16,56 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body js-quarto-frm-edit">
+                            <div class="card-body js-promotion-frm-edit">
 
                                 {# Nome #}
                                 <div class="form-row mt-3">
                                     <div class="offset-md-2 col-md-8">
                                         <div class="form-group bmd-form-group">
                                             <label>Nome</label>
-                                            <input type="text" class="form-control js-quarto-nome" value="{{ data_room_edit.nome }}">
+                                            <input type="text" class="form-control js-promotion-name" value="{{ data_promotion_edit.nome }}">
                                         </div>
                                     </div>
                                 </div>
 
-                                {# Adultos-Preço #}
+                                {# Quartos-Preço #}
                                 <div class="form-row mt-4">
                                     <div class="form-group col-md-6">
-                                        <label for="select-adults">Adultos</label>
-                                        <select class="form-control js-quarto-adultos" id="select-adults">
-                                            <option {{ (data_room_edit.adultos == 1) ? 'selected' : '' }} value="1">1</option>
-                                            <option {{ (data_room_edit.adultos == 2) ? 'selected' : '' }} value="2">2</option>
-                                            <option {{ (data_room_edit.adultos == 3) ? 'selected' : '' }} value="3">3</option>
-                                            <option {{ (data_room_edit.adultos == 4) ? 'selected' : '' }} value="4">4</option>
-                                            <option {{ (data_room_edit.adultos == 5) ? 'selected' : '' }} value="5">5</option>
+                                        <label for="select-room">Quartos</label>
+                                        <select class="form-control js-promotion-rooms" id="select-room">
+                                            <option selected disabled class="">Selecionar</option>
+                                            {% for room in data_room %}
+                                                {% set selected_option = data_promotion_edit.id_quarto == room.id_quarto ? 'selected' : '' %}
+                                                <option {{ selected_option }} value="{{ room.id_quarto }}">{{ room.nome }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label style="top: 5px">Preço</label><br style="margin-bottom: 3px">
-                                        <input type="text" class="form-control mt-2 js-quarto-preco" value="{{ data_room_edit.preco }}">
+                                        <input type="text" class="form-control mt-2 js-promotion-price" value="{{ data_promotion_edit.preco }}">
                                     </div>
                                 </div>
 
-                                {# Descrição #}
+                                {# Datas #}
                                 <div class="form-row mt-4">
-                                    <div class="form-group col-md-12">
-                                        <label>Descrição</label>
-                                        <textarea type="text" class="form-control js-quarto-descricao">{{ data_room_edit.descricao }}</textarea>
+                                    <div class="form-group col-md-6">
+                                        <label>Data Inicial</label>
+                                        <input type="date" class="form-control mt-2 js-promotion-initial-date" value="{{ data_promotion_edit.data_inicial }}">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Data Final</label>
+                                        <input type="date" class="form-control mt-2 js-promotion-final-date" value="{{ data_promotion_edit.data_final }}">
                                     </div>
                                 </div>
+                            </div>
 
-                                {# Imagem #}
-                                <div class="form-group form-file-upload form-file-simple mt-4">
-                                    <label>Imagem</label><br>
-                                    <div class="input-group">
-                                        <input type="file" class="inputFileHidden js-quarto-image">
-                                        <input type="text" class="form-control inputFileVisible" value="{{ data_room_edit.image }}" readonly>
-
-                                        {# '<input-hidden>' para guardar temporalmente el nombre del archivo anteior y asi tenerlo de referencia para eliminar el mismo en caso de que se actualice #}
-                                        <input type="hidden" class="js-input-file-edit" value="{{ data_room_edit.image }}">
-
-                                        <span class="input-group-btn js-icon-open-input-file">
-                                            <button type="button" class="btn btn-fab btn-round btn-primary">
-                                                <i class="material-icons">attach_file</i>
-                                            </button>
-                                        </span>
-                                    </div>
+                            {# Botao Salvar #}
+                            <div class="card-footer">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary pull-right js-promotion-btn-edit" data-id="{{ data_promotion_edit.id_promocao }}">Salvar</button>
                                 </div>
-
-                                <div class="form-row mt-4">
-
-                                    {# Imagem #}
-                                    <div class="form-group col-md-4">
-                                        <div class="img-container">
-                                            <img class="img-thumbnail" src="{{ general.full_images_url }}/galery/{{ data_room_edit.image }}" rel="nofollow" alt="Quarto">
-                                        </div>
-                                    </div>
-
-                                    {# Estado #}
-                                    <div class="form-group col-md-6 ml-5 mt-5">
-                                        <label for="select-estado">Estado</label>
-                                        <select class="form-control js-quarto-estado" id="select-estado">
-                                            <option {{ (data_room_edit.estado == 'disponivel') ? 'selected' : '' }} value="disponivel">Disponível</option>
-                                            <option {{ (data_room_edit.estado == 'ocupado') ? 'selected' : '' }} value="ocupado">Ocupado</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                {# Botao de salvar #}
-                                <button type="submit" class="btn btn-primary pull-right btn-quartos-save-edit" data-id="{{ data_room_edit.id_quarto }}">Salvar</button>
                             </div>
                         </div>
                     </div>
@@ -103,5 +75,5 @@
     {% endblock %}
 
     {% block footer_scripts %}
-        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/quartos.js"></script>
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/promotion.js"></script>
     {% endblock %}

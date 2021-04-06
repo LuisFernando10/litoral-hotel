@@ -108,7 +108,8 @@
                     if (is_numeric($id) && $id != '')
                         $twig->display('promotions-edit.twig', [
                             'general' => $general_param,
-                            'data_promotion_edit' => $data_promotion_edit[0]
+                            'data_promotion_edit' => $data_promotion_edit[0],
+                            'data_room' => $data_room
                         ]);
                     else
                         $twig->display('promotions-list.twig', [
