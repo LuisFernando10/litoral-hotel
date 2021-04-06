@@ -37,7 +37,7 @@
                                                     <td>{{ promotion.nome }}</td>
                                                     <td>{{ promotion.data_inicial }}</td>
                                                     <td>{{ promotion.data_final }}</td>
-                                                    <td class="text-left td-number"><small>R$</small> {{ promotion.preco }}</td>
+                                                    <td class="text-left text-primary"><small>R$</small> {{ promotion.preco }}</td>
                                                     <td>
                                                         {% if (promotion.estado == 'ativo') %}
                                                             {% set estado %}
@@ -56,7 +56,7 @@
                                                         {# Render #}
                                                         {{ estado }}
                                                     </td>
-                                                    <td class="td-actions text-right">
+                                                    <td class="td-actions text-left">
 
                                                         {# Editar #}
                                                         <a href="{{ general.full_web_url }}promocoes/edit/{{ promotion.id_promocao }}/">
