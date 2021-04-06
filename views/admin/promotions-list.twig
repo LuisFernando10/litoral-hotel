@@ -21,8 +21,8 @@
                                     <table class="table table-shopping table-hover">
                                         <thead class="text-primary">
                                             <tr>
-                                                <th>Quarto</th>
                                                 <th>Nome</th>
+                                                <th>Quarto</th>
                                                 <th>Data Inicial</th>
                                                 <th>Data Final</th>
                                                 <th>Preço</th>
@@ -33,8 +33,8 @@
                                         <tbody>
                                             {% for promotion in data_promotion %}
                                                 <tr class="js-promotions-tr" data-id="{{ promotion.id_promocao }}">
-                                                    <td>{{ promotion.nome_quarto }}</td>
                                                     <td>{{ promotion.nome }}</td>
+                                                    <td>{{ promotion.nome_quarto }}</td>
                                                     <td>{{ promotion.data_inicial }}</td>
                                                     <td>{{ promotion.data_final }}</td>
                                                     <td class="text-left text-primary"><small>R$</small> {{ promotion.preco }}</td>
