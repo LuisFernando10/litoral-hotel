@@ -111,38 +111,31 @@
         });
     });
 
-    $('.js-quarto-btn-delete').on('click', function () {
+    $('.js-promotion-btn-delete').on('click', (e) => {
 
-        //Nos os elementos do DOM
-        let element_tr_parent = $(this).parents('tr.js-quartos-tr');
+        //DOM
+        let current_element = $(e.target);
+        let element_tr_parent = current_element.parents('tr.js-promotions-tr');
 
-        //Nós obtemos o Id do quarto pra deletar
-        let id_room = $(this).attr('data-id');
+        //Valores
+        let id_promotion = current_element.parents('tr.js-promotions-tr').attr('data-id');
 
-        //Executamos a peticao  Ajax
+        //Ajax
         $.ajax({
             type: 'POST',
-            url: FULL_WEB_URL+'ajax/admin/quartos-crud.php',
+            url: `${FULL_WEB_URL}ajax/admin/promotion-crud.php`,
             data: {
-                quarto_id: id_room,
+                promotion_id: id_promotion,
                 action: 'DELETE'
             },
             success: function (response) {
-
-                //Nos vamos analisar o formato json a resposta
                 let obj_json = $.parseJSON(response);
 
-                //Nos validamos o estado da petiçao
                 if (obj_json.status === '200'){
-
-                    //Mensagem de sucesso
                     notify_success_notification(obj_json.message);
-
-                    //Removemos com animacao a linha da tabela
                     element_tr_parent.hide('slow', function(){ element_tr_parent.remove(); });
                 }
-                else
-                    notify_error_notification(obj_json.message);
+                else notify_error_notification(obj_json.message);
             }
         });
     });

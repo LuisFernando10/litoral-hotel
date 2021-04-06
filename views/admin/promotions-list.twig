@@ -32,7 +32,7 @@
                                         </thead>
                                         <tbody>
                                             {% for promotion in data_promotion %}
-                                                <tr class="js-promotions-tr">
+                                                <tr class="js-promotions-tr" data-id="{{ promotion.id_promocao }}">
                                                     <td>{{ promotion.nome_quarto }}</td>
                                                     <td>{{ promotion.nome }}</td>
                                                     <td>{{ promotion.data_inicial }}</td>
@@ -67,7 +67,7 @@
 
                                                         {# Deletar #}
                                                         <a href="#">
-                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm js-promotion-btn-delete" data-original-title="Remover" data-id="{{ promotion.id_promocao }}">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm js-promotion-btn-delete" data-original-title="Remover">
                                                                 <i class="material-icons">delete</i>
                                                                 <div class="ripple-container"></div>
                                                             </button>
@@ -87,5 +87,5 @@
     {% endblock %}
 
     {% block footer_scripts %}
-        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/promotions.js"></script>
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/promotion.js"></script>
     {% endblock %}
