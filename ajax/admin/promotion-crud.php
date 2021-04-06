@@ -11,7 +11,7 @@
         #Ajax
         $promotion_id = filter_input(INPUT_POST, 'promotion_id', FILTER_SANITIZE_NUMBER_INT);
         $promotion_name = filter_input(INPUT_POST, 'promotion_name', FILTER_SANITIZE_STRING);
-        $promotion_room = filter_input(INPUT_POST, 'promotion_room', FILTER_SANITIZE_STRING);
+        $promotion_room = filter_input(INPUT_POST, 'promotion_room', FILTER_SANITIZE_NUMBER_INT);
         $promotion_price = filter_input(INPUT_POST, "promotion_price", FILTER_SANITIZE_STRING);
         $promotion_initial_date = filter_input(INPUT_POST, "promotion_initial_date", FILTER_SANITIZE_STRING);
         $promotion_final_date = filter_input(INPUT_POST, "promotion_final_date", FILTER_SANITIZE_STRING);
@@ -40,14 +40,14 @@
         }
         elseif ($action == 'UPDATE'){
 
-            $update_promotion = Rooms::updateRoom($promotion_id,$promotion_name, $promotion_description, NULL,$promotion_price,$promotion_adultos,$promotion_estado);
+            $update_promotion = Promotions::updatePromotion($promotion_id, $promotion_room, $promotion_name, $promotion_initial_date, $promotion_final_date, $promotion_price);
 
-            if ($update_promotion != false) $response = [
+            if ($update_promotion == true && $update_promotion !== 'existing-promotion') $response = [
                 'status' => '200',
                 'message' => 'Promoção Atualizada.',
                 'result' => $update_promotion
             ];
-            elseif ($update_promotion == 'existing_promotion') $response = [
+            elseif ($update_promotion === 'existing-promotion') $response = [
                 'status' => '500',
                 'message' => 'O nome da promoção já existe.',
                 'result' => $update_promotion

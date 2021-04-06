@@ -166,30 +166,43 @@
             # UPDATE
             static function updatePromotion($id_promocao = NULL, $id_quarto = NULL, $nome = NULL, $data_inicial = NULL, $data_final = NULL, $preco = NULL){
 
-                #Query
-                $sql = "
-                    UPDATE
-                        promocao
-                    SET
-                        id_quarto = '%s',
-                        nome = '%s',
-                        data_inicial = '%s',
-                        data_final = '%s',
-                        preco = '%s'
-                    WHERE
-                        id_promocao = '%s'
-                ";
-                $sql = sprintf($sql,
-                    $id_quarto,
-                    $nome,
-                    $data_inicial,
-                    $data_final,
-                    $preco,
-                    $id_promocao
-                );
+                $data_promotion = Promotions::getAll(NULL,NULL,NULL,NULL, NULL, $nome);
+                $existing_control = true;
 
-                #Resposta
-                return DataBase::query($sql);
+                if ($data_promotion != NULL){
+                    foreach ($data_promotion as $value){
+                        if ($value['id_promocao'] !== $id_promocao)
+                            $existing_control = false;
+                    }
+                }
+
+                if ($existing_control == false)
+                    return 'existing-promotion';
+                else{
+                    $sql = "
+                        UPDATE
+                            promocao
+                        SET
+                            id_quarto = '%s',
+                            nome = '%s',
+                            data_inicial = '%s',
+                            data_final = '%s',
+                            preco = '%s'
+                        WHERE
+                            id_promocao = '%s'
+                    ";
+                    $sql = sprintf($sql,
+                        $id_quarto,
+                        $nome,
+                        $data_inicial,
+                        $data_final,
+                        $preco,
+                        $id_promocao
+                    );
+
+                    #Resposta
+                    return DataBase::query($sql);
+                }
             }
 
             # DELETE

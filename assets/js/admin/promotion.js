@@ -29,7 +29,7 @@
         //Petición
         $.ajax({
             type: 'POST',
-            url: FULL_WEB_URL+'ajax/admin/promotion-crud.php',
+            url: `${FULL_WEB_URL}ajax/admin/promotion-crud.php`,
             dataType: 'json',
             cache: false,
             contentType: false,
@@ -54,7 +54,7 @@
         });
     });
 
-    $('.js-promotion-btn-edit').on('click', function () {
+    $('.js-promotion-btn-edit').on('click', (e) => {
 
         //DOM
         let current_element = $(e.target);
@@ -75,7 +75,7 @@
         //FormData
         let form_data = new FormData();
 
-        form_data.append('promotion_id_promotion', value_id);
+        form_data.append('promotion_id', value_id);
         form_data.append('promotion_name', value_name);
         form_data.append('promotion_room', value_room);
         form_data.append('promotion_price', value_price);
@@ -86,25 +86,27 @@
         //Ejecutamos Ajax
         $.ajax({
             type: 'POST',
-            url: FULL_WEB_URL+'ajax/admin/quartos-crud.php',
+            url: `${FULL_WEB_URL}ajax/admin/promotion-crud.php`,
             dataType: 'json',
             cache: false,
             contentType: false,
             processData: false,
             data: form_data,
+            beforeSend: () => {
+                current_element.prop('disabled', true);
+            },
             success: function (response) {
-
-                //Nos validamos o estado da petiçao
                 if (response.status === '200'){
-
-                    //Mensagem de sucesso
                     notify_success_notification(response.message);
-
-                    //Direitonamos pra a pagina do list
-                    $(location).attr('href', FULL_WEB_URL + 'quartos/');
+                    $(location).attr('href', FULL_WEB_URL + 'promocoes/')
                 }
-                else
-                    notify_error_notification(response.message);
+                else{
+                    if (response.result === 'existing-promotion') notify_error_notification(response.message);
+                    else notify_error_notification(response.message);
+
+                    current_element.prop('disabled', false);
+                    return false;
+                }
             }
         });
     });
