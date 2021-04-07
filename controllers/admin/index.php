@@ -218,8 +218,23 @@
                 ));
                 break;
 
-            #CONFIGURAÇÕES
+            #SAIR
+            case 'salir':
+
+                //Importamos el controlador del LogIn
+                Security::sessionClose();
+
+                //Guardamos la ruta general de la plataforma
+                $ruta_redireccion = constant('FULL_WEB_URL');
+
+                //Realizamos el direccionamiento a la ruta general, la cual cargará el 'index.php'
+                header("Location: $ruta_redireccion");
+
+                break;
+
+            #CONFIGURAÇÕES - DEFAULT
             case 'configuracoes':
+            default:
 
                 //Obtemos os dados das configuracoes que precisemos
                 $data_configurations = Configurations::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
@@ -240,36 +255,12 @@
                     $data_emails = NULL;
                 }
 
-
                 $twig->display('configurations.twig',array(
                     'general' => $general_param,
                     'data_configuration' => $data_configurations,
                     'data_phones' => $data_phones,
                     'data_types' => $data_types,
                     'data_emails' => $data_emails
-                ));
-                break;
-
-            #SAIR
-            case 'salir':
-
-                //Importamos el controlador del LogIn
-                Security::sessionClose();
-
-                //Guardamos la ruta general de la plataforma
-                $ruta_redireccion = constant('FULL_WEB_URL');
-
-                //Realizamos el direccionamiento a la ruta general, la cual cargará el 'index.php'
-                header("Location: $ruta_redireccion");
-
-                break;
-
-            #DEFAULT
-            default:
-
-                //Cargamos y renderizamos la plantilla (Vista), junto con los parámetros (Variables) a utilizar
-                $twig->display('configurations.twig',array(
-                    'general' => $general_param
                 ));
                 break;
         }
