@@ -25,9 +25,18 @@
         $data_offerings_dont_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'nao_possui', NULL);
         $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
         $data_configurations = Configurations::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+        $data_promotions = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), date('Y-m-d'), NULL, true);
+
+        var_dump($data_promotions);
+        var_dump('***************');
 
         # General Data
         $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
+
+        # General Process
+        if ($data_promotions !== NULL){
+            
+        }
 
         # ** Aquí la idea es obtener la tabla promociones filtrado por la fecha de 'HOY'
         # Después recorrer los resultados que retornaron

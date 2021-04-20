@@ -4,7 +4,7 @@
         class Promotions
         {
             # SELECT
-            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_promocao = NULL, $id_quarto = NULL, $nome = NULL, $data_inicial = NULL, $data_final = NULL, $estado = NULL) {
+            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_promocao = NULL, $id_quarto = NULL, $nome = NULL, $data_inicial = NULL, $data_final = NULL, $estado = NULL, $range = NULL) {
 
                 #General
                 $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
@@ -14,6 +14,7 @@
                 #Condiciones
                 $limit_start = ($page * $pagination) - $pagination;
                 $conditions = "";
+                $type_rule_operator = $range === true ? '1 + 1 = 3' : '1 + 1 = 2';
 
                 #Filtros
                 if ($id_promocao !== NULL) {
@@ -42,7 +43,12 @@
                 }
                 if ($data_inicial !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND DATE(promocao.data_inicial) >= "%s"';
+
+                    if ($range === true)
+                        $this_condition = 'OR DATE(promocao.data_inicial) >= "%s"';
+                    else
+                        $this_condition = 'AND DATE(promocao.data_inicial) >= "%s"';
+
                     $this_condition = sprintf($this_condition, $data_inicial);
 
                     $conditions .= $this_condition;
@@ -50,7 +56,12 @@
                 }
                 if ($data_final !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND DATE(promocao.data_final) <= "%s"';
+
+                    if ($range === true)
+                        $this_condition = 'OR DATE(promocao.data_final) >= "%s"';
+                    else
+                        $this_condition = 'AND DATE(promocao.data_final) >= "%s"';
+
                     $this_condition = sprintf($this_condition, $data_final);
 
                     $conditions .= $this_condition;
@@ -92,7 +103,7 @@
                         promocao
                     INNER JOIN quartos ON promocao.id_quarto = quartos.id_quarto
                     WHERE
-                        1+1=2
+                        $type_rule_operator
                         $conditions
                     ORDER BY 
                         promocao.data_inicial
