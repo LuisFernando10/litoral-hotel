@@ -58,11 +58,11 @@
                     unset($this_condition);
 
                     if ($range === true)
-                        $this_condition = 'OR DATE(promocao.data_final) >= "%s"';
+                        $this_condition = 'AND DATE(promocao.data_final) <= "%s"';
                     else
                         $this_condition = 'AND DATE(promocao.data_final) >= "%s"';
 
-                    $this_condition = sprintf($this_condition, $data_final);
+                    $this_condition = sprintf($this_condition, $range === true ? $data_inicial : $data_final);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
@@ -106,7 +106,7 @@
                         $type_rule_operator
                         $conditions
                     ORDER BY 
-                        promocao.data_inicial
+                        promocao.data_inicial DESC
                     $sql_limit
                 ";
 
