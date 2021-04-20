@@ -110,15 +110,17 @@
                 }
                 else {
                     $sql_select = "
-                            quartos.id_quarto,
-                            quartos.nome,
-                            quartos.descricao,
-                            quartos.image,
-                            quartos.preco,
-                            quartos.adultos,
-                            quartos.estado,
-                            quartos.order_control
-                        ";
+                        quartos.id_quarto,
+                        quartos.nome,
+                        quartos.descricao,
+                        quartos.image,
+                        quartos.preco,
+                        quartos.preco_promocao,
+                        quartos.data_vencimento_promocao,
+                        quartos.adultos,
+                        quartos.estado,
+                        quartos.order_control
+                    ";
 
                     $sql_limit = "LIMIT $limit_start, $pagination";
                 }
