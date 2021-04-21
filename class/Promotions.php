@@ -62,7 +62,7 @@
                     else
                         $this_condition = 'AND DATE(promocao.data_final) >= "%s"';
 
-                    $this_condition = sprintf($this_condition, $range === true ? $data_inicial : $data_final);
+                    $this_condition = sprintf($this_condition, $data_final);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
@@ -109,6 +109,9 @@
                         promocao.data_inicial DESC
                     $sql_limit
                 ";
+
+                var_dump($sql);
+                exit();
 
                 #Executar
                 $result = DataBase::query($sql);

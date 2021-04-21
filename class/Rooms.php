@@ -301,12 +301,13 @@
             }
 
             # GENERALS
-            static function updatePromotionPrice($id_quarto = NULL, $preco_promocao = NULL, $data_vencimento_promocao = NULL){
+            static function updatePromotionPrice($id_quarto = NULL, $preco_promocao = NULL, $data_inicio_promocao = NULL, $data_vencimento_promocao = NULL){
                 $sql = "
                     UPDATE
                         quartos
                     SET
                         preco_promocao = '$preco_promocao',
+                        data_inicio_promocao = '$data_inicio_promocao',
                         data_vencimento_promocao = '$data_vencimento_promocao'
                     WHERE
                         id_quarto = '$id_quarto'

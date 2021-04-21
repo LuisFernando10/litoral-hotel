@@ -25,7 +25,7 @@
         $data_offerings_dont_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'nao_possui', NULL);
         $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
         $data_configurations = Configurations::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-        $data_promotions = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), NULL, NULL, true);
+        $data_promotions = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), date('Y-m-d'), NULL, true);
         $data_range_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL, date('Y-m-d'), NULL);
 
         # General Data
@@ -34,11 +34,11 @@
         # General Process
         if ($data_promotions !== NULL){
             foreach ($data_promotions as $promotion){
-                Rooms::updatePromotionPrice($promotion['id_quarto'], $promotion['preco'], $promotion['data_final']);
+                Rooms::updatePromotionPrice($promotion['id_quarto'], $promotion['preco'], $promotion['data_final'], $promotion['data_final']);
             }
         }
 
-        if ($data_range_rooms !== ){
+        if ($data_range_rooms !== NULL){
             # ** La idea aquí es saber cuando la fecha de hoy está dentro de una fecha de 'Promocion', si no está entonces se vuelven a nulos
             # los campos del precio especial y las fechas
             # Toca pensar si se recorre y se comparan las fechas con un str_to_time o mirar la manera de como dejar el precio normal cuando ya no hay promocion
