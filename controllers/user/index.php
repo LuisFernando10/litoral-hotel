@@ -26,7 +26,6 @@
         $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
         $data_configurations = Configurations::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         $data_promotions = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), date('Y-m-d'), NULL, true);
-        $data_range_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL, date('Y-m-d'), NULL);
 
         # General Data
         $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
@@ -34,21 +33,21 @@
         # General Process
         if ($data_promotions !== NULL){
             foreach ($data_promotions as $promotion){
-                Rooms::updatePromotionPrice($promotion['id_quarto'], $promotion['preco'], $promotion['data_final'], $promotion['data_final']);
+                Rooms::updatePromotionPrice($promotion['id_quarto'], $promotion['preco'], $promotion['data_inicial'], $promotion['data_final']);
             }
         }
 
-        if ($data_range_rooms !== NULL){
-            # ** La idea aquí es saber cuando la fecha de hoy está dentro de una fecha de 'Promocion', si no está entonces se vuelven a nulos
-            # los campos del precio especial y las fechas
-            # Toca pensar si se recorre y se comparan las fechas con un str_to_time o mirar la manera de como dejar el precio normal cuando ya no hay promocion
-        }
+        if ($data_rooms !== NULL){
+            foreach ($data_rooms as $room){
+                $date_now = date('Y-m-d');
+                $date_start = $room['data_inicio_promocao'];
+                $date_end = $room['data_vencimento_promocao'];
+                $check_range_date = GeneralMethods::checkInRangeDate($date_start, $date_end, $date_now);
 
-        # ** Aquí la idea es obtener la tabla promociones filtrado por la fecha de 'HOY'
-        # Después recorrer los resultados que retornaron
-        # Armar método que actualizará los precios de los cuartos
-        # Ejecutar dicho método por cada iteración para actualizarlos
-        # Validar que se aplique la actualización si el estado es activo y que los precios se actualicen a como estaban antes después de acabada la promoción
+                if ($check_range_date !== true)
+                    Rooms::updatePromotionPrice($room['id_quarto'], NULL, NULL, NULL);
+            }
+        }
 
         # General Twig
         $general_param = [
