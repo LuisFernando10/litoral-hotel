@@ -1,0 +1,77 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h5 class="card-title">Criar Feriado</h5>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}feriados/"><button type="button" class="btn btn-info">Voltar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                {# Nome #}
+                                <div class="form-row mt-3">
+                                    <div class="offset-md-2 col-md-8">
+                                        <div class="form-group bmd-form-group">
+                                            <label>Nome</label>
+                                            <input type="text" class="form-control js-holiday-name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {# Datas #}
+                                <div class="form-row mt-4">
+                                    <div class="form-group col-md-6">
+                                        <label>Data Inicial</label>
+                                        <input type="date" class="form-control mt-2 js-holiday-initial-date">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Data Final</label>
+                                        <input type="date" class="form-control mt-2 js-holiday-final-date">
+                                    </div>
+                                </div>
+
+                                {# Quartos-Preço #}
+                                <div class="form-row mt-4 js-div-room-images">
+                                    {% for room in data_room %}
+                                        <div class="col-md-4">
+                                            <div class="card" style="width: 20rem;" data-id-room="{{ room.id_quarto }}">
+                                                <img src="{{ general.full_images_url }}/galery/{{ room.image }}" class="card-img-top" rel="nofollow" alt="Quarto" style="width: 100%;height: 300px;object-fit: cover">
+                                                <div class="card-body">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="card-text" style="top: 5px">($) Preço - ({{ room.nome }})</label><br style="margin-bottom: 3px">
+                                                        <input type="text" class="form-control mt-2 js-holiday-room-price">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            {# Botao Salvar #}
+                            <div class="card-footer">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary pull-right js-holiday-btn-create">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/holiday.js"></script>
+    {% endblock %}

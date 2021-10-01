@@ -5,29 +5,23 @@
         require_once(dirname(__FILE__).'/../../security/secure-session.php');
         require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
-        //Indicamos en qué parte del proyecto se encontrarán las plantillas a reenderizar
+        # Twig
         $loader = new \Twig\Loader\FilesystemLoader(dirname(__FILE__).'/../../views/admin/');
-
-        //Indicamos las carpetas que almacenarán el caché de Twig
         //$path_cache_twig = dirname(__FILE__).'/../../temp/cache/';
-
-        //Twig load enviroment
         $twig = new \Twig\Environment($loader, array(
             //'cache' =>  $path_cache_twig,
             'auto_reload' => true,
             'debug' => true
         ));
-
-        //Adicionamos as extensões necessárias
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-        #Datos Generales
+        # Generales
         $user_id = $_SESSION['user_id'];
 
-        #Datos BD
+        # Datos BD
         $data_user = Users::getAll(NULL, NULL, NULL, $user_id, NULL, NULL, NULL, '1','ativo');
 
-        #URL
+        # URL
         $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "configuracoes")));
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
@@ -47,7 +41,6 @@
         #Vistas
         switch ($class){
 
-            #DASHBOARD
             case 'dashboard':
 
                 $twig->display('dashboard.twig',array(
@@ -55,7 +48,6 @@
                 ));
                 break;
 
-            #QUARTOS
             case 'quartos':
 
                 //Nos obtemos os dados que precisaremos renderizar nas vistas
@@ -90,7 +82,6 @@
 
                 break;
 
-            #PROMOÇÕES
             case 'promocoes':
 
                 #DB Data
@@ -105,27 +96,52 @@
                         'data_room' => $data_room
                     ]);
                 elseif ($action == 'edit'){
-                    if (is_numeric($id) && $id != '')
-                        $twig->display('promotions-edit.twig', [
-                            'general' => $general_param,
-                            'data_promotion_edit' => $data_promotion_edit[0],
-                            'data_room' => $data_room
-                        ]);
-                    else
-                        $twig->display('promotions-list.twig', [
-                            'general' => $general_param,
-                            'data_promotion' => $data_promotion
-                        ]);
-                }
-                else
-                    $twig->display('promotions-list.twig', [
+                    if (is_numeric($id)) $twig->display('promotions-edit.twig', [
+                        'general' => $general_param,
+                        'data_promotion_edit' => $data_promotion_edit[0],
+                        'data_room' => $data_room
+                    ]);
+                    else $twig->display('promotions-list.twig', [
                         'general' => $general_param,
                         'data_promotion' => $data_promotion
                     ]);
-
+                }
+                else $twig->display('promotions-list.twig', [
+                    'general' => $general_param,
+                    'data_promotion' => $data_promotion
+                ]);
                 break;
 
-            #OFERECIMENTOS
+            #PROMOÇÕES
+            case 'feriados':
+
+                #DB Data
+                $data_holiday = Holidays::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL);
+                $data_room = Rooms::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL,NULL,NULL);
+
+                #Actions
+                if ($action == 'create')
+                    $twig->display('holidays-create.twig', [
+                        'general' => $general_param,
+                        'data_room' => $data_room
+                    ]);
+                elseif ($action == 'edit'){
+                    if (is_numeric($id)) $twig->display('holidays-edit.twig', [
+                        'general' => $general_param,
+                        'data_holiday_edit' => $data_holiday[0],
+                        'data_room' => $data_room
+                    ]);
+                    else $twig->display('holidays-list.twig', [
+                        'general' => $general_param,
+                        'data_holiday' => $data_holiday
+                    ]);
+                }
+                else $twig->display('holidays-list.twig', [
+                    'general' => $general_param,
+                    'data_holiday' => $data_holiday
+                ]);
+                break;
+
             case 'oferecimentos':
 
                 //Obtemos os dados relacionados às ofertas
@@ -139,7 +155,6 @@
 
                 break;
 
-            #RESERVAS
             case 'reservas':
 
                 //Nos obtemos os dados que precisaremos renderizar nas vistas
@@ -171,7 +186,6 @@
 
                 break;
 
-            #GALERIA
             case 'galeria':
 
                 //Nos obtemos os dados que precisaremos renderizar nas vistas
@@ -205,7 +219,6 @@
 
                 break;
 
-            #CORREO
             case 'contato':
 
                 //Obtenemos los datos que se procesarán en las vistas
@@ -218,7 +231,6 @@
                 ));
                 break;
 
-            #SAIR
             case 'salir':
 
                 //Importamos el controlador del LogIn
@@ -232,7 +244,6 @@
 
                 break;
 
-            #CONFIGURAÇÕES - DEFAULT
             case 'configuracoes':
             default:
 

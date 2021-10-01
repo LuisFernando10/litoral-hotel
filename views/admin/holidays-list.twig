@@ -1,0 +1,68 @@
+
+    {% extends "base-document.twig" %}
+    {% block content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h4 class="card-title">Lista de Feriados</h4>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="{{general.full_web_url}}feriados/create/"><button type="button" class="btn btn-info">Criar</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-shopping table-hover">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Data Inicial</th>
+                                                <th>Data Final</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for holiday in data_holiday %}
+                                                <tr class="js-holiday-tr" data-id="{{ holiday.id_promocao }}">
+                                                    <td>{{ holiday.nome }}</td>
+                                                    <td>{{ holiday.data_inicial }}</td>
+                                                    <td>{{ holiday.data_final }}</td>
+                                                    <td class="td-actions text-left">
+
+                                                        {# Editar #}
+                                                        <a href="{{ general.full_web_url }}feriados/edit/{{ holiday.id_feriado }}/">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" data-original-title="Editar">
+                                                                <i class="material-icons">edit</i>
+                                                            </button>
+                                                        </a>
+
+                                                        {# Deletar #}
+                                                        <a href="#">
+                                                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm js-holiday-btn-delete" data-original-title="Remover">
+                                                                <i class="material-icons">delete</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer_scripts %}
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/holiday.js"></script>
+    {% endblock %}
