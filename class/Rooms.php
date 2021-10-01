@@ -1,16 +1,10 @@
 
     <?php
 
-        /**
-         * @Description: Documento que gestiona los CRUD de la información para 'Opiniones'
-         * @User: luis.chamorro
-         * @Date: 03-mar-2020
-         */
-
         class Rooms
         {
             # SELECT
-            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_quarto = NULL, $nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL, $order_control = NULL, $data_inicio_promocao = NULL, $data_vencimento_promocao = NULL) {
+            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_quarto = NULL, $nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL) {
 
                 # General
                 $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
@@ -78,32 +72,7 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
-                if ($order_control !== NULL) {
-                    unset($this_condition);
-                    $this_condition = 'AND quartos.order_control = "%s"';
-                    $this_condition = sprintf($this_condition, $order_control);
 
-                    $conditions .= $this_condition;
-                    unset($this_condition);
-                }
-                if ($data_inicio_promocao !== NULL) {
-                    unset($this_condition);
-                    $this_condition = 'AND quartos.data_inicio_promocao >= "%s"';
-                    $this_condition = sprintf($this_condition, $data_inicio_promocao);
-
-                    $conditions .= $this_condition;
-                    unset($this_condition);
-                }
-                if ($data_inicio_promocao !== NULL) {
-                    unset($this_condition);
-                    $this_condition = 'AND quartos.data_vencimento_promocao <= "%s"';
-                    $this_condition = sprintf($this_condition, $data_inicio_promocao);
-
-                    $conditions .= $this_condition;
-                    unset($this_condition);
-                }
-
-                //Evaluamos el tipo de consulta
                 if ($type == 'count') {
                     $sql_select = "count(*) as count";
                     $sql_limit = '';
@@ -115,9 +84,6 @@
                         quartos.descricao,
                         quartos.image,
                         quartos.preco,
-                        quartos.preco_promocao,
-                        quartos.data_inicio_promocao,
-                        quartos.data_vencimento_promocao,
                         quartos.adultos,
                         quartos.estado,
                         quartos.order_control
@@ -126,7 +92,6 @@
                     $sql_limit = "LIMIT $limit_start, $pagination";
                 }
 
-                //Preparamos el query
                 $sql = "
                     SELECT 
                         $sql_select
@@ -140,28 +105,24 @@
                     $sql_limit
                 ";
 
-                //Ejecutamos la consulta
                 $result = DataBase::query($sql);
 
                 if (isset($result[0]) && $result != NULL) {
 
                     if ($type == 'count') {
 
-                        //Se calcula el total de paginas con esta configuracion
                         $total_pages = ceil(($result[0]['count']) / $pagination);
 
-                        return array(
+                        return [
                             "count" => $result[0]['count'],
                             "pagination" => "" . $pagination,
                             "page" => "" . $page,
                             "total_pages" => "" . $total_pages,
-                        );
+                        ];
                     }
-                    else
-                        return $result;
+                    else return $result;
                 }
-                else
-                    return NULL;
+                else return NULL;
             }
 
             # INSERT

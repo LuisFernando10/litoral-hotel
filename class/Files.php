@@ -304,17 +304,9 @@
 
             static function deleteFileServer($file_current_name = NULL){
 
-                //Obtemos o caminho aonde vamos mover o arquivo escolhido pelo usuario
                 $file_to_delete = __DIR__.'/../assets/img/galery/'. $file_current_name;
 
-                if (file_exists($file_to_delete)) {
-
-                    //Deletamos o arquivo
-                    $return = unlink($file_to_delete);
-
-                    return $return;
-                }
-                else
-                    return false;
+                if (file_exists($file_to_delete)) return unlink($file_to_delete);
+                else return false;
             }
         }
