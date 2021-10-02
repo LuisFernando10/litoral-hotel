@@ -60,6 +60,8 @@
             form_data.append('array_data', JSON.stringify(array_data));
             form_data.append('action', type_action === 'ADD' ? 'INSERT' : 'UPDATE');
 
+            console.log(form_data)
+
             //Petición
             $.ajax({
                 type: 'POST',

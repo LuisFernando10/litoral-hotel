@@ -1,7 +1,12 @@
 
     {% extends "base-document.twig" %}
     {% block content %}
-        <div class="content">
+
+        {{ dump(data_room_holiday) }}
+        {{ dump('* * * * * * * * * *') }}
+        {{ dump(data_holiday) }}
+
+        <div class="content" data-holiday-id="">
             <div class="container-fluid">
                 <div class="row">
                     <div class="offset-md-2 col-md-8">
@@ -9,62 +14,60 @@
                             <div class="card-header card-header-primary">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h5 class="card-title">Editar Promoção</h5>
+                                        <h5 class="card-title">Criar Feriado</h5>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <a href="{{general.full_web_url}}promocoes/"><button type="button" class="btn btn-info">Voltar</button></a>
+                                        <a href="{{general.full_web_url}}feriados/"><button type="button" class="btn btn-info">Voltar</button></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body js-promotion-frm-edit">
+                            <div class="card-body">
 
                                 {# Nome #}
                                 <div class="form-row mt-3">
                                     <div class="offset-md-2 col-md-8">
                                         <div class="form-group bmd-form-group">
                                             <label>Nome</label>
-                                            <input type="text" class="form-control js-promotion-name" value="{{ data_promotion_edit.nome }}">
+                                            <input type="text" class="form-control js-holiday-name" value="{{ data_holiday.nome }}">
                                         </div>
-                                    </div>
-                                </div>
-
-                                {# Quartos-Preço #}
-                                <div class="form-row mt-4">
-                                    <div class="form-group col-md-6">
-                                        <label for="select-room">Quartos</label>
-                                        <select class="form-control js-promotion-rooms" id="select-room">
-                                            <option selected disabled class="">Selecionar</option>
-                                            {% for room in data_room %}
-                                                {% set selected_option = data_promotion_edit.id_quarto == room.id_quarto ? 'selected' : '' %}
-                                                <option {{ selected_option }} value="{{ room.id_quarto }}">{{ room.nome }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label style="top: 5px">Preço</label><br style="margin-bottom: 3px">
-                                        <input type="text" class="form-control mt-2 js-promotion-price" value="{{ data_promotion_edit.preco }}">
                                     </div>
                                 </div>
 
                                 {# Datas #}
                                 <div class="form-row mt-4">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mt-3">
                                         <label>Data Inicial</label>
-                                        <input type="date" class="form-control mt-2 js-promotion-initial-date" value="{{ data_promotion_edit.data_inicial }}">
+                                        <input type="date" class="form-control mt-2 js-holiday-initial-date" value="{{ data_holiday.data_inicial }}">
                                     </div>
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mt-3">
                                         <label>Data Final</label>
-                                        <input type="date" class="form-control mt-2 js-promotion-final-date" value="{{ data_promotion_edit.data_final }}">
+                                        <input type="date" class="form-control mt-2 js-holiday-final-date" value="{{ data_holiday.data_final }}">
                                     </div>
+                                </div>
+
+                                {# Quartos-Preço #}
+                                <div class="form-row mt-4 js-div-room-images">
+                                    {% for room_holiday in data_room_holiday %}
+                                        <div class="col-md-4 js-parent-room-images">
+                                            <div class="card" style="width: 20rem;" data-id-room="{{ room_holiday.id_quarto }}">
+                                                <img src="{{ general.full_images_url }}/galery/{{ room_holiday.image }}" class="card-img-top" rel="nofollow" alt="Quarto" style="width: 100%;height: 300px;object-fit: cover">
+                                                <div class="card-body">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="card-text" style="top: 5px">($) Preço - ({{ room_holiday.nome_quarto }})</label><br style="margin-bottom: 3px">
+                                                        <input type="text" class="form-control mt-2 js-holiday-room-price" value="{{ room_holiday.preco }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
 
                             {# Botao Salvar #}
                             <div class="card-footer">
                                 <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn btn-primary pull-right js-promotion-btn-edit" data-id="{{ data_promotion_edit.id_promocao }}">Salvar</button>
+                                    <button type="submit" class="btn btn-primary pull-right js-holiday-btn-save" data-type="ADD">Salvar</button>
                                 </div>
                             </div>
                         </div>
@@ -75,5 +78,5 @@
     {% endblock %}
 
     {% block footer_scripts %}
-        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/promotion.js"></script>
+        <script type="text/javascript" src="{{ general.full_assets_url }}js/admin/holiday.js"></script>
     {% endblock %}

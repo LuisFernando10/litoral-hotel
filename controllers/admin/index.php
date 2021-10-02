@@ -24,7 +24,7 @@
         # URL
         $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "configuracoes")));
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
-        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => NULL)));
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING, array("options" => array("default" => 1)));
         $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING, array("options" => array("default" => NULL)));
 
@@ -112,12 +112,11 @@
                 ]);
                 break;
 
-            #PROMOÇÕES
             case 'feriados':
 
                 #DB Data
                 $data_holiday = Holidays::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL);
-                $data_room = Rooms::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL,NULL,NULL);
+                $data_room = Rooms::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL,NULL);
 
                 #Actions
                 if ($action == 'create')
@@ -126,11 +125,18 @@
                         'data_room' => $data_room
                     ]);
                 elseif ($action == 'edit'){
-                    if (is_numeric($id)) $twig->display('holidays-edit.twig', [
-                        'general' => $general_param,
-                        'data_holiday_edit' => $data_holiday[0],
-                        'data_room' => $data_room
-                    ]);
+
+                    if ( is_numeric($id) ){
+
+                        $data_room_holiday = Holidays::getAllDetail(NULL,NULL,NULL,$id,NULL,NULL,NULL);
+
+                        $twig->display('holidays-edit.twig', [
+                            'general' => $general_param,
+                            'data_holiday' => $data_holiday[0],
+                            'data_room_holiday' => $data_room_holiday,
+                            'data_room' => $data_room
+                        ]);
+                    }
                     else $twig->display('holidays-list.twig', [
                         'general' => $general_param,
                         'data_holiday' => $data_holiday

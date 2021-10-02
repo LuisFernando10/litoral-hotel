@@ -57,7 +57,7 @@
                 else {
                     $sql_select = "
                         feriados.id_feriado,
-                        feriados.data_inial,
+                        feriados.data_inicial,
                         feriados.data_final,
                         feriados.nome
                     ";
@@ -75,6 +75,109 @@
                         $conditions
                     ORDER BY 
                         feriados.data_inicial
+                    $sql_limit
+                ";
+
+                # Ejecucíon
+                $result = DataBase::query($sql);
+
+                if (isset($result[0]) && $result != NULL) {
+
+                    if ($type == 'count') {
+
+                        $total_pages = ceil(($result[0]['count']) / $pagination);
+                        return [
+                            "count" => $result[0]['count'],
+                            "pagination" => "" . $pagination,
+                            "page" => "" . $page,
+                            "total_pages" => "" . $total_pages,
+                        ];
+                    }
+                    else return $result;
+                }
+                else return NULL;
+            }
+
+            static function getAllDetail($page = NULL, $pagination = NULL, $type = NULL, $id_feriado = NULL, $data_inicial = NULL, $data_final = NULL, $nome = NULL) {
+
+                # General
+                $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
+                $pagination = isset($pagination) && $pagination != NULL && is_numeric($pagination) ? $pagination : constant("PAGINATION");
+                $type = isset($type) && $type != NULL && is_numeric($type) ? $type : 'normal';
+
+                # Condiciones
+                $limit_start = ($page * $pagination) - $pagination;
+                $conditions = "";
+
+                # Filtros
+                if ($id_feriado !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND fer.id_feriado = "%s"';
+                    $this_condition = sprintf($this_condition, $id_feriado);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+                if ($nome !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND fer.nome = "%s"';
+                    $this_condition = sprintf($this_condition, $nome);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+                if ($data_inicial !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND fer.data_inicial >= "%s"';
+                    $this_condition = sprintf($this_condition, $data_inicial);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+                if ($data_final !== NULL) {
+                    unset($this_condition);
+                    $this_condition = 'AND fer.data_final <= "%s"';
+                    $this_condition = sprintf($this_condition, $data_final);
+
+                    $conditions .= $this_condition;
+                    unset($this_condition);
+                }
+
+                # Tipo Consulta
+                if ($type == 'count') {
+                    $sql_select = "count(*) as count";
+                    $sql_limit = '';
+                }
+                else {
+                    $sql_select = "
+                        fer.id_feriado,
+                        fer.data_inicial,
+                        fer.data_final,
+                        fer.nome as nome_feriado,
+                        qua_fer.id_quarto_feriado,
+                        qua_fer.preco,
+                        qua.id_quarto,
+                        qua.nome as nome_quarto,
+                        qua.image,
+                        qua.estado
+                    ";
+                    $sql_limit = "LIMIT $limit_start, $pagination";
+                }
+
+                # Query
+                $sql = "
+                    SELECT
+                        $sql_select
+                    FROM 
+                        quarto_feriado qua_fer
+                    INNER JOIN feriados fer ON qua_fer.id_feriado = fer.id_feriado
+                    INNER JOIN quartos qua ON qua_fer.id_quarto = qua.id_quarto
+                    WHERE
+                        1 + 1 = 2
+                        $conditions
+                    AND qua.estado = 'disponivel'
+                    ORDER BY 
+                        qua.order_control
                     $sql_limit
                 ";
 
@@ -133,7 +236,12 @@
                 $counter = 0;
                 $data_values = '';
 
-                foreach ($array_data as $value) {
+                $array_data1 = json_encode( $array_data );
+                $array_data2 = json_decode( $array_data, true );
+
+                //var_dump($array_data2);
+
+                foreach ($array_data2 as $key => $value) {
 
                     $coma = $counter === 0 ? '' : ',';
                     $data_values .= "$coma('" . $value['id_quarto'] . "', '$id_feriado', '" . $value['preco'] . "')";

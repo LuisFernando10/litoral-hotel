@@ -14,15 +14,7 @@
         $holiday_name = filter_input(INPUT_POST, 'holiday_name', FILTER_SANITIZE_STRING);
         $holiday_initial_date = filter_input(INPUT_POST, "holiday_initial_date", FILTER_SANITIZE_STRING);
         $holiday_final_date = filter_input(INPUT_POST, "holiday_final_date", FILTER_SANITIZE_STRING);
-        $array_data = filter_input(INPUT_POST, "array_data", FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);
-
-        var_dump($action);
-        var_dump($holiday_id);
-        var_dump($holiday_name);
-        var_dump($holiday_initial_date);
-        var_dump($holiday_final_date);
-        var_dump($array_data);
-        exit();
+        $array_data = $_POST['array_data'];
 
         #Acciones
         if ($action == 'INSERT'){
