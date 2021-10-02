@@ -110,11 +110,23 @@
             Direitos Reservados © {{ "now"|date("Y") }} <a href="{{ general.full_web_url }}">Hotel Litoral</a> | Modelo oferecido por: <a href="https://colorlib.com" target="_blank">Colorlib</a>
         </div>
 
-        <div class="css-btn-whatsapp">
-            {% set wp_number = general.data_configuration['numero_wp'] %}
-            {% set wp_message = "Olá!! Eu gostaria de solicitar uma reserva."|url_encode %}
-            <a href="https://api.whatsapp.com/send?phone={{ wp_number }}&text={{ wp_message }}" target="_blank">
-                <img src="{{ general.full_images_url }}Icons/btn_whatsapp.png" alt="">
-            </a>
+        {# Texto informativo #}
+        <div class="row">
+
+            {# Texto #}
+            <div class="col-md-6">
+                <span class="css-text-info-price">VALORES NÃO VÁLIDOS PARA FERIADOS, EVENTOS E MÊS DE JANEIRO</span>
+            </div>
+
+            {# WhatsApp #}
+            <div class="col-md-6">
+                <div class="css-btn-whatsapp">
+                    {% set wp_number = general.data_configuration['numero_wp'] %}
+                    {% set wp_message = "Olá!! Eu gostaria de solicitar uma reserva."|url_encode %}
+                    <a href="https://api.whatsapp.com/send?phone={{ wp_number }}&text={{ wp_message }}" target="_blank">
+                        <img src="{{ general.full_images_url }}Icons/btn_whatsapp.png" alt="">
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
