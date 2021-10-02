@@ -101,9 +101,9 @@
             # INSERT
             static function insertHoliday($data_inicial = NULL, $data_final = NULL, $nome = NULL, $array_data = NULL){
 
-                $existing_quarto = Holidays::getAll(NULL,NULL,NULL,NULL, NULL,NULL,$nome);
+                $existing_holiday = Holidays::getAll(NULL,NULL,NULL,NULL, NULL,NULL,$nome);
 
-                if ($existing_quarto != NULL) return 'existing-holiday';
+                if ($existing_holiday != NULL) return 'existing-holiday';
                 else{
                     $sql = "
                         INSERT INTO feriados (

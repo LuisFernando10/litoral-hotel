@@ -1,7 +1,7 @@
 
     {% extends "base-document.twig" %}
     {% block content %}
-        <div class="content">
+        <div class="content" data-holiday-id="">
             <div class="container-fluid">
                 <div class="row">
                     <div class="offset-md-2 col-md-8">
@@ -30,12 +30,12 @@
 
                                 {# Datas #}
                                 <div class="form-row mt-4">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mt-3">
                                         <label>Data Inicial</label>
                                         <input type="date" class="form-control mt-2 js-holiday-initial-date">
                                     </div>
 
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 mt-3">
                                         <label>Data Final</label>
                                         <input type="date" class="form-control mt-2 js-holiday-final-date">
                                     </div>
@@ -44,13 +44,13 @@
                                 {# Quartos-Preço #}
                                 <div class="form-row mt-4 js-div-room-images">
                                     {% for room in data_room %}
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 js-parent-room-images">
                                             <div class="card" style="width: 20rem;" data-id-room="{{ room.id_quarto }}">
                                                 <img src="{{ general.full_images_url }}/galery/{{ room.image }}" class="card-img-top" rel="nofollow" alt="Quarto" style="width: 100%;height: 300px;object-fit: cover">
                                                 <div class="card-body">
                                                     <div class="form-group col-md-6">
                                                         <label class="card-text" style="top: 5px">($) Preço - ({{ room.nome }})</label><br style="margin-bottom: 3px">
-                                                        <input type="text" class="form-control mt-2 js-holiday-room-price">
+                                                        <input type="text" class="form-control mt-2 js-holiday-room-price" value="{{ room.preco }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -62,7 +62,7 @@
                             {# Botao Salvar #}
                             <div class="card-footer">
                                 <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn btn-primary pull-right js-holiday-btn-create">Salvar</button>
+                                    <button type="submit" class="btn btn-primary pull-right js-holiday-btn-save" data-type="ADD">Salvar</button>
                                 </div>
                             </div>
                         </div>
