@@ -2,11 +2,7 @@
     {% extends "base-document.twig" %}
     {% block content %}
 
-        {{ dump(data_room_holiday) }}
-        {{ dump('* * * * * * * * * *') }}
-        {{ dump(data_holiday) }}
-
-        <div class="content" data-holiday-id="">
+        <div class="content" data-holiday-id="{{ data_holiday.id_feriado }}">
             <div class="container-fluid">
                 <div class="row">
                     <div class="offset-md-2 col-md-8">
@@ -14,7 +10,7 @@
                             <div class="card-header card-header-primary">
                                 <div class="row align-items-center">
                                     <div class="col-8">
-                                        <h5 class="card-title">Criar Feriado</h5>
+                                        <h5 class="card-title">Editar Feriado</h5>
                                     </div>
                                     <div class="col-4 text-right">
                                         <a href="{{general.full_web_url}}feriados/"><button type="button" class="btn btn-info">Voltar</button></a>
@@ -50,7 +46,7 @@
                                 <div class="form-row mt-4 js-div-room-images">
                                     {% for room_holiday in data_room_holiday %}
                                         <div class="col-md-4 js-parent-room-images">
-                                            <div class="card" style="width: 20rem;" data-id-room="{{ room_holiday.id_quarto }}">
+                                            <div class="card" style="width: 20rem;" data-id-room="{{ room_holiday.id_quarto }}" data-id-room-hoiday="{{ room_holiday.id_quarto_feriado }}">
                                                 <img src="{{ general.full_images_url }}/galery/{{ room_holiday.image }}" class="card-img-top" rel="nofollow" alt="Quarto" style="width: 100%;height: 300px;object-fit: cover">
                                                 <div class="card-body">
                                                     <div class="form-group col-md-6">
@@ -67,7 +63,7 @@
                             {# Botao Salvar #}
                             <div class="card-footer">
                                 <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn btn-primary pull-right js-holiday-btn-save" data-type="ADD">Salvar</button>
+                                    <button type="submit" class="btn btn-primary pull-right js-holiday-btn-save" data-type="EDIT">Salvar</button>
                                 </div>
                             </div>
                         </div>

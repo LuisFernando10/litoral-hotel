@@ -19,7 +19,12 @@
         #Acciones
         if ($action == 'INSERT'){
 
-            $insert_holiday = Holidays::insertHoliday($holiday_initial_date, $holiday_final_date, $holiday_name, $array_data);
+            $insert_holiday = Holidays::insertHoliday(
+                $holiday_initial_date,
+                $holiday_final_date,
+                $holiday_name,
+                $array_data
+            );
 
             if ($insert_holiday == 'existing-holiday') $response = [
                 'status' => '500',
@@ -39,7 +44,13 @@
         }
         elseif ($action == 'UPDATE'){
 
-            $update_holiday = Holidays::updateHoliday($holiday_id, $holiday_room, $holiday_name, $holiday_initial_date, $holiday_final_date, $holiday_price);
+            $update_holiday = Holidays::updateHoliday(
+                $holiday_id,
+                $holiday_initial_date,
+                $holiday_final_date,
+                $holiday_name,
+                $array_data
+            );
 
             if ($update_holiday == true && $update_holiday !== 'existing-holiday') $response = [
                 'status' => '200',

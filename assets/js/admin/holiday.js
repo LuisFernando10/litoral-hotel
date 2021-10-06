@@ -27,6 +27,9 @@
             const element_input = $(elem).find('input.js-holiday-room-price');
 
             if ( element_card.attr('data-id-room') !== '' && element_input.val() !== '' ){
+
+                if ( type_action === 'EDIT' ) general_object['id_quarto_feriado'] = element_card.attr('data-id-room-hoiday');
+
                 general_object['id_quarto'] = element_card.attr('data-id-room');
                 general_object['preco'] = element_input.val();
 
@@ -59,8 +62,6 @@
             form_data.append('holiday_final_date', value_final_date);
             form_data.append('array_data', JSON.stringify(array_data));
             form_data.append('action', type_action === 'ADD' ? 'INSERT' : 'UPDATE');
-
-            console.log(form_data)
 
             //Petición
             $.ajax({

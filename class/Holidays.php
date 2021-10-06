@@ -235,13 +235,9 @@
 
                 $counter = 0;
                 $data_values = '';
+                $array_data_decode = json_decode( $array_data, true );
 
-                $array_data1 = json_encode( $array_data );
-                $array_data2 = json_decode( $array_data, true );
-
-                //var_dump($array_data2);
-
-                foreach ($array_data2 as $key => $value) {
+                foreach ($array_data_decode as $key => $value) {
 
                     $coma = $counter === 0 ? '' : ',';
                     $data_values .= "$coma('" . $value['id_quarto'] . "', '$id_feriado', '" . $value['preco'] . "')";
@@ -263,5 +259,58 @@
                 " . $data_values;
 
                 return DataBase::query($sql);
+            }
+
+            #UPDATE
+            static function updateHoliday($id_feriado, $data_inicial = NULL, $data_final = NULL, $nome = NULL, $array_data = NULL){
+
+                $existing_holiday = Holidays::getAll(NULL,NULL,NULL,NULL, NULL,NULL, $nome);
+
+                if ($existing_holiday != NULL) return 'existing-holiday';
+                else{
+                    $sql = "
+                        UPDATE
+                            feriados
+                        SET
+                            data_inicial = '$data_inicial',
+                            data_final = '$data_final',
+                            nome = '$nome'
+                        WHERE
+                            id_feriado = '$id_feriado'
+                    ";
+
+                    $update_holiday = DataBase::query($sql);
+
+                    if ( $update_holiday ){
+                        Holidays::updateRoomHoliday($id_feriado, $array_data);
+                        return $update_holiday;
+                    }
+                    else return false;
+                }
+            }
+
+            static function updateRoomHoliday($id_feriado, $array_data){
+
+                $array_data2 = json_decode( $array_data, true );
+
+                foreach ($array_data2 as $key => $value) {
+
+                    $price = $value['preco'];
+                    $id_room_holiday = $value['id_quarto_feriado'];
+
+                    $sql = "
+                        UPDATE
+                            quarto_feriado
+                        SET
+                            preco = '$price'
+                        WHERE
+                            id_feriado = '$id_feriado'
+                        AND
+                            id_quarto_feriado = '$id_room_holiday'
+                    ";
+
+                    DataBase::query($sql);
+                }
+                return true;
             }
         }
