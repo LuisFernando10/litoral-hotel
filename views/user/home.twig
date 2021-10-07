@@ -252,14 +252,12 @@
                                 {# Booking Slider #}
                                 <div class="booking_slider_container">
                                     <div class="owl-carousel owl-theme booking_slider">
-
-                                        {# Ciclo para obter os quartos do Home #}
-                                        {% for rooms in data_rooms %}
-
+                                        {% for key, rooms in data_rooms %}
+                                            {% set room_price = data_room_holiday is not null ? data_room_holiday[key].preco : rooms.preco %}
                                             <div class="booking_item">
                                                 <div class="background_image" style="background-image:url({{ general.full_images_url }}galery/{{ rooms.image }})"></div>
                                                 <div class="booking_overlay trans_200"></div>
-                                                <div class="booking_price">R$ {{rooms.preco}}/Noite</div>
+                                                <div class="booking_price">R$ {{ room_price }}/Noite</div>
                                                 <div class="booking_link"><a href="{{ general.full_web_url }}bookings/reserve/{{ rooms.id_quarto }}/">{{rooms.nome}}</a></div>
                                             </div>
                                         {% endfor %}

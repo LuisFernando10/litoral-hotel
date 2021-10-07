@@ -11,8 +11,6 @@
             'auto_reload' => true,
             'debug' => true
         ]);
-
-        # Extensiones
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
         # URL
@@ -25,17 +23,18 @@
         $data_offerings_dont_have = Offerings::getAll(NULL, NULL, NULL, NULL, NULL, 'nao_possui', NULL);
         $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
         $data_configurations = Configurations::getAll(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-        $data_promotions = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), date('Y-m-d'), NULL, true);
+        //$data_promotions = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), date('Y-m-d'), NULL, true);
+        $data_ = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL, date('Y-m-d'), date('Y-m-d'), NULL, true);
 
         # General Data
         $data_phones = json_decode($data_configurations[0]['telefones'], TRUE);
 
         # General Process
-        if ($data_promotions !== NULL){
+        /*if ($data_promotions !== NULL){
             foreach ($data_promotions as $promotion){
                 Rooms::updatePromotionPrice($promotion['id_quarto'], $promotion['preco'], $promotion['data_inicial'], $promotion['data_final']);
             }
-        }
+        }*/
 
         if ($data_rooms !== NULL){
             foreach ($data_rooms as $room){
@@ -73,12 +72,14 @@
                 $data_site_gallery = Galery::getAll(null, null, null, null, null, 'galery');
                 $data_home_gallery = Galery::getAll(null, null, null, null, null, 'home');
                 $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+                $data_room_holiday = Holidays::getAllDetail(NULL,NULL,NULL,NULL,date('Y-m-d'),date('Y-m-d'),NULL);
 
                 $twig->display('home.twig', [
                     'general' => $general_param,
                     'data_opinions' => $data_opinions,
                     'data_site_galery' => $data_site_gallery,
                     'data_home_galery' => $data_home_gallery,
+                    'data_room_holiday' => $data_room_holiday,
                     'data_rooms' => $data_rooms
                 ]);
                 break;

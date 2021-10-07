@@ -128,7 +128,7 @@
                 }
                 if ($data_inicial !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND fer.data_inicial >= "%s"';
+                    $this_condition = 'AND "%s" >= fer.data_inicial';
                     $this_condition = sprintf($this_condition, $data_inicial);
 
                     $conditions .= $this_condition;
@@ -136,7 +136,7 @@
                 }
                 if ($data_final !== NULL) {
                     unset($this_condition);
-                    $this_condition = 'AND fer.data_final <= "%s"';
+                    $this_condition = ' AND "%s" <= fer.data_final';
                     $this_condition = sprintf($this_condition, $data_final);
 
                     $conditions .= $this_condition;
@@ -168,7 +168,7 @@
                 $sql = "
                     SELECT
                         $sql_select
-                    FROM 
+                    FROM
                         quarto_feriado qua_fer
                     INNER JOIN feriados fer ON qua_fer.id_feriado = fer.id_feriado
                     INNER JOIN quartos qua ON qua_fer.id_quarto = qua.id_quarto
@@ -176,7 +176,7 @@
                         1 + 1 = 2
                         $conditions
                     AND qua.estado = 'disponivel'
-                    ORDER BY 
+                    ORDER BY
                         qua.order_control
                     $sql_limit
                 ";
