@@ -265,8 +265,15 @@
             static function updateHoliday($id_feriado, $data_inicial = NULL, $data_final = NULL, $nome = NULL, $array_data = NULL){
 
                 $existing_holiday = Holidays::getAll(NULL,NULL,NULL,NULL, NULL,NULL, $nome);
+                $existing_control = true;
 
-                if ($existing_holiday != NULL) return 'existing-holiday';
+                if (is_array($existing_holiday) || is_object($existing_holiday))
+                    foreach ($existing_holiday as $value){
+                        if ($value['id_feriado'] !== $id_feriado)
+                            $existing_control = false;
+                    }
+
+                if ( !$existing_control ) return 'existing-holiday';
                 else{
                     $sql = "
                         UPDATE
