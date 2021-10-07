@@ -73,13 +73,15 @@
             $delete_holiday = Holidays::deleteHoliday($holiday_id);
 
             if ($delete_holiday) $response = [
-                    'status' => '200',
-                    'message' => 'Feriado Deletado.'
-                ];
+                'status' => '200',
+                'message' => 'Feriado Deletado.',
+                'result' => $delete_holiday
+            ];
             else $response = [
-                    'status' => '500',
-                    'message' => 'Error ao Deletar.'
-                ];
+                'status' => '500',
+                'message' => 'Error ao Deletar.',
+                'result' => NULL
+            ];
         }
         else $response = [
             'status' => '500',

@@ -95,28 +95,30 @@
     $('.js-holiday-btn-delete').on('click', (e) => {
 
         //DOM
-        let current_element = $(e.target);
-        let element_tr_parent = current_element.parents('tr.js-holiday-tr');
-
-        //Valores
-        let id_holiday = current_element.parents('tr.js-holiday-tr').attr('data-id');
+        const current_element = $(e.target);
+        const element_tr_parent = current_element.parents('tr.js-holiday-tr');
+        const holiday_id = element_tr_parent.attr('data-id');
 
         //Ajax
         $.ajax({
             type: 'POST',
             url: `${FULL_WEB_URL}ajax/admin/holiday-crud.php`,
             data: {
-                holiday_id: id_holiday,
+                holiday_id,
                 action: 'DELETE'
             },
             success: function (response) {
-                let obj_json = $.parseJSON(response);
 
-                if (obj_json.status === '200'){
+                const obj_json = $.parseJSON(response);
+
+                if ( obj_json.status === '200' ){
                     notify_success_notification(obj_json.message);
                     element_tr_parent.hide('slow', function(){ element_tr_parent.remove(); });
                 }
-                else notify_error_notification(obj_json.message);
+                else {
+                    notify_error_notification(obj_json.message);
+                    return false;
+                }
             }
         });
     });

@@ -261,7 +261,7 @@
                 return DataBase::query($sql);
             }
 
-            #UPDATE
+            # UPDATE
             static function updateHoliday($id_feriado, $data_inicial = NULL, $data_final = NULL, $nome = NULL, $array_data = NULL){
 
                 $existing_holiday = Holidays::getAll(NULL,NULL,NULL,NULL, NULL,NULL, $nome);
@@ -312,5 +312,36 @@
                     DataBase::query($sql);
                 }
                 return true;
+            }
+
+            # DELETE
+            static function deleteHoliday($id_feriado){
+
+                $sql = "
+                    DELETE FROM
+                        feriados
+                    WHERE
+                        id_feriado = '$id_feriado'
+                ";
+
+                $delete_holiday = DataBase::query($sql);
+
+                if ( $delete_holiday ){
+                    Holidays::deleteRoomHoliday($id_feriado);
+                    return $delete_holiday;
+                }
+                else return false;
+            }
+
+            static function deleteRoomHoliday($id_feriado){
+
+                $sql = "
+                    DELETE FROM
+                        quarto_feriado
+                    WHERE
+                        id_feriado = '$id_feriado'
+                ";
+
+                return DataBase::query($sql);
             }
         }
