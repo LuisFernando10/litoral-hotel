@@ -123,10 +123,12 @@
 
                 # DB
                 $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+                $data_room_holiday = Holidays::getAllDetail(NULL,NULL,NULL,NULL,date('Y-m-d'),date('Y-m-d'),NULL);
 
                 $twig->display('rooms.twig', [
                     'general' => $general_param,
-                    'data_rooms' => $data_rooms
+                    'data_rooms' => $data_rooms,
+                    'data_room_holiday' => $data_room_holiday
                 ]);
                 break;
 
@@ -134,6 +136,7 @@
 
                 # BD
                 $data_rooms = Rooms::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'disponivel',NULL);
+                $data_room_holiday = Holidays::getAllDetail(NULL,NULL,NULL,NULL,date('Y-m-d'),date('Y-m-d'),NULL);
 
                 # Actions
                 if ($action == 'reserve'){
