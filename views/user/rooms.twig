@@ -33,13 +33,13 @@
                                     {# Quartos #}
                                     <div class="css-div-rooms row">
 
-                                        {% for rooms in data_rooms %}
-
+                                        {% for key, rooms in data_rooms %}
+                                            {% set room_price = data_room_holiday is not null ? data_room_holiday[key].preco : rooms.preco %}
                                             <div class="col col-md-4 mb-3">
                                                 <div class="card">
                                                     <img class="card-img-top" src="{{ general.full_images_url }}galery/{{rooms.image}}" alt="triple-room">
                                                     <div class="card-body">
-                                                        <h5 class="card-title">{{rooms.nome}}</h5>
+                                                        <h5 class="card-title">{{rooms.nome}} ($R {{ room_price }})</h5>
                                                         <div class="footer_list">
                                                             <ul>
                                                                 <li><i class="fa fa-bed"></i> Camas box de casal</li>
