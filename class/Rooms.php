@@ -9,19 +9,39 @@
 
         class Rooms
         {
-            # SELECT
-            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_quarto = NULL, $nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL, $order_control = NULL, $data_inicio_promocao = NULL, $data_vencimento_promocao = NULL) {
+            /**
+             * @Description: Metodo que obtem os dados correspondentes aos 'Quartos'
+             */
+            static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_quarto = NULL, $nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL, $order_control = NULL) {
 
-                # General
-                $page = isset($page) && $page != NULL && is_numeric($page) ? $page : 1;
-                $pagination = isset($pagination) && $pagination != NULL && is_numeric($pagination) ? $pagination : constant("PAGINATION");
-                $type = isset($type) && $type != NULL && is_numeric($type) ? $type : 'normal';
+                //Valor por defecto para 'page'
+                if (isset($page) && $page != NULL && is_numeric($page)){
+                    /* Se deja igual */
+                }
+                else
+                    $page = 1;
 
-                # Condiciones
+                //Valor por defecto para 'pagination'
+                if (isset($pagination) && $pagination != NULL && is_numeric($pagination)) {
+                    /* Se deja igual */
+                }
+                else
+                    $pagination = constant("PAGINATION");
+
+                //Valor por defecto para tipo (normal - count)
+                if (isset($type) && $type != NULL) {
+                    /* Se deja igual */
+                }
+                else
+                    $type = "normal";
+
+                //Se calcula desde que registro se va a listar segun la paginacion
                 $limit_start = ($page * $pagination) - $pagination;
+
+                //Construimos las condiciones de la consulta
                 $conditions = "";
 
-                # Filtros
+                //Filtro por '$id_quarto'
                 if ($id_quarto !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.id_quarto = "%s"';
@@ -30,6 +50,8 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$nome'
                 if ($nome !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.nome = "%s"';
@@ -38,6 +60,8 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$descricao'
                 if ($descricao !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.descricao = "%s"';
@@ -46,6 +70,8 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$image'
                 if ($image !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.image = "%s"';
@@ -54,6 +80,8 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$preco'
                 if ($preco !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.preco = "%s"';
@@ -62,6 +90,8 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$adultos'
                 if ($adultos !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.adultos = "%s"';
@@ -70,6 +100,8 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$estado'
                 if ($estado !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.estado = "%s"';
@@ -78,26 +110,12 @@
                     $conditions .= $this_condition;
                     unset($this_condition);
                 }
+
+                //Filtro por '$order_control'
                 if ($order_control !== NULL) {
                     unset($this_condition);
                     $this_condition = 'AND quartos.order_control = "%s"';
                     $this_condition = sprintf($this_condition, $order_control);
-
-                    $conditions .= $this_condition;
-                    unset($this_condition);
-                }
-                if ($data_inicio_promocao !== NULL) {
-                    unset($this_condition);
-                    $this_condition = 'AND quartos.data_inicio_promocao >= "%s"';
-                    $this_condition = sprintf($this_condition, $data_inicio_promocao);
-
-                    $conditions .= $this_condition;
-                    unset($this_condition);
-                }
-                if ($data_inicio_promocao !== NULL) {
-                    unset($this_condition);
-                    $this_condition = 'AND quartos.data_vencimento_promocao <= "%s"';
-                    $this_condition = sprintf($this_condition, $data_inicio_promocao);
 
                     $conditions .= $this_condition;
                     unset($this_condition);
@@ -110,18 +128,15 @@
                 }
                 else {
                     $sql_select = "
-                        quartos.id_quarto,
-                        quartos.nome,
-                        quartos.descricao,
-                        quartos.image,
-                        quartos.preco,
-                        quartos.preco_promocao,
-                        quartos.data_inicio_promocao,
-                        quartos.data_vencimento_promocao,
-                        quartos.adultos,
-                        quartos.estado,
-                        quartos.order_control
-                    ";
+                            quartos.id_quarto,
+                            quartos.nome,
+                            quartos.descricao,
+                            quartos.image,
+                            quartos.preco,
+                            quartos.adultos,
+                            quartos.estado,
+                            quartos.order_control
+                        ";
 
                     $sql_limit = "LIMIT $limit_start, $pagination";
                 }
@@ -136,7 +151,7 @@
                         1+1=2
                         $conditions
                     ORDER BY 
-                        quartos.adultos, quartos.nome
+                        quartos.nome
                     $sql_limit
                 ";
 
@@ -164,7 +179,9 @@
                     return NULL;
             }
 
-            # INSERT
+            /**
+             * @Description: Metodo que inserta um quarto no BD
+             */
             static function insertRoom($nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL){
 
                 // ** Proceso para validar si existe un cuarto con el mismo nombre **
@@ -216,7 +233,9 @@
                 }
             }
 
-            # UPDATE
+            /**
+             * @Description: Metodo que atualiza um quarto no BD
+             */
             static function updateRoom($id_quarto = NULL, $nome = NULL, $descricao = NULL, $image = NULL, $preco = NULL, $adultos = NULL, $estado = NULL){
 
                 // ** Proceso para validar si existe un cuarto con el mismo nombre **
@@ -277,7 +296,9 @@
                 }
             }
 
-            # DELETE
+            /**
+             * @Description: Metodo que deletea um quarto desde o BD
+             */
             static function deleteRoom($id_quarto = NULL){
 
                 //A gente prepara o query
@@ -298,21 +319,5 @@
 
                 //A gente retorna o resultado da consulta (true-false)
                 return $result;
-            }
-
-            # GENERALS
-            static function updatePromotionPrice($id_quarto = NULL, $preco_promocao = NULL, $data_inicio_promocao = NULL, $data_vencimento_promocao = NULL){
-                $sql = "
-                    UPDATE
-                        quartos
-                    SET
-                        preco_promocao = '$preco_promocao',
-                        data_inicio_promocao = '$data_inicio_promocao',
-                        data_vencimento_promocao = '$data_vencimento_promocao'
-                    WHERE
-                        id_quarto = '$id_quarto'
-                ";
-
-                return DataBase::query($sql);
             }
         }

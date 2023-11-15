@@ -89,12 +89,4 @@
                 $formatted_date = str_replace('/', '-', $date);
                 return date('Y-m-d', strtotime($formatted_date));
             }
-
-            static function checkInRangeDate($date_start, $date_end, $date_now) {
-                $date_start = strtotime($date_start);
-                $date_end = strtotime($date_end);
-                $date_now = strtotime($date_now);
-                if (($date_now >= $date_start) && ($date_now <= $date_end)) return true;
-                return false;
-            }
         }

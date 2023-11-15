@@ -1,7 +1,13 @@
 
     <?php
 
-        #Importaciones
+        /**
+         * @Description: Documento que procesa los controladores y las acciones para renderizar las vistas con 'Twig' para el rol 'administrador'
+         * @User: luis.chamorro
+         * @Date: 14/feb/2020
+         */
+
+        //Importamos os arquivos que sao indispensaveis pra funcionaiodade do sistema
         require_once(dirname(__FILE__).'/../../security/secure-session.php');
         require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
@@ -21,20 +27,20 @@
         //Adicionamos as extensões necessárias
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-        #Datos Generales
+        //Obtenemos el Id del 'usuario' y el Id de la 'empresa'
         $user_id = $_SESSION['user_id'];
 
-        #Datos BD
+        //Obtenemos los datos desde la BD correspondiente al rol 'administrador'
         $data_user = Users::getAll(NULL, NULL, NULL, $user_id, NULL, NULL, NULL, '1','ativo');
 
-        #URL
-        $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "configuracoes")));
+        //Obtenemos los datos GET que corresponden a la estructura general de la plataforma (Class-Method-Id) y paginaciones
+        $class = filter_input(INPUT_GET, 'class', FILTER_SANITIZE_STRING, array("options" => array("default" => "usuarios")));
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, array("options" => array("default" => "")));
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT, array("options" => array("default" => "")));
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING, array("options" => array("default" => 1)));
         $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING, array("options" => array("default" => NULL)));
 
-        #Parámetros Generales
+        //Definimos los parámetros generales a utilizar en las plantillas 'twig'
         $general_param = array(
             'full_web_url' => constant('FULL_WEB_URL'),
             'full_assets_url' => constant('ASSETS_WEB_URL'),
@@ -44,8 +50,10 @@
             'class_url' => $class
         );
 
-        #Vistas
+        //Evaluamos cada uno de los controladores para permitir el acceso a las respectivas vistas
         switch ($class){
+
+            //Cargamos y renderizamos las plantillas (Vistas), junto con los parámetros (Variables) a utilizar
 
             #DASHBOARD
             case 'dashboard':
@@ -87,41 +95,6 @@
                         'general' => $general_param,
                         'data_room' => $data_room
                     ));
-
-                break;
-
-            #PROMOÇÕES
-            case 'promocoes':
-
-                #DB Data
-                $data_promotion = Promotions::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL);
-                $data_room = Rooms::getAll(NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL,NULL,NULL);
-                $data_promotion_edit = Promotions::getAll(NULL, NULL, NULL, $id, NULL, NULL,NULL, NULL, NULL);
-
-                #Actions
-                if ($action == 'create')
-                    $twig->display('promotions-create.twig', [
-                        'general' => $general_param,
-                        'data_room' => $data_room
-                    ]);
-                elseif ($action == 'edit'){
-                    if (is_numeric($id) && $id != '')
-                        $twig->display('promotions-edit.twig', [
-                            'general' => $general_param,
-                            'data_promotion_edit' => $data_promotion_edit[0],
-                            'data_room' => $data_room
-                        ]);
-                    else
-                        $twig->display('promotions-list.twig', [
-                            'general' => $general_param,
-                            'data_promotion' => $data_promotion
-                        ]);
-                }
-                else
-                    $twig->display('promotions-list.twig', [
-                        'general' => $general_param,
-                        'data_promotion' => $data_promotion
-                    ]);
 
                 break;
 
@@ -218,23 +191,8 @@
                 ));
                 break;
 
-            #SAIR
-            case 'salir':
-
-                //Importamos el controlador del LogIn
-                Security::sessionClose();
-
-                //Guardamos la ruta general de la plataforma
-                $ruta_redireccion = constant('FULL_WEB_URL');
-
-                //Realizamos el direccionamiento a la ruta general, la cual cargará el 'index.php'
-                header("Location: $ruta_redireccion");
-
-                break;
-
-            #CONFIGURAÇÕES - DEFAULT
+            #CONFIGURAÇÕES
             case 'configuracoes':
-            default:
 
                 //Obtemos os dados das configuracoes que precisemos
                 $data_configurations = Configurations::getAll(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
@@ -255,12 +213,36 @@
                     $data_emails = NULL;
                 }
 
+
                 $twig->display('configurations.twig',array(
                     'general' => $general_param,
                     'data_configuration' => $data_configurations,
                     'data_phones' => $data_phones,
                     'data_types' => $data_types,
                     'data_emails' => $data_emails
+                ));
+                break;
+
+            #SAIR
+            case 'salir':
+
+                //Importamos el controlador del LogIn
+                Security::sessionClose();
+
+                //Guardamos la ruta general de la plataforma
+                $ruta_redireccion = constant('FULL_WEB_URL');
+
+                //Realizamos el direccionamiento a la ruta general, la cual cargará el 'index.php'
+                header("Location: $ruta_redireccion");
+
+                break;
+
+            #DEFAULT
+            default:
+
+                //Cargamos y renderizamos la plantilla (Vista), junto con los parámetros (Variables) a utilizar
+                $twig->display('dashboard.twig',array(
+                    'general' => $general_param
                 ));
                 break;
         }

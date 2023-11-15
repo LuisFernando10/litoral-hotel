@@ -1,0 +1,73 @@
+
+    <!DOCTYPE html>
+    <html>
+        {% block head %}
+            <head>
+                {# Title #}
+                 <title>Hotel Litoral</title>
+
+                {# Icon #}
+                {#<link rel="icon" href="{{ general.full_assets_url }}img/Logo.ico">#}
+
+                {# Metadata #}
+                <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="description" content="Hotel Litoral (Aracaju-Sergipe)">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                {# Bootstrap V-4.1.2 (CSS) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}framework/bootstrap-4.1.2/bootstrap.min.css">
+
+                {# Fuentes e íconos #}
+                <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+                <script src="https://kit.fontawesome.com/2c36e9b7b1.js"></script>
+
+                {# CSS Main (Template) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/main.css">
+
+                {# CSS Main Views (Template) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/about.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/about_responsive.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/blog.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/blog_responsive.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/booking.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/booking_responsive.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/contact.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/contact_responsive.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/elements.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/elements_responsive.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/css/responsive.css">
+
+                {# Owl.carousel #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/OwlCarousel2-2.3.4/owl.carousel.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/OwlCarousel2-2.3.4/animate.css">
+
+                {# JQuery-datepicker #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/jquery-datepicker/jquery-ui.css">
+
+                {# Colorcox #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}template/plugins/colorbox/colorbox.css">
+
+                {# Main (CSS) #}
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}css/main.css">
+                <link rel="stylesheet" type="text/css" href="{{ general.full_assets_url }}css/user/main.css">
+            </head>
+        {% endblock %}
+
+        <body>
+            {{ dump(general.full_assets_url) }}
+            {% block content %}
+                {#Código HTML para cada vista#}
+            {% endblock %}
+
+        </body>
+
+        {# Scripts generales #}
+        {{ include('footer-scripts.twig') }}
+
+        {% block footer_scripts %}
+            {# Scripts propios de cada documento #}
+        {% endblock %}
+    </html>

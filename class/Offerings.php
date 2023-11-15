@@ -224,7 +224,7 @@
                 );
 
                 //Ejecutamos el Query (true-false)
-                $result = DataBase::query($sql);
+                $result = DataBase::query(utf8_encode($sql));
 
                 //Retornamos a resposta
                 return $result;
