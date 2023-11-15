@@ -10,11 +10,11 @@
 
         //Obtenemos los datos enviados por el Ajax
         $galery_id = filter_input(INPUT_POST, 'galery_id', FILTER_SANITIZE_NUMBER_INT);
-        $galery_name = filter_input(INPUT_POST, 'galery_name', FILTER_SANITIZE_STRING);
-        $galery_tipo = filter_input(INPUT_POST, "galery_tipo", FILTER_SANITIZE_STRING);
-        $galery_description = filter_input(INPUT_POST, 'galery_description', FILTER_SANITIZE_STRING);
-        $galery_file_current_name = filter_input(INPUT_POST, "galery_file_current_name", FILTER_SANITIZE_STRING);
-        $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+        $galery_name = filter_input(INPUT_POST, 'galery_name');
+        $galery_tipo = filter_input(INPUT_POST, "galery_tipo");
+        $galery_description = filter_input(INPUT_POST, 'galery_description');
+        $galery_file_current_name = filter_input(INPUT_POST, "galery_file_current_name");
+        $action = filter_input(INPUT_POST, 'action');
 
         //Validamos el tipo de 'acción'
         if ($action == 'INSERT'){
@@ -30,7 +30,7 @@
 
                 //Porcessamos o arquivo para mover ele ao caminho estebelecida
                 $file_proccess = Files::uploadFile($file_document);
-
+                
                 //Validamos successo ou error no proceso do 'upload'
                 if ($file_proccess != false){
 
@@ -57,12 +57,13 @@
                             'id_galery' => null
                         );
                 }
-                else
+                else{
                     $response = array(
                         'status' => '500',
                         'message' => 'Error ao registrar',
                         'id_galery' => null
                     );
+                }
             }
         }
         elseif ($action == 'UPDATE'){

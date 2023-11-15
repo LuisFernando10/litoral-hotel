@@ -14,13 +14,14 @@
                 //Nos obtemos a extensao do arquivo
                 $get_extention = pathinfo($file_document['name'], PATHINFO_EXTENSION);
 
+                
                 //Obtemos os microssegundos atuais e os concatenamos com o nome
                 $mtime = microtime(TRUE);
                 $varFileName = $file_document['name'] . $mtime;
-
+                
                 //Nós criptografamos o nome do arquivo
                 $fileName = hash("sha256", $varFileName);
-
+                
                 //Obtemos o caminho onde o arquivo será salvo
                 $galery_folder = __DIR__.'/../assets/img/galery/';
 
@@ -30,9 +31,11 @@
                 //Obtemos o nome final do arquivo
                 $fileName = $fileName.'.'.$get_extention;
 
+                
                 //Obtemos o caminho aonde vamos mover o arquivo escolhido pelo usuario
                 $directory_to_move = __DIR__.'/../assets/img/galery/'. $fileName;
-
+                
+                
                 //Nos movemos o arquivo ao diretorio fisico
                 $file_upload = Files::moveUploadFile($file_document, $directory_to_move);
 
@@ -51,8 +54,9 @@
             {
                 $directory = $direcotiro_verify;
 
-                if (!file_exists($directory))
+                if (!file_exists($directory)){
                     mkdir($directory, 0755, true);
+                }
             }
 
             /**
@@ -60,10 +64,12 @@
              */
             static function moveUploadFile($file_document = NULL, $target_path = NULL)
             {
-                if (move_uploaded_file($file_document['tmp_name'], $target_path))
+                if (move_uploaded_file($file_document['tmp_name'], $target_path)){
                     return true;
-                else
+                }
+                else{
                     return false;
+                }
             }
 
             static function getAll($page = NULL, $pagination = NULL, $type = NULL, $id_archivo = NULL, $nombre = NULL, $alias = NULL, $tipo = NULL, $fecha = NULL, $id_empresa = NULL, $id_template = NULL)
@@ -194,7 +200,7 @@
                         $sql_limit
                 ";
 
-                $result = Db::query($sql);
+                $result = DataBase::query($sql);
 
                 if (isset($result[0]) && $result != NULL) {
                     if ($type == 'count') {
@@ -242,7 +248,7 @@
                     $id_template
                 );
 
-                $result = Db::query(utf8_decode($sql));
+                $result = DataBase::query(utf8_decode($sql));
 
                 return $result;
             }
@@ -276,15 +282,12 @@
                     $id_template
                 );
 
-                $result = Db::query(utf8_decode($sql));
+                $result = DataBase::query(utf8_decode($sql));
 
                 return $result;
             }
 
             static function deleteFile($id_file= NULL){
-
-                if (ValidateData::validateInt($id_file)==false)
-                    return false;
 
                 $sql = "
                     DELETE FROM 
@@ -297,7 +300,7 @@
                     $id_file
                 );
 
-                $result = Db::query($sql);
+                $result = DataBase::query($sql);
 
                 return $result;
             }
