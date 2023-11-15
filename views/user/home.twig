@@ -38,46 +38,6 @@
                             {% endfor %}
                         </div>
 
-                        {# Home Form #}
-                        <form action="{{general.full_web_url}}bookings/reserve/form/" method="post" class="booking_form js-frm-reserve-data" id="booking_form">
-                            <div class="row booking_form_container css-slider-home justify-content-center text-center">
-
-                                {# Check-In #}
-                                <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                                    <input type="text" name="reserve_check_in" class="datepicker booking_input booking_input_a booking_in js-reserve-check-in" placeholder="Data de entrada">
-                                </div>
-
-                                {# Check-Out #}
-                                <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                                    <input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída">
-                                </div>
-
-                                {# Children #}
-                                {# <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
-                                    <input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" value="" placeholder="Crianças" maxlength="1">
-                                </div> #}
-
-                                {# Type Room #}
-                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
-                                    <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" maxlength="1">
-                                        {% for room in general.data_rooms_general %}
-                                            <option value="{{ room.id_quarto }}" data-room-price="{{ room.preco }}">{{ room.nome }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                {# Rooms #}
-                                <div class="col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-3 mt-md-0 mt-lg-0 mt-xl-0">
-                                    <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" maxlength="1">
-                                </div>
-
-                                {# Botao #}
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
-                                    <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Solicite sua Reserva</button>
-                                </div>
-                            </div>
-                        </form>
-
                         {# Number pagination #}
                         <div class="home_slider_dots_container">
                             <div class="home_slider_dots">
