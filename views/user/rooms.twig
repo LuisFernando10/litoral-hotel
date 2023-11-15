@@ -31,13 +31,13 @@
                                 <div class="booking_slider_container">
 
                                     {# Quartos #}
-                                    <div class="css-div-rooms row">
+                                    <div class="css-div-rooms row justify-content-center">
 
                                         {% for rooms in data_rooms %}
 
                                             <div class="col col-md-4 mb-3">
                                                 <div class="card">
-                                                    <img class="card-img-top" src="{{ general.full_images_url }}galery/{{rooms.image}}" alt="triple-room">
+                                                    <img class="card-img-top" src="{{ general.full_images_url }}galery/{{rooms.image}}" alt="triple-room" height="262">
                                                     <div class="card-body">
                                                         <h5 class="card-title">{{rooms.nome}}</h5>
                                                         <div class="footer_list">
@@ -52,14 +52,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <span class="text-muted">
-                                                            <a href="{{ general.full_web_url }}bookings/reserve/{{ rooms.id_quarto }}/">
-                                                                <button type="button" class="btn btn-outline-warning" data-id="{{ rooms.id_quarto }}">
-                                                                    Solicite Reserva!
-                                                                </button>
-                                                            </a>
-                                                        </span>
-                                                        <span style="float: right">
+                                                        <span style="float: left">
                                                             <i class="mr-2 fa fa-shower css-icon-service-rooms"></i>
                                                             <i class="mr-2 fa fa-coffee css-icon-service-rooms"></i>
                                                         </span>

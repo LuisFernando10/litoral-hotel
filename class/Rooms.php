@@ -151,7 +151,7 @@
                         1+1=2
                         $conditions
                     ORDER BY 
-                        quartos.nome
+                        quartos.adultos, quartos.nome
                     $sql_limit
                 ";
 
