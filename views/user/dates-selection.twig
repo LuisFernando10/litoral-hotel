@@ -4,49 +4,8 @@
             <div class="row">
                 <div class="col offset-xl-1 col-xl-10">
                     <div class="home_content text-center">
-                        <div class="home_title">Solicite sua reserva</div>
-                        <div class="booking_form_container">
-                            <form action="{{general.full_web_url}}bookings/reserve/form/" method="post" class="booking_form js-frm-reserve-data" id="booking_form">
-                                <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                    <div class="row booking_input_container d-flex flex-row align-items-start justify-content-center flex-wrap">
-
-                                        {# Check-In #}
-                                        <div class="col-md-3">
-                                            <input type="text" name="reserve_check_in" class="datepicker booking_input booking_input_a booking_in js-reserve-check-in" placeholder="Data de entrada">
-                                        </div>
-
-                                        {# Check-Out #}
-                                        <div class="col-md-3">
-                                            <input type="text" name="reserve_check_out" class="datepicker booking_input booking_input_a booking_out js-reserve-check-out" placeholder="Data de saída">
-                                        </div>
-
-                                        {# Type Room #}
-                                        <div class="col-md-2">
-                                            <select type="text" name="reserve_type_room" class="booking_input booking_input_b css-reserve-select-rooom js-reserve-type_room" maxlength="1">
-                                                {% for room in general.data_rooms_general %}
-                                                    <option value="{{ room.id_quarto }}" data-room-price="{{ room.preco }}">{{ room.nome }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-
-                                        {# Children #}
-                                        {# <div class="col-md-2">
-                                            <input type="text" name="reserve_children" class="booking_input booking_input_b js-reserve-children" value="" placeholder="Crianças" maxlength="1">
-                                        </div>#}
-
-                                        {# Rooms #}
-                                        <div class="col-md-2">
-                                            <input type="text" name="reserve_room" class="booking_input booking_input_b js-reserve-room" value="" placeholder="Quartos" maxlength="1">
-                                        </div>
-
-                                        {# Botao #}
-                                        <div class="col-md-12 mt-3">
-                                            <button type="submit" class="booking_button trans_200 {{ (general.class_param) == 'bookings' ? 'css-element-hide' : '' }} js-btn-reserve">Solicite sua Reserva</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        <div class="home_title">Solicite sua reserva ou faza sua consulta pelo número de whatsapp</div>
+                        <span class="home-span-number">+55 79 999882442</span>
                     </div>
                 </div>
             </div>

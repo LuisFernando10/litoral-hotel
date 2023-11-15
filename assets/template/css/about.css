@@ -521,10 +521,8 @@ section {
   left: 0;
   width: 100%;
 }
-.home_content {
-}
 .home_title {
-  font-size: 72px;
+  font-size: 25px;
   font-weight: 600;
   color: #ffffff;
   line-height: 1.2;
