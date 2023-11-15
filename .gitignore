@@ -1,4 +1,5 @@
 config.php
+
 vendor/
-assets/img/*
-!assets/img/.gitkeep
+
+assets/img/galery/*
