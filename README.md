@@ -14,4 +14,4 @@ Sitio Web para o Hotel Litoral que fica na orla da Atalaya em Aracajú- Sergipe,
 
 - **Asignar permisos a algunas carpetas en caso de no dejar editar/subir archivos: `chmod -R 755 nombre_de_carpeta`**
 
--**Para poder ver logs: `/var/log/apache2/error.log`**
+- **Para poder ver logs: `/var/log/apache2/error.log`**
