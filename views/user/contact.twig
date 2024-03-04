@@ -30,18 +30,13 @@
                                     <div class="contact_list">
                                         <ul>
                                             <li><b>Endereço: </b>{{data_configuration.barrio}} {{ data_configuration.estado }}</li>
+                                            <li><b>Zap e Celular: </b>79 9145.4410</li>
+                                            <li><b>Recepção: </b>79 3025.2441</li>
 
                                             {# Phones #}
-                                            {% for key, phones in data_phones %}
+                                            {# {% for key, phones in data_phones %}
                                                 <li><b>{{data_types[key]|capitalize}}: </b>{{phones}}</li>
-                                            {% endfor %}
-
-                                            {# Email #}
-                                            <li><b>Email:</b>
-                                                {% for email in data_emails %}
-                                                     &nbsp;- {{email}}
-                                                {% endfor %}
-                                            </li>
+                                            {% endfor %} #}
                                         </ul>
                                     </div>
                                     <div class="contact_form_container">
@@ -121,7 +116,6 @@
         {% endblock %}
 
         {% block footer_scripts %}
-            {# Aquí van los scripts Js #}
             <script type="text/javascript" src="{{ general.full_assets_url }}js/user/contact.js"></script>
             <script type="text/javascript" src="{{ general.full_assets_url }}template/js/contact.js"></script>
         {% endblock %}
